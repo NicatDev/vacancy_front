@@ -1,0 +1,383 @@
+{
+    "modulePages": {
+      "UserRegistration": "İstifadəçi qeydiyyatı",
+      "Country": "Ölkələr",
+      "District": "Rayonlar",
+      "Warehouse": "Anbarlar",
+      "Vehicle": "Nəqliyyat vasitələri",
+      "MaterialType": "Material növü",
+      "UnitOfMeasurement": "Ölçü vahidləri",
+      "Mine": "Mədənlər",
+      "RockCategory": "Süxur kateqoriyaları",
+      "Company": "Şirkətlər",
+      "Role": "Səlahiyyət qrupu",
+      "Project": "Layihələr",
+      "ProjectCategory": "Layihə kateqoriyası",
+      "DynamicService": "Xidmətlər"
+    },
+    "login": {
+      "title": "AzərGold geoloji kəşfiyyat məlumatları üzrə informasiya sisteminə xoş gəlmisiniz!",
+      "subTitle": "E-poçt və şifrənizi daxil edərək hesabınıza təhlükəsiz şəkildə giriş edin.",
+      "username": "İstifadəçi adı",
+      "password": "Şifrə",
+      "submit": "Giriş et",
+      "rememberMe": "Məni bu cihazda xatırla",
+      "requiredUsername": "İstifadəçi adı daxil edilməlidir",
+      "requiredPassword": "Şifrə daxil edilməlidir"
+    },
+    "modules": {
+      "title": "AzerGold MTTE siteminə xoş gəlmisiniz!",
+      "subTitle": "AzerGold-un rəsmi səhifəsinə xoş gəlmisiniz! Nəzərə alın ki, bütün əməliyyatlar zamanı etdiyiniz səhvlərə görə məsuliyyət sizə aiddir.",
+      "adminTitle": "Admin Panel",
+      "adminSubtitle": "Admin panellə bağlı məlumatların qeydiyyatı",
+      "planTitle": "Planlama",
+      "planSubtitle": "Layihələrin il ərzində aylıq həcm və fəaliyyətlərini planlamaq",
+      "patternTitle": "Pattern Dizayn və 2D Vizualizasiya",
+      "patternSubtitle": "Mədəndə  partlatma nöqtələrinin pattern dizaynlarının yüklənməsi",
+      "calibrationTitle": "Kolibrasiya",
+      "calibrationSubtitle": "İnteqrasiya ilə bağlı məlumatların qeydiyyatı",
+      "warehouseTitle": "Anbar",
+      "warehouseSubtitle": "Anbara daxil olan materialların dəqiq qeydiyyatı",
+      "labTitle": "Laboratoriya",
+      "labSubtitle": "Laboratoriyalara göndəriləcək sınaqların bütün mərhələlərdə qeydiyyatı",
+      "scalesTitle": "Tərəzi",
+      "scalesSubtitle": "Tərəzi sistemin mərkəzi bazaya inteqrasiyası",
+      "scadaTitle": "SCADA",
+      "scadaSubtitle": "Qurğularının işləmə statusunun vizuallaşdırılması"
+    },
+    "error": {
+      "title404": "404",
+      "subTitle404": "Səhifə tapılmadı",
+      "submit404": "Əsas səhifəyə qayıt"
+    },
+    "HeaderContent": {
+      "logout": "Çıxış et"
+    },
+    "CommonContent": {
+      "users": "İstifadəçilər",
+      "tableSettings": "Cədvəl tənzimləmələri",
+      "search": "Axtarış edin",
+      "select": "Seçim edin",
+      "selectAll": "Hamısını seç",
+      "clearFilter": "Filtirləri təmizlə",
+      "filter": "Filterlə",
+      "total": "Toplam",
+      "noData": "Məlumat yoxdur",
+      "items": "Məlumat",
+      "goTo": "Get",
+      "toPage": "Səhifəyə",
+      "page": "/ Səhifə",
+      "active": "Aktiv",
+      "deactive": "Deaktiv",
+      "activate": "Aktiv et",
+      "deactivate": "Deaktiv et",
+      "save": "Yadda saxla",
+      "close": "Bağla",
+      "forward": "İrəli",
+      "edit": "Düzəliş et",
+      "group_edit":"Qrupa düzəliş et",
+      "permission_edit":"İcazələrə düzəliş et",
+      "save_and_close":"Yadda saxla və bağla",
+      "save_close_and_forward":"Yadda saxla və davam elə",
+      "add": "Əlavə et",
+      "insertData": "Daxil edin",
+      "successfully_activated": "Uğurla aktiv edildi.",
+      "successfully_deactivated": "Uğurla deaktiv edildi.",
+      "none": "Yoxdur",
+      "pending": "Təsdiq üçün gözləyir",
+      "active_user": "Sistemə girişinə icazə verilib",
+      "deactive_user": "Sistemə giriş icazəsi ləğv edilib",
+      "removed": "Hesab ləğv edilib",
+      "changed_user_status": "İstifadəçi uğurla statusu dəyişdirildi.",
+      "add_module": "Modul əlavə et",
+      "module_empty": "Modul əlavə edilməyib",
+      "modules": "Modullar",
+      "returnModules":"Modullara qayıt",
+      "internal": "Daxili",
+      "external": "Xarici",
+      "successCreate":"Uğurla əlavə edildi!",
+      "successUpdate":"Uğurla dəyişdirildi!",
+      "successDelete":"Uğurla silindi!",
+      "400":"Uğursuz əməliyyat",
+      "500":"Server xətası",
+      "404":"Əməliyyat tapılmadı"
+  
+    },
+    "CoordinatesForm": {
+      "actual_coordinates": "Faktiki koordinatlar",
+      "importFromExcel": "Exceldən import et",
+      "coordinate_x": "Koordinat X",
+      "coordinate_y": "Koordinat Y",
+      "coordinate_z": "Koordinat Z",
+      "border_point": "Sərhəd nöqtəsi",
+      "utm": "UTM"
+    },
+    "Countries": {
+      "headerContent": {
+        "countries": "Ölkələr",
+        "insertButtonText": "Ölkə əlavə et",
+        "addTitle": "Yeni ölkə əlavə et",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "countryName": "Ölkə adı",
+        "code": "Abrivuatura",
+        "creator": "Yaradan şəxs",
+        "creationDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "changedDate": "Dəyişdirilmə tarixi",
+        "status": "Status"
+      }
+    },
+    "Regions": {
+      "headerContent": {
+        "regions": "Rayonlar",
+        "insertButtonText": "Rayon əlavə et",
+        "addTitle": "Yeni rayon əlavə et",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "name": "Rayon adı",
+        "countryName": "Ölkə adı",
+        "code": "Abrivuatura",
+        "creator": "Yaradan şəxs",
+        "creationDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "changedDate": "Dəyişdirilmə tarixi",
+        "status": "Status"
+      },
+      "formContent": {
+        "region": "Rayon",
+        "country": "Ölkə"
+      }
+    },
+    "Warehouses": {
+      "headerContent": {
+        "title": "Anbarlar",
+        "insertButtonText": "Anbar əlavə et",
+        "addTitle": "Yeni anbar əlavə et",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "name": "Anbar adı",
+        "creator": "Yaradan şəxs",
+        "creationDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "changedDate": "Dəyişdirilmə tarixi",
+        "status": "Status"
+      },
+      "formContent": {
+        "name": "Anbar adı"
+      }
+    },
+    "Vehicles": {
+      "headerContent": {
+        "title": "Nəqliyyat vasitələri",
+        "insertButtonText": "Yeni nəqliyyat vasitəsi",
+        "addTitle": "Yeni nəqliyyat vasitəsi",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "name": "Nəqliyyat vasitəsi",
+        "creator": "Yaradan şəxs",
+        "creationDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "changedDate": "Dəyişdirilmə tarixi",
+        "status": "Status"
+      }
+    },
+    "MaterialType": {
+      "headerContent": {
+        "title": "Material növü",
+        "insertButtonText": "Yeni material növü",
+        "addTitle": "Yeni material növü",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "name": "Material növü",
+        "creator": "Yaradan şəxs",
+        "creationDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "changedDate": "Dəyişdirilmə tarixi",
+        "status": "Status",
+        "description": "Təsviri"
+      }
+    },
+    "Measure": {
+      "headerContent": {
+        "title": "Ölçü vahidləri",
+        "insertButtonText": "Ölkə əlavə et",
+        "addTitle": "Yeni ölçü vahidi",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "measure": "Ölçü vahidi",
+        "creator": "Yaradan şəxs",
+        "creationDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "changedDate": "Dəyişdirilmə tarixi",
+        "status": "Status",
+        "description": "Təsviri"
+      }
+    },
+    "Mines": {
+      "headerContent": {
+        "title": "Mədənlər",
+        "insertButtonText": "Yeni mədən",
+        "addTitle": "Yeni mədən",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "name": "Mədən adı",
+        "code": "Mədən kodu",
+        "project_category_ids_hash": "Aid olduğu layihə",
+        "country_id_hash": "Yerləşdiyi ölkə",
+        "district_id_hash": "Yerləşdiyi rayon",
+        "discovery_date": "Kəşf olunma tarixi",
+        "mine_date": "Mədən tarixi",
+        "categories": "Mədən kateqoriyaları",
+        "reserve": "Ehtiyyat / Yenilənmiş ehtiyyat",
+        "reserve_category_ids_hash": "Ehtiyyat kateqoriyası",
+        "status": "Status"
+      }
+    },
+    "RockCategory": {
+      "headerContent": {
+        "title": "Süxur kateqoriyaları",
+        "insertButtonText": "Yeni kateqoriya",
+        "addTitle": "Yeni kateqoriya əlavə et",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "categoryName": "Kateqoriya adı",
+        "creator": "Yaradan şəxs",
+        "creationDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "changedDate": "Dəyişdirilmə tarixi",
+        "status": "Status"
+      },
+      "formContent": {
+        "category": "Kateqoriya"
+      }
+    },
+    "Companies": {
+      "headerContent": {
+        "title": "Şirkətlər",
+        "insertButtonText": "Yeni şirkət",
+        "addTitle": "Yeni şirkət əlavə et",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "companyName": "Şirkət adı",
+        "description": "Təsviri",
+        "service": "Xidmət",
+        "country": "Ölkə",
+        "city": "Şəhər",
+        "website": "Veb sayt",
+        "creator": "Yaradan şəxs",
+        "createdDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "updatedDate": "Dəyişdirilmə tarixi",
+        "status": "Status"
+      }
+    },
+    "AuthorityGroup": {
+      "headerContent": {
+        "title": "Səlahiyyət qrupu",
+        "insertButtonText": "Yeni qrup",
+        "addTitle": "Yeni qrup əlavə et",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "groupName": "Qrupun adı",
+        "groupDescription": "Qrupun təsviri",
+        "groupMembers": "Qrupun üzvləri",
+        "assignedModules": "Təyin edilmiş modullar",
+        "creator": "Yaradan şəxs",
+        "createdDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "updatedDate": "Dəyişdirilmə tarixi",
+        "status": "Status"
+      }
+    },
+    "Projects": {
+      "headerContent": {
+        "title": "Layihələr",
+        "insertButtonText": "Yeni layihə",
+        "addTitle": "Yeni layihə",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "project_name": "Layihə adı",
+        "project_code": "Layihə kodu",
+        "project_location": "Layihə icra olunduğu yer",
+        "start_date": "Layihənin başlama tarixi",
+        "end_date": "Layihənin bitmə tarixi",
+        "project_type": "Layihə tipi",
+        "country_id_hash": "Layihənin icra olunduğu ölkə",
+        "district_id_hash": "Layihənin icra olunduğu rayon",
+        "project_category_ids_hash": "Layihənin kateqoriyası",
+        "creator": "Yaradan şəxs",
+        "createdDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "updatedDate": "Dəyişdirilmə tarixi",
+        "status": "Status"
+      }
+    },
+    "ProjectCategory": {
+      "headerContent": {
+        "title": "Layihə kateqoriyası",
+        "insertButtonText": "Yeni kateqoriya",
+        "addTitle": "Yeni kateqoriya",
+        "editTitle": "Düzəliş et"
+      },
+      "tableContent": {
+        "name": "Kateqoriya adı",
+        "creator": "Yaradan şəxs",
+        "createdDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "updatedDate": "Dəyişdirilmə tarixi",
+        "status": "Status"
+      }
+    },
+    "Users": {
+      "headerContent": {
+        "title": "İstifadəçi qeydiyyatı"
+      },
+      "tableContent": {
+        "name": "İstifadəçi adı",
+        "full_name": "Əməkdaşın adı",
+        "position": "İstifadəçinin vəzifəsi",
+        "email": "Əməkdaşın email ünvanı",
+        "creator": "Yaradan şəxs",
+        "createdDate": "Yaradılma tarixi",
+        "changer": "Dəyişdirən şəxs",
+        "updatedDate": "Dəyişdirilmə tarixi",
+        "status": "Status"
+      }
+    },
+    "Services": {
+      "headerContent": {
+        "title": "Xidmətlər",
+        "updateColumn": "Sütun yenilə",
+        "createColumn": "Sütun əlavə et",
+        "createRow": "Sətir əlavə et",
+        "downloadExample": "Nümunə yüklə",
+        "importExcel": "Excel-dən idxal edin"
+      },
+      "formContent": {
+        "title": "Başlıq",
+        "description": "Təsviri",
+        "type": "Tipi",
+        "cancel": "Ləğv et",
+        "submit": "Yadda saxla",
+        "readonly": "Yalnız oxuna bilən",
+        "choose": "Seçim edin"
+      }
+    },
+    "UserRegistration": {
+      "headerContent": {
+        "title": "İstifadəçi qeydiyyatı"
+      }
+    }
+  }
