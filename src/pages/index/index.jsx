@@ -44,7 +44,7 @@ const optionsTwo = [
 export default function Index() {
     return (
         <div>
-            <Navbar navClass='!justify-end' />
+           
             <section className="relative md:py-56 py-36 w-full">
                 <div className="absolute inset-0 bg-emerald-600/5 dark:bg-emerald-600/10"></div>
                 <div className="container z-1">

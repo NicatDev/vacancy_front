@@ -10,7 +10,10 @@ import image from '../assets/images/team/05.jpg';
 import { LuSearch, FiUser, FiSettings, FiLock, FiLogOut } from "../assets/icons/vander";
 import Languages from '../config/Languages';
 import Select from 'react-select';
-export default function Navbar(props) {
+import { memo } from 'react';
+
+const Navbar = (props) => {
+    
     const { languages, changeLanguage } = Languages
 
     const currentLang = localStorage.getItem("language") ?? null;
@@ -18,15 +21,15 @@ export default function Navbar(props) {
     const { navClass, topnavClass, isContainerFluid } = props;
     const [isOpen, setMenu] = useState(true);
 
-    
-  const options = languages.map((lang) => ({
-    value: lang.code,
-    label: lang.code.toUpperCase(),
-  }));
 
-  const handleChange = (selectedOption) => {
-    changeLanguage(selectedOption.value);
-  };
+    const options = languages.map((lang) => ({
+        value: lang.code,
+        label: lang.code.toUpperCase(),
+    }));
+
+    const handleChange = (selectedOption) => {
+        changeLanguage(selectedOption.value);
+    };
     window.addEventListener("scroll", windowScroll);
     useEffect(() => {
         activateMenu();
@@ -228,26 +231,13 @@ export default function Navbar(props) {
                     </li>
 
                     <li className="dropdown inline-block relative ps-1">
-                            <Select
-                                defaultValue={options.find((opt) => opt.value === currentLang)}
-                                onChange={handleChange}
-                                options={options.filter(opt => opt.value !== currentLang)}
-                                isSearchable={false}
-                                styles={{
-                                    control: (base) => ({
-                                        ...base,
-                                        backgroundColor: "white",
-                                        borderColor: "#d1d5db", 
-                                        cursor: "pointer",
-                                        fontSize: "0.875rem", 
-                                        fontWeight: 600,
-                                    }),
-                                    menu: (base) => ({
-                                        ...base,
-                                        zIndex: 9999,
-                                    }),
-                                }}
-                            />
+                        <Select
+                            defaultValue={options.find((opt) => opt.value === currentLang)}
+                            onChange={handleChange}
+                            options={options.filter(opt => opt.value !== currentLang)}
+                            isSearchable={false}
+                            className='dark:border-gray-800 border-gray-100'
+                        />
                     </li>
                 </ul>
 
@@ -389,3 +379,5 @@ export default function Navbar(props) {
 
     )
 }
+
+export default memo(Navbar)

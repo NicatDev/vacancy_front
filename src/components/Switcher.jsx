@@ -20,18 +20,7 @@ export default function Switcher() {
                 } else {
                     document.documentElement.className = 'dark'
                 }
-                break;
-            case 'layout':
-                if (event.target?.innerText === "LTR") {
-                    document.documentElement.dir = "ltr"
-                }
-                else {
-                    document.documentElement.dir = "rtl"
-                }
-                break;
-
-            default:
-                break;
+                break
         }
     }
     return (
@@ -46,12 +35,12 @@ export default function Switcher() {
                     </label>
                 </span>
             </div>
-            <div className="fixed top-[40%] -left-3 z-50">
+            {/* <div className="fixed top-[40%] -left-3 z-50">
                 <Link to="#" id="switchRtl">
                     <span className="py-1 px-3 relative inline-block rounded-b-md -rotate-90 bg-white dark:bg-slate-900 shadow-md dark:shadow-sm dark:shadow-gray-800 font-semibold rtl:block ltr:hidden" onClick={(event) => changeMode('layout', event)}>LTR</span>
                     <span className="py-1 px-3 relative inline-block rounded-b-md -rotate-90 bg-white dark:bg-slate-900 shadow-md dark:shadow-sm dark:shadow-gray-800 font-semibold ltr:block rtl:hidden" onClick={(event) => changeMode('layout', event)}>RTL</span>
                 </Link>
-            </div>
+            </div> */}
             <Link to="#" onClick={scrollToTop} id="back-to-top" className="back-to-top fixed hidden text-lg rounded-full z-10 bottom-5 end-5 size-9 text-center bg-emerald-600 text-white justify-center items-center"><AiOutlineArrowUp/></Link>
         </>
     )
