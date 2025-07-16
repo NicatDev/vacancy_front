@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ab05 from '../assets/images/about/ab05.jpg';
-import Navbar from '../components/Navbar'
 import MillionsJob from '../components/Millions-job'
 import Feature from '../components/Feature'
 import JobCounter from '../components/Job-counter';
 import QuesAnswer from '../components/Question-Answer';
-import ExploreJob from '../components/Explore-job';
-import Footer from '../components/Footer';
 import { Link } from "react-router-dom";
 
 import{BiCheckCircle} from "../assets/icons/vander"
@@ -16,7 +13,6 @@ export default function Aboutus() {
 
     return (
         <>
-            <Navbar navClass='!justify-end nav-light' />
             <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
                 <div className="absolute inset-0 bg-emerald-900/90"></div>
                 <div className="container">
@@ -80,9 +76,7 @@ export default function Aboutus() {
                     <JobCounter />
                 </div>
                 <QuesAnswer />
-                <ExploreJob />
             </section>
-            <Footer />
             {isOpen && 
                 <div className="flex bg-slate-900/70 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div className="relative p-1 w-full max-w-2xl max-h-full">

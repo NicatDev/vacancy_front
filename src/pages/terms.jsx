@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer';
+import { useState } from 'react'
 import { Link } from "react-router-dom";
 import {MdOutlineArrowForward} from "../assets/icons/vander"
 
@@ -35,8 +33,6 @@ export default function Terms() {
 
     return (
         <>
-            <Navbar navClass='!justify-end nav-light' />
-
             <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
                 <div className="absolute inset-0 bg-emerald-900/90"></div>
                 <div className="container">
@@ -106,19 +102,12 @@ export default function Terms() {
                                             )}
                                         </div>
                                     ))}
-
-                                </div>
-
-                                <div className="mt-6">
-                                    <Link to="#" className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 text-white rounded-md">Accept</Link>
-                                    <Link to="#" className="py-1 px-5 inline-block font-semibold tracking-wide align-middle transition duration-500 ease-in-out text-base text-center bg-transparent hover:bg-emerald-600 border border-emerald-600 text-emerald-600 hover:text-white rounded-md ms-2">Decline</Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <Footer />
         </>
     )
 }

@@ -1,14 +1,10 @@
-import React from 'react'
 import contact from '../assets/images/svg/contact.svg';
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import { Link } from 'react-router-dom';
 import {PiMapPin, BsTelephone, LuMail} from "../assets/icons/vander"
 
 export default function Contact() {
     return (
         <>
-            <Navbar navClass='!justify-end' />
             <div className="container-fluid relative mt-20">
                 <div className="grid grid-cols-1">
                     <div className="w-full leading-[0] border-0">
@@ -116,8 +112,6 @@ export default function Contact() {
                     </div>
                 </div>
             </section>
-
-            <Footer />
         </>
     )
 }

@@ -12,7 +12,7 @@ export default function PopularJobsfour() {
         <section className="relative bg-slate-50 dark:bg-slate-800 md:py-24 py-16">
             <div className="container">
                 <div className="grid grid-cols-1 pb-8 text-center">
-                    <h3 className="mb-4 md:text-[26px] md:leading-normal text-2xl leading-normal font-semibold">Popular Jobs</h3>
+                    <h3 className="mb-4 md:text-[26px] md:leading-normal text-2xl leading-normal font-semibold">Latest vacancies</h3>
 
                     <p className="text-slate-400 max-w-xl mx-auto">Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30000+ companies worldwide.</p>
                 </div>
@@ -31,7 +31,7 @@ export default function PopularJobsfour() {
                                     </div>
 
                                     <div className="ms-3">
-                                        <Link to={`/job-detail-three/${item.id}`} className="inline-block text-[16px] font-semibold hover:text-emerald-600 transition-all duration-500 me-1">{item.title}</Link>
+                                        <Link to={`/vacancy/${item.id}`} className="inline-block text-[16px] font-semibold hover:text-emerald-600 transition-all duration-500 me-1">{item.title}</Link>
                                         <span className="inline-block text-sm text-slate-400">{item.day}</span>
                                         <div>
                                             <span className="bg-emerald-600/10 inline-block text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full me-1">{item.jobtype}</span>
@@ -79,7 +79,7 @@ export default function PopularJobsfour() {
 
                 <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
                     <div className="md:col-span-12 text-center">
-                        <Link to="/job-grid-two" className="inline-flex items-center font-semibold tracking-wide border align-middle transition text-base text-center relative border-none after:content-[''] after:absolute after:h-px after:w-0 after:end-0 after:bottom-0 after:start-0 after:transition-all after:duration-500 hover:after:w-full hover:after:end-auto text-slate-400 hover:text-emerald-600 after:bg-emerald-600 duration-500 ease-in-out">See More Jobs <MdOutlineArrowForward className="m-1"/></Link>
+                        <Link to="/vacancies" className="inline-flex items-center font-semibold tracking-wide border align-middle transition text-base text-center relative border-none after:content-[''] after:absolute after:h-px after:w-0 after:end-0 after:bottom-0 after:start-0 after:transition-all after:duration-500 hover:after:w-full hover:after:end-auto text-slate-400 hover:text-emerald-600 after:bg-emerald-600 duration-500 ease-in-out">See More vacancies <MdOutlineArrowForward className="m-1"/></Link>
                     </div>
                 </div>
             </div>

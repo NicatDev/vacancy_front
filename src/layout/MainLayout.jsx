@@ -1,15 +1,27 @@
-import { Outlet } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import { Outlet, useLocation } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const MainLayout = () => {
-    return (
-        <>
-            <Navbar />
-            <Outlet />
-            <Footer />
-        </>
-    )
-}
+  const { pathname } = useLocation();
 
-export default MainLayout
+  return (
+    <>
+      <Navbar
+        navClass={
+          pathname?.includes("vacancies") ||
+          pathname?.includes("aboutus") ||
+          pathname?.includes("terms") ||
+          pathname?.includes("privacy") ||
+          pathname?.includes("categories")
+            ? "!justify-end nav-light"
+            : null
+        }
+      />
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
+
+export default MainLayout;

@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from "react-router-dom";
-import Navbar from '../../components/Navbar';
-import Feature from '../../components/Feature';
-import Footer from '../../components/Footer';
 import JobGridsTwoComp from '../../components/job-grids-two-comp'
 import {LuSearch} from "../../assets/icons/vander"
-import ExploreJob from '../../components/Explore-job';
 
 export default function JobGridsTwo() {
     const [selectedOption, setSelectedOption] = useState('1');
@@ -15,7 +11,6 @@ export default function JobGridsTwo() {
     };
     return (
         <>
-            <Navbar navClass='!justify-end nav-light' />
             <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
                 <div className="absolute inset-0 bg-emerald-900/90"></div>
                 <div className="container">
@@ -27,7 +22,7 @@ export default function JobGridsTwo() {
                 <div className="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
                     <ul className="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
                         <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white/50 hover:text-white"><Link to="/index">Jobstack</Link></li>
-                        <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white" aria-current="page">Job Grid</li>
+                        <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white" aria-current="page">Vacancies</li>
                     </ul>
                 </div>
             </section>
@@ -172,13 +167,7 @@ export default function JobGridsTwo() {
                         <JobGridsTwoComp />
                     </div>
                 </div>
-
-                <Feature />
-
-                <ExploreJob/>
             </section>
-            <Footer />
-
         </>
     )
 }

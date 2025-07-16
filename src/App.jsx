@@ -75,7 +75,7 @@ function App() {
         <Route path='/' element={<MainLayout />}>
 
           <Route exact path="/" element={<Index />} />
-          <Route path="/index" element={<Index />} />
+          <Route path="/" element={<Index />} />
           <Route path="/index-two" element={<IndexTwo />} />
           <Route path="/index-three" element={<IndexThree />} />
           <Route path="/index-four" element={<IndexFour />} />
@@ -86,11 +86,11 @@ function App() {
           <Route path="/index-nine" element={<IndexNine />} />
           <Route path="/index-ten" element={<IndexTen />} />
 
-          <Route path="/job-categories" element={<JobCategories />} />
+          <Route path="/categories" element={<JobCategories />} />
           <Route path="/job-apply" element={<JobApply />} />
           <Route path="/job-post" element={<JobPost />} />
           <Route path="/job-grid-one" element={<JobGridsOne />} />
-          <Route path="/job-grid-two" element={<JobGridsTwo />} />
+          <Route path="/vacancies" element={<JobGridsTwo />} />
           <Route path="/job-grid-three" element={<JobGridsThree />} />
           <Route path="/job-grid-four" element={<JobGridsFour />} />
           <Route path="/job-list-one" element={<JobListOne />} />
@@ -101,7 +101,7 @@ function App() {
           <Route path="/job-list-six" element={<JobListSix />} />
           <Route path="/job-detail-one/:id" element={<JobDetailOne />} />
           <Route path="/job-detail-one" element={<JobDetailOne />} />
-          <Route path="/job-detail-two/:id" element={<JobDetailTwo />} />
+          <Route path="/vacancy/:id" element={<JobDetailTwo />} />
           <Route path="/job-detail-two" element={<JobDetailTwo />} />
           <Route path="/job-detail-three/:id" element={<JobDetailThree />} />
           <Route path="/job-detail-three" element={<JobDetailThree />} />

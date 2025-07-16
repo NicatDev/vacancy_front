@@ -1,13 +1,9 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import { Link } from "react-router-dom";
 import {MdOutlineArrowForward} from "../assets/icons/vander"
 
 export default function Privacy() {
     return (
         <>
-            <Navbar navClass='!justify-end nav-light' />
             <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
                 <div className="absolute inset-0 bg-emerald-900/90"></div>
                 <div className="container">
@@ -52,16 +48,11 @@ export default function Privacy() {
 
                                 <h5 className="text-xl font-medium mb-4 mt-8">Information Provided Voluntarily :</h5>
                                 <p className="text-slate-400">In the 1960s, the text suddenly became known beyond the professional circle of typesetters and layout designers when it was used for Letraset sheets (adhesive letters on transparent film, popular until the 1980s) Versions of the text were subsequently included in DTP programmes such as PageMaker etc.</p>
-
-                                <div className="mt-8">
-                                    <Link to="#" className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 text-white rounded-md">Print</Link>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <Footer />
         </>
     )
 }

@@ -70,7 +70,7 @@ export default function JobCategoriesComp() {
                             </div>
 
                             <div className="content mt-6">
-                                <Link to="#" className="title text-lg font-semibold hover:text-emerald-600">{item.title}</Link>
+                                <Link to="/vacancies" className="title text-lg font-semibold hover:text-emerald-600">{item.title}</Link>
                                 <p className="text-slate-400 mt-3">{item.jobs}</p>
                             </div>
                         </div>

@@ -11,7 +11,6 @@ import { LuSearch, FiUser, FiSettings, FiLock, FiLogOut } from "../assets/icons/
 import Languages from '../config/Languages';
 import Select from 'react-select';
 import { memo } from 'react';
-
 const Navbar = (props) => {
     
     const { languages, changeLanguage } = Languages
