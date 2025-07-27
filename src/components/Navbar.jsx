@@ -166,7 +166,6 @@ const Navbar = (props) => {
                     </div>
 
                     {navClass && navClass.includes('nav-light') ?
-
                         <div className="sm:block hidden">
                             <span className="inline-block dark:hidden">
                                 <img src={logo_dark} className="h-[24px] l-dark" alt="" />

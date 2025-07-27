@@ -58,6 +58,7 @@ import IndexNine from './pages/index/index-nine';
 import IndexTen from './pages/index/index-ten';
 import { useTranslation } from "react-i18next";
 import MainLayout from './layout/MainLayout';
+import "./App.css";
 
 function App() {
   const { t } = useTranslation();

@@ -1,11 +1,6 @@
-import React, { useState } from 'react'
-import ab01 from '../assets/images/about/ab01.jpg';
-import ab02 from '../assets/images/about/ab02.jpg';
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import { useState } from 'react'
 import { Link } from "react-router-dom";
 import JobCategoriesComp from '../components/job-categories-comp';
-import ExploreJob from '../components/Explore-job';
 
 export default function JobCategories() {
     const accordionData = [

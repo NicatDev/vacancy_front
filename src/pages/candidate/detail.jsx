@@ -1,15 +1,9 @@
-import React from 'react'
 import { Link , useParams } from 'react-router-dom';
-import bg5 from '../../assets/images/hero/bg5.jpg';
 import image from '../../assets/images/team/01.jpg';
 import shree_logo from '../../assets/images/company/shree-logo.png';
 import circle_logo from '../../assets/images/company/circle-logo.png';
-import Navbar from '../../components/Navbar'
-import CandidateDetailComp from '../../components/candidate-detail-comp';
-import Footer from '../../components/Footer';
 import {FiSettings,  FiGift, FiGlobe, FiHome, FiMail, FiMapPin, FiPhone, FiServer } from 'react-icons/fi';
 import { LuMail, BiLogoDribbble, AiOutlineBehance, BiLogoLinkedin, FaFacebookF, IoLogoTwitter,FaInstagram, FiFileText} from "../../assets/icons/vander"
-import ExploreJob from '../../components/Explore-job';
 import { CandidateList } from '../../data/data';
 
 export default function CandidateDetail() {
@@ -18,14 +12,10 @@ export default function CandidateDetail() {
     const data = CandidateList.find((jobs) => jobs.id === parseInt (id));
     return (
         <>
-            <Navbar navClass='!justify-end'/>
+        
             <section className="relative lg:mt-24 mt-[74px]">
                 <div className="container">
-                    <div className="relative shrink-0">
-                        <img src={bg5} className="h-64 w-full object-cover lg:rounded-xl shadow-sm shadow-gray-200 dark:shadow-gray-700" alt="" />
-                    </div>
-
-                    <div className="md:flex ms-4 -mt-12">
+                    <div className="md:flex ms-4">
                         <div className="md:w-full">
                             <div className="relative flex items-end justify-between">
                                 <div className="relative flex items-end">
@@ -143,34 +133,7 @@ export default function CandidateDetail() {
                                 </div>
                             </div>
 
-                            <div className="rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 mt-6">
-                                <h5 className="text-xl font-semibold">Contact Me:</h5>
-
-                                <form>
-                                    <div className="grid grid-cols-12 gap-2">
-                                        <div className="md:col-span-6 col-span-12">
-                                            <label htmlFor="name" className="font-semibold">Your Name:</label>
-                                            <input name="name" id="name" type="text" className="form-input mt-2" placeholder="Name :" />
-                                        </div>
-
-                                        <div className="md:col-span-6 col-span-12">
-                                            <label htmlFor="email" className="font-semibold">Your Email:</label>
-                                            <input name="email" id="email" type="email" className="form-input mt-2" placeholder="Email :" />
-                                        </div>
-
-                                        <div className="col-span-12">
-                                            <label htmlFor="subject" className="font-semibold">Your Question:</label>
-                                            <input name="subject" id="subject" className="form-input mt-2" placeholder="Subject :" />
-                                        </div>
-
-                                        <div className="col-span-12">
-                                            <label htmlFor="comments" className="font-semibold">Your Comment:</label>
-                                            <textarea name="comments" id="comments" className="form-input mt-2 textarea" placeholder="Message :"></textarea>
-                                        </div>
-                                    </div>
-                                    <button type="submit" id="submit" name="send" className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 text-white rounded-md">Send Message</button>
-                                </form>
-                            </div>
+                            
                         </div>
 
                         <div className="lg:col-span-4 md:col-span-5">
@@ -227,29 +190,20 @@ export default function CandidateDetail() {
                                         </ul>
                                     </li>
 
-                                    <li className="mt-3 w-full bg-white dark:bg-slate-900 p-3 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700">
+                                    {/* <li className="mt-3 w-full bg-white dark:bg-slate-900 p-3 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700">
                                         <div className="flex items-center mb-3">
                                             <FiFileText className="size-8 text-slate-400"></FiFileText>
                                             <span className="font-medium ms-2">calvin-carlo-resume.pdf</span>
                                         </div>
 
                                         <Link to="assets/images/calvin-carlo-resume.pdf" className="py-1 px-5 inline-flex font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 dark:border-emerald-600 text-white rounded-md w-full flex items-center justify-center" download><FiFileText className='me-2'/> Download CV</Link>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <CandidateDetailComp />
-
             </section>
-            <section className='md:pb-24 pb-16'>
-                <ExploreJob/>
-            </section>
-            <Footer />
-
-
         </>
     )
 }

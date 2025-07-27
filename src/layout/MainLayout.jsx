@@ -15,6 +15,12 @@ const MainLayout = () => {
           pathname?.includes("privacy") ||
           pathname?.includes("categories")
             ? "!justify-end nav-light"
+            : pathname?.includes("employer-list")
+            ? "!justify-end nav-light"
+            :  pathname?.includes("employer-detail")
+            ? "!justify-end nav-light"
+            :  pathname?.includes("candidate-list")
+            ? "!justify-end nav-light"
             : null
         }
       />
