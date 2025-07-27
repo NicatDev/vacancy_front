@@ -23,7 +23,7 @@ export default function FindBestCompanies() {
                             </div>
 
                             <div className="mt-4">
-                                <Link to={`/employer-detail/${item.id}`} className="text-lg hover:text-emerald-600 font-semibold">{item.title}</Link>
+                                <Link to={`/company/${item.id}`} className="text-lg hover:text-emerald-600 font-semibold">{item.title}</Link>
                                 <p className="text-slate-400 mt-2">{item.desc}</p>
                             </div>
 
@@ -36,7 +36,7 @@ export default function FindBestCompanies() {
                 </div>
                 <div className="grid md:grid-cols-12 grid-cols-1 mt-6">
                     <div className="md:col-span-12 text-center">
-                        <Link to="#" className="inline-flex items-center font-semibold tracking-wide border align-middle transition text-base text-center relative border-none after:content-[''] after:absolute after:h-px after:w-0 after:end-0 after:bottom-0 after:start-0 after:transition-all after:duration-500 hover:after:w-full hover:after:end-auto text-slate-400 hover:text-emerald-600 after:bg-emerald-600 duration-500 ease-in-out">See More Companies <MdOutlineArrowForward className='ms-1'/></Link>
+                        <Link to="/companies" className="inline-flex items-center font-semibold tracking-wide border align-middle transition text-base text-center relative border-none after:content-[''] after:absolute after:h-px after:w-0 after:end-0 after:bottom-0 after:start-0 after:transition-all after:duration-500 hover:after:w-full hover:after:end-auto text-slate-400 hover:text-emerald-600 after:bg-emerald-600 duration-500 ease-in-out">See More Companies <MdOutlineArrowForward className='ms-1'/></Link>
                     </div>
                 </div>
             </div>

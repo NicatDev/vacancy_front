@@ -30,7 +30,7 @@ export default function PopularJobsThree() {
                                 </div>
                             </div>
 
-                            <Link to={`/employer-detail/${item.id}`} className="flex items-center p-6 border-t border-gray-100 dark:border-gray-700">
+                            <Link to={`/company/${item.id}`} className="flex items-center p-6 border-t border-gray-100 dark:border-gray-700">
                                 <img src={item.image} className="size-12 shadow-md dark:shadow-gray-800 rounded-md p-2 bg-white dark:bg-slate-900" alt="" />
 
                                 <div className="ms-3">

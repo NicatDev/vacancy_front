@@ -14,13 +14,13 @@ const MainLayout = () => {
           pathname?.includes("terms") ||
           pathname?.includes("privacy") ||
           pathname?.includes("categories")
-            ? "!justify-end nav-light"
-            : pathname?.includes("employer-list")
-            ? "!justify-end nav-light"
-            :  pathname?.includes("employer-detail")
-            ? "!justify-end nav-light"
-            :  pathname?.includes("candidate-list")
-            ? "!justify-end nav-light"
+            ? "nav-light"
+            : pathname?.includes("companies")
+            ? "nav-light"
+            :  pathname?.includes("company")
+            ? "nav-light"
+            :  pathname?.includes("candidates")
+            ? "nav-light"
             : null
         }
       />

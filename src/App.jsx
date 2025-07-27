@@ -115,12 +115,11 @@ function App() {
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/services" element={<Services />} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/employer-list" element={<Employerlist />} />
-          <Route path="/employer-detail/:id" element={<EmployerDetail />} />
-          <Route path="/employer-detail" element={<EmployerDetail />} />
-          <Route path="/candidate-list" element={<CandidateList />} />
+          <Route path="/companies" element={<Employerlist />} />
+          <Route path="/company/:id" element={<EmployerDetail />} />
+          <Route path="/candidates" element={<CandidateList />} />
           <Route path="/candidate-profile/:id" element={<CandidateDetail />} />
-          <Route path="/candidate-profile" element={<CandidateDetail />} />
+          <Route path="/profile" element={<CandidateDetail />} />
           <Route path="/candidate-profile-setting" element={<CandidateProfileSetting />} />
           <Route path="/career" element={<Career />} />
           <Route path="/contact" element={<Contact />} />

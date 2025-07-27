@@ -64,7 +64,7 @@ export default function BestCompanies() {
                                             <img src={item.image} className="size-8" alt="" />
                                         </div>
                                         <div className="ms-3">
-                                            <Link to={`/employer-detail/${item.id}`} className="block text-[16px] font-semibold hover:text-emerald-600 transition-all duration-500">{item.title}</Link>
+                                            <Link to={`/company/${item.id}`} className="block text-[16px] font-semibold hover:text-emerald-600 transition-all duration-500">{item.title}</Link>
                                             <span className="block text-sm text-emerald-600">{item.vacancy} Vacancy</span>
                                         </div>
                                     </div>

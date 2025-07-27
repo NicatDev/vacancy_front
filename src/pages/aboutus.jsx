@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import ab05 from '../assets/images/about/ab05.jpg';
 import MillionsJob from '../components/Millions-job'
 import Feature from '../components/Feature'
@@ -9,7 +8,6 @@ import { Link } from "react-router-dom";
 import{BiCheckCircle} from "../assets/icons/vander"
 
 export default function Aboutus() {
-    const [isOpen, setOpen] = useState(false)
 
     return (
         <>
@@ -48,11 +46,6 @@ export default function Aboutus() {
                             <div className="grid md:grid-cols-2 items-center gap-[30px]">
                                 <div className="relative">
                                     <img src={ab05} alt="" />
-                                    <div className="absolute md:bottom-1/2 md:translate-y-1/2 md:-end-10 ltr:md:translate-x-0 rtl:md:translate-x-0 -bottom-10 end-1/2 ltr:translate-x-1/2 rtl:-translate-x-1/2 text-center">
-                                        <Link to="#" onClick={()=>setOpen(!isOpen)} className="lightbox  size-20 rounded-full shadow-lg shadow-gray-200 dark:shadow-gray-700 inline-flex items-center justify-center bg-white dark:bg-slate-900 text-emerald-600 dark:text-white">
-                                            <i className="mdi mdi-play inline-flex items-center justify-center text-2xl"></i>
-                                        </Link>
-                                    </div>
                                 </div>
 
                                 <div>
@@ -77,25 +70,6 @@ export default function Aboutus() {
                 </div>
                 <QuesAnswer />
             </section>
-            {isOpen && 
-                <div className="flex bg-slate-900/70 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div className="relative p-1 w-full max-w-2xl max-h-full">
-                        <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-                            <div className="flex items-center justify-between p-1 border-b rounded-t dark:border-gray-600 border-gray-200">
-                                <button type="button" onClick={()=>setOpen(!isOpen)} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
-                                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                    </svg>
-                                    <span className="sr-only">Close modal</span>
-                                </button>
-                            </div>
-                            <div className="p-1 md:p-1 space-y-4">
-                                <iframe width="100%" height="400" src="https://www.youtube.com/embed/yba7hPeTSjk?playlist=yba7hPeTSjk&loop=1"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
 
         </>
     )

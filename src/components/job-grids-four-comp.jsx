@@ -15,7 +15,7 @@ export default function JobGridsFourComp() {
                                     <div className="size-14 flex items-center justify-center bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-full mb-2">
                                         <img src={item.image} className="size-8" alt="" />
                                     </div>
-                                    <Link to={`/employer-detail/${item.id}`} className="text-lg hover:text-emerald-600 font-semibold transition-all duration-500">{item.title}</Link>
+                                    <Link to={`/company/${item.id}`} className="text-lg hover:text-emerald-600 font-semibold transition-all duration-500">{item.title}</Link>
                                 </div>
 
                                 <div className="flex items-center">

@@ -17,7 +17,7 @@ export default function EmployerList() {
                             </div>
 
                             <div className="mt-4">
-                                <Link to={`/employer-detail/${item.id}`} className="text-lg hover:text-emerald-600 font-semibold">{item.title}</Link>
+                                <Link to={`/company/${item.id}`} className="text-lg hover:text-emerald-600 font-semibold">{item.title}</Link>
                                 <p className="text-slate-400 mt-2">{item.desc}</p>
                             </div>
 
