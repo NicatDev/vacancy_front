@@ -77,11 +77,11 @@ export default function EmployerDetail(props) {
                                         <Link to="#" className="title h5 text-lg font-semibold hover:text-emerald-600">Software Engineering</Link>
                                         <p className="text-slate-400 mt-2 flex items-center"><AiOutlineClockCircle className="text-emerald-600 me-1"/> Posted 3 Days ago</p>
 
-                                        <div className="flex justify-between items-center mt-4">
+                                        {/* <div className="flex justify-between items-center mt-4">
                                             <span className="bg-emerald-600/5 text-emerald-600 text-xs font-bold px-2.5 py-0.5 rounded h-5">Full Time</span>
 
                                             <p className="text-slate-400 flex items-center"><BiDollarCircle className="text-emerald-600 me-1"/>$950 - $1100/mo</p>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                     <div className="flex items-center p-6 border-t border-gray-100 dark:border-gray-700">
@@ -99,11 +99,11 @@ export default function EmployerDetail(props) {
                                         <Link to="#" className="title h5 text-lg font-semibold hover:text-emerald-600">Web Developer</Link>
                                         <p className="text-slate-400 mt-2 flex items-center"><AiOutlineClockCircle className="text-emerald-600"/>Posted 3 Days ago</p>
 
-                                        <div className="flex justify-between items-center mt-4">
+                                        {/* <div className="flex justify-between items-center mt-4">
                                             <span className="bg-emerald-600/5 text-emerald-600 text-xs font-bold px-2.5 py-0.5 rounded h-5">Remote</span>
 
                                             <p className="text-slate-400 flex items-center"><BiDollarCircle className="text-emerald-600"/> $2500 - $2600/mo</p>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                     <div className="flex items-center p-6 border-t border-gray-100 dark:border-gray-700">
@@ -154,13 +154,11 @@ export default function EmployerDetail(props) {
                                         <span className="text-slate-400 font-medium">Social:</span>
 
                                         <ul className="list-none ltr:text-right rtl:text-left">
-                                            <li className="inline"><Link to="https://dribbble.com/shreethemes" target="_blank" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><BiLogoDribbble/></Link></li>
-                                            <li className="inline"><Link to="https://www.behance.net/shreethemes" target="_blank" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><AiOutlineBehance/></Link></li>
-                                            <li className="inline"><Link to="http://linkedin.com/company/shreethemes" target="_blank" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><BiLogoLinkedin/></Link></li>
-                                            <li className="inline"><Link to="https://www.facebook.com/shreethemes" target="_blank" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><FaFacebookF/></Link></li>
-                                            <li className="inline"><Link to="https://www.instagram.com/shreethemes/" target="_blank" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><FaInstagram/></Link></li>
-                                            <li className="inline"><Link to="https://twitter.com/shreethemes" target="_blank" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><IoLogoTwitter/></Link></li>
-                                            <li className="inline"><Link to="mailto:support@shreethemes.in" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><LuMail/></Link></li>
+                                            <li className="inline"><Link to="http://linkedin.com/" target="_blank" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><BiLogoLinkedin/></Link></li>
+                                            <li className="inline"><Link to="https://www.facebook.com/" target="_blank" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><FaFacebookF/></Link></li>
+                                            <li className="inline"><Link to="https://www.instagram.com//" target="_blank" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><FaInstagram/></Link></li>
+                                            <li className="inline"><Link to="https://twitter.com/" target="_blank" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><IoLogoTwitter/></Link></li>
+                                            <li className="inline"><Link to="mailto:@supportjobstack.in" className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"><LuMail/></Link></li>
                                         </ul>
                                     </li>
                                 </ul>

@@ -21,6 +21,10 @@ const MainLayout = () => {
             ? "nav-light"
             :  pathname?.includes("candidates")
             ? "nav-light"
+            : pathname?.includes("job-apply")
+            ? "nav-light"
+            : pathname?.includes("job-post")
+            ? "nav-light"
             : null
         }
       />

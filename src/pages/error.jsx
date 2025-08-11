@@ -10,7 +10,7 @@ export default function Error() {
                 <div className="grid grid-cols-1">
                     <div className="flex flex-col min-h-screen justify-center md:px-10 py-10 px-4">
                         <div className="text-center">
-                            <Link to="/index"><img src={logo_icon_40} className="mx-auto h-10" alt="" /></Link>
+                            <Link to="/"><img src={logo_icon_40} className="mx-auto h-10" alt="" /></Link>
                         </div>
                         <div className="title-heading text-center my-auto">
                             <img src={error} className="mx-auto" alt="" />
@@ -18,11 +18,11 @@ export default function Error() {
                             <p className="text-slate-400">Whoops, this is embarassing. <br /> Looks like the page you were looking for wasn't found.</p>
 
                             <div className="mt-4">
-                                <Link to="/index" className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md">Back to Home</Link>
+                                <Link to="/" className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md">Back to Home</Link>
                             </div>
                         </div>
                         <div className="text-center">
-                            <p className="mb-0 text-slate-400 font-medium">© {(new Date().getFullYear())}{" "} Jobstack. Design & Develop with <i className="mdi mdi-heart text-red-600"></i> by <Link to="/httpsreethemes.in/" target="_blank" className="text-reset">Shreethemes</Link>.</p>
+                            <p className="mb-0 text-slate-400 font-medium">© {(new Date().getFullYear())}{" "} Jobstack</p>
                         </div>
                     </div>
                 </div>

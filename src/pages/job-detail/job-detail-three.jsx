@@ -2,13 +2,10 @@ import React from 'react'
 import { Link, useParams } from "react-router-dom";
 import lenovo_logo from '../../assets/images/company/lenovo-logo.png';
 import JobDetailComp from '../../components/job-detail-comp';
-import Footer from '../../components/Footer';
-import Navbar from '../../components/Navbar';
 import { FiBook, FiBriefcase, FiClock, FiDollarSign, FiMapPin, FiMonitor, FiUserCheck } from 'react-icons/fi';
 import {MdOutlineArrowForward, HiOutlineBuildingOffice} from "../../assets/icons/vander"
 
 import {PiMapPin} from "../../assets/icons/vander"
-import ExploreJob from '../../components/Explore-job';
 import { jobData } from '../../data/data';
 export default function JobDetailThree() {
     const params = useParams();
@@ -17,7 +14,7 @@ export default function JobDetailThree() {
     return (
         <>
 
-            <Navbar navClass='justify-end' />
+            {/* <Navbar navClass='justify-end' /> */}
             <section className="bg-slate-50 dark:bg-slate-800 md:py-24 py-16">
                 <div className="container mt-10">
                     <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
@@ -142,9 +139,9 @@ export default function JobDetailThree() {
 
                 <JobDetailComp />
 
-                <ExploreJob/>
+                {/* <ExploreJob/> */}
             </section>
-            <Footer />
+            {/* <Footer /> */}
 
 
         </>

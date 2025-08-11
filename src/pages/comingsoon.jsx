@@ -46,7 +46,7 @@ export default function Comingsoon() {
                             </div>
                         </div>
                         <div className="text-center">
-                            <p className="mb-0 text-slate-400 font-medium">© {(new Date().getFullYear())}{" "} Jobstack. Design & Develop with <i className="mdi mdi-heart text-red-600"></i> by <Link to="https://shreethemes.in/" target="_blank" className="text-reset">Shreethemes</Link>.</p>
+                            <p className="mb-0 text-slate-400 font-medium">© {(new Date().getFullYear())}{" "} Jobstack</p>
                         </div>
                     </div>
                 </div>

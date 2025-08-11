@@ -52,6 +52,7 @@ import Blogs from './pages/blog/blogs';
 import BlogDetail from './pages/blog/blog-detail';
 import LockScreen from './pages/auth/lock-screen';
 import JobCategories from './pages/job-categories'
+import Profile from './pages/profile/index.jsx'
 import ScrollToTop from './components/Scroll-top';
 import CandidateProfileSetting from './pages/candidate/candidate-profile-setting';
 import IndexNine from './pages/index/index-nine';
@@ -136,6 +137,7 @@ function App() {
           <Route path='/blog-detail' element={<BlogDetail />} />
           <Route path='/blog-detail/:id' element={<BlogDetail />} />
           <Route path='/lock-screen' element={<LockScreen />} />
+          <Route path='/profile' element={<Profile />}/>
           <Route path='*' element={<Error />} />
         </Route>
 

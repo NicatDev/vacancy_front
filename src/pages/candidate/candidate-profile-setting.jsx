@@ -1,5 +1,3 @@
-import React from 'react'
-import Navbar from '../../components/Navbar';
 import bg5 from "../../assets/images/hero/bg5.jpg"
 import team1 from "../../assets/images/team/01.jpg"
 import { Link } from 'react-router-dom';
@@ -9,16 +7,15 @@ export default function CandidateProfileSetting(){
 
     return(
        <>
-         <Navbar navClass='!justify-end'/>
-         <section className="relative lg:mt-24 mt-[74px] pb-16">
+         <section className="relative pb-16" style={{marginTop: 200}}>
             <div className="container">
-                <div className="profile-banner relative text-transparent">
+                {/* <div className="profile-banner relative text-transparent">
                     <input id="pro-banner" name="profile-banner" type="file" className="hidden" />
                     <div className="relative shrink-0">
                         <img src={bg5} className="h-64 w-full object-cover lg:rounded-xl shadow-sm shadow-gray-200 dark:shadow-gray-700" id="profile-banner" alt=""/>
                         <label className="absolute inset-0 cursor-pointer" htmlFor="pro-banner"></label>
                     </div>
-                </div>
+                </div> */}
                 <div className="md:flex mx-4 -mt-12">
                     <div className="md:w-full">
                         <div className="relative flex items-end">

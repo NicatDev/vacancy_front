@@ -3,7 +3,6 @@ import { CandidateList } from "../data/data";
 import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
-  AiOutlineStar,
 } from "../assets/icons/vander";
 
 export default function CandidateListComp() {
@@ -23,13 +22,18 @@ export default function CandidateListComp() {
               />
 
               <div className="mt-2">
-                <Link
+                {/* <Link
                   to={`/candidate-profile/${item.id}`}
                   className="hover:text-emerald-600 font-semibold text-lg"
                 >
                   {item.name}
+                </Link> */}
+                <Link
+                  to={`/candidate-profile/${item.id}`}
+                  className="hover:text-emerald-600"
+                >
+                  {item.title}
                 </Link>
-                <p className="text-sm text-slate-400">{item.title}</p>
               </div>
 
               <ul className="mt-2 list-none space-x-0.5">
@@ -74,18 +78,18 @@ export default function CandidateListComp() {
                 </Link>
               </div>
 
-              <span className="w-24 text-white p-1 text-center absolute ltr:-rotate-45 rtl:rotate-45 -start-[30px] top-3 bg-yellow-400 flex justify-center">
+              {/* <span className="w-24 text-white p-1 text-center absolute ltr:-rotate-45 rtl:rotate-45 -start-[30px] top-3 bg-yellow-400 flex justify-center">
                 <AiOutlineStar />
-              </span>
+              </span> */}
 
-              <span className="absolute top-[10px] end-4">
+              {/* <span className="absolute top-[10px] end-4">
                 <Link
                   to="#"
                   className="text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600 text-2xl"
                 >
                   <i className="mdi mdi-heart"></i>
                 </Link>
-              </span>
+              </span> */}
             </div>
           ))}
         </div>

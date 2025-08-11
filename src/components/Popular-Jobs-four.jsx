@@ -33,11 +33,11 @@ export default function PopularJobsfour() {
                                     <div className="ms-3">
                                         <Link to={`/vacancy/${item.id}`} className="inline-block text-[16px] font-semibold hover:text-emerald-600 transition-all duration-500 me-1">{item.title}</Link>
                                         <span className="inline-block text-sm text-slate-400">{item.day}</span>
-                                        <div>
+                                        {/* <div>
                                             <span className="bg-emerald-600/10 inline-block text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full me-1">{item.jobtype}</span>
                                             <span className="text-sm font-medium inline-block me-1">{item.deta} <span className="text-slate-400">{item.deta1}</span></span>
                                             <span className="text-sm font-medium inline-block me-1">{item.deta2} <span className="text-slate-400">{item.deta3}</span></span>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
 
@@ -56,22 +56,22 @@ export default function PopularJobsfour() {
 
                             <div className="px-6 py-2 bg-slate-50 dark:bg-slate-800 lg:flex justify-between items-center">
                                 <div className="lg:inline-block flex justify-between items-center">
-                                    <span className="inline-block me-1 font-semibold"><i className="mdi mdi-check-decagram mdi-18px text-blue-500 me-1"></i>{item.verify}</span>
-                                    <ul className="list-none inline-block me-1 text-yellow-400 space-x-0.5">
+                                    {/* <span className="inline-block me-1 font-semibold"><i className="mdi mdi-check-decagram mdi-18px text-blue-500 me-1"></i>{item.verify}</span> */}
+                                    {/* <ul className="list-none inline-block me-1 text-yellow-400 space-x-0.5">
                                         <li className="inline"><i className="mdi mdi-star text-lg"></i></li>
                                         <li className="inline"><i className="mdi mdi-star text-lg"></i></li>
                                         <li className="inline"><i className="mdi mdi-star text-lg"></i></li>
                                         <li className="inline"><i className="mdi mdi-star text-lg"></i></li>
                                         <li className="inline"><i className="mdi mdi-star text-lg"></i></li>
                                         <li className="inline text-slate-400 font-semibold">4.8</li>
-                                    </ul>
+                                    </ul> */}
                                     <span className="inline-flex items-center me-1  text-slate-400"><PiMapPin className="text-[18px] text-slate-900 dark:text-white me-1"/>{item.Location}</span>
                                 </div>
 
                                 <Link to="/job-apply" className="py-[5px] px-4 text-sm inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white md:ms-2 w-full lg:w-auto lg:mt-0 mt-4">{item.apply}</Link>
                             </div>
 
-                            <Link to="/" className="size-9 font-semibold tracking-wide border align-middle transition duration-500 ease-in-out inline-flex items-center text-center justify-center text-base rounded-full bg-emerald-600/5 hover:bg-emerald-600 border-emerald-600/10 hover:border-emerald-600 text-emerald-600 hover:text-white absolute top-0 end-0 m-3"><FiBookmark className="size-4"></FiBookmark></Link>
+                            {/* <Link to="/" className="size-9 font-semibold tracking-wide border align-middle transition duration-500 ease-in-out inline-flex items-center text-center justify-center text-base rounded-full bg-emerald-600/5 hover:bg-emerald-600 border-emerald-600/10 hover:border-emerald-600 text-emerald-600 hover:text-white absolute top-0 end-0 m-3"><FiBookmark className="size-4"></FiBookmark></Link> */}
                         </div>
                     ))}
 

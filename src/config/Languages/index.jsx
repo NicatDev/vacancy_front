@@ -5,7 +5,7 @@ import az from "./az.json";
 
 const DEFAULT_LANGUAGE = 'az';
 
-const language = localStorage.getItem('language') || DEFAULT_LANGUAGE;
+const language = localStorage.getItem('language') || 'en';
 
 export const languages = [
     { code: 'az', name: 'Azərbaycan' },

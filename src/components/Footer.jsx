@@ -1,4 +1,5 @@
 import logo_light from "../assets/images/logo-light.png";
+import logo from "../assets/images/logo.jpg";
 import React from "react";
 import { Link } from "react-router-dom";
 import {
@@ -19,13 +20,13 @@ export default function Footer() {
         <div className="grid grid-cols-1">
           <div className="relative py-12">
             <div className="relative w-full">
-              <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
+              <div className="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
                 <div className="md:col-span-3">
                   <Link
-                    to="#"
+                    to="/"
                     className="flex justify-center md:justify-start focus:outline-none"
                   >
-                    <img src={logo_light} className="" alt="" />
+                    <img src={logo} className="" alt="" style={{height: 120}} />
                   </Link>
                 </div>
 
@@ -77,50 +78,15 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 items-center gap-6">
             <div className="ltr:md:text-left rtl:md:text-right text-center">
               <p className="mb-0 text-gray-300 font-medium">
-                ©{new Date().getFullYear()} Jobstack. Design & Develop with{" "}
-                <i className="mdi mdi-heart text-red-600"></i> by{" "}
-                <Link
-                  to="https://shreethemes.in/"
-                  target="_blank"
-                  className="text-reset"
-                >
-                  Shreethemes
-                </Link>
-                .
+                ©{new Date().getFullYear()} Jobstack
               </p>
             </div>
 
             <ul className="list-none ltr:md:text-right rtl:md:text-left text-center space-x-0.5">
+              
               <li className="inline">
                 <Link
-                  to="https://1.envato.market/jobstack-react"
-                  target="_blank"
-                  className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
-                >
-                  <AiOutlineShoppingCart />
-                </Link>
-              </li>
-              <li className="inline">
-                <Link
-                  to="https://dribbble.com/shreethemes"
-                  target="_blank"
-                  className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
-                >
-                  <BiLogoDribbble />
-                </Link>
-              </li>
-              <li className="inline">
-                <Link
-                  to="https://www.behance.net/shreethemes"
-                  target="_blank"
-                  className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
-                >
-                  <AiOutlineBehance />
-                </Link>
-              </li>
-              <li className="inline">
-                <Link
-                  to="http://linkedin.com/company/shreethemes"
+                  to="http://linkedin.com/company/"
                   target="_blank"
                   className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
                 >
@@ -129,7 +95,7 @@ export default function Footer() {
               </li>
               <li className="inline">
                 <Link
-                  to="https://www.facebook.com/shreethemes"
+                  to="https://www.facebook.com/"
                   target="_blank"
                   className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
                 >
@@ -138,7 +104,7 @@ export default function Footer() {
               </li>
               <li className="inline">
                 <Link
-                  to="https://www.instagram.com/shreethemes/"
+                  to="https://www.instagram.com//"
                   target="_blank"
                   className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
                 >
@@ -147,7 +113,7 @@ export default function Footer() {
               </li>
               <li className="inline">
                 <Link
-                  to="https://twitter.com/shreethemes"
+                  to="https://twitter.com/"
                   target="_blank"
                   className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
                 >
@@ -156,7 +122,7 @@ export default function Footer() {
               </li>
               <li className="inline">
                 <Link
-                  to="mailto:support@shreethemes.in"
+                  to="mailto:support@jobstack.in"
                   className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
                 >
                   <LuMail />

@@ -6,12 +6,13 @@ import logo_icon_40 from "../assets/images/logo-icon-40.png";
 import logo_icon_40_white from "../assets/images/logo-icon-40-white.png";
 import logo_dark from "../assets/images/logo-dark.png";
 import logo_white from "../assets/images/logo-white.png";
+import logo from "../assets/images/logo.jpg";
 import image from "../assets/images/team/05.jpg";
+import userImg from "../assets/images/user.png";
 import {
   LuSearch,
   FiUser,
   FiSettings,
-  FiLock,
   FiLogOut,
 } from "../assets/icons/vander";
 import Languages from "../config/Languages";
@@ -20,7 +21,7 @@ import { memo } from "react";
 const Navbar = (props) => {
   const { languages, changeLanguage } = Languages;
 
-  const currentLang = localStorage.getItem("language") ?? null;
+  const currentLang = localStorage.getItem("language") ?? 'en';
   const [isDropdown, openDropdown] = useState(true);
   const { navClass, topnavClass, isContainerFluid } = props;
   const [isOpen, setMenu] = useState(true);
@@ -164,6 +165,39 @@ const Navbar = (props) => {
       }
     }
   };
+
+  const customSelectStyles = {
+    control: (styles) => ({
+      ...styles,
+      borderRadius: "9999px",
+      borderColor: "#10b981",
+      minHeight: "36px",
+      cursor: "pointer",
+      boxShadow: "none",
+      backgroundColor: "white",
+      width: 75,
+      minWidth: 75,
+      "&:hover": { borderColor: "#059669" },
+    }),
+    singleValue: (styles) => ({
+      ...styles,
+      color: "#059669",
+      fontWeight: "500",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      fontSize: 12,
+    }),
+    dropdownIndicator: (styles) => ({ ...styles, color: "#059669" }),
+    indicatorSeparator: () => ({ display: "none" }),
+    menu: (styles) => ({
+      ...styles,
+      borderRadius: "0.5rem",
+      overflow: "hidden",
+      zIndex: 9999,
+    }),
+  };
+
   return (
     <nav id="topnav" className={`defaultscroll is-sticky ${topnavClass}`}>
       <div
@@ -175,41 +209,46 @@ const Navbar = (props) => {
       >
         <Link className="logo" to="/">
           <div className="block sm:hidden">
-            <img
-              src={logo_icon_40}
-              className="h-10 inline-block dark:hidden"
-              alt=""
-            />
-            <img
-              src={logo_icon_40_white}
-              className="h-10 hidden dark:inline-block"
-              alt=""
-            />
+            <img src={logo} className="h-10 inline-block dark:hidden" alt="" />
+            <img src={logo} className="h-10 hidden dark:inline-block" alt="" />
           </div>
 
           {navClass && navClass.includes("nav-light") ? (
             <div className="sm:block hidden">
               <span className="inline-block dark:hidden">
-                <img src={logo_dark} className="h-[24px] l-dark" alt="" />
-                <img src={logo_light} className="h-[24px] l-light" alt="" />
+                <img
+                  src={logo}
+                  className="!h-[80px] l-dark"
+                  alt=""
+                  style={{ height: 80 }}
+                />
+                <img
+                  src={logo}
+                  className="!h-[80px] l-light"
+                  alt=""
+                  style={{ height: 80 }}
+                />
               </span>
               <img
-                src={logo_white}
-                className="h-[24px] hidden dark:inline-block"
+                src={logo}
+                className="!h-[80px] hidden dark:inline-block"
                 alt=""
+                style={{ height: 80 }}
               />
             </div>
           ) : (
             <div className="sm:block hidden">
               <img
-                src={logo_dark}
-                className="h-[24px] inline-block dark:hidden"
+                src={logo}
+                className="!h-[80px] inline-block dark:hidden"
                 alt=""
+                style={{ height: 80 }}
               />
               <img
-                src={logo_white}
-                className="h-[24px] hidden dark:inline-block"
+                src={logo}
+                className="!h-[80px] hidden dark:inline-block"
                 alt=""
+                style={{ height: 80 }}
               />
             </div>
           )}
@@ -240,7 +279,7 @@ const Navbar = (props) => {
               <LuSearch className="text-lg absolute top-[8px] end-3" />
               <input
                 type="text"
-                className="py-2 px-3 text-[14px] border border-gray-100 dark:border-gray-800 dark:text-slate-200 outline-none h-9 !pe-10 rounded-3xl sm:w-44 w-36 bg-white dark:bg-slate-900"
+                className="py-2 px-3 text-[14px] border border-gray-100 dark:border-gray-800 dark:text-slate-200 outline-none h-9 !pe-10 rounded-3xl sm:w-44 w-36 bg-white dark:bg-slate-900 placeholder-gray-400 dark:placeholder-gray-500"
                 name="s"
                 id="searchItem"
                 placeholder="Search..."
@@ -256,7 +295,7 @@ const Navbar = (props) => {
               type="button"
             >
               <span className="size-9 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide border align-middle transition duration-500 ease-in-out rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white">
-                <img src={image} className="rounded-full" alt="" />
+                <img src={userImg} className="rounded-full" alt="" />
               </span>
             </button>
 
@@ -268,7 +307,7 @@ const Navbar = (props) => {
               <ul className="py-2 text-start">
                 <li>
                   <Link
-                    to="/candidate-profile"
+                    to="/profile"
                     className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
                   >
                     <FiUser className="size-4 me-2" />
@@ -285,7 +324,7 @@ const Navbar = (props) => {
                   </Link>
                 </li>
                 <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
-                <li>
+                {/* <li>
                   <Link
                     to="/lock-screen"
                     className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
@@ -293,7 +332,7 @@ const Navbar = (props) => {
                     <FiLock className="size-4 me-2" />
                     Lockscreen
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     to="/login"
@@ -313,6 +352,7 @@ const Navbar = (props) => {
               onChange={handleChange}
               options={options.filter((opt) => opt.value !== currentLang)}
               isSearchable={false}
+              styles={customSelectStyles}
               className="dark:border-gray-800 border-gray-100"
             />
           </li>

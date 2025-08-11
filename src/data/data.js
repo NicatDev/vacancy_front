@@ -37,6 +37,9 @@ import work4 from '../assets/images/work/04.jpg'
 import work5 from '../assets/images/work/05.jpg'
 import work6 from '../assets/images/work/06.jpg'
 
+import userImg from "../assets/images/user.png"
+
+
 export const jobData = [
     {
         id:1,
@@ -399,7 +402,7 @@ export const companiesData = [
  export  const CandidateList = [
         {
             id:1,
-            image: image,
+            image: userImg,
             name: 'Steven Townsend',
             title: 'Web Designer',
             deta1: 'Design',
@@ -414,7 +417,7 @@ export const companiesData = [
         },
         {
             id:2,
-            image: image1,
+            image: userImg,
             name: 'Steven Townsend',
             title: 'Web Designer',
             deta1: 'Design',
@@ -429,7 +432,7 @@ export const companiesData = [
         },
         {
             id:3,
-            image: image2,
+            image: userImg,
             name: 'Steven Townsend',
             title: 'Web Designer',
             deta1: 'Design',
@@ -444,7 +447,7 @@ export const companiesData = [
         },
         {
             id:4,
-            image: image3,
+            image: userImg,
             name: 'Steven Townsend',
             title: 'Web Designer',
             deta1: 'Design',
@@ -459,7 +462,7 @@ export const companiesData = [
         },
         {
             id:5,
-            image: image4,
+            image: userImg,
             name: 'Steven Townsend',
             title: 'Web Designer',
             deta1: 'Design',
@@ -474,7 +477,7 @@ export const companiesData = [
         },
         {
             id:6,
-            image: image5,
+            image: userImg,
             name: 'Steven Townsend',
             title: 'Web Designer',
             deta1: 'Design',
@@ -489,7 +492,7 @@ export const companiesData = [
         },
         {
             id:7,
-            image: image6,
+            image: userImg,
             name: 'Steven Townsend',
             title: 'Web Designer',
             deta1: 'Design',
@@ -504,7 +507,7 @@ export const companiesData = [
         },
         {
             id:8,
-            image: image7,
+            image: userImg,
             name: 'Steven Townsend',
             title: 'Web Designer',
             deta1: 'Design',
