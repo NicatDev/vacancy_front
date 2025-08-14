@@ -25,6 +25,8 @@ const MainLayout = () => {
             ? "nav-light"
             : pathname?.includes("job-post")
             ? "nav-light"
+            : pathname?.includes("pricing")
+            ? "nav-light"
             : null
         }
       />

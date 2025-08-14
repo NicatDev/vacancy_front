@@ -52,7 +52,7 @@ import Blogs from './pages/blog/blogs';
 import BlogDetail from './pages/blog/blog-detail';
 import LockScreen from './pages/auth/lock-screen';
 import JobCategories from './pages/job-categories'
-import Profile from './pages/profile/index.jsx'
+import Profile from './pages/profile'
 import ScrollToTop from './components/Scroll-top';
 import CandidateProfileSetting from './pages/candidate/candidate-profile-setting';
 import IndexNine from './pages/index/index-nine';
@@ -120,7 +120,6 @@ function App() {
           <Route path="/company/:id" element={<EmployerDetail />} />
           <Route path="/candidates" element={<CandidateList />} />
           <Route path="/candidate-profile/:id" element={<CandidateDetail />} />
-          <Route path="/profile" element={<CandidateDetail />} />
           <Route path="/candidate-profile-setting" element={<CandidateProfileSetting />} />
           <Route path="/career" element={<Career />} />
           <Route path="/contact" element={<Contact />} />

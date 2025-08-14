@@ -9,19 +9,14 @@ import logo_white from "../assets/images/logo-white.png";
 import logo from "../assets/images/logo.jpg";
 import image from "../assets/images/team/05.jpg";
 import userImg from "../assets/images/user.png";
-import {
-  LuSearch,
-  FiUser,
-  FiSettings,
-  FiLogOut,
-} from "../assets/icons/vander";
+import { LuSearch, FiUser, FiSettings, FiLogOut } from "../assets/icons/vander";
 import Languages from "../config/Languages";
 import Select from "react-select";
 import { memo } from "react";
 const Navbar = (props) => {
   const { languages, changeLanguage } = Languages;
 
-  const currentLang = localStorage.getItem("language") ?? 'en';
+  const currentLang = localStorage.getItem("language") ?? "en";
   const [isDropdown, openDropdown] = useState(true);
   const { navClass, topnavClass, isContainerFluid } = props;
   const [isOpen, setMenu] = useState(true);
@@ -360,7 +355,7 @@ const Navbar = (props) => {
 
         <div
           id="navigation"
-          className={`${isOpen === true ? "!hidden-md block" : "!block"}`}
+          className={`${isOpen === true ? "!hidden-md" : ""}`}
         >
           <ul className={`navigation-menu ${navClass}`}>
             <li>
@@ -372,11 +367,14 @@ const Navbar = (props) => {
             </li>
 
             <li>
-              <Link to="/candidates">Candidates</Link>{" "}
+              <Link to="/candidates">Candidates</Link>
             </li>
 
             <li>
-              <Link to="/aboutus">About us</Link>{" "}
+              <Link to="/aboutus">About us</Link>
+            </li>
+            <li>
+              <Link to="/pricing">Create vacancy</Link>
             </li>
           </ul>
         </div>

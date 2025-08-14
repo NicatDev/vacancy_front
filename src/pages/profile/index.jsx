@@ -67,8 +67,8 @@ export default function CandidateDetail() {
 
       <section className="relative mt-12">
         <div className="container md:pb-24 pb-16 ">
-          <div className="grid md:grid-cols-8 grid-cols-1 gap-[30px]">
-            <div className="col-span-12">
+          <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
+            <div className="lg:col-span-8 md:col-span-7">
               <h5 className="text-xl font-semibold">
                 {data?.name ? data?.name : "Steven Townsend"}
               </h5>
