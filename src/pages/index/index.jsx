@@ -78,6 +78,7 @@ export default function Index() {
               </SwiperSlide>
             </Swiper>
 
+
             <div className="d-flex" id="reserve-form">
               <div className="md:w-5/6 mx-auto">
                 <div className="lg:col-span-10 mt-8">
