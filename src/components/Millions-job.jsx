@@ -16,15 +16,7 @@ export default function MillionsJob() {
             <div className="relative">
               <img
                 src={ab01}
-                className="lg:w-[400px] w-[280px] rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700"
-                alt=""
-              />
-            </div>
-
-            <div className="absolute md:-end-5 end-0 -bottom-16">
-              <img
-                src={ab02}
-                className="lg:w-[280px] w-[200px] border-8 border-white dark:border-slate-900 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700"
+                className="lg:w-[500px] w-[320px] rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700"
                 alt=""
               />
             </div>

@@ -6,7 +6,7 @@ import logo_icon_40 from "../assets/images/logo-icon-40.png";
 import logo_icon_40_white from "../assets/images/logo-icon-40-white.png";
 import logo_dark from "../assets/images/logo-dark.png";
 import logo_white from "../assets/images/logo-white.png";
-import logo from "../assets/images/logo.jpg";
+import logo from "../assets/images/logo.png";
 import image from "../assets/images/team/05.jpg";
 import userImg from "../assets/images/user.png";
 import { LuSearch, FiUser, FiSettings, FiLogOut } from "../assets/icons/vander";
@@ -165,25 +165,25 @@ const Navbar = (props) => {
     control: (styles) => ({
       ...styles,
       borderRadius: "9999px",
-      borderColor: "#10b981",
+      borderColor: "#3b82f6", // blue-500
       minHeight: "36px",
       cursor: "pointer",
       boxShadow: "none",
       backgroundColor: "white",
       width: 75,
       minWidth: 75,
-      "&:hover": { borderColor: "#059669" },
+      "&:hover": { borderColor: "#2563eb" }, // blue-600
     }),
     singleValue: (styles) => ({
       ...styles,
-      color: "#059669",
+      color: "#2563eb", // blue-600
       fontWeight: "500",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "ellipsis",
       fontSize: 12,
     }),
-    dropdownIndicator: (styles) => ({ ...styles, color: "#059669" }),
+    dropdownIndicator: (styles) => ({ ...styles, color: "#2563eb" }), // blue-600
     indicatorSeparator: () => ({ display: "none" }),
     menu: (styles) => ({
       ...styles,
@@ -269,12 +269,26 @@ const Navbar = (props) => {
 
         {/* <!--Login button Start--> */}
         <ul className="buy-button list-none mb-0">
+          <li className="hidden lg:inline-block mb-0 me-2">
+            <Link
+              to="/pricing"
+              className="rounded-3xl"
+              style={{
+                backgroundColor: "oklch(45% 0.18 260.67)",
+                color: "white",
+                padding: "8px 16px",
+                textDecoration: "none",
+              }}
+            >
+              New vacancy
+            </Link>
+          </li>
           <li className="inline-block mb-0">
             <div className="relative top-[3px]">
               <LuSearch className="text-lg absolute top-[8px] end-3" />
               <input
                 type="text"
-                className="py-2 px-3 text-[14px] border border-gray-100 dark:border-gray-800 dark:text-slate-200 outline-none h-9 !pe-10 rounded-3xl sm:w-44 w-36 bg-white dark:bg-slate-900 placeholder-gray-400 dark:placeholder-gray-500"
+                className="py-2 px-3 text-[14px] border border-gray-100 dark:border-gray-800 dark:text-slate-200 outline-none h-9 !pe-10 rounded-3xl bg-white dark:bg-slate-900 placeholder-gray-400 w-fit dark:placeholder-gray-500"
                 name="s"
                 id="searchItem"
                 placeholder="Search..."
@@ -355,7 +369,7 @@ const Navbar = (props) => {
 
         <div
           id="navigation"
-          className={`${isOpen === true ? "!hidden-md" : ""}`}
+          className={`${isOpen === true ? "!hidden-md" : "!block"}`}
         >
           <ul className={`navigation-menu ${navClass}`}>
             <li>
@@ -373,8 +387,25 @@ const Navbar = (props) => {
             <li>
               <Link to="/aboutus">About us</Link>
             </li>
+
             <li>
-              <Link to="/pricing">Create vacancy</Link>
+              <Link to="/contact">Contact us</Link>
+            </li>
+
+            <li className="block lg:hidden pb-4 custom_new_vacancy_btn">
+              <Link
+                to="/pricing"
+                className="rounded-3xl w-fit"
+                style={{
+                  backgroundColor: "oklch(45% 0.18 260.67)",
+                  color: "white",
+                  padding: "8px 16px",
+                  textDecoration: "none",
+                  
+                }}
+              >
+                New vacancy
+              </Link>
             </li>
           </ul>
         </div>

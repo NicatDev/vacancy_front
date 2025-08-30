@@ -6,9 +6,48 @@ export default function Pricing() {
   const [selected, setSelected] = useState(null);
 
   const plans = [
-    { name: "Free", price: 0, btn: "Get Started" },
-    { name: "Business", price: 39, btn: "Get Started" },
-    { name: "Professional", price: 59, btn: "Get Started" },
+    {
+      name: "Tək Vakansiya Elanı",
+      price: 20,
+      currency: "AZN",
+      btn: "Elanı Yarat",
+      features: [
+        "1 vakansiya yerləşdirmə",
+        "Vaxtaşırı işə qəbul edənlər üçün ideal",
+      ],
+    },
+    {
+      name: "Başlanğıc Paketi (5 vakansiya)",
+      price: 90,
+      currency: "AZN",
+      btn: "Elanı Yarat",
+      features: [
+        "5 vakansiya yerləşdirmə",
+        "1 elan = 18 AZN",
+        "10% qənaət edin",
+      ],
+    },
+    {
+      name: "6 Aylıq Abunəlik",
+      price: 160,
+      currency: "AZN",
+      btn: "Elanı Yarat",
+      features: [
+        "Limitsiz vakansiya yerləşdirmə",
+        "Əsas Sıralama: Elanlar yuxarıda görünür",
+      ],
+    },
+    {
+      name: "12 Aylıq Limitsiz Abunəlik",
+      price: 290,
+      currency: "AZN",
+      btn: "Elanı Yarat",
+      features: [
+        "Limitsiz vakansiya yerləşdirmə",
+        "Əsas sıralama",
+        "Bonus: 1 pulsuz namizəd yerləşdirilməsi",
+      ],
+    },
   ];
 
   return (
@@ -37,7 +76,11 @@ export default function Pricing() {
                   group relative shadow-sm hover:shadow-md dark:shadow-gray-800 rounded-md transition-all duration-500 cursor-pointer
                   bg-white dark:bg-slate-900
                   border 
-                  ${selected === index ? "border-emerald-600" : "border-transparent"} 
+                  ${
+                    selected === index
+                      ? "border-emerald-600"
+                      : "border-transparent"
+                  } 
                   hover:border-emerald-600
                 `}
               >
@@ -47,7 +90,7 @@ export default function Pricing() {
                   </h6>
 
                   <div className="flex mb-5">
-                    <span className="text-xl font-semibold">$</span>
+                    <span className="text-xl font-semibold">₼</span>
                     <span className="price text-4xl font-semibold mb-0">
                       {plan.price}
                     </span>
@@ -57,18 +100,12 @@ export default function Pricing() {
                   </div>
 
                   <ul className="list-none text-slate-400 border-t border-gray-100 dark:border-gray-700 pt-5">
-                    <li className="my-2 flex items-center">
-                      <BiCheckCircle className="text-emerald-600 text-xl me-2" /> Full Access
-                    </li>
-                    <li className="my-2 flex items-center">
-                      <BiCheckCircle className="text-emerald-600 text-xl me-2" /> Source Files
-                    </li>
-                    <li className="my-2 flex items-center">
-                      <BiCheckCircle className="text-emerald-600 text-xl me-2" /> Free Appointments
-                    </li>
-                    <li className="my-2 flex items-center">
-                      <BiCheckCircle className="text-emerald-600 text-xl me-2" /> Enhanced Security
-                    </li>
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className="my-2 flex items-center">
+                        <BiCheckCircle className="text-emerald-600 text-xl me-2" />{" "}
+                        {feature}
+                      </li>
+                    ))}
                   </ul>
 
                   <Link

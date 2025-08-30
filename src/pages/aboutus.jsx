@@ -4,8 +4,10 @@ import Feature from "../components/Feature";
 import JobCounter from "../components/Job-counter";
 import QuesAnswer from "../components/Question-Answer";
 import { Link } from "react-router-dom";
+import ab01 from "../assets/images/about/ab01.jpg";
+import ab02 from "../assets/images/about/ab02.jpg";
 
-import { BiCheckCircle } from "../assets/icons/vander";
+import { BiCheckCircle, LuMail } from "../assets/icons/vander";
 
 export default function Aboutus() {
   return (
@@ -34,71 +36,46 @@ export default function Aboutus() {
           </ul>
         </div>
       </section>
-      <div className="relative">
-        <div className="shape absolute start-0 end-0 sm:-bottom-px -bottom-[2px] overflow-hidden z-1 text-white dark:text-slate-900">
-          <svg
-            className="w-full h-auto"
-            viewBox="0 0 2880 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </div>
-      </div>
-      <section className="relative md:py-24 py-16">
-        <div className="container md:pb-16">
-          <MillionsJob />
-        </div>
 
-        <Feature />
-        <div className="container md:mt-24 mt-16">
-          <div className="grid grid-cols-1">
-            <div className="relative overflow-hidden bg-emerald-600 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700">
-              <div className="grid md:grid-cols-2 items-center gap-[30px]">
-                <div className="relative">
-                  <img src={ab05} alt="" />
-                </div>
-
-                <div>
-                  <div className="text-white p-4">
-                    <h4 className="leading-normal text-4xl mb-3 font-semibold">
-                      Get the job of your <br /> dreams quickly.
-                    </h4>
-
-                    <p className="text-white/70 text-lg max-w-xl">
-                      Search all the open positions on the web. Get your own
-                      personalized salary estimate. Read reviews on over 30000+
-                      companies worldwide.
-                    </p>
-
-                    <ul className="list-none text-white/50 mt-4">
-                      <li className="mb-1 flex items-center">
-                        <BiCheckCircle className="text-white text-xl me-2" />{" "}
-                        Digital Marketing Solutions for Tomorrow
-                      </li>
-                      <li className="mb-1 flex items-center">
-                        <BiCheckCircle className="text-white text-xl me-2" />{" "}
-                        Our Talented & Experienced Marketing Agency
-                      </li>
-                      <li className="mb-1 flex items-center">
-                        <BiCheckCircle className="text-white text-xl me-2" />{" "}
-                        Create your own skin to match your brand
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+      <section className="container md:py-24 py-16">
+        <div className="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
+          <div className="lg:col-span-5 md:col-span-6">
+            <div className="relative">
+              <div className="relative">
+                <img
+                  src={ab01}
+                  className="lg:w-[400px] w-[280px] rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700"
+                  alt=""
+                />
               </div>
             </div>
           </div>
+
+          <div className="lg:col-span-7 md:col-span-6 mt-14 md:mt-0">
+            <div className="lg:ms-5">
+              <h3 className="mb-6 md:text-[26px] text-2xl md:leading-normal leading-normal font-semibold">
+                Octopus — Peşəkarları və Şirkətləri Birləşdirən Platforma
+              </h3>
+
+              <p className="text-slate-400 max-w-xl">
+                Octopus, ABŞ-da yerləşən Transformative Coaching Inc. tərəfindən
+                yaradılmış bir platformadır və Azərbaycanın əmək bazarına xüsusi
+                olaraq uyğunlaşdırılmışdır. Məqsədimiz — yerli şirkətləri
+                bacarıqlı mütəxəssislərlə bir araya gətirmək və bu prosesdə hər
+                iki tərəfə yüksək dəyər təqdim etməkdir. Biz insan resursları
+                sahəsində dərin təcrübəyə və güclü ekspert komandaya malikik.
+                Komandamız bir vəzifənin düzgün şəkildə tamamlanmamasının şirkət
+                üçün necə çətinliklər yaradacağını, eyni zamanda doğru fürsətin
+                bir mütəxəssisin karyerasında necə dönüş nöqtəsinə çevrilə
+                biləcəyini yaxşı bilir. Uzun illər ərzində qazandığımız təcrübə,
+                yerli bazar haqqında dərin anlayışımız və geniş peşəkar
+                şəbəkəmiz sayəsində həm işəgötürənlərə, həm də iş axtaranlara
+                fərdi yanaşma ilə keyfiyyətli, etibarlı və effektiv dəstək
+                göstəririk.
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="container md:mt-24 mt-16">
-          <JobCounter />
-        </div>
-        <QuesAnswer />
       </section>
     </>
   );

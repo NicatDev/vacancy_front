@@ -1,5 +1,5 @@
 import logo_light from "../assets/images/logo-light.png";
-import logo from "../assets/images/logo.jpg";
+import logo from "../assets/images/logo.png";
 import React from "react";
 import { Link } from "react-router-dom";
 import {

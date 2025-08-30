@@ -118,7 +118,7 @@ export default function JobGridsTwo() {
                           <label className="inline-flex items-center">
                             <input
                               type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
                               defaultChecked
                             />
                             <span className="ms-2 text-slate-400">
@@ -134,7 +134,7 @@ export default function JobGridsTwo() {
                           <label className="inline-flex items-center">
                             <input
                               type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
                             />
                             <span className="ms-2 text-slate-400">
                               Part Time
@@ -149,7 +149,7 @@ export default function JobGridsTwo() {
                           <label className="inline-flex items-center">
                             <input
                               type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
                             />
                             <span className="ms-2 text-slate-400">
                               Freelancing
@@ -164,7 +164,7 @@ export default function JobGridsTwo() {
                           <label className="inline-flex items-center">
                             <input
                               type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
                             />
                             <span className="ms-2 text-slate-400">
                               Fixed Price
@@ -179,7 +179,7 @@ export default function JobGridsTwo() {
                           <label className="inline-flex items-center">
                             <input
                               type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
                             />
                             <span className="ms-2 text-slate-400">Remote</span>
                           </label>
@@ -192,7 +192,7 @@ export default function JobGridsTwo() {
                           <label className="inline-flex items-center">
                             <input
                               type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
                             />
                             <span className="ms-2 text-slate-400">
                               Hourly Basis
@@ -209,7 +209,7 @@ export default function JobGridsTwo() {
                     <div>
                       <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-2">
                         Salary
-                        <span className="text-green-600 ml-2">
+                        <span className="text-emerald-600 ml-2">
                           {formatCurrency(range[0])} -{" "}
                           {formatCurrency(range[1])}
                         </span>

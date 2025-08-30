@@ -102,7 +102,6 @@ export default function JobPost() {
                     <div className="md:col-span-6 col-span-12 ltr:text-left rtl:text-right">
                       <label className="font-semibold">Salary:</label>
                       <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1">
-                        <option value="H">Hourly</option>
                         <option value="M">Monthly</option>
                       </select>
                     </div>
@@ -117,7 +116,7 @@ export default function JobPost() {
                         </span>
                         <input
                           type="number"
-                          className="form-input border border-slate-100 dark:border-slate-800 ps-12"
+                          className="form-input border border-slate-100 dark:border-slate-800 ps-12 pl-12"
                           placeholder="min"
                           name="minsalary"
                         />
@@ -134,7 +133,7 @@ export default function JobPost() {
                         </span>
                         <input
                           type="number"
-                          className="form-input border border-slate-100 dark:border-slate-800 ps-12"
+                          className="form-input border border-slate-100 dark:border-slate-800 ps-12 pl-12"
                           placeholder="max"
                           name="maxsalary"
                         />
@@ -158,21 +157,6 @@ export default function JobPost() {
                         type="text"
                         className="form-input border border-slate-100 dark:border-slate-800 mt-1"
                         placeholder="Web Developer"
-                      />
-                    </div>
-
-                    <div className="md:col-span-6 col-span-12 ltr:text-left rtl:text-right">
-                      <label
-                        className="font-semibold"
-                        htmlFor="Qualificationname"
-                      >
-                        Qualifications:
-                      </label>
-                      <input
-                        id="Qualificationname"
-                        type="text"
-                        className="form-input border border-slate-100 dark:border-slate-800 mt-1"
-                        placeholder="Qualifications"
                       />
                     </div>
 
@@ -217,32 +201,18 @@ export default function JobPost() {
 
                     <div className="md:col-span-4 col-span-12 ltr:text-left rtl:text-right">
                       <label className="font-semibold">Country:</label>
-                      <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1">
-                        <option value="NY">New York</option>
-                        <option value="MC">North Carolina</option>
-                        <option value="SC">South Carolina</option>
-                      </select>
+                      <input
+                        type="text"
+                        className="form-input border border-slate-100 dark:border-slate-800 block w-full mt-1"
+                      />
                     </div>
 
                     <div className="md:col-span-4 col-span-12 ltr:text-left rtl:text-right">
                       <label className="font-semibold">State:</label>
-                      <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1">
-                        <option value="CAL">California</option>
-                        <option value="TEX">Texas</option>
-                        <option value="FLO">Florida</option>
-                      </select>
-                    </div>
-
-                    <div className="col-span-12 ltr:text-left rtl:text-right">
-                      <div className="w-full leading-[0] border-0">
-                        <iframe
-                          title="job-frame"
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39206.002432144705!2d-95.4973981212445!3d29.709510002925988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c16de81f3ca5%3A0xf43e0b60ae539ac9!2sGerald+D.+Hines+Waterwall+Park!5e0!3m2!1sen!2sin!4v1566305861440!5m2!1sen!2sin"
-                          style={{ border: 0 }}
-                          className="w-full h-[200px] rounded shadow"
-                          allowFullScreen
-                        ></iframe>
-                      </div>
+                      <input
+                        type="text"
+                        className="form-input border border-slate-100 dark:border-slate-800 block w-full mt-1"
+                      />
                     </div>
                   </div>
 

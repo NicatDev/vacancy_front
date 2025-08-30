@@ -8,6 +8,14 @@ import MillionsJob from "../../components/Millions-job";
 import PopularJobsfour from "../../components/Popular-Jobs-four";
 import FindBestCompanies from "../../components/FindBestCompanies";
 import { BiBriefcaseAlt2, PiMapPin } from "../../assets/icons/vander";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+
+import ab01 from "../../assets/images/hero/bg.jpg";
+import ab02 from "../../assets/images/hero/bg4.jpg";
+import ab03 from "../../assets/images/hero/bg2.jpg";
 
 const optionsOne = [
   { value: "AF", label: "Afghanistan" },
@@ -33,17 +41,29 @@ const optionsTwo = [
 export default function Index() {
   return (
     <div>
-      <section className="relative table md:pt-60 pt-36 w-full bg-gradient-to-b from-emerald-600/20 dark:from-emerald-600/40 via-emerald-600/10 dark:via-emerald-600/20 to-transparent">
+      <section className="relative table md:pt-36 pt-36 w-full bg-gradient-to-b from-emerald-600/20 dark:from-emerald-600/40 via-emerald-600/10 dark:via-emerald-600/20 to-transparent">
         <div className="container z-1">
-          <div className="grid grid-cols-1 text-center relative">
-            <h4 className="lg:leading-normal leading-normal text-4xl lg:text-5xl mb-5 font-bold">
-              Join our world-class team <br /> of creators & dreamers
-            </h4>
-            <p className="text-slate-400 text-lg max-w-xl mx-auto">
-              Find Jobs, Employment & Career Opportunities. Some of the
-              companies we've helped recruit excellent applicants over the
-              years.
-            </p>
+          <div className="grid grid-cols-1 text-center overflow-hidden relative">
+            <Swiper
+              modules={[Navigation]}
+              navigation={true}
+              loop={true}
+              autoplay={{ delay: 2000, disableOnInteraction: false }}
+              speed={1000}
+              className="w-full h-[400px] rounded-2xl"
+            >
+              <SwiperSlide>
+                <img src={ab01} className="w-full h-full object-cover" alt="" />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <img src={ab02} className="w-full h-full object-cover" alt="" />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <img src={ab03} className="w-full h-full object-cover" alt="" />
+              </SwiperSlide>
+            </Swiper>
 
             <div className="d-flex" id="reserve-form">
               <div className="md:w-5/6 mx-auto">
@@ -121,12 +141,6 @@ export default function Index() {
                 <img src={android} className="size-6" alt="" />
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="grid grid-cols-1">
-            <img src={bg6} alt="" />
           </div>
         </div>
       </section>
