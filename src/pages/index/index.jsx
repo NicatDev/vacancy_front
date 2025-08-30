@@ -1,15 +1,11 @@
 import Select from "react-select";
-import facebook_logo from "../../assets/images/company/facebook-logo.png";
-import google_logo from "../../assets/images/company/google-logo.png";
-import android from "../../assets/images/company/android.png";
-import bg6 from "../../assets/images/hero/bg6.png";
 import Categories from "../../components/Categories";
 import MillionsJob from "../../components/Millions-job";
 import PopularJobsfour from "../../components/Popular-Jobs-four";
 import FindBestCompanies from "../../components/FindBestCompanies";
 import { BiBriefcaseAlt2, PiMapPin } from "../../assets/icons/vander";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -42,26 +38,43 @@ export default function Index() {
   return (
     <div>
       <section className="relative table md:pt-36 pt-36 w-full bg-gradient-to-b from-emerald-600/20 dark:from-emerald-600/40 via-emerald-600/10 dark:via-emerald-600/20 to-transparent">
-        <div className="container z-1">
-          <div className="grid grid-cols-1 text-center overflow-hidden relative">
+        <div className=" z-1">
+          <div className="grid grid-cols-1 text-center relative">
             <Swiper
-              modules={[Navigation]}
-              navigation={true}
+              modules={[Navigation, Pagination, Autoplay]}
               loop={true}
               autoplay={{ delay: 2000, disableOnInteraction: false }}
               speed={1000}
-              className="w-full h-[400px] rounded-2xl"
+              pagination={{ clickable: true }}
+              className="w-full h-[500px] relative cursor-grab"
             >
-              <SwiperSlide>
+              <SwiperSlide className="relative">
                 <img src={ab01} className="w-full h-full object-cover" alt="" />
+                <div className="slide-overlay">
+                  <div className="slide-text">
+                    <h2 className="slide-title">Test text</h2>
+                    <p className="slide-subtitle">test text</p>
+                  </div>
+                </div>
               </SwiperSlide>
 
-              <SwiperSlide>
+              <SwiperSlide className="relative">
                 <img src={ab02} className="w-full h-full object-cover" alt="" />
+                <div className="slide-overlay">
+                  <div className="slide-text">
+                    <h2 className="slide-title">Test text</h2>
+                    <p className="slide-subtitle">test text</p>
+                  </div>
+                </div>
               </SwiperSlide>
-
-              <SwiperSlide>
+              <SwiperSlide className="relative">
                 <img src={ab03} className="w-full h-full object-cover" alt="" />
+                <div className="slide-overlay">
+                  <div className="slide-text">
+                    <h2 className="slide-title">Test text</h2>
+                    <p className="slide-subtitle">test text</p>
+                  </div>
+                </div>
               </SwiperSlide>
             </Swiper>
 
@@ -113,32 +126,13 @@ export default function Index() {
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="mt-4">
-              <span className="text-slate-400">
-                <span className="text-slate-900 dark:text-white">
-                  Popular Searches :
-                </span>{" "}
-                Designer, Developer, Web, IOS, PHP Senior Engineer
-              </span>
-            </div>
-
-            <div className="absolute -top-20 start-1/2 -translate-x-1/2">
-              <div className="size-10 animate-[bounce_2s_infinite] bg-white dark:bg-slate-900 flex items-center justify-center shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
-                <img src={facebook_logo} className="size-6" alt="" />
-              </div>
-            </div>
-
-            <div className="absolute top-[40%] start-10">
-              <div className="size-10 animate-[spin_5s_linear_infinite] bg-white dark:bg-slate-900 flex items-center justify-center shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
-                <img src={google_logo} className="size-6" alt="" />
-              </div>
-            </div>
-
-            <div className="absolute top-[40%] end-1">
-              <div className="size-10 bg-white dark:bg-slate-900 flex items-center justify-center shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
-                <img src={android} className="size-6" alt="" />
+              <div className="mt-4">
+                <span className="text-slate-400">
+                  <span className="text-slate-900 dark:text-white">
+                    Popular Searches :
+                  </span>{" "}
+                  Designer, Developer, Web, IOS, PHP Senior Engineer
+                </span>
               </div>
             </div>
           </div>
