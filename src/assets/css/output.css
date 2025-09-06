@@ -838,6 +838,10 @@
   .h-\[500px\] {
     height: 500px;
   }
+
+  .h-\[621px\] {
+    height: 621px;
+  }
   .h-\[calc\(100\%-1rem\)\] {
     height: calc(100% - 1rem);
   }
@@ -885,6 +889,9 @@
   }
   .w-60 {
     width: calc(var(--spacing) * 60);
+  }
+  .w-110 {
+    width: 110px;
   }
   .w-\[200px\] {
     width: 200px;
@@ -979,7 +986,7 @@
     cursor: pointer;
   }
   .cursor-grab {
-    cursor: grab ;
+    cursor: grab;
   }
   .list-disc {
     list-style-type: disc;
@@ -1157,16 +1164,15 @@
   /* Yazının yerləşdiyi box */
   .slide-text {
     text-align: left;
-    padding-left: 40px; /* px-10 */
+    padding-left: 80px; /* px-10 */
     max-width: 600px; /* max-w-lg */
   }
 
   /* Başlıq (title) */
   .slide-title {
-    font-size: 2.25rem; /* text-4xl */
+    font-size: 3rem; /* text-4xl */
     font-weight: 700; /* font-bold */
     color: #fff; /* text-white */
-    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.7); /* drop-shadow-lg */
     margin: 0;
   }
 
@@ -1761,6 +1767,9 @@
   }
   .pt-36 {
     padding-top: calc(var(--spacing) * 36);
+  }
+  .pt-87 {
+    padding-top: 87px;
   }
   .pb-0 {
     padding-bottom: calc(var(--spacing) * 0);
@@ -4506,10 +4515,9 @@ h6,
     margin: calc(var(--spacing) * 0);
     list-style-type: none;
     padding: calc(var(--spacing) * 0);
+    gap: 1rem;
     > li {
       position: relative;
-      margin-inline: 10px;
-      margin-block: calc(var(--spacing) * 0);
       display: block;
       &:where(:dir(ltr), [dir="ltr"], [dir="ltr"] *) {
         float: left;
@@ -6607,4 +6615,46 @@ html[dir="rtl"] {
       --tw-outline-style: solid;
     }
   }
+}
+
+@media only screen and ((min-width: 992px) and (max-width: 1280px)) {
+  .navigation-menu {
+    float: left !important;
+    margin-left: -60px !important;
+  }
+   .slider_section {
+    padding-top: calc(var(--spacing) * 36) !important;
+  }
+}
+
+.slide-overlay {
+  position: absolute;
+  inset: 0; /* tam şəkilin üstünü örtür */
+  background: linear-gradient(to right, #0f172b, rgba(255, 255, 255, 0.1));
+}
+
+.swiper_custom {
+  height: 621px;
+}
+
+@media only screen and (max-width: 992px) {
+  .swiper_custom {
+    height: 250px;
+  }
+
+  .slide-text {
+    padding-left: 40px;
+  }
+
+  .slide-title {
+    font-size: 2rem;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+   .swiper_slide img {
+     object-fit: cover;
+
+   }
 }

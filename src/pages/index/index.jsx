@@ -5,13 +5,13 @@ import PopularJobsfour from "../../components/Popular-Jobs-four";
 import FindBestCompanies from "../../components/FindBestCompanies";
 import { BiBriefcaseAlt2, PiMapPin } from "../../assets/icons/vander";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
 
-import ab01 from "../../assets/images/hero/bg.jpg";
+import ab01 from "../../assets/images/blog/01.jpg";
 import ab02 from "../../assets/images/hero/bg4.jpg";
-import ab03 from "../../assets/images/hero/bg2.jpg";
+import ab03 from "../../assets/images/hero/bg3.jpg";
+
 
 const optionsOne = [
   { value: "AF", label: "Afghanistan" },
@@ -37,47 +37,48 @@ const optionsTwo = [
 export default function Index() {
   return (
     <div>
-      <section className="relative table md:pt-36 pt-36 w-full bg-gradient-to-b from-emerald-600/20 dark:from-emerald-600/40 via-emerald-600/10 dark:via-emerald-600/20 to-transparent">
+      <section className="relative slider_section table pt-87 w-full bg-gradient-to-b from-emerald-600/20 dark:from-emerald-600/40 via-emerald-600/10 dark:via-emerald-600/20 to-transparent">
         <div className=" z-1">
           <div className="grid grid-cols-1 text-center relative">
             <Swiper
-              modules={[Navigation, Pagination, Autoplay]}
+              modules={[Autoplay]}
               loop={true}
               autoplay={{ delay: 2000, disableOnInteraction: false }}
               speed={1000}
-              pagination={{ clickable: true }}
-              className="w-full h-[500px] relative cursor-grab"
+              className="w-full swiper_custom relative cursor-grab"
             >
-              <SwiperSlide className="relative">
-                <img src={ab01} className="w-full h-full object-cover" alt="" />
+              <SwiperSlide className="relative swiper_slide">
+                <img src={ab01} className="w-full h-full" alt="" />
+                <div className="slide-overlay"></div>
                 <div className="slide-overlay">
                   <div className="slide-text">
-                    <h2 className="slide-title">Test text</h2>
+                    <h1 className="slide-title">Test text</h1>
                     <p className="slide-subtitle">test text</p>
                   </div>
                 </div>
               </SwiperSlide>
 
-              <SwiperSlide className="relative">
-                <img src={ab02} className="w-full h-full object-cover" alt="" />
+              <SwiperSlide className="relative swiper_slide">
+                <img src={ab02} className="w-full h-full" alt="" />
+                <div className="slide-overlay"></div>
                 <div className="slide-overlay">
                   <div className="slide-text">
-                    <h2 className="slide-title">Test text</h2>
+                    <h1 className="slide-title">Test text</h1>
                     <p className="slide-subtitle">test text</p>
                   </div>
                 </div>
               </SwiperSlide>
-              <SwiperSlide className="relative">
-                <img src={ab03} className="w-full h-full object-cover" alt="" />
+              <SwiperSlide className="relative swiper_slide">
+                <img src={ab03} className="w-full h-full" alt="" />
+                <div className="slide-overlay"></div>
                 <div className="slide-overlay">
                   <div className="slide-text">
-                    <h2 className="slide-title">Test text</h2>
+                    <h1 className="slide-title">Test text</h1>
                     <p className="slide-subtitle">test text</p>
                   </div>
                 </div>
               </SwiperSlide>
             </Swiper>
-
 
             <div className="d-flex" id="reserve-form">
               <div className="md:w-5/6 mx-auto">

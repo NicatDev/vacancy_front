@@ -288,7 +288,7 @@ const Navbar = (props) => {
               <LuSearch className="text-lg absolute top-[8px] end-3" />
               <input
                 type="text"
-                className="py-2 px-3 text-[14px] border border-gray-100 dark:border-gray-800 dark:text-slate-200 outline-none h-9 !pe-10 rounded-3xl bg-white dark:bg-slate-900 placeholder-gray-400 w-fit dark:placeholder-gray-500"
+                className="py-2 px-3 text-[14px] w-110 border border-gray-100 dark:border-gray-800 dark:text-slate-200 outline-none h-9 !pe-10 rounded-3xl bg-white dark:bg-slate-900 placeholder-gray-400 w-fit dark:placeholder-gray-500"
                 name="s"
                 id="searchItem"
                 placeholder="Search..."
@@ -392,7 +392,7 @@ const Navbar = (props) => {
               <Link to="/contact">Contact us</Link>
             </li>
 
-            <li className="block lg:hidden pb-4 custom_new_vacancy_btn">
+            <li className="block lg:hidden pb-4 px-4 custom_new_vacancy_btn">
               <Link
                 to="/pricing"
                 className="rounded-3xl w-fit"

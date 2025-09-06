@@ -5,13 +5,6 @@ import {PiMapPin, BsTelephone, LuMail} from "../assets/icons/vander"
 export default function Contact() {
     return (
         <>
-            <div className="container-fluid relative mt-20">
-                <div className="grid grid-cols-1">
-                    <div className="w-full leading-[0] border-0">
-                        <iframe title="contact-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39206.002432144705!2d-95.4973981212445!3d29.709510002925988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c16de81f3ca5%3A0xf43e0b60ae539ac9!2sGerald+D.+Hines+Waterwall+Park!5e0!3m2!1sen!2sin!4v1566305861440!5m2!1sen!2sin" style={{ border: 0 }} className="w-full h-[500px]" allowFullScreen></iframe>
-                    </div>
-                </div>
-            </div>
             <section className="relative lg:py-24 py-16">
                 <div className="container">
                     <div className="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
