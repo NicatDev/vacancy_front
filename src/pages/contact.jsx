@@ -1,4 +1,4 @@
-import contact from '../assets/images/svg/contact.svg';
+import contact from '../assets/images/DSC09363.jpg';
 import { Link } from 'react-router-dom';
 import {PiMapPin, BsTelephone, LuMail} from "../assets/icons/vander"
 

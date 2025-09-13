@@ -8,9 +8,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-import ab01 from "../../assets/images/blog/01.jpg";
-import ab02 from "../../assets/images/hero/bg4.jpg";
-import ab03 from "../../assets/images/hero/bg3.jpg";
+import ab01 from "../../assets/images/b8b57763-111c-4efb-88fb-ea4261150657.jpg";
+import ab02 from "../../assets/images/DSC03777.jpg";
+import ab03 from "../../assets/images/DSC03251.jpg";
 
 
 const optionsOne = [
@@ -48,7 +48,7 @@ export default function Index() {
               className="w-full swiper_custom relative cursor-grab"
             >
               <SwiperSlide className="relative swiper_slide">
-                <img src={ab01} className="w-full h-full" alt="" />
+                <img src={ab01} className="w-full h-full object-cover" alt="" />
                 <div className="slide-overlay"></div>
                 <div className="slide-overlay">
                   <div className="slide-text">
@@ -59,7 +59,7 @@ export default function Index() {
               </SwiperSlide>
 
               <SwiperSlide className="relative swiper_slide">
-                <img src={ab02} className="w-full h-full" alt="" />
+                <img src={ab02} className="w-full h-full object-cover" alt="" />
                 <div className="slide-overlay"></div>
                 <div className="slide-overlay">
                   <div className="slide-text">
@@ -69,7 +69,7 @@ export default function Index() {
                 </div>
               </SwiperSlide>
               <SwiperSlide className="relative swiper_slide">
-                <img src={ab03} className="w-full h-full" alt="" />
+                <img src={ab03} className="w-full h-full object-cover" alt="" />
                 <div className="slide-overlay"></div>
                 <div className="slide-overlay">
                   <div className="slide-text">

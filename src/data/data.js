@@ -37,7 +37,7 @@ import work4 from '../assets/images/work/04.jpg'
 import work5 from '../assets/images/work/05.jpg'
 import work6 from '../assets/images/work/06.jpg'
 
-import userImg from "../assets/images/user.png"
+import userImg from "../assets/images/DSC03269.jpg"
 
 
 export const jobData = [

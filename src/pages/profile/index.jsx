@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import image from "../../assets/images/team/01.jpg";
+import image from "../../assets/images/DSC03269.jpg";
 import shree_logo from "../../assets/images/company/shree-logo.png";
 import circle_logo from "../../assets/images/company/circle-logo.png";
 import {

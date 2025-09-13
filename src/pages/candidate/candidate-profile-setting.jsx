@@ -1,5 +1,5 @@
 import bg5 from "../../assets/images/hero/bg5.jpg"
-import team1 from "../../assets/images/team/01.jpg"
+import team1 from "../../assets/images/DSC03269.jpg"
 import { Link } from 'react-router-dom';
 import { FiTwitter, FiFacebook, FiInstagram, FiLinkedin ,FiYoutube } from 'react-icons/fi';
 

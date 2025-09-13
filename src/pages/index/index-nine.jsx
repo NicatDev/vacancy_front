@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import heroImg from '../../assets/images/hero.png'
-import team1 from '../../assets/images/team/01.jpg'
+import team1 from '../../assets/images/DSC03269.jpg'
 import team2 from '../../assets/images/team/02.jpg'
 import team3 from '../../assets/images/team/03.jpg'
 import team4 from '../../assets/images/team/04.jpg'
