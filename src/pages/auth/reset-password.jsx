@@ -8,7 +8,7 @@ export default function ResetPassword() {
         <section className="h-screen flex items-center justify-center relative overflow-hidden bg-[url('../../assets/images/hero/bg3.jpg')] bg-no-repeat bg-left-bottom bg-cover">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
             <div className="container">
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+                <div className="flex justify-center">
                     <div className="relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md">
                         <div className="p-6">
                             <Link to="/index">

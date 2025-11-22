@@ -6,7 +6,6 @@ import IndexTwo from './pages/index/index-two';
 import IndexThree from './pages/index/index-three';
 import IndexFour from './pages/index/index-four';
 import IndexFive from './pages/index/index-five';
-import IndexSix from './pages/index/index-six';
 import IndexSeven from './pages/index/index-seven';
 import IndexEight from './pages/index/index-eight';
 import Comingsoon from './pages/comingsoon';
@@ -60,6 +59,9 @@ import IndexTen from './pages/index/index-ten';
 import { useTranslation } from "react-i18next";
 import MainLayout from './layout/MainLayout';
 import "./App.css";
+import { GuestRoute } from './components/ProtectedRoute';
+import EmailVerification from './pages/auth/EmailVerification';
+import EmailSent from './pages/auth/EmailSent';
 
 function App() {
   const { t } = useTranslation();
@@ -82,7 +84,7 @@ function App() {
           <Route path="/index-three" element={<IndexThree />} />
           <Route path="/index-four" element={<IndexFour />} />
           <Route path="/index-five" element={<IndexFive />} />
-          <Route path="/index-six" element={<IndexSix />} />
+          {/* <Route path="/index-six" element={<IndexSix />} /> */}
           <Route path="/index-seven" element={<IndexSeven />} />
           <Route path="/index-eight" element={<IndexEight />} />
           <Route path="/index-nine" element={<IndexNine />} />
@@ -129,9 +131,13 @@ function App() {
           <Route path='/thankyou' element={<Thankyou />} />
           <Route path='/privacy' element={<Privacy />} />
           <Route path='/terms' element={<Terms />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route element={<GuestRoute />}>
+              <Route path='/login' element={<Login />} />
+              <Route path='/signup' element={<Signup />} />
+              <Route path='/reset-password' element={<ResetPassword />} />
+              <Route path='/email/verify/:id/:hash' element={<EmailVerification />} />
+              <Route path='/email-sent' element={<EmailSent />} />
+          </Route>
           <Route path='/blogs' element={<Blogs />} />
           <Route path='/blog-detail' element={<BlogDetail />} />
           <Route path='/blog-detail/:id' element={<BlogDetail />} />
