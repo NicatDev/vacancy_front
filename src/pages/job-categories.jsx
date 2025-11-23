@@ -3,31 +3,7 @@ import { Link } from "react-router-dom";
 import JobCategoriesComp from '../components/job-categories-comp';
 
 export default function JobCategories() {
-    const accordionData = [
-        {
-            title: 'How does it work ?',
-            content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.'
-        },
-        {
-            title: 'Do I need a designer to use Jobstack ?',
-            content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.'
-        },
-        {
-            title: 'What do I need to do to start selling ?',
-            content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.'
-        }
-    ]
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [isOpen, setOpen] = useState(false)
 
-
-    const toggleAccordion = (index) => {
-        if (activeIndex === index) {
-            setActiveIndex(null);
-        } else {
-            setActiveIndex(index);
-        }
-    }
     return (
         <>
             <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">

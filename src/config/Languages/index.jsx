@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next";
 import en from "./en.json";
 import az from "./az.json";
 
-const DEFAULT_LANGUAGE = 'az';
+const DEFAULT_LANGUAGE = 'en';
 
 const language = localStorage.getItem('language') || 'en';
 

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import IndustryAPI from "../api/apiList/industries";
+import { useTranslation } from "react-i18next";
+
 import {
   AiOutlineGitlab,
   VscBook,
@@ -9,110 +12,86 @@ import {
   MdOutlineArrowForward
 } from "../assets/icons/vander";
 
+const icons = [
+  <AiOutlineGitlab />,
+  <VscBook />,
+  <AiOutlinePieChart />,
+  <VscFeedback />,
+  <RiPresentationFill />
+];
+
 export default function Categories() {
+  const { t } = useTranslation();
+  const [industries, setIndustries] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // ✅ Fetch funksiyası
+  const fetchIndustries = async () => {
+    try {
+      const res = await IndustryAPI.getIndustries(1, 15);
+      setIndustries(res.data.data || res.data);
+    } catch (err) {
+      console.error("API ERROR:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchIndustries();
+  }, []);
+
   return (
     <>
       <div className="container">
         <div className="grid grid-cols-1 pb-8 text-center">
           <h3 className="mb-4 md:text-[26px] md:leading-normal text-2xl leading-normal font-semibold">
-            Popular Categories
+            {t("categories.title")}
           </h3>
-
           <p className="text-slate-400 max-w-xl mx-auto">
-            Search all the open positions on the web. Get your own personalized
-            salary estimate. Read reviews on over 30000+ companies worldwide.
+            {t("categories.subtitle")}
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
-          <div className="group px-3 py-10 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 hover:shadow-emerald-600/10 dark:hover:shadow-emerald-600/10 text-center bg-white dark:bg-slate-900 hover:bg-emerald-600/5 dark:hover:bg-emerald-600/5 transition duration-500">
-            <div className="size-16 bg-emerald-600/5 group-hover:bg-emerald-600 text-emerald-600 group-hover:text-white rounded-md text-2xl flex align-middle justify-center items-center shadow-xs shadow-gray-200 dark:shadow-gray-700 transition duration-500 mx-auto">
-              <AiOutlineGitlab />
-            </div>
-
-            <div className="content mt-6">
-              <Link
-                to="/vacancies"
-                className="title text-lg font-semibold hover:text-emerald-600"
+        {loading ? (
+          <p className="text-center text-slate-500">{t("categories.loading")}</p>
+        ) : industries.length === 0 ? (
+          <p className="text-center text-slate-500">{t("categories.noData")}</p>
+        ) : (
+          <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
+            {industries.slice(0, 5).map((item, index) => (
+              <div
+                key={item.id}
+                className="group px-3 py-10 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 hover:shadow-emerald-600/10 dark:hover:shadow-emerald-600/10 text-center bg-white dark:bg-slate-900 hover:bg-emerald-600/5 dark:hover:bg-emerald-600/5 transition duration-500"
               >
-                Business <br /> Development
-              </Link>
-              <p className="text-slate-400 mt-3">74 Jobs</p>
-            </div>
+                <div className="size-16 bg-emerald-600/5 group-hover:bg-emerald-600 text-emerald-600 group-hover:text-white rounded-md text-2xl flex align-middle justify-center items-center shadow-xs shadow-gray-200 dark:shadow-gray-700 transition duration-500 mx-auto">
+                  {icons[index % icons.length]}
+                </div>
+
+                <div className="content mt-6">
+                  <Link
+                    to={`/vacancies?industry=${item.id}`}
+                    className="title text-lg font-semibold hover:text-emerald-600"
+                  >
+                    {item.name}
+                  </Link>
+                  <p className="text-slate-400 mt-3">
+                    {item.occupations?.length ?? 0} {t("categories.jobs")}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <div className="group px-3 py-10 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 hover:shadow-emerald-600/10 dark:hover:shadow-emerald-600/10 text-center bg-white dark:bg-slate-900 hover:bg-emerald-600/5 dark:hover:bg-emerald-600/5 transition duration-500">
-            <div className="size-16 bg-emerald-600/5 group-hover:bg-emerald-600 text-emerald-600 group-hover:text-white rounded-md text-2xl flex align-middle justify-center items-center shadow-xs shadow-gray-200 dark:shadow-gray-700 transition duration-500 mx-auto">
-              <VscBook />
-            </div>
-
-            <div className="content mt-6">
-              <Link
-                to="/vacancies"
-                className="title text-lg font-semibold hover:text-emerald-600"
-              >
-                Marketing & <br /> Communication
-              </Link>
-              <p className="text-slate-400 mt-3">20 Jobs</p>
-            </div>
-          </div>
-
-          <div className="group px-3 py-10 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 hover:shadow-emerald-600/10 dark:hover:shadow-emerald-600/10 text-center bg-white dark:bg-slate-900 hover:bg-emerald-600/5 dark:hover:bg-emerald-600/5 transition duration-500">
-            <div className="size-16 bg-emerald-600/5 group-hover:bg-emerald-600 text-emerald-600 group-hover:text-white rounded-md text-2xl flex align-middle justify-center items-center shadow-xs shadow-gray-200 dark:shadow-gray-700 transition duration-500 mx-auto">
-              <AiOutlinePieChart />
-            </div>
-
-            <div className="content mt-6">
-              <Link
-                to="/vacancies"
-                className="title text-lg font-semibold hover:text-emerald-600"
-              >
-                Project <br /> Management
-              </Link>
-              <p className="text-slate-400 mt-3">35 Jobs</p>
-            </div>
-          </div>
-
-          <div className="group px-3 py-10 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 hover:shadow-emerald-600/10 dark:hover:shadow-emerald-600/10 text-center bg-white dark:bg-slate-900 hover:bg-emerald-600/5 dark:hover:bg-emerald-600/5 transition duration-500">
-            <div className="size-16 bg-emerald-600/5 group-hover:bg-emerald-600 text-emerald-600 group-hover:text-white rounded-md text-2xl flex align-middle justify-center items-center shadow-xs shadow-gray-200 dark:shadow-gray-700 transition duration-500 mx-auto">
-              <VscFeedback />
-            </div>
-
-            <div className="content mt-6">
-              <Link
-                to="/vacancies"
-                className="title text-lg font-semibold hover:text-emerald-600"
-              >
-                Customer <br /> Service
-              </Link>
-              <p className="text-slate-400 mt-3">46 Jobs</p>
-            </div>
-          </div>
-
-          <div className="group px-3 py-10 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 hover:shadow-emerald-600/10 dark:hover:shadow-emerald-600/10 text-center bg-white dark:bg-slate-900 hover:bg-emerald-600/5 dark:hover:bg-emerald-600/5 transition duration-500">
-            <div className="size-16 bg-emerald-600/5 group-hover:bg-emerald-600 text-emerald-600 group-hover:text-white rounded-md text-2xl flex align-middle justify-center items-center shadow-xs shadow-gray-200 dark:shadow-gray-700 transition duration-500 mx-auto">
-              <RiPresentationFill />
-            </div>
-
-            <div className="content mt-6">
-              <Link
-                to="/vacancies"
-                className="title text-lg font-semibold hover:text-emerald-600"
-              >
-                Software <br /> Engineering
-              </Link>
-              <p className="text-slate-400 mt-3">60 Jobs</p>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
+
       <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
         <div className="md:col-span-12 text-center">
           <Link
             to="/categories"
             className="inline-flex items-center font-semibold tracking-wide border align-middle transition text-base text-center relative border-none after:content-[''] after:absolute after:h-px after:w-0 after:end-0 after:bottom-0 after:start-0 after:transition-all after:duration-500 hover:after:w-full hover:after:end-auto text-slate-400 hover:text-emerald-600 after:bg-emerald-600 duration-500 ease-in-out"
           >
-            See More categories <MdOutlineArrowForward className="m-1" />
+            {t("categories.seeMore")} <MdOutlineArrowForward className="m-1" />
           </Link>
         </div>
       </div>

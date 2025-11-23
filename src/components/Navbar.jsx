@@ -13,10 +13,13 @@ import { LuSearch, FiUser, FiSettings, FiLogOut } from "../assets/icons/vander";
 import Languages from "../config/Languages";
 import Select from "react-select";
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
+
 const Navbar = (props) => {
+  const { t } = useTranslation(); // translation funksiyası
   const { languages, changeLanguage } = Languages;
 
-  const currentLang = localStorage.getItem("language") ?? "en";
+  const [currentLang,setCurrentLang] = useState(localStorage.getItem("language") ?? "en");
   const [isDropdown, openDropdown] = useState(true);
   const { navClass, topnavClass, isContainerFluid } = props;
   const [isOpen, setMenu] = useState(true);
@@ -28,8 +31,11 @@ const Navbar = (props) => {
 
   const handleChange = (selectedOption) => {
     changeLanguage(selectedOption.value);
+    setCurrentLang(selectedOption)
   };
+
   window.addEventListener("scroll", windowScroll);
+
   useEffect(() => {
     activateMenu();
   }, []);
@@ -85,7 +91,6 @@ const Navbar = (props) => {
   };
 
   const getClosest = (elem, selector) => {
-    // Element.matches() polyfill
     if (!Element.prototype.matches) {
       Element.prototype.matches =
         Element.prototype.matchesSelector ||
@@ -102,8 +107,6 @@ const Navbar = (props) => {
           return i > -1;
         };
     }
-
-    // Get the closest matching element
     for (; elem && elem !== document; elem = elem.parentNode) {
       if (elem.matches(selector)) return elem;
     }
@@ -122,40 +125,23 @@ const Navbar = (props) => {
 
       if (matchingMenuItem) {
         matchingMenuItem.classList.add("active");
-
         var immediateParent = getClosest(matchingMenuItem, "li");
-
-        if (immediateParent) {
-          immediateParent.classList.add("active");
-        }
-
+        if (immediateParent) immediateParent.classList.add("active");
         var parent = getClosest(immediateParent, ".child-menu-item");
-        if (parent) {
-          parent.classList.add("active");
-        }
-
+        if (parent) parent.classList.add("active");
         var parent = getClosest(parent || immediateParent, ".parent-menu-item");
-
         if (parent) {
           parent.classList.add("active");
-
           var parentMenuitem = parent.querySelector(".menu-item");
-          if (parentMenuitem) {
-            parentMenuitem.classList.add("active");
-          }
-
+          if (parentMenuitem) parentMenuitem.classList.add("active");
           var parentOfParent = getClosest(parent, ".parent-parent-menu-item");
-          if (parentOfParent) {
-            parentOfParent.classList.add("active");
-          }
+          if (parentOfParent) parentOfParent.classList.add("active");
         } else {
           var parentOfParent = getClosest(
             matchingMenuItem,
             ".parent-parent-menu-item"
           );
-          if (parentOfParent) {
-            parentOfParent.classList.add("active");
-          }
+          if (parentOfParent) parentOfParent.classList.add("active");
         }
       }
     }
@@ -165,25 +151,25 @@ const Navbar = (props) => {
     control: (styles) => ({
       ...styles,
       borderRadius: "9999px",
-      borderColor: "#3b82f6", // blue-500
+      borderColor: "#3b82f6",
       minHeight: "36px",
       cursor: "pointer",
       boxShadow: "none",
       backgroundColor: "white",
       width: 75,
       minWidth: 75,
-      "&:hover": { borderColor: "#2563eb" }, // blue-600
+      "&:hover": { borderColor: "#2563eb" },
     }),
     singleValue: (styles) => ({
       ...styles,
-      color: "#2563eb", // blue-600
+      color: "#2563eb",
       fontWeight: "500",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "ellipsis",
       fontSize: 12,
     }),
-    dropdownIndicator: (styles) => ({ ...styles, color: "#2563eb" }), // blue-600
+    dropdownIndicator: (styles) => ({ ...styles, color: "#2563eb" }),
     indicatorSeparator: () => ({ display: "none" }),
     menu: (styles) => ({
       ...styles,
@@ -265,23 +251,23 @@ const Navbar = (props) => {
             </Link>
           </div>
         </div>
-        {/* <!-- End Mobile Toggle --> */}
 
-        {/* <!--Login button Start--> */}
         <ul className="buy-button list-none mb-0">
           <li className="hidden lg:inline-block mb-0 me-2">
-            <Link
-              to="/pricing"
-              className="rounded-3xl"
-              style={{
-                backgroundColor: "oklch(45% 0.18 260.67)",
-                color: "white",
-                padding: "8px 16px",
-                textDecoration: "none",
-              }}
-            >
-              New vacancy
-            </Link>
+            <div className="relative top-[3px]">
+              <Link
+                to="/pricing"
+                className="rounded-3xl"
+                style={{
+                  backgroundColor: "oklch(45% 0.18 260.67)",
+                  color: "white",
+                  padding: "8px 16px",
+                  textDecoration: "none",
+                }}
+              >
+                {t("navbar.newVacancy")}
+              </Link>
+            </div>
           </li>
           <li className="inline-block mb-0">
             <div className="relative top-[3px]">
@@ -291,7 +277,7 @@ const Navbar = (props) => {
                 className="py-2 px-3 text-[14px] w-110 border border-gray-100 dark:border-gray-800 dark:text-slate-200 outline-none h-9 !pe-10 rounded-3xl bg-white dark:bg-slate-900 placeholder-gray-400 w-fit dark:placeholder-gray-500"
                 name="s"
                 id="searchItem"
-                placeholder="Search..."
+                placeholder={t("navbar.search")}
               />
             </div>
           </li>
@@ -320,7 +306,7 @@ const Navbar = (props) => {
                     className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
                   >
                     <FiUser className="size-4 me-2" />
-                    Profile
+                    {t("navbar.profile")}
                   </Link>
                 </li>
                 <li>
@@ -329,26 +315,17 @@ const Navbar = (props) => {
                     className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
                   >
                     <FiSettings className="size-4 me-2" />
-                    Settings
+                    {t("navbar.settings")}
                   </Link>
                 </li>
                 <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
-                {/* <li>
-                  <Link
-                    to="/lock-screen"
-                    className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
-                  >
-                    <FiLock className="size-4 me-2" />
-                    Lockscreen
-                  </Link>
-                </li> */}
                 <li>
                   <Link
                     to="/login"
                     className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
                   >
                     <FiLogOut className="size-4 me-2" />
-                    Logout
+                    {t("navbar.logout")}
                   </Link>
                 </li>
               </ul>
@@ -357,12 +334,11 @@ const Navbar = (props) => {
 
           <li className="dropdown inline-block relative ps-1">
             <Select
-              defaultValue={options.find((opt) => opt.value === currentLang)}
+              value={options.find((opt) => opt.value === currentLang)}
               onChange={handleChange}
-              options={options.filter((opt) => opt.value !== currentLang)}
+              options={options}
               isSearchable={false}
               styles={customSelectStyles}
-              className="dark:border-gray-800 border-gray-100"
             />
           </li>
         </ul>
@@ -373,23 +349,23 @@ const Navbar = (props) => {
         >
           <ul className={`navigation-menu ${navClass}`}>
             <li>
-              <Link to="/companies"> Companies </Link>
+              <Link to="/companies">{t("navbar.companies")}</Link>
             </li>
 
             <li>
-              <Link to="/vacancies">Vacancies</Link>
+              <Link to="/vacancies">{t("navbar.vacancies")}</Link>
             </li>
 
             <li>
-              <Link to="/candidates">Candidates</Link>
+              <Link to="/candidates">{t("navbar.candidates")}</Link>
             </li>
 
             <li>
-              <Link to="/aboutus">About us</Link>
+              <Link to="/aboutus">{t("navbar.aboutUs")}</Link>
             </li>
 
             <li>
-              <Link to="/contact">Contact us</Link>
+              <Link to="/contact">{t("navbar.contactUs")}</Link>
             </li>
 
             <li className="block lg:hidden pb-4 px-4 custom_new_vacancy_btn">
@@ -401,10 +377,9 @@ const Navbar = (props) => {
                   color: "white",
                   padding: "8px 16px",
                   textDecoration: "none",
-                  
                 }}
               >
-                New vacancy
+                {t("navbar.newVacancy")}
               </Link>
             </li>
           </ul>
