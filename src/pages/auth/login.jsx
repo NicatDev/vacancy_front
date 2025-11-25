@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next"; 
-import logo_dark from '../../assets/images/logo-dark.png';
-import logo_light from '../../assets/images/logo-light.png';
+  import logo from "../../assets/images/logo.png";
+
 import AuthAPI from "../../api/AuthAPI";
 import axiosClient from "../../api/axiosClient";
 
@@ -62,8 +62,8 @@ export default function Login() {
                 <div className="max-w-[600px] w-[400px] relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md ">
                     <div className="p-6">
                         <Link to="#">
-                            <img src={logo_dark} className="mx-auto h-[24px] block dark:hidden" alt="Logo Dark" />
-                            <img src={logo_light} className="mx-auto h-[24px] dark:block hidden" alt="Logo Light" />
+                            <img  style={{width:'100px'}} src={logo} className="mx-auto  block dark:hidden" alt="Logo Dark" />
+                            <img  style={{width:'100px'}} src={logo} className="mx-auto  dark:block hidden" alt="Logo Light" />
                         </Link>
 
                         <div className="flex justify-center mt-4 mb-6 border-b border-gray-200 dark:border-gray-700">

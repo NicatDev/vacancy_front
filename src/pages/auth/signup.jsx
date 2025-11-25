@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import logo_dark from '../../assets/images/logo-dark.png';
-import logo_light from '../../assets/images/logo-light.png';
+  import logo from "../../assets/images/logo.png";
 import AuthAPI from "../../api/AuthAPI";
 
 export default function Signup() {
@@ -74,8 +73,8 @@ export default function Signup() {
                 <div className="relative bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md w-full max-w-xl">
                     <div className="p-6">
                         <Link to="#">
-                            <img src={logo_dark} className="mx-auto h-6 block dark:hidden" alt="Logo Dark" />
-                            <img src={logo_light} className="mx-auto h-6 hidden dark:block" alt="Logo Light" />
+                            <img style={{width:'100px'}} src={logo} className="mx-auto h-6 block dark:hidden w-[100px]" alt="Logo Dark" />
+                            <img style={{width:'100px'}}  src={logo} className="mx-auto h-6 hidden dark:block w-[100px]" alt="Logo Light" />
                         </Link>
 
                         {/* Tabs */}
