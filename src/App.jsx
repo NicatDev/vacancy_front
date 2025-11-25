@@ -131,12 +131,13 @@ function App() {
           <Route path='/thankyou' element={<Thankyou />} />
           <Route path='/privacy' element={<Privacy />} />
           <Route path='/terms' element={<Terms />} />
-          <Route element={<GuestRoute />}>
-              <Route path='/login' element={<Login />} />
+                        <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
-              <Route path='/reset-password' element={<ResetPassword />} />
+           <Route path='/reset-password' element={<ResetPassword />} />
               <Route path='/email/verify/:id/:hash' element={<EmailVerification />} />
               <Route path='/email-sent' element={<EmailSent />} />
+          <Route element={<GuestRoute />}>
+   
           </Route>
           <Route path='/blogs' element={<Blogs />} />
           <Route path='/blog-detail' element={<BlogDetail />} />

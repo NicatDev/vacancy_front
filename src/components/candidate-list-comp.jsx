@@ -1,165 +1,207 @@
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { CandidateList } from "../data/data";
-import {
-  MdKeyboardArrowLeft,
-  MdKeyboardArrowRight,
-} from "../assets/icons/vander";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/icons/vander";
+import CandidatesAPI from "../api/apiList/candidates";
+import { useTranslation } from "react-i18next";
+
+const initialCandidateData = {
+  data: [],
+  meta: {
+    current_page: 1,
+    last_page: 1,
+    per_page: 15,
+    total: 0,
+  },
+};
 
 export default function CandidateListComp() {
+  const { t } = useTranslation();
+  const [candidateList, setCandidateList] = useState(initialCandidateData);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(15);
+
+  const fetchCandidates = useCallback(
+    async (page = 1) => {
+      setLoading(true);
+      try {
+        const params = {
+          page,
+          size: perPage,
+          order: "desc",
+          order_by: "id",
+          include: ["user", "languages"],
+        };
+
+        const response = await CandidatesAPI.getCandidates(params);
+        setCandidateList(response.data);
+        setCurrentPage(response.data.meta.current_page || 1);
+      } catch (error) {
+        console.error("Error loading candidates:", error);
+        setCandidateList(initialCandidateData);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [perPage]
+  );
+
+  useEffect(() => {
+    fetchCandidates(currentPage);
+  }, [currentPage, fetchCandidates]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= candidateList.meta.last_page) {
+      setCurrentPage(newPage);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const renderPagination = () => {
+    const { current_page, last_page } = candidateList.meta;
+    const pageNumbers = [];
+
+    pageNumbers.push(
+      <li key="prev">
+        <Link
+          to="#"
+          aria-label={t("candidates.pagination.prev")}
+          onClick={(e) => {
+            e.preventDefault();
+            if (current_page > 1) handlePageChange(current_page - 1);
+          }}
+          className={`size-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 rounded-s-3xl border border-gray-100 dark:border-gray-800 ${
+            current_page === 1 ? "cursor-not-allowed opacity-50" : "hover:text-white hover:border-emerald-600 hover:bg-emerald-600"
+          }`}
+        >
+          <MdKeyboardArrowLeft className="text-[20px]" />
+        </Link>
+      </li>
+    );
+
+    const maxPagesToShow = 5;
+    let startPage = Math.max(1, current_page - Math.floor(maxPagesToShow / 2));
+    let endPage = Math.min(last_page, startPage + maxPagesToShow - 1);
+
+    if (endPage - startPage + 1 < maxPagesToShow) {
+      startPage = Math.max(1, endPage - maxPagesToShow + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(
+        <li key={i}>
+          <Link
+            to="#"
+            onClick={(e) => {
+              e.preventDefault();
+              handlePageChange(i);
+            }}
+            className={`size-[40px] inline-flex justify-center items-center border ${
+              i === current_page
+                ? "bg-emerald-600 text-white border-emerald-600"
+                : "text-slate-400 bg-white dark:bg-slate-900 border-gray-100 hover:text-white hover:border-emerald-600 hover:bg-emerald-600"
+            }`}
+          >
+            {i}
+          </Link>
+        </li>
+      );
+    }
+
+    pageNumbers.push(
+      <li key="next">
+        <Link
+          to="#"
+          aria-label={t("candidates.pagination.next")}
+          onClick={(e) => {
+            e.preventDefault();
+            if (current_page < last_page) handlePageChange(current_page + 1);
+          }}
+          className={`size-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 rounded-e-3xl border border-gray-100 dark:border-gray-800 ${
+            current_page === last_page ? "cursor-not-allowed opacity-50" : "hover:text-white hover:border-emerald-600 hover:bg-emerald-600"
+          }`}
+        >
+          <MdKeyboardArrowRight className="text-[20px]" />
+        </Link>
+      </li>
+    );
+
+    return pageNumbers;
+  };
+
   return (
-    <>
-      <div className="container">
-        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
-          {CandidateList.map((item, index) => (
-            <div
-              className="group bg-white dark:bg-slate-900 relative overflow-hidden rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 text-center p-6"
-              key={index}
-            >
-              <img
-                src={item.image}
-                className=" size-20 rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 mx-auto"
-                alt=""
-              />
-
-              <div className="mt-2">
-                {/* <Link
-                  to={`/candidate-profile/${item.id}`}
-                  className="hover:text-emerald-600 font-semibold text-lg"
-                >
-                  {item.name}
-                </Link> */}
-                <Link
-                  to={`/candidate-profile/${item.id}`}
-                  className="hover:text-emerald-600"
-                >
-                  {item.title}
-                </Link>
-              </div>
-
-              <ul className="mt-2 list-none space-x-0.5">
-                <li className="inline">
-                  <span className="bg-emerald-600/10 inline-block text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full">
-                    {item.deta1}
-                  </span>
-                </li>
-                <li className="inline">
-                  <span className="bg-emerald-600/10 inline-block text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full">
-                    {item.deta2}
-                  </span>
-                </li>
-                <li className="inline">
-                  <span className="bg-emerald-600/10 inline-block text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full">
-                    {item.deta3}
-                  </span>
-                </li>
-              </ul>
-
-              <div className="flex justify-between mt-2">
-                <div className="block">
-                  <span className="text-slate-400">{item.Salery}</span>
-                  <span className="block text-sm font-semibold">
-                    {item.price}
-                  </span>
-                </div>
-                <div className="block">
-                  <span className="text-slate-400">{item.Experience}</span>
-                  <span className="block text-sm font-semibold">
-                    {item.year}
-                  </span>
-                </div>
-              </div>
-
-              <div className="mt-3">
-                <Link
-                  to={`/candidate-profile/${item.id}`}
-                  className="py-[5px] px-4 text-sm inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 dark:border-emerald-600 text-white rounded-md"
-                >
-                  {item.Profile}
-                </Link>
-              </div>
-
-              {/* <span className="w-24 text-white p-1 text-center absolute ltr:-rotate-45 rtl:rotate-45 -start-[30px] top-3 bg-yellow-400 flex justify-center">
-                <AiOutlineStar />
-              </span> */}
-
-              {/* <span className="absolute top-[10px] end-4">
-                <Link
-                  to="#"
-                  className="text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600 text-2xl"
-                >
-                  <i className="mdi mdi-heart"></i>
-                </Link>
-              </span> */}
-            </div>
-          ))}
+    <div className="container">
+      {loading ? (
+        <div className="text-center py-10">
+          <p className="text-xl text-gray-500 dark:text-gray-400">{t("candidates.list.loading")}</p>
         </div>
+      ) : candidateList.data.length === 0 ? (
+        <div className="text-center py-10">
+          <p className="text-xl text-red-500">{t("candidates.list.empty")}</p>
+        </div>
+      ) : (
+        <>
+          <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
+            {candidateList.data.map((item) => (
+              <div
+                className="group bg-white dark:bg-slate-900 relative overflow-hidden rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 text-center p-6"
+                key={item.id}
+              >
+                <img
+                  src={item.avatar || `/images/candidate-${item.id % 5 || 1}.png`}
+                  className="size-20 rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 mx-auto"
+                  alt={item.name}
+                />
+                <div className="mt-2">
+                  <Link to={`/candidate-profile/${item.id}`} className="hover:text-emerald-600 font-semibold text-lg">
+                    {item.name}
+                  </Link>
+                </div>
 
-        <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
-          <div className="md:col-span-12 text-center">
-            <nav aria-label="Page navigation example">
-              <ul className="inline-flex items-center -space-x-px">
-                <li>
+                <ul className="mt-2 list-none space-x-0.5">
+                  {item.languages?.map((lang, idx) => (
+                    <li className="inline" key={idx}>
+                      <span className="bg-emerald-600/10 inline-block text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full">
+                        {lang.name}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex justify-between mt-2">
+                  <div className="block">
+                    <span className="text-slate-400">{t("candidates.list.salary")}:</span>
+                    <span className="block text-sm font-semibold">{item.salary_expectation || "-"}</span>
+                  </div>
+                  <div className="block">
+                    <span className="text-slate-400">{t("candidates.list.speciality")}:</span>
+                    <span className="block text-sm font-semibold">{item.speciality || "-"}</span>
+                  </div>
+                </div>
+
+                <div className="mt-3">
                   <Link
-                    to="#"
-                    className="size-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 rounded-s-3xl hover:text-white border border-gray-100 dark:border-gray-800 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600"
+                    to={`/candidate-profile/${item.id}`}
+                    className="py-[5px] px-4 text-sm inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 dark:border-emerald-600 text-white rounded-md"
                   >
-                    <MdKeyboardArrowLeft className="text-[20px] rtl:rotate-180 rtl:-mt-1" />
+                    {t("candidates.list.viewProfile")}
                   </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="size-[40px] inline-flex justify-center items-center text-slate-400 hover:text-white bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600"
-                  >
-                    1
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="size-[40px] inline-flex justify-center items-center text-slate-400 hover:text-white bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600"
-                  >
-                    2
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    aria-current="page"
-                    className="z-10 size-[40px] inline-flex justify-center items-center text-white bg-emerald-600 border border-emerald-600"
-                  >
-                    3
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="size-[40px] inline-flex justify-center items-center text-slate-400 hover:text-white bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600"
-                  >
-                    4
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="size-[40px] inline-flex justify-center items-center text-slate-400 hover:text-white bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600"
-                  >
-                    5
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="size-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 rounded-e-3xl hover:text-white border border-gray-100 dark:border-gray-800 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600"
-                  >
-                    <MdKeyboardArrowRight className="text-[20px] rtl:rotate-180 rtl:-mt-1" />
-                  </Link>
-                </li>
-              </ul>
-            </nav>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      </div>
-    </>
+
+          {candidateList.meta.last_page > 1 && (
+            <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
+              <div className="md:col-span-12 text-center">
+                <nav aria-label="Page navigation example">
+                  <ul className="inline-flex items-center -space-x-px">{renderPagination()}</ul>
+                </nav>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </div>
   );
 }

@@ -1,37 +1,31 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import EmployerList from "../../components/employer-list";
-import ab01 from "../../assets/images/about/ab01.jpg";
-import ab02 from "../../assets/images/about/ab02.jpg";
+import { useTranslation } from "react-i18next";
 
 export default function Employerlist() {
-  const [isOpen, setOpen] = useState(false);
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const accordionData = [
     {
-      title: "How does it work ?",
-      content:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.",
+      title: t("companiesMain.faq1Title"),
+      content: t("companiesMain.faq1Content"),
     },
     {
-      title: "Do I need a designer to use Jobstack ?",
-      content:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.",
+      title: t("companiesMain.faq2Title"),
+      content: t("companiesMain.faq2Content"),
     },
     {
-      title: "What do I need to do to start selling ?",
-      content:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.",
+      title: t("companiesMain.faq3Title"),
+      content: t("companiesMain.faq3Content"),
     },
   ];
+
   const toggleAccordion = (index) => {
-    if (activeIndex === index) {
-      setActiveIndex(null);
-    } else {
-      setActiveIndex(index);
-    }
+    setActiveIndex(activeIndex === index ? null : index);
   };
+
   return (
     <>
       <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
@@ -39,7 +33,7 @@ export default function Employerlist() {
         <div className="container">
           <div className="grid grid-cols-1 text-center mt-10">
             <h3 className="md:text-3xl text-2xl md:leading-snug tracking-wide leading-snug font-medium text-white">
-              Employers / Companies
+              {t("companiesMain.title")}
             </h3>
           </div>
         </div>
@@ -47,20 +41,16 @@ export default function Employerlist() {
         <div className="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
           <ul className="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
             <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white/50 hover:text-white">
-              <Link to="/index">Jobstack</Link>
+              <Link to="/">{t("companiesMain.breadcrumb.home")}</Link>
             </li>
             <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white/50 hover:text-white">
-              <Link to="/index">Jobs</Link>
+              <Link to="/companies">{t("companiesMain.breadcrumb.jobs")}</Link>
             </li>
-            <li
-              className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white"
-              aria-current="page"
-            >
-              Employers
-            </li>
+            
           </ul>
         </div>
       </section>
+
       <div className="relative">
         <div className="shape absolute start-0 end-0 sm:-bottom-px -bottom-[2px] overflow-hidden z-1 text-white dark:text-slate-900">
           <svg
@@ -76,6 +66,7 @@ export default function Employerlist() {
           </svg>
         </div>
       </div>
+
       <section className="relative md:py-24 py-16">
         <EmployerList />
       </section>

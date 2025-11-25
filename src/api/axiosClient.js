@@ -92,7 +92,7 @@ axiosClient.interceptors.response.use(
         }
 
         const newAccess = accessObj?.token;
-        const newRefreshTokenValue = refreshObj?.token;
+        const newRefreshTokenValue = refreshObj?.token || tokens.refresh_token.token;
 
 
         if (!newAccess || !newRefreshTokenValue) {
@@ -118,7 +118,6 @@ axiosClient.interceptors.response.use(
         
         processQueue(refreshError, null);
         
-        localStorage.removeItem("tokens");
         localStorage.removeItem("user");
         delete axiosClient.defaults.headers.common["Authorization"];
         return Promise.reject(refreshError);

@@ -1,8 +1,11 @@
 import contact from '../assets/images/DSC09363.jpg';
 import { Link } from 'react-router-dom';
-import {PiMapPin, BsTelephone, LuMail} from "../assets/icons/vander"
+import { PiMapPin, BsTelephone, LuMail } from "../assets/icons/vander";
+import { useTranslation } from "react-i18next";
 
 export default function Contact() {
+    const { t } = useTranslation();
+
     return (
         <>
             <section className="relative lg:py-24 py-16">
@@ -15,33 +18,53 @@ export default function Contact() {
                         <div className="lg:col-span-5 md:col-span-6">
                             <div className="lg:ms-5">
                                 <div className="bg-white dark:bg-slate-900 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6">
-                                    <h3 className="mb-6 text-2xl leading-normal font-semibold">Get in touch !</h3>
+                                    
+                                    <h3 className="mb-6 text-2xl leading-normal font-semibold">
+                                        {t("contact.getInTouch")}
+                                    </h3>
 
                                     <form>
                                         <div className="grid lg:grid-cols-12 lg:gap-6">
                                             <div className="lg:col-span-6 mb-5">
-                                                <label htmlFor="name" className="font-semibold">Your Name:</label>
-                                                <input name="name" id="name" type="text" className="form-input mt-2" placeholder="Name :" />
+                                                <label htmlFor="name" className="font-semibold">
+                                                    {t("contact.yourName")}
+                                                </label>
+                                                <input name="name" id="name" type="text" className="form-input mt-2"
+                                                    placeholder={t("contact.namePlaceholder")} />
                                             </div>
 
                                             <div className="lg:col-span-6 mb-5">
-                                                <label htmlFor="email" className="font-semibold">Your Email:</label>
-                                                <input name="email" id="email" type="email" className="form-input mt-2" placeholder="Email :" />
+                                                <label htmlFor="email" className="font-semibold">
+                                                    {t("contact.yourEmail")}
+                                                </label>
+                                                <input name="email" id="email" type="email" className="form-input mt-2"
+                                                    placeholder={t("contact.emailPlaceholder")} />
                                             </div>
                                         </div>
 
                                         <div className="grid grid-cols-1">
                                             <div className="mb-5">
-                                                <label htmlFor="subject" className="font-semibold">Your Question:</label>
-                                                <input name="subject" id="subject" className="form-input mt-2" placeholder="Subject :" />
+                                                <label htmlFor="subject" className="font-semibold">
+                                                    {t("contact.yourQuestion")}
+                                                </label>
+                                                <input name="subject" id="subject" className="form-input mt-2"
+                                                    placeholder={t("contact.subjectPlaceholder")} />
                                             </div>
 
                                             <div className="mb-5">
-                                                <label htmlFor="comments" className="font-semibold">Your Comment:</label>
-                                                <textarea name="comments" id="comments" className="form-input mt-2 textarea" placeholder="Message :"></textarea>
+                                                <label htmlFor="comments" className="font-semibold">
+                                                    {t("contact.yourComment")}
+                                                </label>
+                                                <textarea name="comments" id="comments" className="form-input mt-2 textarea"
+                                                    placeholder={t("contact.messagePlaceholder")}></textarea>
                                             </div>
                                         </div>
-                                        <button type="submit" id="submit" name="send" className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 text-white rounded-md">Send Message</button>
+
+                                        <button
+                                            type="submit"
+                                            className="py-1 px-5 inline-block font-semibold tracking-wide border text-base bg-emerald-600 hover:bg-emerald-700 text-white rounded-md">
+                                            {t("contact.sendMessage")}
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -49,62 +72,62 @@ export default function Contact() {
                     </div>
                 </div>
 
+                {/* 3 Info Cards */}
                 <div className="container lg:mt-24 mt-16">
                     <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-[30px]">
+
+                        {/* Phone */}
                         <div className="text-center px-6">
-                            <div className="relative text-transparent">
-                                <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl text-2xl flex align-middle justify-center items-center mx-auto shadow-xs dark:shadow-gray-800">
-                                    <BsTelephone/>
-                                </div>
+                            <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
+                                <BsTelephone />
                             </div>
-
                             <div className="content mt-7">
-                                <h5 className="title h5 text-lg font-semibold">Phone</h5>
-                                <p className="text-slate-400 mt-3">The phrasal sequence of the is now so that many campaign and benefit</p>
-
+                                <h5 className="text-lg font-semibold">{t("contact.phone")}</h5>
+                                <p className="text-slate-400 mt-3">{t("contact.phoneDescription")}</p>
                                 <div className="mt-5">
-                                    <Link to="tel:+152534-468-854" className="btn btn-link text-emerald-600 hover:text-emerald-600 after:bg-emerald-600 transition duration-500">+152 534-468-854</Link>
+                                    <Link to="tel:+152534-468-854" className="btn btn-link">
+                                        +152 534-468-854
+                                    </Link>
                                 </div>
                             </div>
                         </div>
 
+                        {/* Email */}
                         <div className="text-center px-6">
-                            <div className="relative text-transparent">
-                                <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl text-2xl flex align-middle justify-center items-center mx-auto shadow-xs dark:shadow-gray-800">
-                                    <LuMail/>
-                                </div>
+                            <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
+                                <LuMail />
                             </div>
-
                             <div className="content mt-7">
-                                <h5 className="title h5 text-lg font-semibold">Email</h5>
-                                <p className="text-slate-400 mt-3">The phrasal sequence of the is now so that many campaign and benefit</p>
-
+                                <h5 className="text-lg font-semibold">{t("contact.email")}</h5>
+                                <p className="text-slate-400 mt-3">{t("contact.emailDescription")}</p>
                                 <div className="mt-5">
-                                    <Link to="mailto:contact@example.com" className="btn btn-link text-emerald-600 hover:text-emerald-600 after:bg-emerald-600 transition duration-500">contact@example.com</Link>
+                                    <Link to="mailto:contact@example.com" className="btn btn-link">
+                                        contact@example.com
+                                    </Link>
                                 </div>
                             </div>
                         </div>
 
+                        {/* Location */}
                         <div className="text-center px-6">
-                            <div className="relative text-transparent">
-                                <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl text-2xl flex align-middle justify-center items-center mx-auto shadow-xs dark:shadow-gray-800">
-                                    <PiMapPin/>
-                                </div>
+                            <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
+                                <PiMapPin />
                             </div>
-
                             <div className="content mt-7">
-                                <h5 className="title h5 text-lg font-semibold">Location</h5>
-                                <p className="text-slate-400 mt-3">C/54 Northwest Freeway, Suite 558, <br /> Houston, USA 485</p>
+                                <h5 className="text-lg font-semibold">{t("contact.location")}</h5>
+                                <p className="text-slate-400 mt-3">{t("contact.locationAddress")}</p>
 
                                 <div className="mt-5">
-                                    <Link to="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39206.002432144705!2d-95.4973981212445!3d29.709510002925988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c16de81f3ca5%3A0xf43e0b60ae539ac9!2sGerald+D.+Hines+Waterwall+Park!5e0!3m2!1sen!2sin!4v1566305861440!5m2!1sen!2sin"
-                                        data-type="iframe" className="video-play-icon read-more lightbox btn btn-link text-emerald-600 hover:text-emerald-600 after:bg-emerald-600 transition duration-500">View on Google map</Link>
+                                    <Link to="https://www.google.com/maps" className="btn btn-link">
+                                        {t("contact.viewOnMap")}
+                                    </Link>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>
         </>
-    )
+    );
 }

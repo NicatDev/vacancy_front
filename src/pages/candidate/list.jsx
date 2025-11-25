@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import CandidateListComp from "../../components/candidate-list-comp";
+import { useTranslation } from "react-i18next";
 
 export default function CandidateList() {
+  const { t } = useTranslation();
+
   return (
     <>
       <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
@@ -9,23 +12,21 @@ export default function CandidateList() {
         <div className="container">
           <div className="grid grid-cols-1 text-center mt-10">
             <h3 className="md:text-3xl text-2xl md:leading-snug tracking-wide leading-snug font-medium text-white">
-              Candidates
+              {t("candidatesMain.title")}
             </h3>
           </div>
         </div>
         <div className="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
           <ul className="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
             <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white/50 hover:text-white">
-              <Link to="/index">Jobstack</Link>
+              <Link to="/">{t("candidatesMain.breadcrumbs.home")}</Link>
             </li>
-            <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white/50 hover:text-white">
-              <Link to="/index">Jobs</Link>
-            </li>
+           
             <li
               className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white"
               aria-current="page"
             >
-              Candidates
+              {t("candidatesMain.breadcrumbs.candidates")}
             </li>
           </ul>
         </div>

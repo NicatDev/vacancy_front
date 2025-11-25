@@ -1,5 +1,4 @@
 {
-
   "hero": {
     "title1": "Hero Title 1",
     "desc1": "Hero description 1",
@@ -24,7 +23,7 @@
     "jobs": "Jobs",
     "seeMore": "See more categories"
   },
-  
+
   "millions": {
     "title": "Millions of jobs. Find the one that's right for you.",
     "subtitle": "Search all open positions on the web. Get your personalized salary estimate. Read reviews on over 30,000 companies worldwide.",
@@ -35,17 +34,17 @@
   },
   "popularJobs": {
     "title": "Latest vacancies",
-    "subtitle": "Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30,000 companies worldwide.",
-    "applyButton": "Apply now",
-    "seeMore": "See More vacancies"
+    "subtitle": "Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30000+ companies worldwide.",
+    "seeMore": "See More vacancies",
+    "applyButton": "Apply"
   },
-    "bestCompanies": {
+  "bestCompanies": {
     "title": "Find Best Companies",
     "subtitle": "Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30,000 companies worldwide.",
     "jobs": "Jobs",
     "seeMore": "See More Companies"
   },
-   "navbar": {
+  "navbar": {
     "search": "Search...",
     "newVacancy": "New vacancy",
     "profile": "Profile",
@@ -56,6 +55,121 @@
     "candidates": "Candidates",
     "aboutUs": "About us",
     "contactUs": "Contact us"
+  },
+  "common": {
+    "noData": "No data"
+  },
+  "companies": {
+    "employerList.loading": "Loading companies...",
+    "employerList.noCompanies": "No registered companies found.",
+
+    "employerList.noWebsite": "No Website Information",
+    "employerList.userId": "User ID",
+    "employerList.noLocation": "No Location Information",
+    "employerList.noVacancies": "No Job Vacancies",
+
+    "employerList.pagination.prev": "Previous",
+    "employerList.pagination.next": "Next"
+  },
+  "companiesMain": {
+    "title": "Companies",
+    "breadcrumb": {
+      "home": "Octobus",
+      "jobs": "Companies",
+      "employers": ""
+    },
+    "faq1Title": "How does it work?",
+    "faq1Content": "There are many variations of passages of Lorem Ipsum available, but most have been altered in some way.",
+    "faq2Title": "Do I need a designer to use Jobstack?",
+    "faq2Content": "There are many variations of passages of Lorem Ipsum available, but most have been altered in some way.",
+    "faq3Title": "What do I need to do to start selling?",
+    "faq3Content": "There are many variations of passages of Lorem Ipsum available, but most have been altered in some way."
+  },
+  "contact": {
+    "getInTouch": "Get in touch!",
+    "yourName": "Your Name:",
+    "yourEmail": "Your Email:",
+    "yourQuestion": "Your Question:",
+    "yourComment": "Your Comment:",
+    "namePlaceholder": "Name :",
+    "emailPlaceholder": "Email :",
+    "subjectPlaceholder": "Subject :",
+    "messagePlaceholder": "Message :",
+    "sendMessage": "Send Message",
+
+    "phone": "Phone",
+    "phoneDescription": "If you have any questions feel free to contact us.",
+
+    "email": "Email",
+    "emailDescription": "You can always send us an email.",
+
+    "location": "Location",
+    "locationAddress": "C/54 Northwest Freeway, Suite 558, Houston, USA 485",
+
+    "viewOnMap": "View on Google Map"
+  },
+
+  "about": {
+    "title": "About Us",
+    "breadcrumbHome": "Home",
+    "heading": "Octopus — A Platform Connecting Professionals and Companies",
+    "description": "Octopus is a platform created by Transformative Coaching Inc., based in the USA, and specifically adapted to the labor market of Azerbaijan. Our goal is to bring local companies together with skilled professionals and provide high value to both sides. We have deep experience in human resources and a strong team of experts. Our team understands how an improperly fulfilled position can create challenges for a company, and how the right opportunity can become a turning point in a professional’s career. With the experience we have gained over the years, our strong understanding of the local market, and our wide professional network, we offer high-quality, reliable, and effective support to both employers and job seekers with a personalized approach."
+  },
+  "candidates": {
+    "list": {
+      "loading": "Loading candidates...",
+      "empty": "No candidates found",
+      "salary": "Salary expectation",
+      "speciality": "Speciality",
+      "viewProfile": "View Profile"
+    },
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next"
+    }
+  },
+    "candidatesMain": {
+    "title": "Candidates",
+    "breadcrumbs": {
+    "home": "Ana səhifə",
+    "jobs": "Jobs",
+    "candidates": "Candidates"
   }
+  },
+  "login": {
+    "candidate": "Candidate",
+    "company": "Company",
+    "candidateLogin": "Candidate Login",
+    "companyLogin": "Company Login",
+    "email": "Email Address",
+    "password": "Password",
+    "loginButton": "Login",
+    "loggingIn": "Logging In...",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up"
+  },
+   "register": {
+    "candidate": "Candidate",
+    "company": "Company",
+    "signup": "Signup",
+    "login": "Login",
+    "name": "Your Name",
+    "email": "Email Address",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "speciality": "Speciality",
+    "summary": "Brief Summary",
+    "salary_expectation": "Salary Expectation",
+    "website": "Website",
+    "accept_tnc": "I accept the Terms and Conditions",
+    "register": "Register",
+    "already_account": "Already have an account?",
+    "sign_in": "Sign in"
+  },
+  "jobcategory": {
+    "title": "Job Categories",
+    "home": "Home"
+  }
+  
 
 }

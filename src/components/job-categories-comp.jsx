@@ -23,7 +23,7 @@ export default function JobCategoriesComp() {
   const [industries, setIndustries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [size] = useState(5); // ✅ səhifədə 5 data
+  const [size] = useState(8); // ✅ səhifədə 5 data
   const [total, setTotal] = useState(0);
 
   const fetchIndustries = async (pageNumber = 1) => {

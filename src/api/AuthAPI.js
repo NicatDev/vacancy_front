@@ -1,31 +1,52 @@
 import axiosClient from "./axiosClient";
 
 const AuthAPI = {
-  authenticate: (email, password) => {
-    return axiosClient.post("/auth/authenticate", { email, password });
+  authenticateAsCandidate: (email, password) => {
+    return axiosClient.post("/auth/candidates/login", { email, password });
+  },
+  authenticateAsCompany: (email, password) => {
+    return axiosClient.post("/auth/companies/login", { email, password });
   },
 
-  register: ({ name, email, password, password_confirmation, role = "candidate", speciality, summary, salary_expectation }) => {
-    
-    // API'nin beklediği payload yapısını oluştur
+ registerAsCandidate: ({
+    name,
+    email,
+    password,
+    password_confirmation,
+    speciality,
+    summary,
+    salary_expectation,
+  }) => {
     const payload = {
-      name, 
-      email, 
-      password, 
-      // Düzeltme: API 'passwordConfirm' alanını bekliyor.
-      passwordConfirm: password_confirmation, 
-      // Laravel standartı olan 'password_confirmation' artık gerekli değilse silebilirsiniz.
-      // password_confirmation: password_confirmation, 
-      role, 
-      data: {
-        name: name,
-        speciality: speciality,
-        summary: summary,
-        salary_expectation: parseInt(salary_expectation, 10),
-      }
+      name,
+      email,
+      password,
+      passwordConfirm: password_confirmation, // API tələb edir
+      speciality,
+      summary,
+      salary_expectation: parseInt(salary_expectation, 10),
     };
 
-    return axiosClient.post("/auth/register", payload);
+    return axiosClient.post("/candidates/register", payload);
+  },
+
+  // Company registration
+  registerAsCompany: ({
+    email,
+    password,
+    password_confirmation,
+    website,
+    name,
+  }) => {
+    const payload = {
+      email,
+      password,
+      passwordConfirm: password_confirmation, // API tələb edir
+      website,
+      name,
+    };
+
+    return axiosClient.post("/companies/register", payload);
   },
 
   getCurrentUser: () => {

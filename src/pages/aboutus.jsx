@@ -8,8 +8,11 @@ import ab01 from "../assets/images/about/ab01.jpg";
 import ab02 from "../assets/images/about/ab02.jpg";
 
 import { BiCheckCircle, LuMail } from "../assets/icons/vander";
+import { useTranslation } from "react-i18next";
 
 export default function Aboutus() {
+  const { t } = useTranslation();
+
   return (
     <>
       <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
@@ -17,7 +20,7 @@ export default function Aboutus() {
         <div className="container">
           <div className="grid grid-cols-1 text-center mt-10">
             <h3 className="md:text-3xl text-2xl md:leading-snug tracking-wide leading-snug font-medium text-white">
-              About Us
+              {t("about.title")}
             </h3>
           </div>
         </div>
@@ -25,13 +28,13 @@ export default function Aboutus() {
         <div className="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
           <ul className="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
             <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white/50 hover:text-white">
-              <Link to="/index">Jobstack</Link>
+              <Link to="/">{t("about.breadcrumbHome")}</Link>
             </li>
             <li
               className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white"
               aria-current="page"
             >
-              About Us
+              {t("about.title")}
             </li>
           </ul>
         </div>
@@ -54,24 +57,11 @@ export default function Aboutus() {
           <div className="lg:col-span-7 md:col-span-6 mt-14 md:mt-0">
             <div className="lg:ms-5">
               <h3 className="mb-6 md:text-[26px] text-2xl md:leading-normal leading-normal font-semibold">
-                Octopus — Peşəkarları və Şirkətləri Birləşdirən Platforma
+                {t("about.heading")}
               </h3>
 
               <p className="text-slate-400 max-w-xl">
-                Octopus, ABŞ-da yerləşən Transformative Coaching Inc. tərəfindən
-                yaradılmış bir platformadır və Azərbaycanın əmək bazarına xüsusi
-                olaraq uyğunlaşdırılmışdır. Məqsədimiz — yerli şirkətləri
-                bacarıqlı mütəxəssislərlə bir araya gətirmək və bu prosesdə hər
-                iki tərəfə yüksək dəyər təqdim etməkdir. Biz insan resursları
-                sahəsində dərin təcrübəyə və güclü ekspert komandaya malikik.
-                Komandamız bir vəzifənin düzgün şəkildə tamamlanmamasının şirkət
-                üçün necə çətinliklər yaradacağını, eyni zamanda doğru fürsətin
-                bir mütəxəssisin karyerasında necə dönüş nöqtəsinə çevrilə
-                biləcəyini yaxşı bilir. Uzun illər ərzində qazandığımız təcrübə,
-                yerli bazar haqqında dərin anlayışımız və geniş peşəkar
-                şəbəkəmiz sayəsində həm işəgötürənlərə, həm də iş axtaranlara
-                fərdi yanaşma ilə keyfiyyətli, etibarlı və effektiv dəstək
-                göstəririk.
+                {t("about.description")}
               </p>
             </div>
           </div>

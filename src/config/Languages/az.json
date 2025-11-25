@@ -31,19 +31,14 @@
     "li3": "Brendinizə uyğun öz unikal görünüşünüzü yaradın",
     "contactButton": "Bizimlə əlaqə"
   },
-  "popularJobs": {
-    "title": "Ən son vakansiyalar",
-    "subtitle": "Vebdəki bütün açıq mövqeləri axtarın. Şəxsi maaş qiymətləndirmənizi əldə edin. Dünyada 30000+ şirkət haqqında rəyləri oxuyun.",
-    "applyButton": "Müraciət et",
-    "seeMore": "Bütün vakansiyalara bax"
-  },
-"bestCompanies": {
+
+  "bestCompanies": {
     "title": "Ən yaxşı şirkətləri tapın",
     "subtitle": "Vebdəki bütün açıq mövqeləri axtarın. Şəxsi maaş qiymətləndirmənizi əldə edin. Dünyada 30000+ şirkət haqqında rəyləri oxuyun.",
     "jobs": "Vakansiya",
     "seeMore": "Bütün şirkətlərə bax"
   },
-   "navbar": {
+  "navbar": {
     "search": "Axtar...",
     "newVacancy": "Yeni vakansiya",
     "profile": "Profil",
@@ -54,6 +49,127 @@
     "candidates": "Namizədlər",
     "aboutUs": "Haqqımızda",
     "contactUs": "Əlaqə"
-  }
+  },
+  "popularJobs": {
+    "title": "Ən son vakansiyalar",
+    "subtitle": "Vebdəki bütün açıq mövqeləri axtarın. Şəxsi maaş qiymətləndirmənizi əldə edin. Dünyada 30000+ şirkət haqqında rəyləri oxuyun.",
+    "seeMore": "Bütün vakansiyalara bax",
+    "applyButton": "Müraciət et"
+  },
+  "common": {
+    "noData": "Məlumat tapılmadı"
+  },
+  "companies": {
+    "employerList.loading": "Şirkətlər yüklənir...",
+    "employerList.noCompanies": "Qeydiyyatdan keçmiş şirkət tapılmadı.",
 
+    "employerList.noWebsite": "Vebsayt məlumatı yoxdur",
+    "employerList.userId": "İstifadəçi ID",
+    "employerList.noLocation": "Məkan məlumatı yoxdur",
+    "employerList.noVacancies": "Vakansiya yoxdur",
+
+    "employerList.pagination.prev": "Əvvəlki",
+    "employerList.pagination.next": "Növbəti"
+  },
+
+  "companiesMain": {
+    "title": "Şirkətlər",
+    "breadcrumb": {
+      "home": "Octobus",
+      "jobs": "Şirkətlər",
+      "employers": ""
+    },
+    "faq1Title": "Necə işləyir?",
+    "faq1Content": "Lorem Ipsum mətni üçün bir çox variasiyalar mövcuddur, lakin əksəriyyəti müəyyən qədər dəyişdirilmişdir.",
+    "faq2Title": "Jobstack istifadə etmək üçün dizayner lazımdır?",
+    "faq2Content": "Lorem Ipsum mətni üçün bir çox variasiyalar mövcuddur, lakin əksəriyyəti müəyyən qədər dəyişdirilmişdir.",
+    "faq3Title": "Satışa başlamaq üçün nə etməliyəm?",
+    "faq3Content": "Lorem Ipsum mətni üçün bir çox variasiyalar mövcuddur, lakin əksəriyyəti müəyyən qədər dəyişdirilmişdir."
+  },
+  "contact": {
+    "getInTouch": "Bizimlə əlaqə saxlayın!",
+    "yourName": "Adınız:",
+    "yourEmail": "Emailiniz:",
+    "yourQuestion": "Sualınız:",
+    "yourComment": "Şərhiniz:",
+    "namePlaceholder": "Ad :",
+    "emailPlaceholder": "Email :",
+    "subjectPlaceholder": "Mövzu :",
+    "messagePlaceholder": "Mesaj :",
+    "sendMessage": "Mesajı göndər",
+
+    "phone": "Telefon",
+    "phoneDescription": "Sorğunuz varsa bizimlə əlaqə saxlaya bilərsiniz.",
+
+    "email": "Email",
+    "emailDescription": "Hər zaman bizə email göndərə bilərsiniz.",
+
+    "location": "Ünvan",
+    "locationAddress": "C/54 Northwest Freeway, Suite 558, Houston, ABŞ 485",
+
+    "viewOnMap": "Xəritədə bax"
+  },
+  "about": {
+    "title": "Haqqımızda",
+    "breadcrumbHome": "Ana səhifə",
+    "heading": "Octopus — Peşəkarları və Şirkətləri Birləşdirən Platforma",
+    "description": "Octopus, ABŞ-da yerləşən Transformative Coaching Inc. tərəfindən yaradılmış bir platformadır və Azərbaycanın əmək bazarına xüsusi olaraq uyğunlaşdırılmışdır. Məqsədimiz — yerli şirkətləri bacarıqlı mütəxəssislərlə bir araya gətirmək və bu prosesdə hər iki tərəfə yüksək dəyər təqdim etməkdir. Biz insan resursları sahəsində dərin təcrübəyə və güclü ekspert komandaya malikik. Komandamız bir vəzifənin düzgün şəkildə tamamlanmamasının şirkət üçün necə çətinliklər yaradacağını, eyni zamanda doğru fürsətin bir mütəxəssisin karyerasında necə dönüş nöqtəsinə çevrilə biləcəyini yaxşı bilir. Uzun illər ərzində qazandığımız təcrübə, yerli bazar haqqında dərin anlayışımız və geniş peşəkar şəbəkəmiz sayəsində həm işəgötürənlərə, həm də iş axtaranlara fərdi yanaşma ilə keyfiyyətli, etibarlı və effektiv dəstək göstəririk."
+  },
+
+  "candidates": {
+    "list": {
+      "loading": "Namizədlər yüklənir...",
+      "empty": "Namizəd tapılmadı",
+      "salary": "Maaş gözləntisi",
+      "speciality": "İxtisas",
+      "viewProfile": "Profilə bax"
+    },
+    "pagination": {
+      "prev": "Əvvəlki",
+      "next": "Sonrakı"
+    }
+  },
+  "candidatesMain": {
+    "title": "Namizədlər",
+     "breadcrumbs": {
+    "home": "Ana səhifə",
+    "jobs": "İşlər",
+    "candidates": "Namizədlər"
+  }
+  },
+  "login": {
+    "candidate": "Namizəd",
+    "company": "Şirkət",
+    "candidateLogin": "Namizəd Girişi",
+    "companyLogin": "Şirkət Girişi",
+    "email": "E-poçt ünvanı",
+    "password": "Şifrə",
+    "loginButton": "Daxil ol",
+    "loggingIn": "Daxil olunur...",
+    "noAccount": "Hesabınız yoxdur?",
+    "signUp": "Qeydiyyatdan keçin"
+  },
+  "register": {
+    "candidate": "Namizəd",
+    "company": "Şirkət",
+    "signup": "Qeydiyyat",
+    "login": "Daxil ol",
+    "name": "Adınız",
+    "email": "Email ünvanı",
+    "password": "Şifrə",
+    "confirm_password": "Şifrəni təsdiqləyin",
+    "speciality": "İxtisas",
+    "summary": "Qısa Məlumat",
+    "salary_expectation": "Gözlənilən əmək haqqı",
+    "website": "Veb sayt",
+    "accept_tnc": "Mən Şərtləri qəbul edirəm",
+    "register": "Qeydiyyat",
+    "already_account": "Artıq hesabınız var?",
+    "sign_in": "Daxil ol"
+  },
+"jobcategory": {
+    "title": "İş Kateqoriyaları",
+    "home": "Ana səhifə"
+  }
+ 
 }

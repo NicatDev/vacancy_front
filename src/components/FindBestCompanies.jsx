@@ -1,57 +1,118 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Pagination } from "antd";
 import { useTranslation } from "react-i18next";
 
-import { companiesData } from "../data/data";
+import CompaniesAPI from "../api/apiList/companies"; 
 import { LuMapPin, MdOutlineArrowForward } from "../assets/icons/vander";
 
 export default function FindBestCompanies() {
   const { t } = useTranslation();
 
+  const [companies, setCompanies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Pagination state
+  const [page, setPage] = useState(1);
+  const [pageSize] = useState(8); // 8 company per page
+  const [total, setTotal] = useState(0);
+
+  const fetchCompanies = async () => {
+    try {
+      setLoading(true);
+ const params = {
+                page,
+                size: pageSize,
+                include: "user",
+                order: "desc",
+                order_by: "id",
+            };
+      const res = await CompaniesAPI.getCompanies(params);
+
+      const data = res.data.data || res.data;
+
+      setCompanies(data.items || data);
+      setTotal(data.total || 0);
+    } catch (err) {
+      console.error("COMPANIES API ERROR:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCompanies();
+  }, [page]);
+
   return (
     <div className="container pt-4">
+      {/* Title */}
       <div className="grid grid-cols-1 pb-8 text-center">
-        <h3 className="mb-4 md:text-[26px] md:leading-normal text-2xl leading-normal font-semibold">
+        <h3 className="mb-4 md:text-[26px] text-2xl font-semibold">
           {t("bestCompanies.title")}
         </h3>
-
         <p className="text-slate-400 max-w-xl mx-auto">
           {t("bestCompanies.subtitle")}
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
-        {companiesData.slice(0, 8).map((item, index) => (
-          <div
-            className="group relative p-6 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 mt-6"
-            key={index}
-          >
-            <div className="size-14 flex items-center justify-center bg-white dark:bg-slate-900 shadow-md shadow-gray-200 dark:shadow-gray-700 rounded-md relative -mt-12">
-              <img src={item.image} className="size-8" alt="" />
-            </div>
+      {/* Loading */}
+      {loading && <p className='text-center text-slate-500'>{t("loading")}</p>}
 
-            <div className="mt-4">
-              <Link
-                to={`/company/${item.id}`}
-                className="text-lg hover:text-emerald-600 font-semibold"
+      {/* Empty state */}
+      {!loading && companies.length === 0 && (
+        <p className='text-center text-slate-500'>{t("common.noData")}</p>
+      )}
+
+      {/* Companies Grid */}
+      {!loading && companies.length > 0 && (
+        <>
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
+            {companies.map((item) => (
+              <div
+                className="group relative p-6 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 mt-6"
+                key={item.id}
               >
-                {item.title}
-              </Link>
-              <p className="text-slate-400 mt-2">{item.desc}</p>
-            </div>
+                <div className="size-14 flex items-center justify-center bg-white dark:bg-slate-900 shadow-md shadow-gray-200 dark:shadow-gray-700 rounded-md relative -mt-12">
+                  <img src={item.logo_url} className="size-8" alt="" />
+                </div>
 
-            <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between">
-              <span className="text-slate-400 flex items-center">
-                <LuMapPin className="me-1" /> {item.country}
-              </span>
-              <span className="block font-semibold text-emerald-600">
-                {item.vacancy} {t("bestCompanies.jobs")}
-              </span>
-            </div>
+                <div className="mt-4">
+                  <Link
+                    to={`/company/${item.id}`}
+                    className="text-lg hover:text-emerald-600 font-semibold"
+                  >
+                    {item.name}
+                  </Link>
+                  <p className="text-slate-400 mt-2">{item.description}</p>
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between">
+                  <span className="text-slate-400 flex items-center">
+                    <LuMapPin className="me-1" /> {item.country}
+                  </span>
+                  <span className="block font-semibold text-emerald-600">
+                    {item.total_vacancies} {t("bestCompanies.jobs")}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
+          {/* Pagination */}
+          <div className="flex justify-center mt-8">
+            <Pagination
+              current={page}
+              pageSize={pageSize}
+              total={total}
+              onChange={(p) => setPage(p)}
+              showSizeChanger={false}
+            />
+          </div>
+        </>
+      )}
+
+      {/* See More */}
       <div className="grid md:grid-cols-12 grid-cols-1 mt-6">
         <div className="md:col-span-12 text-center">
           <Link

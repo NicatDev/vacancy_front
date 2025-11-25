@@ -28,6 +28,7 @@ export default function Categories() {
   // ✅ Fetch funksiyası
   const fetchIndustries = async () => {
     try {
+      
       const res = await IndustryAPI.getIndustries(1, 15);
       setIndustries(res.data.data || res.data);
     } catch (err) {
@@ -40,6 +41,12 @@ export default function Categories() {
   useEffect(() => {
     fetchIndustries();
   }, []);
+
+
+  useEffect(() => {
+    console.log(industries)
+  }, [industries]);
+
 
   return (
     <>
