@@ -1,251 +1,224 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import JobGridsTwoComp from "../../components/job-grids-two-comp";
+import { useEffect, useState } from "react";
 import { LuSearch } from "../../assets/icons/vander";
-import RangeSlider from "react-range-slider-input";
-import MultiSelect from "../../components/MultiSelect";
-import "react-range-slider-input/dist/style.css";
-
+import VacanciesAPI from "../../api/apiList/vacancies";
+import IndustryAPI from "../../api/apiList/industries";
+import EmploymentTypeApi from "../../api/apiList/employmentTypes";
+import JobGridsTwoComp from "../../components/job-grids-two-comp";
+import { Link } from "react-router-dom";
 export default function JobGridsTwo() {
-  const [categories, setCategories] = useState([
-    { label: "Web Designer", value: 1 },
-    { label: "Web Developer", value: 2 },
-    { label: "UI / UX Designer", value: 3 },
-    { label: "Backend Developer", value: 4 },
-  ]);
+  const [industries, setIndustries] = useState([]);
+  const [employmentTypes, setEmploymentTypes] = useState([]);
+  const [expandedIndustry, setExpandedIndustry] = useState(null);
 
-  const [locations, setLocations] = useState([
-    { label: "New York", value: "NY" },
-    { label: "North Carolina", value: "MC" },
-    { label: "South Carolina", value: "SC" },
-  ]);
+  const [filters, setFilters] = useState({
+    text: "",
+    industry: null,
+    occupation: null,
+    employment_type: null,
+    page: 1,
+    size: 15,
+  });
 
-  const [range, setRange] = useState([0, 5000]);
+  const [jobs, setJobs] = useState([]);
+  const [pagination, setPagination] = useState({
+    current_page: 1,
+    last_page: 1,
+    total: 0,
+  });
 
-  const [selectedOption, setSelectedOption] = useState("1");
+  // FETCH INDUSTRIES & EMPLOYMENT TYPES
+  useEffect(() => {
+    IndustryAPI.getIndustries(1, 10000, { relationsOccupations: true }).then(
+      (res) => setIndustries(res.data.data)
+    );
 
-  const formatCurrency = (value) => `$${value.toLocaleString()}`;
+    EmploymentTypeApi.getEmploymentTypes(1, 10000).then((res) =>
+      setEmploymentTypes(res.data.data)
+    );
+  }, []);
 
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+  // FETCH JOBS
+  const fetchJobs = async (page = 1) => {
+    try {
+      const res = await VacanciesAPI.searchJobPosts({
+        text: filters.text,
+        industry: filters.industry,
+        occupation: filters.occupation,
+        employment_type: filters.employment_type,
+        page,
+        size: filters.size,
+      });
+
+      setJobs(res.data.data);
+      setPagination({
+        current_page: res.data.meta.current_page,
+        last_page: res.data.meta.last_page,
+        total: res.data.meta.total,
+      });
+    } catch (err) {
+      console.error("Search error:", err);
+    }
   };
+
+  // INITIAL LOAD OR FILTER CHANGE
+  useEffect(() => {
+    fetchJobs(1);
+  }, [filters]);
+
+  /* =======================
+     HANDLERS
+  ======================= */
+  const handleSearchChange = (e) => {
+    setFilters((prev) => ({ ...prev, text: e.target.value, page: 1 }));
+  };
+
+  const handleIndustrySelect = (industryId) => {
+    setExpandedIndustry((prev) => (prev === industryId ? null : industryId));
+
+    setFilters((prev) => {
+      if (prev.industry === industryId) {
+        return { ...prev, industry: null, occupation: null, page: 1 };
+      }
+      return { ...prev, industry: industryId, occupation: null, page: 1 };
+    });
+  };
+
+  const handleOccupationSelect = (occupationId) => {
+    setFilters((prev) => ({
+      ...prev,
+      occupation: prev.occupation === occupationId ? null : occupationId,
+      page: 1,
+    }));
+  };
+
+  const handleEmploymentTypeSelect = (id) => {
+    setFilters((prev) => ({
+      ...prev,
+      employment_type: prev.employment_type === id ? null : id,
+      page: 1,
+    }));
+  };
+
+  const handlePageChange = (page) => {
+    setFilters((prev) => ({ ...prev, page }));
+  };
+
   return (
     <>
-      <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
-        <div className="absolute inset-0 bg-emerald-900/90"></div>
-        <div className="container">
-          <div className="grid grid-cols-1 text-center mt-10">
-            <h3 className="md:text-3xl text-2xl md:leading-snug tracking-wide leading-snug font-medium text-white">
-              Job Vacancies
-            </h3>
-          </div>
-        </div>
-
-        <div className="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
-          <ul className="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
-            <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white/50 hover:text-white">
-              <Link to="/index">Jobstack</Link>
-            </li>
-            <li
-              className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white"
-              aria-current="page"
-            >
-              Vacancies
-            </li>
-          </ul>
-        </div>
-      </section>
-      <div className="relative">
-        <div className="shape absolute start-0 end-0 sm:-bottom-px -bottom-[2px] overflow-hidden z-1 text-white dark:text-slate-900">
-          <svg
-            className="w-full h-auto"
-            viewBox="0 0 2880 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </div>
-      </div>
-      <section className="relative md:py-24 py-16">
-        <div className="container">
-          <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
-            <div className="lg:col-span-4 md:col-span-6">
-              <div className="shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 rounded-md bg-white dark:bg-slate-900 sticky top-20">
-                <form>
-                  <div className="grid grid-cols-1 gap-3">
-                    <div>
-                      <label htmlFor="searchname" className="font-semibold">
-                        Search Company
-                      </label>
-                      <div className="relative mt-2">
-                        <LuSearch className="text-lg absolute top-[10px] start-3" />
-                        <input
-                          name="search"
-                          id="searchname"
-                          type="text"
-                          className="w-full py-2 px-3 text-[14px] border border-gray-200 dark:border-gray-800 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none bg-transparent ps-10"
-                          placeholder="Search"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="font-semibold">Categories</label>
-                      <MultiSelect
-                        options={categories}
-                        maxTagCount={1}
-                        placeholder="Select"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="font-semibold">Location</label>
-                      <MultiSelect
-                        options={locations}
-                        maxTagCount={1}
-                        placeholder="Select"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="font-semibold">Job Types</label>
-                      <div className="block mt-2">
-                        <div className="flex justify-between">
-                          <label className="inline-flex items-center">
-                            <input
-                              type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
-                              defaultChecked
-                            />
-                            <span className="ms-2 text-slate-400">
-                              Full Time
-                            </span>
-                          </label>
-
-                          <span className="bg-emerald-600/10 text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full h-5">
-                            3
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <label className="inline-flex items-center">
-                            <input
-                              type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
-                            />
-                            <span className="ms-2 text-slate-400">
-                              Part Time
-                            </span>
-                          </label>
-
-                          <span className="bg-emerald-600/10 text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full h-5">
-                            7
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <label className="inline-flex items-center">
-                            <input
-                              type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
-                            />
-                            <span className="ms-2 text-slate-400">
-                              Freelancing
-                            </span>
-                          </label>
-
-                          <span className="bg-emerald-600/10 text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full h-5">
-                            4
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <label className="inline-flex items-center">
-                            <input
-                              type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
-                            />
-                            <span className="ms-2 text-slate-400">
-                              Fixed Price
-                            </span>
-                          </label>
-
-                          <span className="bg-emerald-600/10 text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full h-5">
-                            6
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <label className="inline-flex items-center">
-                            <input
-                              type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
-                            />
-                            <span className="ms-2 text-slate-400">Remote</span>
-                          </label>
-
-                          <span className="bg-emerald-600/10 text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full h-5">
-                            7
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <label className="inline-flex items-center">
-                            <input
-                              type="checkbox"
-                              className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-emerald-600 checked:appearance-auto dark:accent-emerald-600 focus:border-emerald-300 focus:ring-0 focus:ring-offset-0 focus:ring-emerald-200 focus:ring-opacity-50 me-2"
-                            />
-                            <span className="ms-2 text-slate-400">
-                              Hourly Basis
-                            </span>
-                          </label>
-
-                          <span className="bg-emerald-600/10 text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full h-5">
-                            44
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-2">
-                        Salary
-                        <span className="text-emerald-600 ml-2">
-                          {formatCurrency(range[0])} -{" "}
-                          {formatCurrency(range[1])}
-                        </span>
-                      </label>
-
-                      <RangeSlider
-                        min={0}
-                        max={5000}
-                        step={100}
-                        value={range}
-                        onInput={setRange}
-                        className="custom-slider"
-                      />
-
-                      <div className="flex justify-between text-sm text-slate-400 mt-2">
-                        <span>$0</span>
-                        <span>$5000</span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <input
-                        type="submit"
-                        className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md w-full"
-                        value="Apply Filter"
-                      />
-                    </div>
-                  </div>
-                </form>
+    <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover"> <div className="absolute inset-0 bg-emerald-900/90"></div> <div className="container"> <div className="grid grid-cols-1 text-center mt-10"> <h3 className="md:text-3xl text-2xl md:leading-snug tracking-wide leading-snug font-medium text-white"> Job Vacancies </h3> </div> </div> <div className="absolute text-center z-10 bottom-5 start-0 end-0 mx-3"> <ul className="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block"> <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white/50 hover:text-white"> <Link to="/index">Jobstack</Link> </li> <li className="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white" aria-current="page" > Vacancies </li> </ul> </div> </section>
+   <section className="py-16">
+      <div className="container grid md:grid-cols-12 gap-8" style={{gap:'30px'}}>
+        {/* FILTER SIDEBAR */}
+        <div className="md:col-span-4">
+          <div className="bg-white p-6 rounded shadow sticky top-20">
+            {/* SEARCH */}
+            <div className="mb-6" >
+              <label className="font-semibold">Search</label>
+              <div className="relative mt-2">
+                <LuSearch className="absolute top-3 left-3 ml-2.5" style={{marginLeft:'10px'}}  />
+                <input
+                  type="text"
+                  value={filters.text}
+                  onChange={handleSearchChange}
+                  className="w-full h-10 ps-10 border rounded"
+                  placeholder="Search jobs..."
+                />
               </div>
             </div>
 
-            <JobGridsTwoComp />
+            {/* CATEGORIES */}
+            <div className="mb-6">
+              <label className="font-semibold block mb-3">Categories</label>
+
+              {(filters.industry || filters.occupation) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setExpandedIndustry(null);
+                    setFilters((prev) => ({
+                      ...prev,
+                      industry: null,
+                      occupation: null,
+                      page: 1,
+                    }));
+                  }}
+                  className="text-xs text-emerald-600 mb-2 underline"
+                  style={{cursor:'pointer'}}
+                >
+                  Clear category selection
+                </button>
+              )}
+
+              {industries.map((industry) => (
+                <div key={industry.id} className="mb-3">
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={filters.industry === industry.id}
+                      onChange={() => handleIndustrySelect(industry.id)}
+                    />
+                    <span className="ms-2 font-medium text-slate-800">
+                      {industry.name}
+                    </span>
+                  </label>
+
+                  {expandedIndustry === industry.id && (
+                    <div style={{marginLeft:'20px'}} className="ml-14 mt-2 pl-4 border-l-2 border-slate-200 bg-slate-50 rounded-sm space-y-1">
+                      {industry.occupations.map((occ) => (
+                        <label
+                          key={occ.id}
+                          className="flex items-center text-xs text-slate-500 cursor-pointer py-0.5"
+                        >
+                          <input
+                            type="checkbox"
+                            className="scale-90"
+                            checked={filters.occupation === occ.id}
+                            onChange={() => handleOccupationSelect(occ.id)}
+                          />
+                          <span className="ms-2">{occ.name}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* EMPLOYMENT TYPES */}
+            <div className="mb-6">
+              <label className="font-semibold block mb-3">
+                Employment Type
+              </label>
+              {employmentTypes.map((type) => (
+                <label
+                  key={type.id}
+                  className="flex items-center mb-2 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    checked={filters.employment_type === type.id}
+                    onChange={() => handleEmploymentTypeSelect(type.id)}
+                  />
+                  <span className="ms-2 text-slate-600">{type.name}</span>
+                </label>
+              ))}
+            </div>
           </div>
+          
+      </div>
+         <div className="md:col-span-7">
+          <JobGridsTwoComp
+            jobs={jobs}
+            pagination={pagination}
+            onPageChange={handlePageChange}
+          />
         </div>
-      </section>
+        </div>
+
+        {/* JOB LIST */}
+     
+    </section>
     </>
+    
   );
 }
