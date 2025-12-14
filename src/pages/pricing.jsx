@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiCheckCircle } from "../assets/icons/vander";
+import PricingPlansApi from "../api/apiList/pricing";
+import { toast } from "react-toastify";
 
 export default function Pricing() {
   const [selected, setSelected] = useState(null);
 
-  const plans = [
+  const [plans, setPlans] = useState([])
+
+  const planss = [
     {
       name: "Tək Vakansiya Elanı",
       price: 20,
@@ -50,6 +54,37 @@ export default function Pricing() {
     },
   ];
 
+  const mapPackages = (data) =>
+    data.map((item) => ({
+      name: item.name,               
+      price: Number(item.price),
+      currency: "AZN",
+      btn: "Elanı Yarat",
+      features: item.features,      
+    }));
+
+
+  const getPricingPlans = async () => {
+    try {
+      const response = await PricingPlansApi.getPricingPlans();
+
+      if (response.status === 200) {
+        const mapped_plans_data = mapPackages(response?.data?.data);
+        setPlans(prevState => [...mapped_plans_data]);
+
+      }
+      else {
+        throw new Error(response?.data)
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  }
+
+  useEffect(() => {
+    getPricingPlans();
+  }, [])
+
   return (
     <>
       {/* Background Section */}
@@ -76,10 +111,9 @@ export default function Pricing() {
                   group relative shadow-sm hover:shadow-md dark:shadow-gray-800 rounded-md transition-all duration-500 cursor-pointer
                   bg-white dark:bg-slate-900
                   border 
-                  ${
-                    selected === index
-                      ? "border-emerald-600"
-                      : "border-transparent"
+                  ${selected === index
+                    ? "border-emerald-600"
+                    : "border-transparent"
                   } 
                   hover:border-emerald-600
                 `}
