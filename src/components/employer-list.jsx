@@ -152,7 +152,7 @@ export default function EmployerList() {
 
                             <div className="mt-4">
                                 <Link
-                                    to={item.website}
+                                    to={`/company/${item.id}`}
                                     className="text-lg hover:text-emerald-600 font-semibold"
                                 >
                                    {item?.name}
