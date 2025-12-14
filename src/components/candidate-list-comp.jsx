@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/icons/vander";
 import CandidatesAPI from "../api/apiList/candidates";
 import { useTranslation } from "react-i18next";
+import UserIcon from "../assets/icons/user.svg";
 
 const initialCandidateData = {
   data: [],
@@ -148,7 +149,7 @@ export default function CandidateListComp() {
                 key={item.id}
               >
                 <img
-                  src={item.avatar || `/images/candidate-${item.id % 5 || 1}.png`}
+                  src={UserIcon}
                   className="size-20 rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 mx-auto"
                   alt={item.name}
                 />

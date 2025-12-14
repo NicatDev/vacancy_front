@@ -25,6 +25,7 @@ export default function Categories() {
   const [industries, setIndustries] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
   // ✅ Fetch funksiyası
   const fetchIndustries = async () => {
     try {

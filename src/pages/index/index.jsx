@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import ab01 from "../../assets/images/b8b57763-111c-4efb-88fb-ea4261150657.jpg";
 import ab02 from "../../assets/images/DSC03777.jpg";
 import ab03 from "../../assets/images/DSC03251.jpg";
+import React, { useEffect } from "react";
 
 const optionsOne = [
   { value: "AF", label: "Afghanistan" },
@@ -34,6 +35,7 @@ const optionsTwo = [
   { value: "4", label: "Remote Work" },
   { value: "5", label: "Office Work" },
 ];
+
 
 export default function Index() {
   const { t } = useTranslation();

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { LuMapPin, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/icons/vander";
 import CompaniesAPI from '../api/apiList/companies';
 import { useTranslation } from "react-i18next";
-
+import CompanyIcon from "../assets/icons/company.svg";
 const initialCompanyData = {
     data: [],
     meta: {
@@ -144,7 +144,7 @@ export default function EmployerList() {
                         >
                             <div className="size-14 flex items-center justify-center bg-white dark:bg-slate-900 shadow-md rounded-md -mt-12">
                                 <img
-                                    src={`/images/company-logo-${item.id % 5 || 1}.png`}
+                                    src={CompanyIcon}
                                     className="size-8"
                                     alt="Company Logo"
                                 />
@@ -152,15 +152,12 @@ export default function EmployerList() {
 
                             <div className="mt-4">
                                 <Link
-                                    to={`/company/${item.id}`}
+                                    to={item.website}
                                     className="text-lg hover:text-emerald-600 font-semibold"
                                 >
-                                    {item.website || t("companies.employerList.noWebsite")}
+                                   {item?.name}
                                 </Link>
 
-                                <p className="text-slate-400 mt-2">
-                                    {t("companies.employerList.userId")}: {item.user_id}
-                                </p>
                             </div>
 
                             <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between">

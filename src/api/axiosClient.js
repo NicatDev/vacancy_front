@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://46.62.155.59:8000/api/v1"; 
+const BASE_URL = "https://api.octopus.com.az/api/v1"; 
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,
