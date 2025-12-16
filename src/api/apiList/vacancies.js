@@ -25,6 +25,10 @@ const VacanciesAPI = {
 
     return axiosClient.get("/job-posts/search", { params });
   },
+
+  createJobPost: (params) => {
+    return axiosClient.post("/job-posts", params);
+  }
 };
 
 export default VacanciesAPI;

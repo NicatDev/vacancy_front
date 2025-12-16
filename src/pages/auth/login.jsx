@@ -63,7 +63,8 @@ export default function Login() {
                     access_token: { token: accessObj.token, ...accessObj },
                     refresh_token: { token: refreshObj.token, ...refreshObj },
                 };
-
+                localStorage.setItem('companyId', responseData?.id)
+                localStorage.setItem("role", responseData?.user?.role === "company" ? 'company' : 'candidate')
                 localStorage.setItem("tokens", JSON.stringify(newTokens));
                 axiosClient.defaults.headers.common[
                     "Authorization"

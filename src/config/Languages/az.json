@@ -31,7 +31,6 @@
     "li3": "Brendinizə uyğun öz unikal görünüşünüzü yaradın",
     "contactButton": "Bizimlə əlaqə"
   },
-
   "bestCompanies": {
     "title": "Ən yaxşı şirkətləri tapın",
     "subtitle": "Vebdəki bütün açıq mövqeləri axtarın. Şəxsi maaş qiymətləndirmənizi əldə edin. Dünyada 30000+ şirkət haqqında rəyləri oxuyun.",
@@ -62,16 +61,13 @@
   "companies": {
     "employerList.loading": "Şirkətlər yüklənir...",
     "employerList.noCompanies": "Qeydiyyatdan keçmiş şirkət tapılmadı.",
-
     "employerList.noWebsite": "Vebsayt məlumatı yoxdur",
     "employerList.userId": "İstifadəçi ID",
     "employerList.noLocation": "Məkan məlumatı yoxdur",
     "employerList.noVacancies": "Vakansiya yoxdur",
-
     "employerList.pagination.prev": "Əvvəlki",
     "employerList.pagination.next": "Növbəti"
   },
-
   "companiesMain": {
     "title": "Şirkətlər",
     "breadcrumb": {
@@ -97,16 +93,12 @@
     "subjectPlaceholder": "Mövzu :",
     "messagePlaceholder": "Mesaj :",
     "sendMessage": "Mesajı göndər",
-
     "phone": "Telefon",
     "phoneDescription": "Sorğunuz varsa bizimlə əlaqə saxlaya bilərsiniz.",
-
     "email": "Email",
     "emailDescription": "Hər zaman bizə email göndərə bilərsiniz.",
-
     "location": "Ünvan",
     "locationAddress": "C/54 Northwest Freeway, Suite 558, Houston, ABŞ 485",
-
     "viewOnMap": "Xəritədə bax"
   },
   "about": {
@@ -115,7 +107,6 @@
     "heading": "Octopus — Peşəkarları və Şirkətləri Birləşdirən Platforma",
     "description": "Octopus, ABŞ-da yerləşən Transformative Coaching Inc. tərəfindən yaradılmış bir platformadır və Azərbaycanın əmək bazarına xüsusi olaraq uyğunlaşdırılmışdır. Məqsədimiz — yerli şirkətləri bacarıqlı mütəxəssislərlə bir araya gətirmək və bu prosesdə hər iki tərəfə yüksək dəyər təqdim etməkdir. Biz insan resursları sahəsində dərin təcrübəyə və güclü ekspert komandaya malikik. Komandamız bir vəzifənin düzgün şəkildə tamamlanmamasının şirkət üçün necə çətinliklər yaradacağını, eyni zamanda doğru fürsətin bir mütəxəssisin karyerasında necə dönüş nöqtəsinə çevrilə biləcəyini yaxşı bilir. Uzun illər ərzində qazandığımız təcrübə, yerli bazar haqqında dərin anlayışımız və geniş peşəkar şəbəkəmiz sayəsində həm işəgötürənlərə, həm də iş axtaranlara fərdi yanaşma ilə keyfiyyətli, etibarlı və effektiv dəstək göstəririk."
   },
-
   "candidates": {
     "list": {
       "loading": "Namizədlər yüklənir...",
@@ -131,11 +122,11 @@
   },
   "candidatesMain": {
     "title": "Namizədlər",
-     "breadcrumbs": {
-    "home": "Ana səhifə",
-    "jobs": "İşlər",
-    "candidates": "Namizədlər"
-  }
+    "breadcrumbs": {
+      "home": "Ana səhifə",
+      "jobs": "İşlər",
+      "candidates": "Namizədlər"
+    }
   },
   "login": {
     "candidate": "Namizəd",
@@ -167,9 +158,82 @@
     "already_account": "Artıq hesabınız var?",
     "sign_in": "Daxil ol"
   },
-"jobcategory": {
+  "jobcategory": {
     "title": "İş Kateqoriyaları",
     "home": "Ana səhifə"
+  },
+  "jobPost": {
+    "pageTitle": "İş Elanı",
+    "breadcrumbHome": "Jobstack",
+    "breadcrumbCurrent": "İş Elanı",
+    "paymentSuccessToast": "Ödəniş uğurlu oldu!",
+    "jobDetailsTitle": "İş Məlumatları:",
+    "jobTitleLabel": "İş Başlığı:",
+    "jobTitlePlaceholder": "Veb Developer",
+    "jobDescriptionLabel": "İş Təsviri:",
+    "jobDescriptionPlaceholder": "İş Təsvirini Yazın :",
+    "categoriesLabel": "Kateqoriyalar:",
+    "categoryWebDesigner": "Veb Dizayner",
+    "categoryWebDeveloper": "Veb Developer",
+    "categoryUiUxDesigner": "UI / UX Dizayner",
+    "jobTypeLabel": "İş Növü:",
+    "jobTypeFullTime": "Tam Ştat",
+    "jobTypePartTime": "Yarım Ştat",
+    "jobTypeFreelancer": "Frilanser",
+    "jobTypeRemoteWork": "Uzaqdan İş",
+    "jobTypeOfficeWork": "Ofis İşi",
+    "salaryLabel": "Əmək haqqı:",
+    "salaryMonthly": "Aylıq",
+    "salaryMinLabel": "Minimum:",
+    "salaryMinPlaceholder": "min",
+    "salaryMaxLabel": "Maksimum:",
+    "salaryMaxPlaceholder": "maks",
+    "skillExperienceTitle": "Bilik və Təcrübə:",
+    "skillsLabel": "Biliklər:",
+    "requirementsLabel":"Tələblər:",
+    "skillsPlaceholder": "Veb Developer",
+    "experienceLabel": "Təcrübə:",
+    "experiencePlaceholder": "Təcrübə",
+    "industryLabel": "Sahə:",
+    "industryBanking": "Bankçılıq",
+    "industryBiotechnology": "Biotexnologiya",
+    "industryAviation": "Aviasiya",
+    "addressTitle": "Ünvan:",
+    "addressLabel": "Ünvan:",
+    "addressPlaceholder": "Ünvan",
+    "countryLabel": "Ölkə:",
+    "stateLabel": "Şəhər:",
+    "postNowButton": "İndi Elan Et",
+    "education": "Təhsil",
+    "formSubmittedSuccess": "İş elanı uğurla göndərildi!",
+    "submittingButton": "Göndərilir..."
+  },
+  "commonContent": {
+    "draft": "Qaralama",
+    "active": "Aktiv",
+    "select":"Seçim edin",
+    "insertData":"Daxil edin"
+  },
+  "formErrors": {
+    "invalidStatus": "Yanlış status seçimi.",
+    "statusRequired": "Status seçimi tələb olunur.",
+    "jobTitleRequired": "Vəzifə adı tələb olunur.",
+    "jobDescriptionRequired": "Vəzifə təsviri tələb olunur.",
+    "categoryRequired": "Kateqoriya seçimi tələb olunur.",
+    "jobTypeRequired": "İş növü seçimi tələb olunur.",
+    "salaryTypeRequired": "Maaş növü tələb olunur.",
+    "skillsRequired": "Bacarıqlar sahəsi tələb olunur.",
+    "requirementsRequired": "Tələblər sahəsi tələb olunur.",
+    "educationRequired": "Təhsil səviyyəsi tələb olunur.",
+    "experienceRequired": "Təcrübə tələb olunur.",
+    "industryRequired": "Sənaye sahəsi tələb olunur.",
+    "addressRequired": "Ünvan tələb olunur.",
+    "countryRequired": "Ölkə tələb olunur.",
+    "stateRequired": "Şəhər/Rayon tələb olunur.",
+    "min3Chars": "Minimum 3 simvol olmalıdır.",
+    "min10Chars": "Minimum 10 simvol olmalıdır.",
+    "max100Chars": "Maksimum 100 simvol olmalıdır.",
+    "minSalaryMax": "Minimum maaş maksimum maaşdan çox ola bilməz.",
+    "maxSalaryMin": "Maksimum maaş minimum maaşdan az ola bilməz."
   }
- 
 }

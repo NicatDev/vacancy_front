@@ -23,7 +23,6 @@
     "jobs": "Jobs",
     "seeMore": "See more categories"
   },
-
   "millions": {
     "title": "Millions of jobs. Find the one that's right for you.",
     "subtitle": "Search all open positions on the web. Get your personalized salary estimate. Read reviews on over 30,000 companies worldwide.",
@@ -62,12 +61,10 @@
   "companies": {
     "employerList.loading": "Loading companies...",
     "employerList.noCompanies": "No registered companies found.",
-
     "employerList.noWebsite": "No Website Information",
     "employerList.userId": "User ID",
     "employerList.noLocation": "No Location Information",
     "employerList.noVacancies": "No Job Vacancies",
-
     "employerList.pagination.prev": "Previous",
     "employerList.pagination.next": "Next"
   },
@@ -96,19 +93,14 @@
     "subjectPlaceholder": "Subject :",
     "messagePlaceholder": "Message :",
     "sendMessage": "Send Message",
-
     "phone": "Phone",
     "phoneDescription": "If you have any questions feel free to contact us.",
-
     "email": "Email",
     "emailDescription": "You can always send us an email.",
-
     "location": "Location",
     "locationAddress": "C/54 Northwest Freeway, Suite 558, Houston, USA 485",
-
     "viewOnMap": "View on Google Map"
   },
-
   "about": {
     "title": "About Us",
     "breadcrumbHome": "Home",
@@ -128,13 +120,13 @@
       "next": "Next"
     }
   },
-    "candidatesMain": {
+  "candidatesMain": {
     "title": "Candidates",
     "breadcrumbs": {
-    "home": "Ana səhifə",
-    "jobs": "Jobs",
-    "candidates": "Candidates"
-  }
+      "home": "Ana səhifə",
+      "jobs": "Jobs",
+      "candidates": "Candidates"
+    }
   },
   "login": {
     "candidate": "Candidate",
@@ -148,7 +140,7 @@
     "noAccount": "Don't have an account?",
     "signUp": "Sign Up"
   },
-   "register": {
+  "register": {
     "candidate": "Candidate",
     "company": "Company",
     "signup": "Signup",
@@ -169,7 +161,80 @@
   "jobcategory": {
     "title": "Job Categories",
     "home": "Home"
+  },
+  "jobPost": {
+    "pageTitle": "Job Post",
+    "breadcrumbHome": "Jobstack",
+    "breadcrumbCurrent": "Job Post",
+    "paymentSuccessToast": "Payment successful!",
+    "jobDetailsTitle": "Job Details:",
+    "jobTitleLabel": "Job Title:",
+    "jobTitlePlaceholder": "Web Developer",
+    "jobDescriptionLabel": "Job Description:",
+    "jobDescriptionPlaceholder": "Write Job Description :",
+    "categoriesLabel": "Categories:",
+    "categoryWebDesigner": "Web Designer",
+    "categoryWebDeveloper": "Web Developer",
+    "categoryUiUxDesigner": "UI / UX Desinger",
+    "jobTypeLabel": "Job Type:",
+    "jobTypeFullTime": "Full Time",
+    "jobTypePartTime": "Part Time",
+    "jobTypeFreelancer": "Freelancer",
+    "jobTypeRemoteWork": "Remote Work",
+    "jobTypeOfficeWork": "Office Work",
+    "salaryLabel": "Salary:",
+    "salaryMonthly": "Monthly",
+    "salaryMinLabel": "Min:",
+    "salaryMinPlaceholder": "min",
+    "salaryMaxLabel": "Max:",
+    "salaryMaxPlaceholder": "max",
+    "skillExperienceTitle": "Skill & Experience:",
+    "requirementsLabel": "Requirements:",
+    "skillsLabel": "Skills:",
+    "skillsPlaceholder": "Web Developer",
+    "experienceLabel": "Experience:",
+    "experiencePlaceholder": "Experience",
+    "industryLabel": "Industry:",
+    "industryBanking": "Banking",
+    "industryBiotechnology": "Biotechnology",
+    "industryAviation": "Aviation",
+    "addressTitle": "Address:",
+    "addressLabel": "Address:",
+    "addressPlaceholder": "Address",
+    "countryLabel": "Country:",
+    "stateLabel": "State:",
+    "postNowButton": "Post Now",
+    "education": "Education",
+    "formSubmittedSuccess": "Job post submitted successfully!",
+    "submittingButton": "Submitting..."
+  },
+  "commonContent": {
+    "draft": "Draft",
+    "active": "Active",
+    "select": "Select",
+    "insertData": "Enter data"
+  },
+  "formErrors": {
+    "invalidStatus": "Invalid status selection.",
+    "statusRequired": "Status selection is required.",
+    "jobTitleRequired": "Job title is required.",
+    "jobDescriptionRequired": "Job description is required.",
+    "categoryRequired": "Category selection is required.",
+    "jobTypeRequired": "Job type selection is required.",
+    "salaryTypeRequired": "Salary type is required.",
+    "skillsRequired": "Skills field is required.",
+    "requirementsRequired": "The Requirements field is required.",
+    "educationRequired": "Education level is required.",
+    "experienceRequired": "Experience is required.",
+    "industryRequired": "Industry field is required.",
+    "addressRequired": "Address is required.",
+    "countryRequired": "Country is required.",
+    "stateRequired": "City/State is required.",
+    "min3Chars": "Must be at least 3 characters.",
+    "min10Chars": "Must be at least 10 characters.",
+    "max100Chars": "Cannot exceed 100 characters.",
+    "minSalaryMax": "Minimum salary cannot be greater than maximum salary.",
+    "maxSalaryMin": "Maximum salary cannot be less than minimum salary.",
+    "mustBeNumber": "The value must be a number."
   }
-  
-
 }

@@ -1,14 +1,15 @@
 import axiosClient from "../axiosClient";
 
 const IndustryAPI = {
+  getAllIndustries: () => {
+    return axiosClient.get("/industries");
+  },
   getIndustries: (page, size, relationsOccupations = true) => {
-    // backend 1/0 istəyir
     const relations = relationsOccupations ? 1 : 0;
-    console.log(page,size,'---')
     return axiosClient.get("/industries", {
       params: {
-        page: page??'',
-        size: size??'',
+        page: page ?? '',
+        size: size ?? '',
         order: "desc",
         order_by: "name",
         "relations[occupations]": relations, // ✅ flat param kimi

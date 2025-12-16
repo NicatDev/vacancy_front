@@ -63,6 +63,7 @@ import { GuestRoute } from './components/ProtectedRoute';
 import EmailVerification from './pages/auth/EmailVerification';
 import EmailSent from './pages/auth/EmailSent';
 import { ToastContainer } from "react-toastify";
+import { UserProvider } from "./context/UserContext.jsx"
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -74,94 +75,96 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
+    <UserProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
 
-        <Route path='/' element={<MainLayout />}>
+          <Route path='/' element={<MainLayout />}>
 
-          <Route exact path="/" element={<Index />} />
-          <Route path="/" element={<Index />} />
-          <Route path="/index-two" element={<IndexTwo />} />
-          <Route path="/index-three" element={<IndexThree />} />
-          <Route path="/index-four" element={<IndexFour />} />
-          <Route path="/index-five" element={<IndexFive />} />
-          {/* <Route path="/index-six" element={<IndexSix />} /> */}
-          <Route path="/index-seven" element={<IndexSeven />} />
-          <Route path="/index-eight" element={<IndexEight />} />
-          <Route path="/index-nine" element={<IndexNine />} />
-          <Route path="/index-ten" element={<IndexTen />} />
+            <Route exact path="/" element={<Index />} />
+            <Route path="/" element={<Index />} />
+            <Route path="/index-two" element={<IndexTwo />} />
+            <Route path="/index-three" element={<IndexThree />} />
+            <Route path="/index-four" element={<IndexFour />} />
+            <Route path="/index-five" element={<IndexFive />} />
+            {/* <Route path="/index-six" element={<IndexSix />} /> */}
+            <Route path="/index-seven" element={<IndexSeven />} />
+            <Route path="/index-eight" element={<IndexEight />} />
+            <Route path="/index-nine" element={<IndexNine />} />
+            <Route path="/index-ten" element={<IndexTen />} />
 
-          <Route path="/categories" element={<JobCategories />} />
-          <Route path="/job-apply" element={<JobApply />} />
-          <Route path="/job-post" element={<JobPost />} />
-          <Route path="/job-grid-one" element={<JobGridsOne />} />
-          <Route path="/vacancies" element={<JobGridsTwo />} />
-          <Route path="/job-grid-three" element={<JobGridsThree />} />
-          <Route path="/job-grid-four" element={<JobGridsFour />} />
-          <Route path="/job-list-one" element={<JobListOne />} />
-          <Route path="/job-list-two" element={<JobListTwo />} />
-          <Route path="/job-list-three" element={<JobListThree />} />
-          <Route path="/job-list-four" element={<JobListFour />} />
-          <Route path="/job-list-five" element={<JobListFive />} />
-          <Route path="/job-list-six" element={<JobListSix />} />
-          <Route path="/job-detail-one/:id" element={<JobDetailOne />} />
-          <Route path="/job-detail-one" element={<JobDetailOne />} />
-          <Route path="/vacancy/:id" element={<JobDetailTwo />} />
-          <Route path="/job-detail-two" element={<JobDetailTwo />} />
-          <Route path="/job-detail-three/:id" element={<JobDetailThree />} />
-          <Route path="/job-detail-three" element={<JobDetailThree />} />
+            <Route path="/categories" element={<JobCategories />} />
+            <Route path="/job-apply" element={<JobApply />} />
+            <Route path="/job-post" element={<JobPost />} />
+            <Route path="/job-grid-one" element={<JobGridsOne />} />
+            <Route path="/vacancies" element={<JobGridsTwo />} />
+            <Route path="/job-grid-three" element={<JobGridsThree />} />
+            <Route path="/job-grid-four" element={<JobGridsFour />} />
+            <Route path="/job-list-one" element={<JobListOne />} />
+            <Route path="/job-list-two" element={<JobListTwo />} />
+            <Route path="/job-list-three" element={<JobListThree />} />
+            <Route path="/job-list-four" element={<JobListFour />} />
+            <Route path="/job-list-five" element={<JobListFive />} />
+            <Route path="/job-list-six" element={<JobListSix />} />
+            <Route path="/job-detail-one/:id" element={<JobDetailOne />} />
+            <Route path="/job-detail-one" element={<JobDetailOne />} />
+            <Route path="/vacancy/:id" element={<JobDetailTwo />} />
+            <Route path="/job-detail-two" element={<JobDetailTwo />} />
+            <Route path="/job-detail-three/:id" element={<JobDetailThree />} />
+            <Route path="/job-detail-three" element={<JobDetailThree />} />
 
-          <Route path="/helpcenter-faqs" element={<Faqs />} />
-          <Route path="/helpcenter-overview" element={<Overview />} />
-          <Route path="/helpcenter-support" element={<Support />} />
-          <Route path="/helpcenter-guides" element={<Guides />} />
+            <Route path="/helpcenter-faqs" element={<Faqs />} />
+            <Route path="/helpcenter-overview" element={<Overview />} />
+            <Route path="/helpcenter-support" element={<Support />} />
+            <Route path="/helpcenter-guides" element={<Guides />} />
 
-          <Route path="/aboutus" element={<Aboutus />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/companies" element={<Employerlist />} />
-          <Route path="/company/:id" element={<EmployerDetail />} />
-          <Route path="/candidates" element={<CandidateList />} />
-          <Route path="/candidate-profile/:id" element={<CandidateDetail />} />
-          <Route path="/candidate-profile-setting" element={<CandidateProfileSetting />} />
-          <Route path="/career" element={<Career />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/comingsoon" element={<Comingsoon />} />
-          <Route path="/maintenance" element={<Maintenance />} />
-          <Route path='/error' element={<Error />} />
-          <Route path='/thankyou' element={<Thankyou />} />
-          <Route path='/privacy' element={<Privacy />} />
-          <Route path='/terms' element={<Terms />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
-          <Route path='/email/verify/:id/:hash' element={<EmailVerification />} />
-          <Route path='/email-sent' element={<EmailSent />} />
-          <Route element={<GuestRoute />}>
+            <Route path="/aboutus" element={<Aboutus />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/companies" element={<Employerlist />} />
+            <Route path="/company/:id" element={<EmployerDetail />} />
+            <Route path="/candidates" element={<CandidateList />} />
+            <Route path="/candidate-profile/:id" element={<CandidateDetail />} />
+            <Route path="/candidate-profile-setting" element={<CandidateProfileSetting />} />
+            <Route path="/career" element={<Career />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/comingsoon" element={<Comingsoon />} />
+            <Route path="/maintenance" element={<Maintenance />} />
+            <Route path='/error' element={<Error />} />
+            <Route path='/thankyou' element={<Thankyou />} />
+            <Route path='/privacy' element={<Privacy />} />
+            <Route path='/terms' element={<Terms />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/reset-password' element={<ResetPassword />} />
+            <Route path='/email/verify/:id/:hash' element={<EmailVerification />} />
+            <Route path='/email-sent' element={<EmailSent />} />
+            <Route element={<GuestRoute />}>
 
+            </Route>
+            <Route path='/blogs' element={<Blogs />} />
+            <Route path='/blog-detail' element={<BlogDetail />} />
+            <Route path='/blog-detail/:id' element={<BlogDetail />} />
+            <Route path='/lock-screen' element={<LockScreen />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='*' element={<Error />} />
           </Route>
-          <Route path='/blogs' element={<Blogs />} />
-          <Route path='/blog-detail' element={<BlogDetail />} />
-          <Route path='/blog-detail/:id' element={<BlogDetail />} />
-          <Route path='/lock-screen' element={<LockScreen />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='*' element={<Error />} />
-        </Route>
 
-      </Routes>
-      <Switcher />
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        pauseOnHover
-        draggable
-        theme="light"
-      />
-    </BrowserRouter>
+        </Routes>
+        <Switcher />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          pauseOnHover
+          draggable
+          theme="light"
+        />
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 
