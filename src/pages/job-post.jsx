@@ -162,11 +162,11 @@ export default function JobPost() {
           category: values?.category?.value,
           education_level_id: values?.education_level_id?.value,
           employment_type_id: values?.employment_type_id?.value,
-          occupation_id: values?.occupation_id?.value
+          occupation_id: values?.occupation_id?.value,
+          location: `${values?.location} ${values?.country} ${values?.state}`
         });
 
-        if (response.status === 200) {
-          console.log("Form Məlumatları:", values);
+        if (response.status === 201) {
           setSubmitting(false);
           toast.success(t('jobPost.formSubmittedSuccess'));
         }

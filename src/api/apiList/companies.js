@@ -15,6 +15,10 @@ const CompaniesAPI = {
   getSingle: (id) => {
     return axiosClient.get(`/companies/${id}`);
   },
+
+  getCompanyExternalLinks: (id) => {
+    return axiosClient.get(`/companies/${id}/external-links`);
+  },
 };
 
 export default CompaniesAPI;

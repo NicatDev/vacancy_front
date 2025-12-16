@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import logo_icon_40 from "../assets/images/logo-icon-40.png";
 import logo_icon_40_white from "../assets/images/logo-icon-40-white.png";
@@ -14,8 +14,11 @@ import Select from "react-select";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import AuthAPI from "../api/AuthAPI";
+import { useUser } from "../context/UserContext";
 
 const Navbar = (props) => {
+  const { refreshUser } = useUser();
+  const { pathname } = useLocation();
   const { t } = useTranslation();
   const { languages, changeLanguage } = Languages;
 
@@ -179,6 +182,12 @@ const Navbar = (props) => {
       zIndex: 9999,
     }),
   };
+
+  useEffect(() => {
+    if (!pathname?.includes('login') && !pathname?.includes('signup')) {
+      refreshUser();
+    }
+  }, [pathname])
 
   return (
     <nav id="topnav" className={`defaultscroll is-sticky ${topnavClass}`}>

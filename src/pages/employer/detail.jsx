@@ -29,19 +29,30 @@ export default function EmployerDetail(props) {
   const params = useParams();
   const id = params.id;
   const [company, setCompany] = useState(null);
+  const [externalLinks, setExternalLinks] = useState([])
 
-useEffect(() => {
-  const fetchCompany = async () => {
-    try {
-      const response = await CompaniesAPI.getSingle(id);
-      setCompany(response.data);
-    } catch (error) {
-      console.error("Error loading company:", error);
-    } 
-  };
+  useEffect(() => {
+    const fetchCompany = async () => {
+      try {
+        const response = await CompaniesAPI.getSingle(id);
+        setCompany(response.data?.data);
+      } catch (error) {
+        console.error("Error loading company:", error);
+      }
+    };
 
-  fetchCompany();
-}, []);
+    const getCompanyExternalLinks = async () => {
+      try {
+        const response = await CompaniesAPI.getCompanyExternalLinks(id);
+        console.log(response?.data)
+      } catch (error) {
+
+      }
+    }
+
+    fetchCompany();
+    getCompanyExternalLinks();
+  }, []);
   const data = jobData.find((jobs) => jobs.id === parseInt(id));
   return (
     <>
@@ -69,15 +80,15 @@ useEffect(() => {
           <div className="grid grid-cols-1">
             <div className="md:flex justify-between items-center shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md p-6 bg-white dark:bg-slate-900">
               <div className="flex items-center">
-                <img
-                  src={data?.image ? data?.image : google_logo}
+                {company?.logo && <img
+                  src={company?.logo}
                   className=" size-20 p-3 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md bg-slate-50 dark:bg-slate-800"
                   alt=""
-                />
+                />}
 
                 <div className="ms-4">
                   <h5 className="text-xl font-bold">
-                    {data?.title ? data?.title : "Google"}
+                    {company?.name ? company?.name : ""}
                   </h5>
                   <h6 className="text-base text-slate-400 flex items-center">
                     <PiMapPin className="me-1" />{" "}
@@ -207,7 +218,7 @@ useEffect(() => {
 
             <div className="lg:col-span-4 md:col-span-5">
               <div className="bg-slate-50 dark:bg-slate-800 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 sticky top-20">
-                <div className="w-full leading-[0] border-0">
+                {/* <div className="w-full leading-[0] border-0">
                   <iframe
                     title="detail-frame"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39206.002432144705!2d-95.4973981212445!3d29.709510002925988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c16de81f3ca5%3A0xf43e0b60ae539ac9!2sGerald+D.+Hines+Waterwall+Park!5e0!3m2!1sen!2sin!4v1566305861440!5m2!1sen!2sin"
@@ -215,7 +226,7 @@ useEffect(() => {
                     className="w-full h-[350px] rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700"
                     allowFullScreen
                   ></iframe>
-                </div>
+                </div> */}
 
                 <ul className="list-none mt-4">
                   <li className="flex justify-between mt-2">
@@ -244,13 +255,13 @@ useEffect(() => {
 
                   <li className="flex justify-between mt-2">
                     <span className="text-slate-400 font-medium">Website:</span>
-                    <span className="font-medium">https://skype.com</span>
+                    {company?.website && <a href={company?.website} target="_blank" className="font-medium text-blue-500">{company?.name}</a>}
                   </li>
 
                   <li className="flex justify-between mt-2">
                     <span className="text-slate-400 font-medium">Social:</span>
 
-                    <ul className="list-none ltr:text-right rtl:text-left">
+                    {externalLinks?.length > 0 && <ul className="list-none ltr:text-right rtl:text-left">
                       <li className="inline">
                         <Link
                           to="http://linkedin.com/"
@@ -295,7 +306,7 @@ useEffect(() => {
                           <LuMail />
                         </Link>
                       </li>
-                    </ul>
+                    </ul>}
                   </li>
                 </ul>
 

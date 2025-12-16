@@ -8,7 +8,7 @@ const AuthAPI = {
     return axiosClient.post("/auth/companies/login", { email, password });
   },
 
- registerAsCandidate: ({
+  registerAsCandidate: ({
     name,
     email,
     password,
@@ -59,7 +59,7 @@ const AuthAPI = {
 
   refreshToken: (refresh_token) => {
     return axiosClient.post("/auth/refresh", null, {
-        headers: { 'Authorization': `Bearer ${refresh_token}` }
+      headers: { Authorization: `Bearer ${refresh_token}` },
     });
   },
 
@@ -69,7 +69,15 @@ const AuthAPI = {
 
   resendVerificationEmail: () => {
     return axiosClient.post("/email/resend");
-  }
+  },
+
+  getCompanyProfile: () => {
+    return axiosClient.get("/auth/companies/me");
+  },
+
+  getCandidateProfile: () => {
+    return axiosClient.get("/auth/candidates/me");
+  },
 };
 
 export default AuthAPI;

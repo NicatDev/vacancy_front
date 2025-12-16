@@ -15,18 +15,26 @@ export const useUser = () => {
 };
 
 export const UserProvider = ({ children }) => {
+    const role = localStorage.getItem('role') ?? null;
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isDarkMode, setIsDarkMode] = useState(false)
 
     const getProfile = async () => {
         try {
-            const response = await AuthAPI.getCurrentUser();
+            let response;
+            if (role === "company") {
+                response = await AuthAPI.getCompanyProfile();
+            } else {
+                response = await AuthAPI.getCandidateProfile();
+            }
+
             if (response.status === 200) {
                 setUser(response.data);
             } else {
                 setUser(null);
             }
+
         } catch (err) {
             setUser(null);
         } finally {
@@ -39,9 +47,6 @@ export const UserProvider = ({ children }) => {
         setUser(null);
     };
 
-    useEffect(() => {
-        // getProfile();
-    }, []);
 
     return (
         <UserContext.Provider
