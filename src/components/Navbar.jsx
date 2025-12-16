@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-
-import logo_icon_40 from "../assets/images/logo-icon-40.png";
-import logo_icon_40_white from "../assets/images/logo-icon-40-white.png";
-import logo_dark from "../assets/images/logo-dark.png";
-import logo_white from "../assets/images/logo-white.png";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo.png";
-import image from "../assets/images/team/05.jpg";
 import userImg from "../assets/images/user.png";
 import { LuSearch, FiUser, FiSettings, FiLogOut } from "../assets/icons/vander";
 import Languages from "../config/Languages";
@@ -22,11 +17,29 @@ const Navbar = (props) => {
   const { t } = useTranslation();
   const { languages, changeLanguage } = Languages;
 
-  const [currentLang, setCurrentLang] = useState(localStorage.getItem("language") ?? "en");
+  const [currentLang, setCurrentLang] = useState(
+    localStorage.getItem("language") ?? "en"
+  );
   const [isDropdown, openDropdown] = useState(true);
   const { navClass, topnavClass, isContainerFluid } = props;
   const [isOpen, setMenu] = useState(true);
-  const role = localStorage.getItem('role') ?? null;
+  const role = localStorage.getItem("role") ?? null;
+
+  const navigate = useNavigate();
+  const [search, setSearch] = useState("");
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      setSearch('')
+      const params = new URLSearchParams();
+      if (search.trim()) {
+        params.set("search", search.trim());
+      }
+
+      navigate(`/vacancies?${params.toString()}`);
+    }
+  };
 
   const options = languages.map((lang) => ({
     value: lang.code,
@@ -35,7 +48,7 @@ const Navbar = (props) => {
 
   const handleChange = (selectedOption) => {
     changeLanguage(selectedOption.value);
-    setCurrentLang(selectedOption)
+    setCurrentLang(selectedOption);
   };
 
   window.addEventListener("scroll", windowScroll);
@@ -104,10 +117,10 @@ const Navbar = (props) => {
         Element.prototype.webkitMatchesSelector ||
         function (s) {
           var matches = (this.document || this.ownerDocument).querySelectorAll(
-            s
-          ),
+              s
+            ),
             i = matches.length;
-          while (--i >= 0 && matches.item(i) !== this) { }
+          while (--i >= 0 && matches.item(i) !== this) {}
           return i > -1;
         };
     }
@@ -184,18 +197,19 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
-    if (!pathname?.includes('login') && !pathname?.includes('signup')) {
+    if (!pathname?.includes("login") && !pathname?.includes("signup")) {
       refreshUser();
     }
-  }, [pathname])
+  }, [pathname]);
 
   return (
     <nav id="topnav" className={`defaultscroll is-sticky ${topnavClass}`}>
       <div
-        className={`${isContainerFluid === true
-          ? "container-fluid md:px-8 px-3"
-          : "container"
-          }`}
+        className={`${
+          isContainerFluid === true
+            ? "container-fluid md:px-8 px-3"
+            : "container"
+        }`}
       >
         <Link className="logo" to="/">
           <div className="block sm:hidden">
@@ -262,84 +276,90 @@ const Navbar = (props) => {
         </div>
 
         <ul className="buy-button list-none mb-0">
-          {(role === "company" || !role) && <li className="hidden lg:inline-block mb-0 me-2">
-            <div className="relative top-[3px]">
-              <Link
-                to="/job-post"
-                className="rounded-3xl"
-                style={{
-                  backgroundColor: "oklch(45% 0.18 260.67)",
-                  color: "white",
-                  padding: "8px 16px",
-                  textDecoration: "none",
-                }}
-              >
-                {t("navbar.newVacancy")}
-              </Link>
-            </div>
-          </li>}
+          {(role === "company" || !role) && (
+            <li className="hidden lg:inline-block mb-0 me-2">
+              <div className="relative top-[3px]">
+                <Link
+                  to="/job-post"
+                  className="rounded-3xl"
+                  style={{
+                    backgroundColor: "oklch(45% 0.18 260.67)",
+                    color: "white",
+                    padding: "8px 16px",
+                    textDecoration: "none",
+                  }}
+                >
+                  {t("navbar.newVacancy")}
+                </Link>
+              </div>
+            </li>
+          )}
 
           <li className="inline-block mb-0">
             <div className="relative top-[3px]">
               <LuSearch className="text-lg absolute top-[8px] end-3" />
               <input
                 type="text"
-                className="py-2 px-3 text-[14px] w-110 border border-gray-100 dark:border-gray-800 dark:text-slate-200 outline-none h-9 !pe-10 rounded-3xl bg-white dark:bg-slate-900 placeholder-gray-400 w-fit dark:placeholder-gray-500"
-                name="s"
-                id="searchItem"
+                className="py-2 px-3 text-[14px] w-110 border border-gray-100 dark:border-gray-800 dark:text-slate-200 outline-none h-9 !pe-10 rounded-3xl bg-white dark:bg-slate-900 placeholder-gray-400 dark:placeholder-gray-500"
                 placeholder={t("navbar.search")}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={handleKeyDown}
               />
             </div>
           </li>
 
-          {role && <li className="dropdown inline-block relative ps-1">
-            <button
-              onClick={() => openDropdown(!isDropdown)}
-              data-dropdown-toggle="dropdown"
-              className="dropdown-toggle items-center"
-              type="button"
-            >
-              <span className="size-9 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide border align-middle transition duration-500 ease-in-out rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white">
-                <img src={userImg} className="rounded-full" alt="" />
-              </span>
-            </button>
+          {role && (
+            <li className="dropdown inline-block relative ps-1">
+              <button
+                onClick={() => openDropdown(!isDropdown)}
+                data-dropdown-toggle="dropdown"
+                className="dropdown-toggle items-center"
+                type="button"
+              >
+                <span className="size-9 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide border align-middle transition duration-500 ease-in-out rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white">
+                  <img src={userImg} className="rounded-full" alt="" />
+                </span>
+              </button>
 
-            <div
-              className={`dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 ${isDropdown ? "hidden" : "block"
+              <div
+                className={`dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 ${
+                  isDropdown ? "hidden" : "block"
                 }`}
-            >
-              <ul className="py-2 text-start">
-                <li>
-                  <Link
-                    to="/profile"
-                    className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
-                  >
-                    <FiUser className="size-4 me-2" />
-                    {t("navbar.profile")}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/candidate-profile-setting"
-                    className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
-                  >
-                    <FiSettings className="size-4 me-2" />
-                    {t("navbar.settings")}
-                  </Link>
-                </li>
-                <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
-                <li>
-                  <Link
-                    to="/login"
-                    className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
-                  >
-                    <FiLogOut className="size-4 me-2" />
-                    {t("navbar.logout")}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </li>}
+              >
+                <ul className="py-2 text-start">
+                  <li>
+                    <Link
+                      to="/profile"
+                      className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
+                    >
+                      <FiUser className="size-4 me-2" />
+                      {t("navbar.profile")}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/candidate-profile-setting"
+                      className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
+                    >
+                      <FiSettings className="size-4 me-2" />
+                      {t("navbar.settings")}
+                    </Link>
+                  </li>
+                  <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
+                  <li>
+                    <Link
+                      to="/login"
+                      className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
+                    >
+                      <FiLogOut className="size-4 me-2" />
+                      {t("navbar.logout")}
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          )}
 
           <li className="dropdown inline-block relative ps-1">
             <Select

@@ -2782,6 +2782,11 @@
       grid-column: span 7 / span 7;
     }
   }
+    .md\:col-span-8 {
+    @media (width >= 720px) {
+      grid-column: span 8 / span 8;
+    }
+  }
   .md\:col-span-9 {
     @media (width >= 720px) {
       grid-column: span 9 / span 9;
@@ -6657,4 +6662,17 @@ html[dir="rtl"] {
      object-fit: cover;
 
    }
+}
+.shadow-class {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0px 2px rgba(100, 100, 100, 0.55);
+}
+.rounded-cart{
+  border-radius: 30px;
+}
+.border-top{
+  border-top: 1px solid rgba(100, 100, 100, 0.191);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }

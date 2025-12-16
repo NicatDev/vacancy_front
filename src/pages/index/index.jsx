@@ -8,37 +8,53 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { useTranslation } from "react-i18next";
-
+import EmploymentTypeApi from "../../api/apiList/employmentTypes";
 import ab01 from "../../assets/images/b8b57763-111c-4efb-88fb-ea4261150657.jpg";
 import ab02 from "../../assets/images/DSC03777.jpg";
 import ab03 from "../../assets/images/DSC03251.jpg";
-import React, { useEffect } from "react";
-
-const optionsOne = [
-  { value: "AF", label: "Afghanistan" },
-  { value: "AZ", label: "Azerbaijan" },
-  { value: "BS", label: "Bahamas" },
-  { value: "BH", label: "Bahrain" },
-  { value: "CA", label: "Canada" },
-  { value: "CV", label: "Cape Verde" },
-  { value: "DK", label: "Denmark" },
-  { value: "DJ", label: "Djibouti" },
-  { value: "ER", label: "Eritrea" },
-  { value: "EE", label: "Estonia" },
-  { value: "GM", label: "Gambia" },
-];
-
-const optionsTwo = [
-  { value: "1", label: "Full Time" },
-  { value: "2", label: "Part Time" },
-  { value: "3", label: "Freelancer" },
-  { value: "4", label: "Remote Work" },
-  { value: "5", label: "Office Work" },
-];
-
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Index() {
   const { t } = useTranslation();
+  const [employmentTypes, setEmploymentTypes] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [selectedWorkType, setSelectedWorkType] = useState(null);
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const params = new URLSearchParams();
+
+    if (selectedWorkType) {
+      params.append("type", selectedWorkType.value);
+    }
+
+    if (searchText) {
+      params.append("search", searchText);
+    }
+
+    navigate(`/vacancies?${params.toString()}`);
+  };
+
+  const getAllEmploymentTypes = async () => {
+    try {
+      const response = await EmploymentTypeApi.getEmploymentTypes();
+      if (response.status === 200) {
+        const modified_data = [...response?.data?.data]?.map((d) => {
+          return {
+            value: d?.id,
+            label: d?.name,
+          };
+        });
+        setEmploymentTypes((prevState) => [...modified_data]);
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getAllEmploymentTypes();
+  }, []);
 
   return (
     <div>
@@ -90,27 +106,18 @@ export default function Index() {
               <div className="md:w-5/6 mx-auto">
                 <div className="lg:col-span-10 mt-8">
                   <div className="bg-white dark:bg-slate-900 border-0 shadow-sm rounded-md p-3">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="registration-form text-dark text-start">
-                        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-6">
-                          
+                        <div className="grid lg:grid-cols-3 md:grid-cols-3 grid-cols-1 lg:gap-0 gap-6">
                           <div className="filter-search-form relative filter-border">
                             <BiBriefcaseAlt2 className="icons" />
                             <input
                               name="name"
                               type="text"
-                              id="job-keyword"
                               className="form-input filter-input-box !bg-gray-50 dark:!bg-slate-800 border-0"
                               placeholder={t("search.keywords")}
-                            />
-                          </div>
-
-                          <div className="filter-search-form relative filter-border">
-                            <PiMapPin className="icons" />
-                            <Select
-                              className="form-input filter-input-box !bg-gray-50 dark:!bg-slate-800 border-0"
-                              options={optionsOne}
-                              placeholder={t("search.country")}
+                              value={searchText}
+                              onChange={(e) => setSearchText(e.target.value)}
                             />
                           </div>
 
@@ -118,17 +125,15 @@ export default function Index() {
                             <BiBriefcaseAlt2 className="icons" />
                             <Select
                               className="form-input filter-input-box !bg-gray-50 dark:!bg-slate-800 border-0"
-                              options={optionsTwo}
+                              options={employmentTypes}
                               placeholder={t("search.worktype")}
+                              onChange={(value) => setSelectedWorkType(value)}
                             />
                           </div>
 
                           <input
                             type="submit"
-                            id="search"
-                            name="search"
-                            style={{ height: "60px" }}
-                            className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white searchbtn submit-btn w-full"
+                            className="cursor-pointer py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white searchbtn submit-btn w-full"
                             value={t("search.button")}
                           />
                         </div>
