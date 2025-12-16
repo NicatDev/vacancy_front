@@ -1,7 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { FiDollarSign } from "react-icons/fi";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 export default function JobPost() {
+  const [searchParams] = useSearchParams();
+  const paymentStatus = searchParams.get("payment");
+
+  const TOAST_SHOWN_KEY = "payment_success_toast_shown";
+
+  useEffect(() => {
+    if (paymentStatus === "success") {
+      const toastShown = localStorage.getItem(TOAST_SHOWN_KEY);
+
+      if (toastShown !== "true") {
+        toast.success("Ödəniş uğurlu oldu!");
+
+        localStorage.setItem(TOAST_SHOWN_KEY, "true");
+      }
+    }
+  }, [paymentStatus]);
+
+  useEffect(() => {
+    return () => {
+      if (localStorage.getItem(TOAST_SHOWN_KEY) === "true") {
+        localStorage.removeItem(TOAST_SHOWN_KEY);
+      }
+    };
+  }, []);
   return (
     <>
       <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">

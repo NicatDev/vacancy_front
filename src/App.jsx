@@ -62,6 +62,8 @@ import "./App.css";
 import { GuestRoute } from './components/ProtectedRoute';
 import EmailVerification from './pages/auth/EmailVerification';
 import EmailSent from './pages/auth/EmailSent';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { t } = useTranslation();
@@ -131,24 +133,34 @@ function App() {
           <Route path='/thankyou' element={<Thankyou />} />
           <Route path='/privacy' element={<Privacy />} />
           <Route path='/terms' element={<Terms />} />
-                        <Route path='/login' element={<Login />} />
-              <Route path='/signup' element={<Signup />} />
-           <Route path='/reset-password' element={<ResetPassword />} />
-              <Route path='/email/verify/:id/:hash' element={<EmailVerification />} />
-              <Route path='/email-sent' element={<EmailSent />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/email/verify/:id/:hash' element={<EmailVerification />} />
+          <Route path='/email-sent' element={<EmailSent />} />
           <Route element={<GuestRoute />}>
-   
+
           </Route>
           <Route path='/blogs' element={<Blogs />} />
           <Route path='/blog-detail' element={<BlogDetail />} />
           <Route path='/blog-detail/:id' element={<BlogDetail />} />
           <Route path='/lock-screen' element={<LockScreen />} />
-          <Route path='/profile' element={<Profile />}/>
+          <Route path='/profile' element={<Profile />} />
           <Route path='*' element={<Error />} />
         </Route>
 
       </Routes>
       <Switcher />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="light"
+      />
     </BrowserRouter>
   );
 }

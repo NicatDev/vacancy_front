@@ -23,25 +23,6 @@ export default function Pricing() {
       type: item?.type
     }));
 
-  const getPricingPlans = async () => {
-    try {
-      const response = await PricingPlansApi.getPricingPlans();
-
-      if (response.status === 200) {
-        const mapped_plans_data = mapPackages(response?.data?.data);
-        setPlans(mapped_plans_data);
-      } else {
-        throw new Error(response?.data?.message || "Planlar yüklenirken bir sorun oluştu.");
-      }
-    } catch (error) {
-      toast.error(error?.response?.data?.message || error.message || "Bilinmeyen bir hata oluştu.");
-    }
-  }
-
-  useEffect(() => {
-    getPricingPlans();
-  }, []);
-
   const handleClickPayment = async (plan) => {
     if (!plan) return;
 
@@ -72,6 +53,29 @@ export default function Pricing() {
       }
     }
   }
+
+
+
+  const getPricingPlans = async () => {
+    try {
+      const response = await PricingPlansApi.getPricingPlans();
+
+      if (response.status === 200) {
+        const mapped_plans_data = mapPackages(response?.data?.data);
+        setPlans(prevState => [...mapped_plans_data]);
+
+      }
+      else {
+        throw new Error(response?.data)
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  }
+
+  useEffect(() => {
+    getPricingPlans();
+  }, [])
 
   return (
     <>

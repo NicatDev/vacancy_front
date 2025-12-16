@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-  import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 import AuthAPI from "../../api/AuthAPI";
+import { toast } from "react-toastify";
 
 export default function Signup() {
     const { t } = useTranslation();
@@ -20,7 +21,6 @@ export default function Signup() {
         website: ''
     });
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -30,25 +30,26 @@ export default function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setError(null);
 
         if (userType === 'candidate' && formData.password !== formData.password_confirmation) {
-            setError(t('register.confirm_password') + " does not match.");
+            toast.error(t('register.confirm_password'));
             setLoading(false);
             return;
         }
 
         if (!e.target.elements['AcceptT&C']?.checked) {
-            setError(t('register.accept_tnc'));
+            toast.error(t('register.accept_tnc'));
             setLoading(false);
             return;
         }
 
         try {
             if (userType === 'candidate') {
-                await AuthAPI.registerAsCandidate(formData);
+                const res = await AuthAPI.registerAsCandidate(formData);
+                toast.success(res?.data?.message)
             } else {
-                await AuthAPI.registerAsCompany(formData);
+                const res = await AuthAPI.registerAsCompany(formData);
+                toast.success(res?.data?.message)
             }
             navigate('/login');
         } catch (err) {
@@ -57,9 +58,9 @@ export default function Signup() {
                 const errors = err.response.data.errors;
                 const errorMessages = [];
                 for (const key in errors) errorMessages.push(...errors[key]);
-                setError(errorMessages.join(' '));
+                toast.error(errorMessages.join(' '));
             } else {
-                setError("An unexpected error occurred.");
+                toast.error("An unexpected error occurred.");
             }
         } finally {
             setLoading(false);
@@ -73,20 +74,20 @@ export default function Signup() {
                 <div className="relative bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md w-full max-w-xl">
                     <div className="p-6">
                         <Link to="#">
-                            <img style={{width:'100px'}} src={logo} className="mx-auto h-6 block dark:hidden w-[100px]" alt="Logo Dark" />
-                            <img style={{width:'100px'}}  src={logo} className="mx-auto h-6 hidden dark:block w-[100px]" alt="Logo Light" />
+                            <img style={{ width: '100px' }} src={logo} className="mx-auto h-6 block dark:hidden w-[100px]" alt="Logo Dark" />
+                            <img style={{ width: '100px' }} src={logo} className="mx-auto h-6 hidden dark:block w-[100px]" alt="Logo Light" />
                         </Link>
 
                         {/* Tabs */}
                         <div className="flex justify-center mt-4 mb-6 border-b border-gray-200 dark:border-gray-700">
                             <button
-                                className={`px-4 py-2 border-b-2 ${userType==='candidate' ? 'border-emerald-600 text-emerald-600' : 'border-transparent text-gray-500'} hover:text-emerald-600 hover:cursor-pointer transition cursor-pointer hover:text-emerald-600`}
+                                className={`px-4 py-2 border-b-2 ${userType === 'candidate' ? 'border-emerald-600 text-emerald-600' : 'border-transparent text-gray-500'} hover:text-emerald-600 hover:cursor-pointer transition cursor-pointer hover:text-emerald-600`}
                                 onClick={() => setUserType('candidate')}
                             >
                                 {t('register.candidate')}
                             </button>
                             <button
-                                className={`px-4 py-2 border-b-2 ${userType==='company' ? 'border-emerald-600 text-emerald-600' : 'border-transparent text-gray-500'} hover:text-emerald-600 hover:cursor-pointer transition cursor-pointer hover:text-emerald-600`}
+                                className={`px-4 py-2 border-b-2 ${userType === 'company' ? 'border-emerald-600 text-emerald-600' : 'border-transparent text-gray-500'} hover:text-emerald-600 hover:cursor-pointer transition cursor-pointer hover:text-emerald-600`}
                                 onClick={() => setUserType('company')}
                             >
                                 {t('register.company')}
@@ -96,12 +97,6 @@ export default function Signup() {
                         <h5 className="text-xl font-semibold mb-6 text-center">
                             {userType === 'candidate' ? t('register.signup') + " " + t('register.candidate') : t('register.signup') + " " + t('register.company')}
                         </h5>
-
-                        {error && (
-                            <div className="p-3 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                                {error}
-                            </div>
-                        )}
 
                         <form onSubmit={handleSubmit} className="space-y-4">
 
