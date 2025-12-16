@@ -42,7 +42,7 @@ export default function JobGridsTwoComp({ jobs, pagination, onPageChange }) {
 
             <div className="mt-6">
               <Link
-                to={`/job-detail-three/${job.id}`}
+                to={`/vacancies/${job.id}`}
                 className="text-lg hover:text-emerald-600 font-semibold transition-all duration-500"
               >
                 {job.title}

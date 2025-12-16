@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import lenovo_logo from "../../assets/images/company/lenovo-logo.png";
 import {
@@ -16,14 +16,32 @@ import {
 } from "../../assets/icons/vander";
 import { PiMapPin } from "../../assets/icons/vander";
 import { jobData } from "../../data/data";
+import VacanciesAPI from "../../api/apiList/vacancies";
 
 export default function JobDetailThree() {
   const params = useParams();
   const id = params.id;
   const data = jobData.find((jobs) => jobs.id === parseInt(id));
+  const [vacancy, setVacancy] = useState(null);
 
   // Modal state
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const getVacancy = async () => {
+      try {
+
+        const response = await VacanciesAPI.getSingleJobPost(id);
+
+        setVacancy(prevState => prevState = response?.data?.data);
+      } catch (error) {
+
+      }
+    }
+
+    getVacancy();
+  }, [id])
+
 
   return (
     <>
@@ -42,20 +60,15 @@ export default function JobDetailThree() {
 
                   <div className="md:ms-4 mt-4">
                     <h5 className="text-xl font-semibold">
-                      {data?.heading
-                        ? data?.heading
-                        : "Web Designer / Developer"}
+                      {vacancy?.title
+                        ? vacancy?.title
+                        : ""}
                     </h5>
                     <div className="mt-1">
-                      <span className="text-slate-400 font-medium me-2 inline-flex items-center">
-                        <HiOutlineBuildingOffice className="text-[18px] text-emerald-600 me-1" />
-                        {data?.title
-                          ? `${data?.title} pvt. ltd `
-                          : "Lenovo pvt. ltd"}{" "}
-                      </span>
+                   
                       <span className="text-slate-400 font-medium me-2 inline-flex items-center">
                         <PiMapPin className="text-[18px] text-emerald-600 me-1" />{" "}
-                        {data?.Location ? data?.Location : "Norway,Oslo"}
+                        {vacancy?.location ? vacancy?.location?.split(" ")[0] : "Norway,Oslo"}
                       </span>
                     </div>
                   </div>
@@ -80,7 +93,7 @@ export default function JobDetailThree() {
                   <div className="ms-4">
                     <p className="font-medium">Employee Type:</p>
                     <span className="text-emerald-600 font-medium text-sm">
-                      {data?.jobtype ? data?.jobtype : "Full Time"}
+                      {vacancy?.employment_type ? vacancy?.employment_type?.name : ""}
                     </span>
                   </div>
                 </li>

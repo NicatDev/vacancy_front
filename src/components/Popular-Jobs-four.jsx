@@ -37,7 +37,7 @@ export default function PopularJobsfour() {
 
                                     <div className="ms-3">
                                         <Link
-                                            to={`/vacancy/${item.id}`}
+                                            to={`/vacancies/${item.id}`}
                                             className="inline-block text-[16px] font-semibold hover:text-emerald-600 transition-all duration-500 me-1"
                                         >
                                             {item.title}
