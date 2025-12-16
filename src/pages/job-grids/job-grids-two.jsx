@@ -6,19 +6,21 @@ import EmploymentTypeApi from "../../api/apiList/employmentTypes";
 import JobGridsTwoComp from "../../components/job-grids-two-comp";
 import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
-
+import { useSearchParams } from "react-router-dom";
 export default function JobGridsTwo() {
   const [industries, setIndustries] = useState([]);
   const [employmentTypes, setEmploymentTypes] = useState([]);
   const [expandedIndustry, setExpandedIndustry] = useState(null);
-
+const [searchParams,setSearchParams] = useSearchParams();
+const typeFromUrl = searchParams.get("type");     
+const searchFromUrl = searchParams.get("search");
   const dropdownRef = useRef(null);
 
   const [filters, setFilters] = useState({
-    text: "",
+    text: searchFromUrl??"",
     industry: null,
     occupation: null,
-    employment_type: null,
+    employment_type: typeFromUrl??null,
     page: 1,
     size: 15,
   });
@@ -70,6 +72,7 @@ export default function JobGridsTwo() {
 
   useEffect(() => {
     fetchJobs(filters.page);
+      setSearchParams({});
   }, [filters]);
 
   /* =======================
@@ -155,7 +158,7 @@ export default function JobGridsTwo() {
               <div className="mb-6">
                 <label className="font-semibold">Search</label>
                 <div className="relative mt-2">
-                  <LuSearch className="absolute top-3 left-3" />
+                  <LuSearch className="absolute top-3 left-3" style={{marginLeft:'10px'}} />
                   <input
                     type="text"
                     value={filters.text}
@@ -181,12 +184,12 @@ export default function JobGridsTwo() {
                     return (
                       <div
                         key={industry.id}
-                        className={`border rounded-lg transition-all ${isOpen ? "border-emerald-500 shadow-sm" : "border-slate-200"
+                        className={`shadow-class rounded-lg transition-all ${isOpen ? "border-emerald-500 shadow-sm" : "border-slate-200"
                           }`}
                       >
                         {/* INDUSTRY HEADER */}
                         <div
-                          className="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-slate-50"
+                          className=" rounded-cart flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-slate-50"
                           onClick={() =>
                             setExpandedIndustry(isOpen ? null : industry.id)
                           }
@@ -206,7 +209,7 @@ export default function JobGridsTwo() {
 
                           {industry.occupations?.length > 0 && (
                             <IoIosArrowDown
-                              className={`text-slate-500 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                              className={`rounded-cart text-slate-500 transition-transform duration-300 rounded-lg ${isOpen ? "rotate-180" : ""
                                 }`}
                             />
                           )}
@@ -214,7 +217,7 @@ export default function JobGridsTwo() {
 
                         {/* OCCUPATIONS DROPDOWN */}
                         {isOpen && industry.occupations && (
-                          <div className="px-4 pb-3 pt-2 bg-slate-50">
+                          <div className="rounded-cart px-4 pb-3 pt-2 border-top">
                             {industry.occupations.map((occ) => {
                               const occSelected = filters.occupation === occ.id;
 
@@ -259,7 +262,7 @@ export default function JobGridsTwo() {
                   >
                     <input
                       type="checkbox"
-                      checked={filters.employment_type === type.id}
+                      checked={filters.employment_type == type.id}
                       onChange={() =>
                         handleEmploymentTypeSelect(type.id)
                       }

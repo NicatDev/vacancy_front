@@ -4,7 +4,7 @@ import { LuMapPin, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/i
 import CompanyIcon from "../assets/icons/company.svg"
 
 export default function JobGridsTwoComp({ jobs, pagination, onPageChange }) {
-  if (!jobs || jobs.length === 0) return <p>No jobs found.</p>;
+  if (!jobs || jobs.length === 0) return <div style={{display:'flex',alignItems:'center',width:'100%',justifyContent:'center'}}><p style={{fontSize:'25px', color:'gray'}}>No jobs found.</p></div>;
 
   const pages = [];
   for (let i = 1; i <= pagination.last_page; i++) pages.push(i);
