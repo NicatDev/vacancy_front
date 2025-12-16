@@ -67,7 +67,6 @@ export default function JobDetailThree() {
     ? requirementsText.split('\n').filter(item => item.trim() !== '')
     : [];
 
-
   const handleClickJobApply = async () => {
     try {
       const params = {
