@@ -1,59 +1,84 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { BiCheckCircle } from "../assets/icons/vander";
+import { useEffect, useState } from "react";
+import { BiCheckCircle } from "react-icons/bi";
+import PricingPlansApi from "../api/apiList/pricing";
+import { toast } from "react-toastify";
+import SubscriptionApi from "../api/apiList/subscriptions";
+
+const BACKGROUND_IMAGE_PATH = '../../assets/images/hero/bg.jpg';
 
 export default function Pricing() {
   const [selected, setSelected] = useState(null);
+  const [plans, setPlans] = useState([]);
 
-  const plans = [
-    {
-      name: "Tək Vakansiya Elanı",
-      price: 20,
+  const companyId = localStorage.getItem('companyId') ?? null;
+
+  const mapPackages = (data) =>
+    data.map((item) => ({
+      id: item?.id,
+      name: item.name,
+      price: Number(item.price),
       currency: "AZN",
       btn: "Elanı Yarat",
-      features: [
-        "1 vakansiya yerləşdirmə",
-        "Vaxtaşırı işə qəbul edənlər üçün ideal",
-      ],
-    },
-    {
-      name: "Başlanğıc Paketi (5 vakansiya)",
-      price: 90,
-      currency: "AZN",
-      btn: "Elanı Yarat",
-      features: [
-        "5 vakansiya yerləşdirmə",
-        "1 elan = 18 AZN",
-        "10% qənaət edin",
-      ],
-    },
-    {
-      name: "6 Aylıq Abunəlik",
-      price: 160,
-      currency: "AZN",
-      btn: "Elanı Yarat",
-      features: [
-        "Limitsiz vakansiya yerləşdirmə",
-        "Əsas Sıralama: Elanlar yuxarıda görünür",
-      ],
-    },
-    {
-      name: "12 Aylıq Limitsiz Abunəlik",
-      price: 290,
-      currency: "AZN",
-      btn: "Elanı Yarat",
-      features: [
-        "Limitsiz vakansiya yerləşdirmə",
-        "Əsas sıralama",
-        "Bonus: 1 pulsuz namizəd yerləşdirilməsi",
-      ],
-    },
-  ];
+      features: item.features,
+      type: item?.type
+    }));
+
+  const getPricingPlans = async () => {
+    try {
+      const response = await PricingPlansApi.getPricingPlans();
+
+      if (response.status === 200) {
+        const mapped_plans_data = mapPackages(response?.data?.data);
+        setPlans(mapped_plans_data);
+      } else {
+        throw new Error(response?.data?.message || "Planlar yüklenirken bir sorun oluştu.");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message || error.message || "Bilinmeyen bir hata oluştu.");
+    }
+  }
+
+  useEffect(() => {
+    getPricingPlans();
+  }, []);
+
+  const handleClickPayment = async (plan) => {
+    if (!plan) return;
+
+    if (plan.type === "one-time") {
+      const params = { pricing_plan_id: plan.id, company_id: companyId };
+      const response = await SubscriptionApi.createOnetimePurchase(params);
+
+      if (response?.data?.status === "PAYER_ACTION_REQUIRED") {
+        const link = response?.data?.payer_action_link;
+        if (link) {
+          window.open(link, "_blank", "noopener,noreferrer");
+        }
+      } else {
+        toast.error("Ödeme başlatılamadı.");
+      }
+    }
+    else if (plan.type === "regular") {
+      const params = { pricing_plan_id: plan.id, company_id: companyId };
+      const response = await SubscriptionApi.createSubsscription(params);
+
+      if (response?.data?.data?.paypal?.status === "APPROVAL_PENDING") {
+        const link = response?.data?.data?.paypal?.approve_link;
+        if (link) {
+          window.open(link, "_blank", "noopener,noreferrer");
+        }
+      } else {
+        toast.error("Abonelik başlatılamadı.");
+      }
+    }
+  }
 
   return (
     <>
-      {/* Background Section */}
-      <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
+      <section
+        className="relative table w-full py-36 bg-top bg-no-repeat bg-cover"
+        style={{ backgroundImage: `url(${BACKGROUND_IMAGE_PATH})` }}
+      >
         <div className="absolute inset-0 bg-emerald-900/90"></div>
         <div className="container">
           <div className="grid grid-cols-1 text-center mt-10">
@@ -64,23 +89,18 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* Pricing Cards */}
       <section className="relative lg:py-24 py-16">
         <div className="container">
           <div className="grid md:grid-cols-3 grid-cols-1 gap-[30px]">
+
             {plans.map((plan, index) => (
               <div
                 key={index}
                 onClick={() => setSelected(index)}
                 className={`
-                  group relative shadow-sm hover:shadow-md dark:shadow-gray-800 rounded-md transition-all duration-500 cursor-pointer
-                  bg-white dark:bg-slate-900
-                  border 
-                  ${
-                    selected === index
-                      ? "border-emerald-600"
-                      : "border-transparent"
-                  } 
+                  group relative shadow-sm hover:shadow-md dark:shadow-gray-800 rounded-md 
+                  transition-all duration-500 cursor-pointer bg-white dark:bg-slate-900 border 
+                  ${selected === index ? "border-emerald-600" : "border-transparent"} 
                   hover:border-emerald-600
                 `}
               >
@@ -94,6 +114,7 @@ export default function Pricing() {
                     <span className="price text-4xl font-semibold mb-0">
                       {plan.price}
                     </span>
+
                     <span className="text-xl font-semibold self-end mb-1">
                       /mo
                     </span>
@@ -108,12 +129,15 @@ export default function Pricing() {
                     ))}
                   </ul>
 
-                  <Link
-                    to="/job-post"
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleClickPayment(plan);
+                    }}
                     className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md mt-5"
                   >
                     {plan.btn}
-                  </Link>
+                  </button>
                 </div>
               </div>
             ))}
