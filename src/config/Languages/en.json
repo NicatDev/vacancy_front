@@ -54,7 +54,8 @@
     "vacancies": "Vacancies",
     "candidates": "Candidates",
     "aboutUs": "About us",
-    "contactUs": "Contact us"
+    "contactUs": "Contact us",
+    "login": "Login"
   },
   "common": {
     "noData": "No data"

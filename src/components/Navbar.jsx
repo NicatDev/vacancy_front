@@ -10,7 +10,7 @@ import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import AuthAPI from "../api/AuthAPI";
 import { useUser } from "../context/UserContext";
-
+import LoginIcon from "../assets/icons/login.svg";
 const Navbar = (props) => {
   const { refreshUser } = useUser();
   const { pathname } = useLocation();
@@ -31,7 +31,7 @@ const Navbar = (props) => {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      setSearch('')
+      setSearch("");
       const params = new URLSearchParams();
       if (search.trim()) {
         params.set("search", search.trim());
@@ -349,7 +349,13 @@ const Navbar = (props) => {
                   <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
                   <li>
                     <Link
-                      to="/login"
+                      to="/login" // keep the link for semantics
+                      onClick={(e) => {
+                        e.preventDefault(); // prevent navigation
+                        localStorage.clear(); // clear localStorage
+                        navigate('/')
+                        // optionally, you can do other logout actions here
+                      }}
                       className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
                     >
                       <FiLogOut className="size-4 me-2" />
@@ -357,6 +363,28 @@ const Navbar = (props) => {
                     </Link>
                   </li>
                 </ul>
+              </div>
+            </li>
+          )}
+          {!role && (
+            <li className="hidden lg:inline-block mb-0 me-2 ml-2">
+              <div className="relative top-[3px]">
+                <Link
+                  to="/login"
+                  className="rounded-3xl"
+                  style={{
+                    backgroundColor: "white",
+                    color: "white",
+                    padding: "8px 8px",
+                    textDecoration: "none",
+                    display: "flex",
+                  }}
+                >
+                  <img
+                    style={{ height: "17px", color: "white" }}
+                    src={LoginIcon}
+                  />
+                </Link>
               </div>
             </li>
           )}
