@@ -219,7 +219,6 @@ export default function JobDetailThree() {
                   ))}
                 </ul>
               )}
-
               {role === "candidate" && <div className="mt-5">
                 <Link
                   to="#"
