@@ -47,7 +47,8 @@
     "vacancies": "Vakansiyalar",
     "candidates": "Namizədlər",
     "aboutUs": "Haqqımızda",
-    "contactUs": "Əlaqə"
+    "contactUs": "Əlaqə",
+    "login":"Daxil ol"
   },
   "popularJobs": {
     "title": "Ən son vakansiyalar",
