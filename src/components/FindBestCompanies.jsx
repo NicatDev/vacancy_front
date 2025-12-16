@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Pagination } from "antd";
 import { useTranslation } from "react-i18next";
-
+import CompanyIcon from "../assets/icons/company.svg";
 import CompaniesAPI from "../api/apiList/companies"; 
 import { LuMapPin, MdOutlineArrowForward } from "../assets/icons/vander";
 
@@ -20,7 +20,7 @@ export default function FindBestCompanies() {
   const fetchCompanies = async () => {
     try {
       setLoading(true);
- const params = {
+            const params = {
                 page,
                 size: pageSize,
                 include: "user",
@@ -30,8 +30,7 @@ export default function FindBestCompanies() {
       const res = await CompaniesAPI.getCompanies(params);
 
       const data = res.data.data || res.data;
-
-      setCompanies(data.items || data);
+      setCompanies(data.items || data?.slice(0, 4));
       setTotal(data.total || 0);
     } catch (err) {
       console.error("COMPANIES API ERROR:", err);
@@ -74,17 +73,16 @@ export default function FindBestCompanies() {
                 key={item.id}
               >
                 <div className="size-14 flex items-center justify-center bg-white dark:bg-slate-900 shadow-md shadow-gray-200 dark:shadow-gray-700 rounded-md relative -mt-12">
-                  <img src={item.logo_url} className="size-8" alt="" />
+                  <img src={item.logo||CompanyIcon} className="size-8" alt="" />
                 </div>
 
                 <div className="mt-4">
                   <Link
                     to={`/company/${item.id}`}
-                    className="text-lg hover:text-emerald-600 font-semibold"
+                    className="text-lg hover:text-emerald-600 font-semibold h-[150px]"
                   >
                     {item.name}
                   </Link>
-                  <p className="text-slate-400 mt-2">{item.description}</p>
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between">
@@ -92,14 +90,14 @@ export default function FindBestCompanies() {
                     <LuMapPin className="me-1" /> {item.country}
                   </span>
                   <span className="block font-semibold text-emerald-600">
-                    {item.total_vacancies} {t("bestCompanies.jobs")}
+                    {item.job_post_count} {t("bestCompanies.jobs")}
                   </span>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Pagination */}
+          {/* Pagination
           <div className="flex justify-center mt-8">
             <Pagination
               current={page}
@@ -108,7 +106,7 @@ export default function FindBestCompanies() {
               onChange={(p) => setPage(p)}
               showSizeChanger={false}
             />
-          </div>
+          </div> */}
         </>
       )}
 

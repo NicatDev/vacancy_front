@@ -35,7 +35,8 @@
     "title": "Latest vacancies",
     "subtitle": "Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30000+ companies worldwide.",
     "seeMore": "See More vacancies",
-    "applyButton": "Apply"
+    "applyButton": "Apply",
+    "daysago":"days ago"
   },
   "bestCompanies": {
     "title": "Find Best Companies",

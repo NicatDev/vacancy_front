@@ -53,7 +53,8 @@
     "title": "Ən son vakansiyalar",
     "subtitle": "Vebdəki bütün açıq mövqeləri axtarın. Şəxsi maaş qiymətləndirmənizi əldə edin. Dünyada 30000+ şirkət haqqında rəyləri oxuyun.",
     "seeMore": "Bütün vakansiyalara bax",
-    "applyButton": "Müraciət et"
+    "applyButton": "Müraciət et",
+    "daysago":"gün əvvəl"
   },
   "common": {
     "noData": "Məlumat tapılmadı"
