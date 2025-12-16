@@ -119,7 +119,7 @@ export default function EmployerDetail(props) {
                 Ipsum passage.
               </p>
 
-              <div className="grid grid-cols-12 gap-6 mt-6">
+              {/* <div className="grid grid-cols-12 gap-6 mt-6">
                 <div className="col-span-12">
                   <img
                     src={image}
@@ -141,11 +141,11 @@ export default function EmployerDetail(props) {
                     alt=""
                   />
                 </div>
-              </div>
+              </div> */}
 
-              <h5 className="text-xl font-semibold mt-6">Vacancies:</h5>
+              {/* <h5 className="text-xl font-semibold mt-6">Vacancies:</h5> */}
 
-              <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 mt-6">
+              {/* <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 mt-6">
                 <div className="group relative overflow-hidden rounded-md shadow-sm dark:shadow-gray-800">
                   <div className="p-6">
                     <Link
@@ -159,11 +159,6 @@ export default function EmployerDetail(props) {
                       Posted 3 Days ago
                     </p>
 
-                    {/* <div className="flex justify-between items-center mt-4">
-                                            <span className="bg-emerald-600/5 text-emerald-600 text-xs font-bold px-2.5 py-0.5 rounded h-5">Full Time</span>
-
-                                            <p className="text-slate-400 flex items-center"><BiDollarCircle className="text-emerald-600 me-1"/>$950 - $1100/mo</p>
-                                        </div> */}
                   </div>
 
                   <div className="flex items-center p-6 border-t border-gray-100 dark:border-gray-700">
@@ -193,11 +188,6 @@ export default function EmployerDetail(props) {
                       Posted 3 Days ago
                     </p>
 
-                    {/* <div className="flex justify-between items-center mt-4">
-                                            <span className="bg-emerald-600/5 text-emerald-600 text-xs font-bold px-2.5 py-0.5 rounded h-5">Remote</span>
-
-                                            <p className="text-slate-400 flex items-center"><BiDollarCircle className="text-emerald-600"/> $2500 - $2600/mo</p>
-                                        </div> */}
                   </div>
 
                   <div className="flex items-center p-6 border-t border-gray-100 dark:border-gray-700">
@@ -213,7 +203,7 @@ export default function EmployerDetail(props) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="lg:col-span-4 md:col-span-5">

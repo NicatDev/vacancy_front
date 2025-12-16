@@ -10,6 +10,10 @@ import {
   FiMonitor,
   FiUserCheck,
 } from "react-icons/fi";
+import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
+import 'dayjs/locale/az';
+
 import {
   MdOutlineArrowForward,
   HiOutlineBuildingOffice,
@@ -19,6 +23,8 @@ import { jobData } from "../../data/data";
 import VacanciesAPI from "../../api/apiList/vacancies";
 
 export default function JobDetailThree() {
+  const { t } = useTranslation();
+  const role = localStorage.getItem('role') ?? null;
   const params = useParams();
   const id = params.id;
   const data = jobData.find((jobs) => jobs.id === parseInt(id));
@@ -40,7 +46,18 @@ export default function JobDetailThree() {
     }
 
     getVacancy();
-  }, [id])
+  }, [id]);
+  const responsibilitiesText = vacancy?.responsibilities;
+  const requirementsText = vacancy?.requirements;
+
+
+  const responsibilitiesArray = responsibilitiesText
+    ? responsibilitiesText.split('\n').filter(item => item.trim() !== '')
+    : [];
+
+  const requirementsArray = requirementsText
+    ? requirementsText.split('\n').filter(item => item.trim() !== '')
+    : [];
 
 
   return (
@@ -52,11 +69,11 @@ export default function JobDetailThree() {
             <div className="lg:col-span-4 md:col-span-6 ">
               <div className="flex flex-col sticky top-20">
                 <div className="p-6 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md bg-white dark:bg-slate-900">
-                  <img
-                    src={data?.image ? data?.image : lenovo_logo}
+                  {vacancy?.company?.logo && <img
+                    src={vacancy?.company?.logo}
                     className="rounded-full size-28 p-4 bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700"
                     alt=""
-                  />
+                  />}
 
                   <div className="md:ms-4 mt-4">
                     <h5 className="text-xl font-semibold">
@@ -65,7 +82,7 @@ export default function JobDetailThree() {
                         : ""}
                     </h5>
                     <div className="mt-1">
-                   
+
                       <span className="text-slate-400 font-medium me-2 inline-flex items-center">
                         <PiMapPin className="text-[18px] text-emerald-600 me-1" />{" "}
                         {vacancy?.location ? vacancy?.location?.split(" ")[0] : "Norway,Oslo"}
@@ -78,7 +95,7 @@ export default function JobDetailThree() {
                     onClick={() => setIsOpen(true)}
                     className="py-1 px-5 mt-4 cursor-pointer w-fit inline-block rounded-3xl font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white searchbtn submit-btn"
                   >
-                    Boost the vacancy
+                    {t('vacancyDetail.boostVacancy')}
                   </button>
                 </div>
               </div>
@@ -86,12 +103,12 @@ export default function JobDetailThree() {
 
             {/* Sağ tərəf */}
             <div className="lg:col-span-8 md:col-span-6">
-              <h5 className="text-lg font-semibold">Job Information:</h5>
+              <h5 className="text-lg font-semibold">{t('vacancyDetail.jobInformation')}:</h5>
               <ul className="list-none mt-5">
                 <li className="inline-flex items-center py-2 px-4 bg-white dark:bg-slate-900 me-2 my-1 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
                   <FiUserCheck className="size-5"></FiUserCheck>
                   <div className="ms-4">
-                    <p className="font-medium">Employee Type:</p>
+                    <p className="font-medium">{t('vacancyDetail.employeeType')}:</p>
                     <span className="text-emerald-600 font-medium text-sm">
                       {vacancy?.employment_type ? vacancy?.employment_type?.name : ""}
                     </span>
@@ -101,9 +118,9 @@ export default function JobDetailThree() {
                 <li className="inline-flex items-center py-2 px-4 bg-white dark:bg-slate-900 me-2 my-1 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
                   <FiMapPin className="size-5"></FiMapPin>
                   <div className="ms-4">
-                    <p className="font-medium">Location:</p>
+                    <p className="font-medium">{t('vacancyDetail.location')}:</p>
                     <span className="text-emerald-600 font-medium text-sm">
-                      {data?.Location ? data?.Location : "Australia"}
+                      {vacancy?.location ? vacancy?.location?.split(" ")[0] : ""}
                     </span>
                   </div>
                 </li>
@@ -111,10 +128,10 @@ export default function JobDetailThree() {
                 <li className="inline-flex items-center py-2 px-4 bg-white dark:bg-slate-900 me-2 my-1 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
                   <FiMonitor className="size-5"></FiMonitor>
                   <div className="ms-4">
-                    <p className="font-medium">Job Type:</p>
+                    <p className="font-medium">{t('vacancyDetail.jobType')}:</p>
                     <span className="text-emerald-600 font-medium text-sm">
-                      {data?.heading
-                        ? data?.heading
+                      {vacancy?.occupation
+                        ? vacancy?.occupation?.name
                         : "Web Designer / Developer"}
                     </span>
                   </div>
@@ -123,9 +140,9 @@ export default function JobDetailThree() {
                 <li className="inline-flex items-center py-2 px-4 bg-white dark:bg-slate-900 me-2 my-1 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
                   <FiBriefcase className="size-5"></FiBriefcase>
                   <div className="ms-4">
-                    <p className="font-medium">Experience:</p>
+                    <p className="font-medium">{t('vacancyDetail.experience')}:</p>
                     <span className="text-emerald-600 font-medium text-sm">
-                      2+ years
+                      {vacancy?.experience ?? ''}
                     </span>
                   </div>
                 </li>
@@ -133,9 +150,9 @@ export default function JobDetailThree() {
                 <li className="inline-flex items-center py-2 px-4 bg-white dark:bg-slate-900 me-2 my-1 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
                   <FiDollarSign className="size-5"></FiDollarSign>
                   <div className="ms-4">
-                    <p className="font-medium">Salary:</p>
+                    <p className="font-medium">{t('vacancyDetail.salary')}:</p>
                     <span className="text-emerald-600 font-medium text-sm">
-                      {data?.price ? data?.price : "$4000 - $4500"}
+                      {vacancy?.salary ? vacancy?.salary : ""}
                     </span>
                   </div>
                 </li>
@@ -143,113 +160,75 @@ export default function JobDetailThree() {
                 <li className="inline-flex items-center py-2 px-4 bg-white dark:bg-slate-900 me-2 my-1 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
                   <FiClock className="size-5"></FiClock>
                   <div className="ms-4">
-                    <p className="font-medium">Date posted:</p>
+                    <p className="font-medium">{t('vacancyDetail.datePosted')}:</p>
                     <span className="text-emerald-600 font-medium text-sm">
-                      28th Feb, 2025
+                      {/* 28th Feb, 2025 */}
+                      {vacancy?.published_at && dayjs(vacancy?.published_at?.as_date).format("Do MMM, YYYY")}
                     </span>
                   </div>
                 </li>
               </ul>
 
-              <h5 className="text-lg font-semibold mt-6">Job Description:</h5>
+              <h5 className="text-lg font-semibold mt-6">{t('vacancyDetail.jobDescription')}:</h5>
               <p className="text-slate-400 mt-4">
-                One disadvantage of Lorum Ipsum is that in Latin certain letters
-                appear more frequently than others - which creates a distinct
-                visual impression...
+                {vacancy?.info ?? ''}
               </p>
 
               <h5 className="text-lg font-semibold mt-6">
-                Responsibilities and Duties:
+                {t('vacancyDetail.responsibilitiesAndDuties')}:
               </h5>
-              <p className="text-slate-400 mt-4">
+              {/* <p className="text-slate-400 mt-4">
                 It sometimes makes sense to select texts containing the various
                 letters and symbols specific to the output language.
-              </p>
-              <ul className="list-none">
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Participate in requirements analysis
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Write clean, scalable code using C# and .NET frameworks
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Test and deploy applications and systems
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Revise, update, refactor and debug code
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Improve existing software
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Develop documentation throughout the software development life
-                  cycle (SDLC)
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Serve as an expert on applications and provide technical
-                  support
-                </li>
-              </ul>
+              </p> */}
+              {responsibilitiesArray.length > 0 && (
+                <ul className="list-none flex flex-col">
+                  {responsibilitiesArray.map((responsibility, index) => (
+                    <li
+                      key={index}
+                      className="text-slate-400 mt-2 inline-flex items-center"
+                    >
+                      <MdOutlineArrowForward className="text-emerald-600 me-1" />
+
+                      {responsibility.trim()}
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               <h5 className="text-lg font-semibold mt-6">
-                Required Experience, Skills and Qualifications:{" "}
+                {t('vacancyDetail.requirements')}:
               </h5>
-              <p className="text-slate-400 mt-4">
+              {/* <p className="text-slate-400 mt-4">
                 It sometimes makes sense to select texts containing the various
                 letters and symbols specific to the output language.
-              </p>
-              <ul className="list-none">
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Proven experience as a .NET Developer or Application Developer
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  good understanding of SQL and Relational Databases,
-                  specifically Microsoft SQL Server.
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Experience designing, developing and creating RESTful web
-                  services and APIs
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Basic know how of Agile process and practices
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Good understanding of object-oriented programming.
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Good understanding of concurrent programming.
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Sound knowledge of application architecture and design.
-                </li>
-                <li className="text-slate-400 mt-2 inline-flex items-center">
-                  <MdOutlineArrowForward className="text-emerald-600 me-1" />
-                  Excellent problem solving and analytical skills
-                </li>
-              </ul>
+              </p> */}
 
-              <div className="mt-5">
+
+              {requirementsArray.length > 0 && (
+                <ul className="list-none flex flex-col">
+                  {requirementsArray.map((requirement, index) => (
+                    <li
+                      key={index}
+                      className="text-slate-400 mt-2 inline-flex items-center"
+                    >
+                      <MdOutlineArrowForward className="text-emerald-600 me-1" />
+
+                      {requirement.trim()}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {role === "candidate" && <div className="mt-5">
                 <Link
                   to="#"
                   className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white md:ms-2 w-full md:w-auto"
                 >
-                  Apply Now
+                 {t('vacancyDetail.applyNow')}
                 </Link>
-              </div>
+              </div>}
+
             </div>
           </div>
         </div>

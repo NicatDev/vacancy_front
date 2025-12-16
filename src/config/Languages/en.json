@@ -36,7 +36,7 @@
     "subtitle": "Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30000+ companies worldwide.",
     "seeMore": "See More vacancies",
     "applyButton": "Apply",
-    "daysago":"days ago"
+    "daysago": "days ago"
   },
   "bestCompanies": {
     "title": "Find Best Companies",
@@ -237,5 +237,19 @@
     "minSalaryMax": "Minimum salary cannot be greater than maximum salary.",
     "maxSalaryMin": "Maximum salary cannot be less than minimum salary.",
     "mustBeNumber": "The value must be a number."
+  },
+  "vacancyDetail": {
+    "jobInformation": "Job Information",
+    "employeeType": "Employee Type",
+    "location": "Location",
+    "jobType": "Job Type",
+    "experience": "Experience",
+    "salary": "Salary",
+    "datePosted": "Date posted",
+    "jobDescription": "Job Description",
+    "responsibilitiesAndDuties": "Responsibilities and Duties",
+    "requirements": "Required Experience, Skills and Qualifications",
+    "boostVacancy": "Boost the vacancy",
+    "applyNow": "Apply now"
   }
 }

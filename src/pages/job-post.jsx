@@ -158,7 +158,7 @@ export default function JobPost() {
         const response = await VacanciesAPI.createJobPost({
           ...values,
           company_id,
-          salary: `${values?.minSalary}-${values?.maxSalary}`,
+          salary: `$${values?.minSalary}-$${values?.maxSalary}`,
           category: values?.category?.value,
           education_level_id: values?.education_level_id?.value,
           employment_type_id: values?.employment_type_id?.value,

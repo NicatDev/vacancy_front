@@ -54,7 +54,7 @@
     "subtitle": "Vebdəki bütün açıq mövqeləri axtarın. Şəxsi maaş qiymətləndirmənizi əldə edin. Dünyada 30000+ şirkət haqqında rəyləri oxuyun.",
     "seeMore": "Bütün vakansiyalara bax",
     "applyButton": "Müraciət et",
-    "daysago":"gün əvvəl"
+    "daysago": "gün əvvəl"
   },
   "common": {
     "noData": "Məlumat tapılmadı"
@@ -191,7 +191,7 @@
     "salaryMaxPlaceholder": "maks",
     "skillExperienceTitle": "Bilik və Təcrübə:",
     "skillsLabel": "Biliklər:",
-    "requirementsLabel":"Tələblər:",
+    "requirementsLabel": "Tələblər:",
     "skillsPlaceholder": "Veb Developer",
     "experienceLabel": "Təcrübə:",
     "experiencePlaceholder": "Təcrübə",
@@ -212,8 +212,8 @@
   "commonContent": {
     "draft": "Qaralama",
     "active": "Aktiv",
-    "select":"Seçim edin",
-    "insertData":"Daxil edin"
+    "select": "Seçim edin",
+    "insertData": "Daxil edin"
   },
   "formErrors": {
     "invalidStatus": "Yanlış status seçimi.",
@@ -236,5 +236,19 @@
     "max100Chars": "Maksimum 100 simvol olmalıdır.",
     "minSalaryMax": "Minimum maaş maksimum maaşdan çox ola bilməz.",
     "maxSalaryMin": "Maksimum maaş minimum maaşdan az ola bilməz."
+  },
+  "vacancyDetail": {
+    "jobInformation": "İş məlumatı",
+    "employeeType": "Əməkdaş növü",
+    "location": "Yerləşmə",
+    "jobType": "İş növü",
+    "experience": "Təcrübə",
+    "salary": "Əmək haqqı",
+    "datePosted": "Yerləşdirilmə tarixi",
+    "jobDescription": "İşin təsviri",
+    "responsibilitiesAndDuties": "Öhdəliklər və Vəzifələr",
+    "requirements": "Tələb olunan Təcrübə, Bacarıqlar və Kvalifikasiyalar",
+    "boostVacancy": "Vakansiyanı irəli çək",
+    "applyNow": "İndi müraciət et"
   }
 }
