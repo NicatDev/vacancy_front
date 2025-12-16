@@ -167,7 +167,7 @@ export default function EmployerList() {
                                 </span>
 
                                 <span className="font-semibold text-emerald-600">
-                                    {t("companies.employerList.noVacancies")}
+                                  {item?.job_post_count}Jobs
                                 </span>
                             </div>
                         </div>

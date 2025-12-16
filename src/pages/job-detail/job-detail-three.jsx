@@ -12,6 +12,7 @@ import {
 } from "react-icons/fi";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import { useUser } from "../../context/UserContext"
 import 'dayjs/locale/az';
 
 import {
@@ -21,8 +22,14 @@ import {
 import { PiMapPin } from "../../assets/icons/vander";
 import { jobData } from "../../data/data";
 import VacanciesAPI from "../../api/apiList/vacancies";
+import CandidatesAPI from "../../api/apiList/candidates";
+import { toast } from "react-toastify";
 
 export default function JobDetailThree() {
+  const { user } = useUser();
+
+  console.log(user);
+
   const { t } = useTranslation();
   const role = localStorage.getItem('role') ?? null;
   const params = useParams();
@@ -32,6 +39,7 @@ export default function JobDetailThree() {
 
   // Modal state
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getVacancy = async () => {
@@ -59,6 +67,21 @@ export default function JobDetailThree() {
     ? requirementsText.split('\n').filter(item => item.trim() !== '')
     : [];
 
+
+  const handleClickJobApply = async () => {
+    try {
+      const params = {
+        candidate_id: user?.data?.id,
+        job_post_id: id
+      }
+      const response = await CandidatesAPI.jobApply(params, user?.data?.id);
+      if (response.status === 201) {
+        toast.success(response?.data?.message)
+      }
+    } catch (error) {
+
+    }
+  }
 
   return (
     <>
@@ -220,14 +243,13 @@ export default function JobDetailThree() {
                 </ul>
               )}
               {role === "candidate" && <div className="mt-5">
-                <Link
-                  to="#"
-                  className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white md:ms-2 w-full md:w-auto"
+                <button
+                  onClick={handleClickJobApply}
+                  className="py-1 cursor-pointer px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white md:ms-2 w-full md:w-auto"
                 >
-                 {t('vacancyDetail.applyNow')}
-                </Link>
+                  {t('vacancyDetail.applyNow')}
+                </button>
               </div>}
-
             </div>
           </div>
         </div>
@@ -240,7 +262,7 @@ export default function JobDetailThree() {
             <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
               {/* Header */}
               <div className="flex items-center justify-between p-3 border-b rounded-t border-gray-200 dark:border-gray-600">
-                <h2 className="text-lg font-semibold">Boost the vacancy</h2>
+                <h2 className="text-lg font-semibold">{t('vacancyDetail.boostVacancy')}</h2>
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
@@ -271,27 +293,27 @@ export default function JobDetailThree() {
                   <table className="w-full text-sm text-left text-gray-600 dark:text-gray-300">
                     <thead className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
                       <tr>
-                        <th className="px-6 py-3 font-semibold">Parametr</th>
-                        <th className="px-6 py-3 font-semibold">Dəyər</th>
+                        <th className="px-6 py-3 font-semibold">{t('vacancyDetail.parametr')}</th>
+                        <th className="px-6 py-3 font-semibold">{t('vacancyDetail.value')}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                       <tr className="hover:bg-gray-50 dark:hover:bg-gray-800 transition">
                         <td className="px-6 py-3 font-medium">
-                          Deadline tarixi
+                          {t('vacancyDetail.deadlineDate')}
                         </td>
-                        <td className="px-6 py-3">30 gün</td>
+                        <td className="px-6 py-3">30 {t('vacancyDetail.day')}</td>
                       </tr>
                       <tr className="hover:bg-gray-50 dark:hover:bg-gray-800 transition">
-                        <td className="px-6 py-3 font-medium">Bitmə tarixi</td>
-                        <td className="px-6 py-3">15 gün</td>
+                        <td className="px-6 py-3 font-medium">{t('vacancyDetail.expiryDate')}</td>
+                        <td className="px-6 py-3">{vacancy?.expired_at?.as_days} {t('vacancyDetail.day')}</td>
                       </tr>
                       <tr className="hover:bg-gray-50 dark:hover:bg-gray-800 transition">
-                        <td className="px-6 py-3 font-medium">Boost qiyməti</td>
+                        <td className="px-6 py-3 font-medium">{t('vacancyDetail.boostPrice')}</td>
                         <td className="px-6 py-3">
-                          2 × 15 ={" "}
+                          2 × {vacancy?.expired_at?.as_days} =
                           <span className="font-bold text-emerald-600">
-                            30 manat
+                            {2 * vacancy?.expired_at?.as_days} manat
                           </span>
                         </td>
                       </tr>
@@ -306,10 +328,10 @@ export default function JobDetailThree() {
                   onClick={() => setIsOpen(false)}
                   className="px-4 cursor-pointer py-2 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600"
                 >
-                  Close
+                  {t('vacancyDetail.close')}
                 </button>
                 <button className="px-4 cursor-pointer py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700">
-                  Submit
+                  {t('vacancyDetail.submit')}
                 </button>
               </div>
             </div>

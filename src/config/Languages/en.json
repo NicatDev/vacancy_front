@@ -250,6 +250,14 @@
     "responsibilitiesAndDuties": "Responsibilities and Duties",
     "requirements": "Required Experience, Skills and Qualifications",
     "boostVacancy": "Boost the vacancy",
-    "applyNow": "Apply now"
+    "applyNow": "Apply now",
+    "parametr": "Parameter",
+    "value": "Value",
+    "deadlineDate": "Deadline date",
+    "expiryDate": "Expiration date",
+    "boostPrice": "Boost price",
+    "close": "Close",
+    "submit": "Submit",
+    "day":"day"
   }
 }

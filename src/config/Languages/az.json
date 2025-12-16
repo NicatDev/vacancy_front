@@ -249,6 +249,14 @@
     "responsibilitiesAndDuties": "Öhdəliklər və Vəzifələr",
     "requirements": "Tələb olunan Təcrübə, Bacarıqlar və Kvalifikasiyalar",
     "boostVacancy": "Vakansiyanı irəli çək",
-    "applyNow": "İndi müraciət et"
+    "applyNow": "İndi müraciət et",
+    "parametr": "Parametr",
+    "value": "Dəyər",
+    "deadlineDate": "Deadline tarixi",
+    "expiryDate": "Bitmə tarixi",
+    "boostPrice": "Boost qiyməti",
+    "close":"Bağla",
+    "submit":"Göndər",
+    "day":"gün"
   }
 }

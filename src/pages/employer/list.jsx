@@ -7,20 +7,6 @@ export default function Employerlist() {
   const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const accordionData = [
-    {
-      title: t("companiesMain.faq1Title"),
-      content: t("companiesMain.faq1Content"),
-    },
-    {
-      title: t("companiesMain.faq2Title"),
-      content: t("companiesMain.faq2Content"),
-    },
-    {
-      title: t("companiesMain.faq3Title"),
-      content: t("companiesMain.faq3Content"),
-    },
-  ];
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
