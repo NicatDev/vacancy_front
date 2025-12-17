@@ -8,7 +8,6 @@ import Languages from "../config/Languages";
 import Select from "react-select";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import AuthAPI from "../api/AuthAPI";
 import { useUser } from "../context/UserContext";
 import LoginIcon from "../assets/icons/login.svg";
 const Navbar = (props) => {
