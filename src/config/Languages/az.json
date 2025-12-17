@@ -48,7 +48,7 @@
     "candidates": "Namizədlər",
     "aboutUs": "Haqqımızda",
     "contactUs": "Əlaqə",
-    "login":"Daxil ol"
+    "login": "Daxil ol"
   },
   "popularJobs": {
     "title": "Ən son vakansiyalar",
@@ -58,7 +58,11 @@
     "daysago": "gün əvvəl"
   },
   "common": {
-    "noData": "Məlumat tapılmadı"
+    "noData": "Məlumat tapılmadı",
+    "contactFor": "Müraciət üçün",
+    "resetPassword": "Şifrənizi sıfırlayın",
+    "resetPasswordInfoText": "Zəhmət olmasa e-poçt ünvanınızı daxil edin. Yeni şifrə yaratmaq üçün link e-poçt vasitəsilə sizə göndəriləcək.",
+     "rememberPassword": "Şifrənizi xatırladınız?"
   },
   "companies": {
     "employerList.loading": "Şirkətlər yüklənir...",
@@ -68,7 +72,12 @@
     "employerList.noLocation": "Məkan məlumatı yoxdur",
     "employerList.noVacancies": "Vakansiya yoxdur",
     "employerList.pagination.prev": "Əvvəlki",
-    "employerList.pagination.next": "Növbəti"
+    "employerList.pagination.next": "Növbəti",
+    "notFound": "Yoxdur",
+    "website": "Veb sayt",
+    "jobPostCount": "Vakansiya sayı",
+    "social": "Sosial",
+    "companyStory": "Şirkət hekayəsi"
   },
   "companiesMain": {
     "title": "Şirkətlər",
@@ -169,6 +178,7 @@
     "breadcrumbHome": "Jobstack",
     "breadcrumbCurrent": "İş Elanı",
     "paymentSuccessToast": "Ödəniş uğurlu oldu!",
+    "paymentErrorToast": "Ödəniş uğursuz oldu!",
     "jobDetailsTitle": "İş Məlumatları:",
     "jobTitleLabel": "İş Başlığı:",
     "jobTitlePlaceholder": "Veb Developer",
@@ -192,6 +202,8 @@
     "salaryMaxPlaceholder": "maks",
     "skillExperienceTitle": "Bilik və Təcrübə:",
     "skillsLabel": "Biliklər:",
+    "languages": "Dillər",
+    "services": "Xidmətlər",
     "requirementsLabel": "Tələblər:",
     "skillsPlaceholder": "Veb Developer",
     "experienceLabel": "Təcrübə:",
@@ -256,8 +268,9 @@
     "deadlineDate": "Deadline tarixi",
     "expiryDate": "Bitmə tarixi",
     "boostPrice": "Boost qiyməti",
-    "close":"Bağla",
-    "submit":"Göndər",
-    "day":"gün"
+    "close": "Bağla",
+    "submit": "Göndər",
+    "day": "gün",
+    "wait": "Gözləyin..."
   }
 }

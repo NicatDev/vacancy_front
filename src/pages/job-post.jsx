@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { FiDollarSign } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
@@ -14,6 +14,7 @@ import VacanciesAPI from "../api/apiList/vacancies.js";
 
 
 export default function JobPost() {
+  const navigate = useNavigate();
   const company_id = localStorage.getItem('companyId') ?? null;
   const { isDarkMode } = useUser();
   const { t } = useTranslation();
@@ -30,7 +31,7 @@ export default function JobPost() {
     { value: 'active', label: t('commonContent.active') },
   ];
 
-  const TOAST_SHOWN_KEY = "payment_success_toast_shown";
+
   const getAllEmploymentTypes = async () => {
     try {
       const response = await EmploymentTypeApi.getEmploymentTypes();
@@ -143,7 +144,7 @@ export default function JobPost() {
       minSalary: "",
       maxSalary: "",
       responsibilities: "",
-      requirements:"",
+      requirements: "",
       education_level_id: null,
       experience: "",
       occupation_id: null,
@@ -250,24 +251,23 @@ export default function JobPost() {
 
   useEffect(() => {
     if (paymentStatus === "success") {
-      const toastShown = localStorage.getItem(TOAST_SHOWN_KEY);
-
-      if (toastShown !== "true") {
-        toast.success(t('jobPost.paymentSuccessToast'));
-        localStorage.setItem(TOAST_SHOWN_KEY, "true");
-      }
+      toast.success(t('jobPost.paymentSuccessToast'));
+      // Parametri URL-dən silmək
+      searchParams.delete("payment");
+      navigate({ search: searchParams.toString() }, { replace: true });
+    } else if (paymentStatus === "fail") {
+      toast.error(t('jobPost.paymentErrorToast'));
+      // Parametri URL-dən silmək
+      searchParams.delete("payment");
+      navigate({ search: searchParams.toString() }, { replace: true });
     }
-  }, [paymentStatus]);
+  }, [paymentStatus, navigate, searchParams]);
+
 
   useEffect(() => {
     getAllEmploymentTypes();
     getAllCategoriesAndOccupations();
     getAllEducations();
-    return () => {
-      if (localStorage.getItem(TOAST_SHOWN_KEY) === "true") {
-        localStorage.removeItem(TOAST_SHOWN_KEY);
-      }
-    };
   }, []);
 
   return (

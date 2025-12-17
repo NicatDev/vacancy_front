@@ -58,7 +58,11 @@
     "login": "Login"
   },
   "common": {
-    "noData": "No data"
+    "noData": "No data",
+    "contactFor": "Contact For",
+    "resetPassword": "Reset Your Password",
+    "resetPasswordInfoText": "Please enter your email address. You will receive a link to create a new password via email.",
+    "rememberPassword": "Remember your password ?"
   },
   "companies": {
     "employerList.loading": "Loading companies...",
@@ -68,7 +72,12 @@
     "employerList.noLocation": "No Location Information",
     "employerList.noVacancies": "No Job Vacancies",
     "employerList.pagination.prev": "Previous",
-    "employerList.pagination.next": "Next"
+    "employerList.pagination.next": "Next",
+    "notFound": "Not found",
+    "website": "Website",
+    "jobPostCount": "Post count",
+    "social": "Social",
+    "companyStory": "Compant Story"
   },
   "companiesMain": {
     "title": "Companies",
@@ -169,6 +178,7 @@
     "breadcrumbHome": "Jobstack",
     "breadcrumbCurrent": "Job Post",
     "paymentSuccessToast": "Payment successful!",
+    "paymentErrorToast": "Payment failed!",
     "jobDetailsTitle": "Job Details:",
     "jobTitleLabel": "Job Title:",
     "jobTitlePlaceholder": "Web Developer",
@@ -193,6 +203,8 @@
     "skillExperienceTitle": "Skill & Experience:",
     "requirementsLabel": "Requirements:",
     "skillsLabel": "Skills:",
+    "languages": "Languages",
+    "services": "Services",
     "skillsPlaceholder": "Web Developer",
     "experienceLabel": "Experience:",
     "experiencePlaceholder": "Experience",
@@ -259,6 +271,7 @@
     "boostPrice": "Boost price",
     "close": "Close",
     "submit": "Submit",
-    "day":"day"
+    "day": "day",
+    "wait": "Gözləyin..."
   }
 }

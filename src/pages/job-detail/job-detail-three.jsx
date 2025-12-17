@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import lenovo_logo from "../../assets/images/company/lenovo-logo.png";
 import {
   FiBook,
@@ -27,15 +27,18 @@ import { toast } from "react-toastify";
 
 export default function JobDetailThree() {
   const { user } = useUser();
-
-  console.log(user);
-
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const role = localStorage.getItem('role') ?? null;
   const params = useParams();
   const id = params.id;
   const data = jobData.find((jobs) => jobs.id === parseInt(id));
   const [vacancy, setVacancy] = useState(null);
+
+  const [searchParams] = useSearchParams();
+  const paymentStatus = searchParams.get("payment");
+
+
 
   // Modal state
   const [isOpen, setIsOpen] = useState(false);
@@ -55,6 +58,21 @@ export default function JobDetailThree() {
 
     getVacancy();
   }, [id]);
+
+  useEffect(() => {
+    if (paymentStatus === "success") {
+      toast.success(t('jobPost.paymentSuccessToast'));
+      // Parametri URL-dən silmək
+      searchParams.delete("payment");
+      navigate({ search: searchParams.toString() }, { replace: true });
+    } else if (paymentStatus === "fail") {
+      toast.error(t('jobPost.paymentErrorToast'));
+      // Parametri URL-dən silmək
+      searchParams.delete("payment");
+      navigate({ search: searchParams.toString() }, { replace: true });
+    }
+  }, [paymentStatus, navigate, searchParams]);
+
   const responsibilitiesText = vacancy?.responsibilities;
   const requirementsText = vacancy?.requirements;
 
@@ -76,6 +94,24 @@ export default function JobDetailThree() {
       const response = await CandidatesAPI.jobApply(params, user?.data?.id);
       if (response.status === 201) {
         toast.success(response?.data?.message)
+      }
+    } catch (error) {
+
+    }
+  }
+
+  const handleBoostJob = async () => {
+    setLoading(true);
+    try {
+      const response = await VacanciesAPI.boostJob(id);
+      if (response.status === 201) {
+        const link = response?.data?.payer_action_link;
+        if (link) {
+          window.open(link, "_blank", "noopener,noreferrer");
+        } else {
+          toast.error(t('jobPost.paymentErrorToast'));
+        }
+        setLoading(false);
       }
     } catch (error) {
 
@@ -329,8 +365,8 @@ export default function JobDetailThree() {
                 >
                   {t('vacancyDetail.close')}
                 </button>
-                <button className="px-4 cursor-pointer py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700">
-                  {t('vacancyDetail.submit')}
+                <button disabled={loading} onClick={handleBoostJob} className="px-4 cursor-pointer py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700">
+                  {loading ? t('vacancyDetail.wait') : t('vacancyDetail.submit')}
                 </button>
               </div>
             </div>

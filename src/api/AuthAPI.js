@@ -78,6 +78,10 @@ const AuthAPI = {
   getCandidateProfile: () => {
     return axiosClient.get("/auth/candidates/me");
   },
+
+  forgotPassword: (params) => {
+    return axiosClient.post("/auth/forgot-password", params);
+  },
 };
 
 export default AuthAPI;

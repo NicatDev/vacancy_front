@@ -33,6 +33,10 @@ const VacanciesAPI = {
   getSingleJobPost: (id) => {
     return axiosClient.get(`/job-posts/${id}`);
   },
+
+  boostJob: (id) => {
+    return axiosClient.post(`/job-posts/${id}/boost`);
+  },
 };
 
 export default VacanciesAPI;

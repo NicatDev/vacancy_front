@@ -7,6 +7,7 @@ import google_logo from "../../assets/images/company/google-logo.png";
 import Navbar from "../../components/Navbar";
 import { FiMail, FiMessageCircle, FiUser } from "react-icons/fi";
 import EmployerDetailComp from "../../components/employer-detail-comp";
+import { useTransition } from "react";
 
 import {
   PiMapPin,
@@ -24,8 +25,10 @@ import ExploreJob from "../../components/Explore-job";
 import { jobData } from "../../data/data";
 import { useCallback, useEffect, useState } from "react";
 import CompaniesAPI from "../../api/apiList/companies";
+import { useTranslation } from "react-i18next";
 
 export default function EmployerDetail(props) {
+  const { t } = useTranslation()
   const params = useParams();
   const id = params.id;
   const [company, setCompany] = useState(null);
@@ -91,8 +94,8 @@ export default function EmployerDetail(props) {
                     {company?.name ? company?.name : ""}
                   </h5>
                   <h6 className="text-base text-slate-400 flex items-center">
-                    <PiMapPin className="me-1" />{" "}
-                    {data?.Location ? data?.Location : "France,Paris"}
+                    <PiMapPin className="me-1" />
+                    {/* {data?.Location ? data?.Location : "France,Paris"} */}
                   </h6>
                 </div>
               </div>
@@ -103,7 +106,7 @@ export default function EmployerDetail(props) {
         <div className="container mt-12">
           <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
             <div className="lg:col-span-8 md:col-span-7">
-              <h5 className="text-xl font-semibold">Company Story</h5>
+              <h5 className="text-xl font-semibold">{t('companies.companyStory')}</h5>
               <p className="text-slate-400 mt-4">
                 It is a long established fact that a reader will be distracted
                 by the readable content of a page when looking at its layout.
@@ -220,38 +223,45 @@ export default function EmployerDetail(props) {
 
                 <ul className="list-none mt-4">
                   <li className="flex justify-between mt-2">
-                    <span className="text-slate-400 font-medium">Founded:</span>
-                    <span className="font-medium">2003</span>
+                    <span className="text-slate-400 font-medium">{t('companies.jobPostCount')}:</span>
+                    <span className="font-medium">{company?.job_post_count ?? 0}</span>
                   </li>
-
+{/* 
                   <li className="flex justify-between mt-2">
                     <span className="text-slate-400 font-medium">Founder:</span>
                     <span className="font-medium">Niklas Zennström</span>
-                  </li>
+                  </li> */}
 
-                  <li className="flex justify-between mt-2">
+                  {/* <li className="flex justify-between mt-2">
                     <span className="text-slate-400 font-medium">
                       Headquarters:
                     </span>
                     <span className="font-medium">Luxembourg</span>
-                  </li>
+                  </li> */}
 
-                  <li className="flex justify-between mt-2">
+                  {/* <li className="flex justify-between mt-2">
                     <span className="text-slate-400 font-medium">
                       Number of employees:
                     </span>
                     <span className="font-medium">788</span>
+                  </li> */}
+
+                  <li className="flex justify-between mt-2">
+                    <span className="text-slate-400 font-medium">{t('companies.website')}:</span>
+                    {company?.website && <a href={company?.website} style={{
+                      lineClamp: 1,
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                      width: '70%',
+                      marginLeft: "auto"
+                    }} target="_blank" className="font-medium text-blue-500">{company?.website}</a>}
                   </li>
 
                   <li className="flex justify-between mt-2">
-                    <span className="text-slate-400 font-medium">Website:</span>
-                    {company?.website && <a href={company?.website} target="_blank" className="font-medium text-blue-500">{company?.name}</a>}
-                  </li>
+                    <span className="text-slate-400 font-medium">{t('companies.social')}:</span>
 
-                  <li className="flex justify-between mt-2">
-                    <span className="text-slate-400 font-medium">Social:</span>
-
-                    {externalLinks?.length > 0 && <ul className="list-none ltr:text-right rtl:text-left">
+                    {externalLinks?.length > 0 ? <ul className="list-none ltr:text-right rtl:text-left">
                       <li className="inline">
                         <Link
                           to="http://linkedin.com/"
@@ -296,7 +306,7 @@ export default function EmployerDetail(props) {
                           <LuMail />
                         </Link>
                       </li>
-                    </ul>}
+                    </ul> : t('companies.notFound')}
                   </li>
                 </ul>
 

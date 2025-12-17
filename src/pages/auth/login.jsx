@@ -131,7 +131,7 @@ export default function Login() {
                                     required className="form-input mt-2 w-full rounded-md"
                                 />
                             </div>
-
+  
                             <button
                                 type="submit"
                                 disabled={loading}
@@ -144,6 +144,11 @@ export default function Login() {
                         <div className="text-center mt-4">
                             <span className="text-slate-400 me-2">{t('login.noAccount')}</span>
                             <Link to="/signup" className="text-black dark:text-white font-bold">{t('login.signUp')}</Link>
+                        </div>
+
+
+                        <div className="text-center mt-4">
+                            <Link to="/reset-password" style={{textDecoration:"underline"}} className="text-slate-400">Şifrəmi unutdum</Link>
                         </div>
                     </div>
 

@@ -1,28 +1,104 @@
-import { Link , useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import image from '../../assets/images/DSC03269.jpg';
 import shree_logo from '../../assets/images/company/shree-logo.png';
 import circle_logo from '../../assets/images/company/circle-logo.png';
-import {FiSettings,  FiGift, FiGlobe, FiHome, FiMail, FiMapPin, FiPhone, FiServer } from 'react-icons/fi';
-import { LuMail, BiLogoDribbble, AiOutlineBehance, BiLogoLinkedin, FaFacebookF, IoLogoTwitter,FaInstagram, FiFileText} from "../../assets/icons/vander"
+import { FiSettings, FiGift, FiGlobe, FiHome, FiMail, FiMapPin, FiPhone, FiServer } from 'react-icons/fi';
+import { LuMail, BiLogoDribbble, AiOutlineBehance, BiLogoLinkedin, FaFacebookF, IoLogoTwitter, FaInstagram, FiFileText } from "../../assets/icons/vander"
 import { CandidateList } from '../../data/data';
+import CandidatesAPI from '../../api/apiList/candidates';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import UserIcon from "../../assets/icons/user.svg";
+import { TfiEmail } from "react-icons/tfi";
+import { MdOutlinePhone } from "react-icons/md";
 
 export default function CandidateDetail() {
+    const { t } = useTranslation();
     const params = useParams();
     const id = params.id
-    const data = CandidateList.find((jobs) => jobs.id === parseInt (id));
+    const [candidate, setCandidate] = useState(null);
+    const [skills, setSkills] = useState([]);
+    const [languages, setLanguages] = useState([]);
+
+    const getCandidate = async () => {
+        try {
+            const response = await CandidatesAPI.getSingleCandidate(id);
+
+            if (response?.status === 200) {
+                setCandidate(response?.data?.data)
+            }
+        } catch (error) {
+
+        }
+    }
+
+    const getCandidateSkills = async () => {
+        try {
+            const response = await CandidatesAPI.getSingleCandidateSkills(id);
+            if (response.status === 200) {
+                setSkills(prevState => [...response?.data?.data])
+            }
+        } catch (error) {
+
+        }
+    }
+
+    const getCandidateLanguages = async () => {
+        try {
+            const response = await CandidatesAPI.getSingleCandidateLanguages(id);
+            if (response.status === 200) {
+                setLanguages(prevState => [...response?.data?.data]?.map(d => {
+                    return {
+                        language: d?.language?.name,
+                        level: d?.level?.label
+                    }
+                }))
+            }
+        } catch (error) {
+
+        }
+    }
+
+    const getCandidateServices = async () => {
+        try {
+            const response = await CandidatesAPI.getSingleCandidateServices(id);
+            if (response.status === 200) {
+                setCandidate(prevState => {
+                    return {
+                        ...prevState,
+                        services: [...response?.data?.data]?.map(d => {
+                            return d?.service?.name
+                        })
+                    }
+                })
+            }
+        } catch (error) {
+
+        }
+    }
+
+    useEffect(() => {
+        getCandidate();
+        getCandidateSkills();
+        getCandidateLanguages();
+        getCandidateServices();
+    }, [id]);
+
+
+    console.log(candidate)
     return (
         <>
-        
+
             <section className="relative lg:mt-24 mt-[74px]">
                 <div className="container">
                     <div className="md:flex ms-4">
                         <div className="md:w-full">
                             <div className="relative flex items-end justify-between">
                                 <div className="relative flex items-center">
-                                    <img src={data?.image ? data?.image : image} className="size-28 rounded-full shadow-sm dark:shadow-gray-800 ring-4 ring-slate-50 dark:ring-slate-800" alt="" />
+                                    <img src={UserIcon} className="size-28 rounded-full shadow-sm dark:shadow-gray-800 ring-4 ring-slate-50 dark:ring-slate-800" alt="" />
                                     <div className="ms-4">
                                         {/* <h5 className="text-lg font-semibold">{data?.name ? data?.name : "Steven Townsend"}</h5> */}
-                                        <h5 className="text-lg font-semibold">{data?.title ? data?.title : "Web Designer"}</h5>
+                                        <h5 className="text-lg font-semibold">{candidate?.speciality ?? ''}</h5>
                                     </div>
                                 </div>
 
@@ -40,72 +116,83 @@ export default function CandidateDetail() {
                 <div className="container md:pb-24 pb-16 ">
                     <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
                         <div className="col-span-12">
-                            {/* <h5 className="text-xl font-semibold">{data?.name ? data?.name : "Steven Townsend"}</h5> */}
-                            <p className="text-slate-400 mt-4">Obviously I'M Web Developer. Web Developer with over 3 years of experience. Experienced with all stages of the development cycle for dynamic web projects. The as opposed to using 'Content here, content here', making it look like readable English.</p>
-                            <p className="text-slate-400 mt-4">Data Structures and Algorithms are the heart of programming. Initially most of the developers do not realize its importance but when you will start your career in software development, you will find your code is either taking too much time or taking too much space.</p>
+                            <p className="text-slate-400 mt-4">{candidate?.summary}</p>
+                            <h4 className="mt-6 text-xl font-semibold">{t('jobPost.skillsLabel')}</h4>
+                            <div className="mt-4 flex flex-col gap-2">
+                                {skills?.length > 0 ? (
+                                    skills.map((skill) => (
+                                        <div key={skill.name} className='flex items-center gap-2'>
+                                            <span>-</span>
+                                            <span className="flex items-center py-2">
+                                                {skill.name}
+                                            </span>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p className="text-gray-400">{t('companies.notFound')}</p>
+                                )}
+                            </div>
+                            <div style={{ height: 1, backgroundColor: "#ccc" }} className='w-full mt-4'></div>
 
-                            <h4 className="mt-6 text-xl font-semibold">Skills :</h4>
-                            <div className="grid lg:grid-cols-2 grid-cols-1 mt-6 gap-6">
-                                <div>
-                                    <div className="flex justify-between mb-2">
-                                        <span className="text-slate-400">WordPress</span>
-                                        <span className="text-slate-400">84%</span>
-                                    </div>
-                                    <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                                        <div className="bg-emerald-600 h-[6px] rounded-full" style={{ width: '84%' }}></div>
-                                    </div>
-                                </div>
+                            <h4 className="mt-6 text-xl font-semibold">{t('jobPost.languages')}:</h4>
+                            <div className="mt-4 flex flex-col gap-2">
+                                {languages?.length > 0 ? (
+                                    languages.map((lang) => (
+                                        <div key={lang.language} className='flex items-center'>
+                                            <span>-</span>
+                                            <div className="flex items-center gap-2 px-2.5 py-2">
+                                                <span className="text-gray-700 font-medium">{lang.language}</span>
+                                                <span className="text-gray-500 text-sm">({lang.level})</span>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p className="text-gray-400">{t('companies.notFound')}</p>
+                                )}
+                            </div>
+                            <div style={{ height: 1, backgroundColor: "#ccc" }} className='w-full mt-4'></div>
+                            <h4 className="mt-6 text-xl font-semibold">{t('jobPost.services')}:</h4>
+                            <div className="mt-4 flex flex-col gap-2">
+                                {candidate?.services?.length > 0 ? (
+                                    candidate.services.map((service) => (
+                                        <div key={service} className='flex items-center gap-2'>
+                                            <span>-</span>
+                                            <div className="flex items-center py-2 ">
+                                                {service}
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p className="text-gray-400">{t('companies.notFound')}</p>
+                                )}
+                            </div>
 
-                                <div>
-                                    <div className="flex justify-between mb-2">
-                                        <span className="text-slate-400">JavaScript</span>
-                                        <span className="text-slate-400">79%</span>
-                                    </div>
-                                    <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                                        <div className="bg-emerald-600 h-[6px] rounded-full" style={{ width: '79%' }}></div>
-                                    </div>
-                                </div>
 
-                                <div>
-                                    <div className="flex justify-between mb-2">
-                                        <span className="text-slate-400">HTML</span>
-                                        <span className="text-slate-400">95%</span>
-                                    </div>
-                                    <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                                        <div className="bg-emerald-600 h-[6px] rounded-full" style={{ width: '95%' }}></div>
-                                    </div>
-                                </div>
+                            <div className="mt-4 flex items-center gap-4">
+                                <h4 className="text-lg font-semibold">{t('common.contactFor')}:</h4>
 
-                                <div>
-                                    <div className="flex justify-between mb-2">
-                                        <span className="text-slate-400">Figma</span>
-                                        <span className="text-slate-400">85%</span>
-                                    </div>
-                                    <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                                        <div className="bg-emerald-600 h-[6px] rounded-full" style={{ width: '85%' }}></div>
-                                    </div>
-                                </div>
+                                <div className="flex gap-4 ">
+                                    <a href='mailto:octopustalentscareers@gmail.com' className="flex items-center gap-3 px-4 py-3 rounded-cart border border-slate-100">
+                                        <span className="text-slate-900 dark:text-white">
+                                            <TfiEmail />
+                                        </span>
+                                        <span className="text-slate-900 dark:text-white text-sm">
+                                            octopustalentscareers@gmail.com
+                                        </span>
+                                    </a>
 
-                                <div>
-                                    <div className="flex justify-between mb-2">
-                                        <span className="text-slate-400">Photoshop</span>
-                                        <span className="text-slate-400">70%</span>
-                                    </div>
-                                    <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                                        <div className="bg-emerald-600 h-[6px] rounded-full" style={{ width: '70%' }}></div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div className="flex justify-between mb-2">
-                                        <span className="text-slate-400">Illustration</span>
-                                        <span className="text-slate-400">65%</span>
-                                    </div>
-                                    <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                                        <div className="bg-emerald-600 h-[6px] rounded-full" style={{ width: '65%' }}></div>
-                                    </div>
+                                    <a href='tel:+994 50 123 45 67' className="flex items-center gap-3 px-4 py-3 rounded-cart border border-slate-100">
+                                        <span className="text-slate-900 dark:text-white">
+                                            <MdOutlinePhone />
+                                        </span>
+                                        <span className="text-slate-900 dark:text-white text-sm">
+                                            +994 50 123 45 67
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
+
+
 
                             {/* <h4 className="mt-6 text-xl font-semibold">Experience :</h4>
 
@@ -133,7 +220,7 @@ export default function CandidateDetail() {
                                 </div>
                             </div> */}
 
-                            
+
                         </div>
 
                         {/* <div className="lg:col-span-4 md:col-span-5">
