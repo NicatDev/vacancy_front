@@ -1,53 +1,64 @@
 import { Link, useParams } from "react-router-dom";
-import image from "../../assets/images/DSC03269.jpg";
 import shree_logo from "../../assets/images/company/shree-logo.png";
 import circle_logo from "../../assets/images/company/circle-logo.png";
-import {
-  FiSettings,
-  FiGift,
-  FiGlobe,
-  FiHome,
-  FiMail,
-  FiMapPin,
-  FiPhone,
-  FiServer,
-} from "react-icons/fi";
-import {
-  LuMail,
-  BiLogoDribbble,
-  AiOutlineBehance,
-  BiLogoLinkedin,
-  FaFacebookF,
-  IoLogoTwitter,
-  FaInstagram,
-  FiFileText,
-} from "../../assets/icons/vander";
+import { FiSettings, FiMail } from "react-icons/fi";
+
 import { CandidateList } from "../../data/data";
+import { useUser } from "../../context/UserContext";
+import { useTranslation } from "react-i18next";
+import UserIcon from "../../assets/icons/user.svg";
+import { useEffect, useState } from "react";
+import CandidatesAPI from "../../api/apiList/candidates";
+import CandidateSkillsModal from "../../components/CandidateSkillsModal";
 
 export default function CandidateDetail() {
-  const params = useParams();
-  const id = params.id;
-  const data = CandidateList.find((jobs) => jobs.id === parseInt(id));
+  const { t } = useTranslation();
+  const { user } = useUser();
+  const [skills, setSkills] = useState(null);
+  const [skillsModalOpen, setSkillsModalOpen] = useState(false);
+  const params = {
+    size: 20,
+    page: 1,
+  };
+
+  const getSkills = async (id) => {
+    try {
+      if(!id)return;
+      let response = await CandidatesAPI.getCandidateSkill(id, params);
+
+      if (response.status === 200) {
+        setSkills(response.data);
+      } else {
+        setSkills(null);
+      }
+    } catch (err) {
+      setSkills(null);
+    }
+  };
+
+  useEffect(() => {
+    if(!skillsModalOpen)getSkills(user?.data?.id);
+  }, [user?.data?.id,skillsModalOpen]);
+
+  const data = CandidateList.find((jobs) => jobs.id === parseInt(1));
   return (
     <>
-      <section className="relative lg:mt-24 mt-[74px]"> 
+      <section className="relative lg:mt-24 mt-[74px]">
         <div className="container">
           <div className="md:flex ms-4">
             <div className="md:w-full">
               <div className="relative flex items-end justify-between">
                 <div className="relative flex items-center">
                   <img
-                    src={data?.image ? data?.image : image}
+                    src={user?.image ?? UserIcon}
                     className="size-28 rounded-full shadow-sm dark:shadow-gray-800 ring-4 ring-slate-50 dark:ring-slate-800"
                     alt=""
                   />
                   <div className="ms-4">
                     <h5 className="text-lg font-semibold">
-                      {data?.name ? data?.name : "Steven Townsend"}
+                      {user?.data?.name}
                     </h5>
-                    <p className="text-slate-400">
-                      {data?.title ? data?.title : "Web Designer"}
-                    </p>
+                    <p className="text-slate-400">{user?.data?.speciality}</p>
                   </div>
                 </div>
 
@@ -69,24 +80,18 @@ export default function CandidateDetail() {
         <div className="container md:pb-24 pb-16 ">
           <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
             <div className="lg:col-span-8 md:col-span-7">
-              <h5 className="text-xl font-semibold">
-                {data?.name ? data?.name : "Steven Townsend"}
-              </h5>
-              <p className="text-slate-400 mt-4">
-                Obviously I'M Web Developer. Web Developer with over 3 years of
-                experience. Experienced with all stages of the development cycle
-                for dynamic web projects. The as opposed to using 'Content here,
-                content here', making it look like readable English.
-              </p>
-              <p className="text-slate-400 mt-4">
-                Data Structures and Algorithms are the heart of programming.
-                Initially most of the developers do not realize its importance
-                but when you will start your career in software development, you
-                will find your code is either taking too much time or taking too
-                much space.
-              </p>
+              <h5 className="text-xl font-semibold">{user?.data?.name}</h5>
+              <p className="text-slate-400 mt-4">{user?.data?.summary}</p>
 
-              <h4 className="mt-6 text-xl font-semibold">Skills :</h4>
+              <h4 className="mt-6 text-xl font-semibold">
+                Skills :{" "}
+                <button
+                  onClick={() => setSkillsModalOpen(true)}
+                  className="text-emerald-600 font-medium"
+                >
+                  Edit skills
+                </button>
+              </h4>
               <div className="grid lg:grid-cols-2 grid-cols-1 mt-6 gap-6">
                 <div>
                   <div className="flex justify-between mb-2">
@@ -228,62 +233,69 @@ export default function CandidateDetail() {
                 <ul className="list-none mt-4">
                   <li className="flex justify-between mt-3 items-center font-medium">
                     <span>
+                      <span className="text-slate-400 me-3">Full name :</span>
+                    </span>
+
+                    <span>{user?.data?.name}</span>
+                  </li>
+                  <li className="flex justify-between mt-3 items-center font-medium">
+                    <span>
                       <FiMail className="size-4 text-slate-400 me-3 inline"></FiMail>
                       <span className="text-slate-400 me-3">Email :</span>
                     </span>
 
-                    <span>thomas@mail.com</span>
+                    <span>{user?.data?.user?.email}</span>
                   </li>
-                  <li className="flex justify-between mt-3 items-center font-medium">
+                  {/* <li className="flex justify-between mt-3 items-center font-medium">
                     <span>
                       <FiGift className="size-4 text-slate-400 me-3 inline"></FiGift>
                       <span className="text-slate-400 me-3">D.O.B. :</span>
                     </span>
 
                     <span>31st Dec, 1996</span>
-                  </li>
-                  <li className="flex justify-between mt-3 items-center font-medium">
+                  </li> */}
+                  {/* <li className="flex justify-between mt-3 items-center font-medium">
                     <span>
                       <FiHome className="size-4 text-slate-400 me-3 inline"></FiHome>
                       <span className="text-slate-400 me-3">Address :</span>
                     </span>
 
                     <span>15 Razy street</span>
-                  </li>
-                  <li className="flex justify-between mt-3 items-center font-medium">
+                  </li> */}
+                  {/* <li className="flex justify-between mt-3 items-center font-medium">
                     <span>
                       <FiMapPin className="size-4 text-slate-400 me-3 inline"></FiMapPin>
                       <span className="text-slate-400 me-3">City :</span>
                     </span>
 
                     <span>London</span>
-                  </li>
-                  <li className="flex justify-between mt-3 items-center font-medium">
+                  </li> */}
+                  {/* <li className="flex justify-between mt-3 items-center font-medium">
                     <span>
                       <FiGlobe className="size-4 text-slate-400 me-3 inline"></FiGlobe>
                       <span className="text-slate-400 me-3">Country :</span>
                     </span>
 
                     <span>UK</span>
-                  </li>
-                  <li className="flex justify-between mt-3 items-center font-medium">
+                  </li> */}
+                  {/* <li className="flex justify-between mt-3 items-center font-medium">
                     <span>
                       <FiServer className="size-4 text-slate-400 me-3 inline"></FiServer>
                       <span className="text-slate-400 me-3">Postal Code :</span>
                     </span>
 
                     <span>521452</span>
-                  </li>
-                  <li className="flex justify-between mt-3 items-center font-medium">
+                  </li> */}
+                  {/* <li className="flex justify-between mt-3 items-center font-medium">
                     <span>
                       <FiPhone className="size-4 text-slate-400 me-3 inline"></FiPhone>
                       <span className="text-slate-400 me-3">Mobile :</span>
                     </span>
 
                     <span>(+125) 1542-8452</span>
-                  </li>
+                  </li> */}
 
-                  <li className="flex justify-between mt-3">
+                  {/* <li className="flex justify-between mt-3">
                     <span className="text-slate-400 font-medium">Social:</span>
 
                     <ul className="list-none ltr:text-right rtl:text-left space-x-0.5">
@@ -332,9 +344,9 @@ export default function CandidateDetail() {
                         </Link>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
 
-                  <li className="mt-3 w-full bg-white dark:bg-slate-900 p-3 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700">
+                  {/* <li className="mt-3 w-full bg-white dark:bg-slate-900 p-3 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700">
                     <div className="flex items-center mb-3">
                       <FiFileText className="size-8 text-slate-400"></FiFileText>
                       <span className="font-medium ms-2">
@@ -349,12 +361,17 @@ export default function CandidateDetail() {
                     >
                       <FiFileText className="me-2" /> Download CV
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
           </div>
         </div>
+        <CandidateSkillsModal
+          open={skillsModalOpen}
+          onClose={() => setSkillsModalOpen(false)}
+          candidateId={user?.data?.id}
+        />
       </section>
     </>
   );
