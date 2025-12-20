@@ -63,6 +63,10 @@ export default function Login() {
                     access_token: { token: accessObj.token, ...accessObj },
                     refresh_token: { token: refreshObj.token, ...refreshObj },
                 };
+                localStorage.removeItem('companyId');
+                localStorage.removeItem('role');
+                localStorage.removeItem('tokens');
+                
                 localStorage.setItem('companyId', responseData?.id)
                 localStorage.setItem("role", responseData?.user?.role === "company" ? 'company' : 'candidate')
                 localStorage.setItem("tokens", JSON.stringify(newTokens));

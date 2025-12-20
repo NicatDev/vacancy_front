@@ -79,7 +79,8 @@
     "passwordConfirmation": "Confirm password",
     "passwordMin": "Password must be at least 6 characters",
     "passwordRequired": "Password is required",
-    "passwordsMustMatch": "Passwords must match"
+    "passwordsMustMatch": "Passwords must match",
+    "plans": "Plans"
   },
   "companies": {
     "employerList.loading": "Loading companies...",

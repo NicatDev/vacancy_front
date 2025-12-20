@@ -78,7 +78,8 @@
     "passwordConfirmation": "Parolu təsdiqlə",
     "passwordMin": "Parol ən azı 6 simvol olmalıdır",
     "passwordRequired": "Parol tələb olunur",
-    "passwordsMustMatch": "Parollar uyğun olmalıdır"
+    "passwordsMustMatch": "Parollar uyğun olmalıdır",
+    "plans":"Planlar"
   },
   "companies": {
     "employerList.loading": "Şirkətlər yüklənir...",

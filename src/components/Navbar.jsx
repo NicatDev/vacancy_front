@@ -10,6 +10,7 @@ import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../context/UserContext";
 import LoginIcon from "../assets/icons/login.svg";
+import { FaDollarSign } from "react-icons/fa6";
 
 const Navbar = (props) => {
   const { refreshUser, user } = useUser();
@@ -117,10 +118,10 @@ const Navbar = (props) => {
         Element.prototype.webkitMatchesSelector ||
         function (s) {
           var matches = (this.document || this.ownerDocument).querySelectorAll(
-              s
-            ),
+            s
+          ),
             i = matches.length;
-          while (--i >= 0 && matches.item(i) !== this) {}
+          while (--i >= 0 && matches.item(i) !== this) { }
           return i > -1;
         };
     }
@@ -204,13 +205,12 @@ const Navbar = (props) => {
 
   return (
     <nav id="topnav" className={`defaultscroll is-sticky ${topnavClass}`}>
-      
+
       <div
-        className={`${
-          isContainerFluid === true
-            ? "container-fluid md:px-8 px-3"
-            : "container"
-        }`}
+        className={`${isContainerFluid === true
+          ? "container-fluid md:px-8 px-3"
+          : "container"
+          }`}
       >
         <Link className="logo" to="/">
           <div className="block sm:hidden">
@@ -318,19 +318,18 @@ const Navbar = (props) => {
                 className="dropdown-toggle items-center"
                 type="button"
               >
-              
+
                 <span className="size-9 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide border align-middle transition duration-500 ease-in-out rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white">
                   <img src={user?.data?.avatar_url ?? userImg} className="rounded-full" alt="" />
                 </span>
               </button>
 
               <div
-                className={`dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 ${
-                  isDropdown ? "hidden" : "block"
-                }`}
+                className={`dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 ${isDropdown ? "hidden" : "block"
+                  }`}
               >
                 <ul className="py-2 text-start">
-                  {user?.data?.user?.role=='company'? <li>
+                  {user?.data?.user?.role == 'company' ? <li>
                     <Link
                       to="/company-profile"
                       className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
@@ -338,7 +337,7 @@ const Navbar = (props) => {
                       <FiUser className="size-4 me-2" />
                       {t("navbar.profile")}
                     </Link>
-                  </li>:user?.data?.user?.role=='candidate'?<li>
+                  </li> : user?.data?.user?.role == 'candidate' ? <li>
                     <Link
                       to="/profile"
                       className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
@@ -346,8 +345,8 @@ const Navbar = (props) => {
                       <FiUser className="size-4 me-2" />
                       {t("navbar.profile")}
                     </Link>
-                  </li>:<></>}
-                  {user?.data?.user?.role!='company'?<li>
+                  </li> : <></>}
+                  {user?.data?.user?.role != 'company' ? <li>
                     <Link
                       to="/candidate-profile-setting"
                       className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
@@ -355,8 +354,8 @@ const Navbar = (props) => {
                       <FiSettings className="size-4 me-2" />
                       {t("navbar.settings")}
                     </Link>
-                  </li>:<></>}
-                  
+                  </li> : <></>}
+
                   <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
                   <li>
                     <Link
@@ -373,12 +372,21 @@ const Navbar = (props) => {
                       {t("navbar.logout")}
                     </Link>
                   </li>
+                  {user?.data?.user?.role == 'company' ? <li>
+                    <Link
+                      to="/pricing"
+                      className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
+                    >
+                      <FaDollarSign className="size-4 me-2" />
+                      {t("common.plans")}
+                    </Link>
+                  </li> : <></>}
                 </ul>
               </div>
             </li>
           )}
           {!role && (
-            <li className="hidden lg:inline-block mb-0 me-2 ml-2">
+            <li className="inline-block mb-0 me-2 ml-2">
               <div className="relative top-[3px]">
                 <Link
                   to="/login"
