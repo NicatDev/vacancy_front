@@ -204,6 +204,7 @@ const Navbar = (props) => {
 
   return (
     <nav id="topnav" className={`defaultscroll is-sticky ${topnavClass}`}>
+      
       <div
         className={`${
           isContainerFluid === true
@@ -329,7 +330,15 @@ const Navbar = (props) => {
                 }`}
               >
                 <ul className="py-2 text-start">
-                  <li>
+                  {user?.data?.user?.role=='company'? <li>
+                    <Link
+                      to="/company-profile"
+                      className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
+                    >
+                      <FiUser className="size-4 me-2" />
+                      {t("navbar.profile")}
+                    </Link>
+                  </li>:user?.data?.user?.role=='candidate'?<li>
                     <Link
                       to="/profile"
                       className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
@@ -337,8 +346,8 @@ const Navbar = (props) => {
                       <FiUser className="size-4 me-2" />
                       {t("navbar.profile")}
                     </Link>
-                  </li>
-                  <li>
+                  </li>:<></>}
+                  {user?.data?.user?.role!='company'?<li>
                     <Link
                       to="/candidate-profile-setting"
                       className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
@@ -346,7 +355,8 @@ const Navbar = (props) => {
                       <FiSettings className="size-4 me-2" />
                       {t("navbar.settings")}
                     </Link>
-                  </li>
+                  </li>:<></>}
+                  
                   <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
                   <li>
                     <Link

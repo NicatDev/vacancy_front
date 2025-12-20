@@ -4,6 +4,7 @@ import { LuMapPin, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/i
 import CompaniesAPI from '../api/apiList/companies';
 import { useTranslation } from "react-i18next";
 import { TbBuildings } from "react-icons/tb";
+import CompanyIcon from '../assets/icons/company.svg'
 const initialCompanyData = {
     data: [],
     meta: {
