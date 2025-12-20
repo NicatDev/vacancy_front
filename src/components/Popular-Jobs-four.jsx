@@ -9,10 +9,14 @@ import { jobData } from "../data/data";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { TbBuildings } from "react-icons/tb";
+import CandidatesAPI from "../api/apiList/candidates";
+import { useUser } from "../context/UserContext";
 
 export default function PopularJobsfour() {
   const { t } = useTranslation();
   const [jobs, setJobs] = useState([]);
+  const { user } = useUser();
+
   const fetchJobs = async (page = 1) => {
     try {
       const res = await VacanciesAPI.searchJobPosts({
@@ -30,6 +34,21 @@ export default function PopularJobsfour() {
   useEffect(() => {
     fetchJobs();
   }, []);
+
+   const handleClickJobApply = async (id) => {
+    try {
+      const params = {
+        candidate_id: user?.data?.id,
+        job_post_id: id
+      }
+      await CandidatesAPI.jobApply(params, user?.data?.id).then(()=>{
+      toast.success('Ugurla elave olundu!')
+
+      })
+    } catch (error) {
+   toast.success('Ne ise duzgun getmedi!')
+    }
+  }
 
   return (
     <section className="relative bg-slate-50 dark:bg-slate-800 md:py-24 py-16">
@@ -86,13 +105,14 @@ export default function PopularJobsfour() {
                     {item?.location}
                   </span>
                 </div>
-
-                <Link
-                  to="/job-apply"
+              {user?.data?.user?.role !='company'&&
+                <div
+                  onClick={()=>handleClickJobApply(item?.id)}
+                  style={{cursor:'pointer'}}
                   className="py-[5px] px-4 text-sm inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white md:ms-2 w-full lg:w-auto lg:mt-0 mt-4"
                 >
-                  {t("popularJobs.applyButton")}
-                </Link>
+                  {t("popularJobs.applyButton")}{user?.data?.role}
+                </div>}
               </div>
             </div>
           ))}
