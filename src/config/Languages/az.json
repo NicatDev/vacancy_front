@@ -1,11 +1,11 @@
 {
   "hero": {
-    "title1": "Başlıq 1",
-    "desc1": "Açıqlama 1",
-    "title2": "Başlıq 2",
-    "desc2": "Açıqlama 2",
-    "title3": "Başlıq 3",
-    "desc3": "Açıqlama 3"
+    "title1": "İstədiyiniz işi tapın",
+    "desc1": "Minlərlə vakansiya arasında bacarıqlarınıza və təcrübənizə uyğun işləri kəşf edin.",
+    "title2": "Karyeranızı yüksəldin",
+    "desc2": "Peşəkar inkişaf üçün ən yaxşı şirkətlər və imkanlar sizə bir klik uzaqlıqda.",
+    "title3": "Yeni fürsətləri qaçırmayın",
+    "desc3": "Xüsusi filtrlər və xəbərdarlıqlarla ideal iş elanlarını vaxtında əldə edin."
   },
   "search": {
     "keywords": "Açar söz axtar",
@@ -332,7 +332,7 @@
     "logo": "Loqo (istəyə bağlı)",
     "noPhone": "Telefon nömrəsi yoxdur",
     "noLink": "Xarici link yoxdur",
-            "vacancy": "Vakansiya",
+    "vacancy": "Vakansiya",
     "employmentType": "Əmək növü",
     "publishedAt": "Yayımlanma tarixi",
     "expiresAt": "Bitmə tarixi",
@@ -341,5 +341,4 @@
     "inactive": "Passiv",
     "noVacancies": "Vakansiya yoxdur"
   }
-
 }

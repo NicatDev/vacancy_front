@@ -1,12 +1,13 @@
 {
   "hero": {
-    "title1": "Hero Title 1",
-    "desc1": "Hero description 1",
-    "title2": "Hero Title 2",
-    "desc2": "Hero description 2",
-    "title3": "Hero Title 3",
-    "desc3": "Hero description 3"
+    "title1": "Find Your Dream Job",
+    "desc1": "Discover jobs that match your skills and experience among thousands of vacancies.",
+    "title2": "Advance Your Career",
+    "desc2": "The best companies and opportunities for professional growth are just a click away.",
+    "title3": "Never Miss an Opportunity",
+    "desc3": "Get timely notifications for ideal job listings with custom filters and alerts."
   },
+
   "search": {
     "keywords": "Search your Keywords",
     "country": "Select country",
@@ -333,7 +334,7 @@
     "logo": "Logo (optional)",
     "noPhone": "No phone numbers",
     "noLink": "No external links",
-            "vacancy": "Vacancy",
+    "vacancy": "Vacancy",
     "employmentType": "Employment Type",
     "publishedAt": "Published At",
     "expiresAt": "Expires At",
