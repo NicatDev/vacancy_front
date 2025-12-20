@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { TbBuildings } from "react-icons/tb";
 import CandidatesAPI from "../api/apiList/candidates";
 import { useUser } from "../context/UserContext";
+import { toast } from "react-toastify";
 
 export default function PopularJobsfour() {
   const { t } = useTranslation();
@@ -35,18 +36,18 @@ export default function PopularJobsfour() {
     fetchJobs();
   }, []);
 
-   const handleClickJobApply = async (id) => {
+  const handleClickJobApply = async (id) => {
     try {
       const params = {
         candidate_id: user?.data?.id,
         job_post_id: id
       }
-      await CandidatesAPI.jobApply(params, user?.data?.id).then(()=>{
-      toast.success('Ugurla elave olundu!')
+      await CandidatesAPI.jobApply(params, user?.data?.id).then(() => {
+        toast.success('Ugurla elave olundu!')
 
       })
     } catch (error) {
-   toast.success('Ne ise duzgun getmedi!')
+      toast.success('Ne ise duzgun getmedi!')
     }
   }
 
@@ -105,14 +106,14 @@ export default function PopularJobsfour() {
                     {item?.location}
                   </span>
                 </div>
-              {user?.data?.user?.role !='company'&&
-                <div
-                  onClick={()=>handleClickJobApply(item?.id)}
-                  style={{cursor:'pointer'}}
-                  className="py-[5px] px-4 text-sm inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white md:ms-2 w-full lg:w-auto lg:mt-0 mt-4"
-                >
-                  {t("popularJobs.applyButton")}{user?.data?.role}
-                </div>}
+                {user?.data?.user?.role != 'company' &&
+                  <div
+                    onClick={() => handleClickJobApply(item?.id)}
+                    style={{ cursor: 'pointer' }}
+                    className="py-[5px] px-4 text-sm inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white md:ms-2 w-full lg:w-auto lg:mt-0 mt-4"
+                  >
+                    {t("popularJobs.applyButton")}{user?.data?.role}
+                  </div>}
               </div>
             </div>
           ))}
