@@ -1,312 +1,189 @@
-import bg5 from "../../assets/images/hero/bg5.jpg"
-import team1 from "../../assets/images/DSC03269.jpg"
-import { Link } from 'react-router-dom';
-import { FiTwitter, FiFacebook, FiInstagram, FiLinkedin ,FiYoutube } from 'react-icons/fi';
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useUser } from "../../context/UserContext";
+import CandidatesAPI from "../../api/apiList/candidates";
+import { FiEdit } from "react-icons/fi";
+import UserIcon from "../../assets/icons/user.svg";
+import { toast } from "react-toastify";
 
-export default function CandidateProfileSetting(){
+export default function CandidateProfileSetting() {
+    const { user } = useUser();
 
-    return(
-       <>
-         <section className="relative pb-16" style={{marginTop: 200}}>
+    const fileToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (err) => reject(err);
+        });
+    };
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            name: user?.data?.name || "",
+            speciality: user?.data?.speciality || "",
+            summary: user?.data?.summary || "",
+            salary_expectation: user?.data?.salary_expectation || "",
+            cv: null,
+            avatar: null,
+        },
+        validationSchema: Yup.object({
+            name: Yup.string(),
+            speciality: Yup.string(),
+            summary: Yup.string(),
+            salary_expectation: Yup.number()
+                .typeError("Salary must be a number")
+                .min(0, "Salary must be positive"),
+        }),
+        onSubmit: async (values) => {
+            const payload = {
+                candidate: user?.data?.id,
+            };
+
+            if (values.name) payload.name = values.name;
+            if (values.speciality) payload.speciality = values.speciality;
+            if (values.summary) payload.summary = values.summary;
+            if (values.salary_expectation) payload.salary_expectation = values.salary_expectation;
+            if (values.cv) payload.cv = await fileToBase64(values.cv);
+            if (values.avatar) payload.avatar = await fileToBase64(values.avatar);
+
+            try {
+                const response = await CandidatesAPI.updateProfile(user?.data?.id, payload);
+                if (response.status === 204) {
+                    toast.success("Profile updated successfully");
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        },
+    });
+
+    return (
+        <section className="relative pb-16" style={{ marginTop: 200 }}>
             <div className="container">
-                {/* <div className="profile-banner relative text-transparent">
-                    <input id="pro-banner" name="profile-banner" type="file" className="hidden" />
-                    <div className="relative shrink-0">
-                        <img src={bg5} className="h-64 w-full object-cover lg:rounded-xl shadow-sm shadow-gray-200 dark:shadow-gray-700" id="profile-banner" alt=""/>
-                        <label className="absolute inset-0 cursor-pointer" htmlFor="pro-banner"></label>
+                <div className="flex items-center mb-4">
+                    <div style={{ position: "relative", width: "112px", height: "112px" }}>
+                        <img
+                            src={formik.values.avatar ? URL.createObjectURL(formik.values.avatar) : user?.data?.avatar_url ? user?.data?.avatar_url : UserIcon}
+                            alt="avatar"
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                                border: "4px solid #e2e8f0", // ring-slate-200
+                            }}
+                        />
+
+                        {/* Hidden file input */}
+                        <input
+                            type="file"
+                            accept="image/*"
+                            id="avatar-upload"
+                            style={{ display: "none" }}
+                            onChange={(e) => formik.setFieldValue("avatar", e.currentTarget.files[0])}
+                        />
+
+                        {/* Pencil icon */}
+                        <label
+                            htmlFor="avatar-upload"
+                            style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                backgroundColor: "#fff",
+                                padding: "4px",
+                                borderRadius: "50%",
+                                cursor: "pointer",
+                                boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                opacity: 0, // default gizli
+                                transition: "opacity 0.3s",
+                                transform: "translate(-50%, -50%)",
+                                zIndex: 999
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.opacity = 1)}
+                            onMouseLeave={(e) => (e.currentTarget.style.opacity = 0)}
+                        >
+                            <FiEdit style={{ width: "16px", height: "16px", color: "#374151" }} />
+                        </label>
                     </div>
-                </div> */}
-                <div className="md:flex mx-4 -mt-12">
-                    <div className="md:w-full">
-                        <div className="relative flex items-end">
-                            <div className="profile-pic text-center">
-                                <input id="pro-img" name="profile-image" type="file" className="hidden"/>
-                                <div>
-                                    <div className="relative size-28 max-w-[112px] max-h-[112px] mx-auto">
-                                        <img src={team1} className="rounded-full shadow-sm dark:shadow-gray-800 ring-4 ring-slate-50 dark:ring-slate-800" id="profile-image" alt=""/>
-                                        <label className="absolute inset-0 cursor-pointer" htmlFor="pro-img"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="ms-4">
-                                <h5 className="text-lg font-semibold">Mr. Calvin carlo</h5>
-                                <p className="text-slate-400">Web Designer</p>
-                            </div>
-                        </div>
+
+                    <div className="ms-4">
+                        <h5 className="text-lg font-semibold">{formik.values.name}</h5>
+                        <p className="text-slate-400">{formik.values.speciality}</p>
                     </div>
                 </div>
-            </div>
 
-            <div className="container mt-16">
-                <div className="grid grid-cols-1 gap-[30px]">
-                    <div className="p-6 rounded-md shadow-sm dark:shadow-gray-800 bg-white dark:bg-slate-900">
-                        <h5 className="text-lg font-semibold mb-4">Personal Detail :</h5>
-                        <form>
-                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-                                <div>
-                                    <label className="form-label font-medium">First Name : <span className="text-red-600">*</span></label>
-                                    <input type="text" className="form-input border border-slate-100 dark:border-slate-800 mt-2" placeholder="First Name:" id="firstname" name="name" required=""/>
-                                </div>
-                                <div>
-                                    <label className="form-label font-medium">Last Name : <span className="text-red-600">*</span></label>
-                                    <input type="text" className="form-input border border-slate-100 dark:border-slate-800 mt-2" placeholder="Last Name:" id="lastname" name="name" required=""/>
-                                </div>
-                                <div>
-                                    <label className="form-label font-medium">Your Email : <span className="text-red-600">*</span></label>
-                                    <input type="email" className="form-input border border-slate-100 dark:border-slate-800 mt-2" placeholder="Email" name="email" required=""/>
-                                </div>
-                                <div>
-                                    <label className="form-label font-medium">Occupation :</label>
-                                    <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-2">
-                                        <option value="WD">Web Designer</option>
-                                        <option value="WD">Web Developer</option>
-                                        <option value="UI">UI / UX Desinger</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="form-label font-medium">Location :</label>
-                                    <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-2">
-                                        <option value="NY">New York</option>
-                                        <option value="MC">North Carolina</option>
-                                        <option value="SC">South Carolina</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="form-label font-medium" htmlFor="multiple_files">Upload Resume:</label>
-                                    <input className="relative form-input border border-slate-100 dark:border-slate-800 file:h-10 file:-mx-3 file:-my-2 file:cursor-pointer file:rounded-none file:border-0 file:px-3 file:text-neutral-700 bg-clip-padding px-3 py-1.5 file:me-3 mt-2" id="multiple_files" type="file" multiple />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1">
-                                <div className="mt-5">
-                                    <label className="form-label font-medium">Intro : </label>
-                                    <textarea name="comments" id="comments" className="form-input border border-slate-100 dark:border-slate-800 mt-2 textarea" placeholder="Intro :"></textarea>
-                                </div>
-                            </div>
-
-                            <input type="submit" id="submit" name="send" className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 text-white rounded-md mt-5" value="Save Changes"/>
-                        </form>
-                    </div>
-
-                    <div className="p-6 rounded-md shadow-sm dark:shadow-gray-800 bg-white dark:bg-slate-900">
-                        <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
+                {/* FORM */}
+                <div className="p-6 rounded-md shadow bg-white dark:bg-slate-900">
+                    <form onSubmit={formik.handleSubmit}>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <h5 className="text-lg font-semibold mb-4">Contact Info :</h5>
-
-                                <form>
-                                    <div className="grid grid-cols-1 gap-4">
-                                        <div>
-                                            <label className="form-label font-medium">Phone No. :</label>
-                                            <input name="number" id="number" type="number" className="form-input border border-slate-100 dark:border-slate-800 mt-2" placeholder="Phone :"/>
-                                        </div>
-
-                                        <div>
-                                            <label className="form-label font-medium">Website :</label>
-                                            <input name="url" id="url" type="url" className="form-input border border-slate-100 dark:border-slate-800 mt-2" placeholder="Url :"/>
-                                        </div>
-                                    </div>
-
-                                    <button className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 text-white rounded-md mt-5">Add</button>
-                                </form>
+                                <label className="font-medium">Candidate Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    className="form-input border mt-2"
+                                    value={formik.values.name}
+                                    onChange={formik.handleChange}
+                                />
                             </div>
-                            
-                            <div> 
-                                <h5 className="text-lg font-semibold mb-4">Change password :</h5>
-                                <form>
-                                    <div className="grid grid-cols-1 gap-4">
-                                        <div>
-                                            <label className="form-label font-medium">Old password :</label>
-                                            <input type="password" className="form-input border border-slate-100 dark:border-slate-800 mt-2" placeholder="Old password" required=""/>
-                                        </div>
-
-                                        <div>
-                                            <label className="form-label font-medium">New password :</label>
-                                            <input type="password" className="form-input border border-slate-100 dark:border-slate-800 mt-2" placeholder="New password" required=""/>
-                                        </div>
-
-                                        <div>
-                                            <label className="form-label font-medium">Re-type New password :</label>
-                                            <input type="password" className="form-input border border-slate-100 dark:border-slate-800 mt-2" placeholder="Re-type New password" required=""/>
-                                        </div>
-                                    </div>
-
-                                    <button className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 text-white rounded-md mt-5">Save password</button>
-                                </form>
+                            <div>
+                                <label className="font-medium">Speciality</label>
+                                <input
+                                    type="text"
+                                    name="speciality"
+                                    className="form-input border mt-2"
+                                    value={formik.values.speciality}
+                                    onChange={formik.handleChange}
+                                />
                             </div>
-                        </div>
-                    </div>
-
-                    <div className="p-6 rounded-md shadow-sm dark:shadow-gray-800 bg-white dark:bg-slate-900">
-                        <h5 className="text-lg font-semibold mb-4">Social Media :</h5>
-
-                        <div className="md:flex">
-                            <div className="md:w-1/3">
-                                <span className="font-medium">Twitter</span>
+                            <div>
+                                <label className="font-medium">Salary Expectation</label>
+                                <input
+                                    type="number"
+                                    name="salary_expectation"
+                                    className="form-input border mt-2"
+                                    value={formik.values.salary_expectation}
+                                    onChange={formik.handleChange}
+                                />
                             </div>
-
-                            <div className="md:w-2/3 mt-4 md:mt-0">
-                                <form>
-                                    <div className="form-icon relative">
-                                        <FiTwitter className="size-4 absolute top-5 start-4"/>
-                                        <input type="text" className="w-full py-2 px-3 text-[14px] border border-gray-200 dark:border-gray-800 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none bg-transparent mt-2 ps-12" placeholder="Twitter Profile Name" id="twitter_name" name="name" required=""/>
-                                    </div>
-                                </form>
-
-                                <p className="text-slate-400 mt-1">Add your Twitter username (e.g. jennyhot).</p>
-                            </div>
-                        </div>
-                        
-                        <div className="md:flex mt-8">
-                            <div className="md:w-1/3">
-                                <span className="font-medium">Facebook</span>
-                            </div>
-
-                            <div className="md:w-2/3 mt-4 md:mt-0">
-                                <form>
-                                    <div className="form-icon relative">
-                                        <FiFacebook className="size-4 absolute top-5 start-4"/>
-                                        <input type="text" className="w-full py-2 px-3 text-[14px] border border-gray-200 dark:border-gray-800 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none bg-transparent mt-2 ps-12" placeholder="Facebook Profile Name" id="facebook_name" name="name" required=""/>
-                                    </div>
-                                </form>
-
-                                <p className="text-slate-400 mt-1">Add your Facebook username (e.g. jennyhot).</p>
-                            </div>
-                        </div>
-                        
-                        <div className="md:flex mt-8">
-                            <div className="md:w-1/3">
-                                <span className="font-medium">Instagram</span>
-                            </div>
-
-                            <div className="md:w-2/3 mt-4 md:mt-0">
-                                <form>
-                                    <div className="form-icon relative">
-                                        <FiInstagram className="size-4 absolute top-5 start-4"/>
-                                        <input type="text" className="w-full py-2 px-3 text-[14px] border border-gray-200 dark:border-gray-800 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none bg-transparent mt-2 ps-12" placeholder="Instagram Profile Name" id="insta_name" name="name" required=""/>
-                                    </div>
-                                </form>
-
-                                <p className="text-slate-400 mt-1">Add your Instagram username (e.g. jennyhot).</p>
-                            </div>
-                        </div>
-                        
-                        <div className="md:flex mt-8">
-                            <div className="md:w-1/3">
-                                <span className="font-medium">Linkedin</span>
-                            </div>
-
-                            <div className="md:w-2/3 mt-4 md:mt-0">
-                                <form>
-                                    <div className="form-icon relative">
-                                        <FiLinkedin className="size-4 absolute top-5 start-4"/>
-                                        <input type="text" className="w-full py-2 px-3 text-[14px] border border-gray-200 dark:border-gray-800 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none bg-transparent mt-2 ps-12" placeholder="Linkedin Profile Name" id="linkedin_name" name="name" required=""/>
-                                    </div>
-                                </form>
-
-                                <p className="text-slate-400 mt-1">Add your Linkedin username.</p>
-                            </div>
-                        </div>
-                        
-                        <div className="md:flex mt-8">
-                            <div className="md:w-1/3">
-                                <span className="font-medium">Youtube</span>
-                            </div>
-
-                            <div className="md:w-2/3 mt-4 md:mt-0">
-                                <form>
-                                    <div className="form-icon relative">
-                                        <FiYoutube className="size-4 absolute top-5 start-4"/>
-                                        <input type="url" className="w-full py-2 px-3 text-[14px] border border-gray-200 dark:border-gray-800 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none bg-transparent mt-2 ps-12" placeholder="Youtube url" id="you_url" name="url" required=""/>
-                                    </div>
-                                </form>
-
-                                <p className="text-slate-400 mt-1">Add your Youtube url.</p>
+                            <div>
+                                <label className="font-medium">Upload Resume (PDF)</label>
+                                <input
+                                    type="file"
+                                    accept="application/pdf"
+                                    className="form-input border mt-2"
+                                    onChange={(e) =>
+                                        formik.setFieldValue("cv", e.currentTarget.files[0])
+                                    }
+                                />
                             </div>
                         </div>
 
-                        <div className="md:flex">
-                            <div className="md:w-1/3">
-                                <input type="submit" id="submit" name="send" className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 text-white rounded-md mt-5" value="Save Changes"/>
-                            </div>
+                        <div className="mt-4">
+                            <label className="font-medium">Summary</label>
+                            <textarea
+                                name="summary"
+                                className="form-input border mt-2 textarea"
+                                value={formik.values.summary}
+                                onChange={formik.handleChange}
+                            />
                         </div>
-                    </div>
 
-                    <div className="p-6 rounded-md shadow-sm dark:shadow-gray-800 bg-white dark:bg-slate-900">
-                        <h5 className="text-lg font-semibold mb-5">Account Notifications :</h5>
-
-                        <div className="flex justify-between pb-4">
-                            <h6 className="mb-0 font-medium">When someone mentions me</h6>
-                            <div className="">
-                                <input className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2" type="checkbox" value="" id="noti1"/>
-                                <label className="form-check-label" htmlFor="noti1"></label>
-                            </div>
-                        </div>
-                        <div className="flex justify-between py-4 border-t border-gray-100 dark:border-gray-700">
-                            <h6 className="mb-0 font-medium">When someone follows me</h6>
-                            <div className="">
-                                <input className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2" type="checkbox" value="" defaultChecked id="noti2"/>
-                                <label className="form-check-label" htmlFor="noti2"></label>
-                            </div>
-                        </div>
-                        <div className="flex justify-between py-4 border-t border-gray-100 dark:border-gray-700">
-                            <h6 className="mb-0 font-medium">When shares my activity</h6>
-                            <div className="">
-                                <input className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2" type="checkbox" value="" id="noti3"/>
-                                <label className="form-check-label" htmlFor="noti3"></label>
-                            </div>
-                        </div>
-                        <div className="flex justify-between py-4 border-t border-gray-100 dark:border-gray-700">
-                            <h6 className="mb-0 font-medium">When someone messages me</h6>
-                            <div className="">
-                                <input className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2" type="checkbox" value="" id="noti4"/>
-                                <label className="form-check-label" htmlFor="noti4"></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="p-6 rounded-md shadow-sm dark:shadow-gray-800 bg-white dark:bg-slate-900">
-                        <h5 className="text-lg font-semibold mb-5">Marketing Notifications :</h5>
-
-                        <div className="flex justify-between pb-4">
-                            <h6 className="mb-0 font-medium">There is a sale or promotion</h6>
-                            <div className="">
-                                <input className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2" type="checkbox" value="" id="noti5"/>
-                                <label className="form-check-label" htmlFor="noti5"></label>
-                            </div>
-                        </div>
-                        <div className="flex justify-between py-4 border-t border-gray-100 dark:border-gray-700">
-                            <h6 className="mb-0 font-medium">Company news</h6>
-                            <div className="">
-                                <input className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2" type="checkbox" value="" id="noti6"/>
-                                <label className="form-check-label" htmlFor="noti6"></label>
-                            </div>
-                        </div>
-                        <div className="flex justify-between py-4 border-t border-gray-100 dark:border-gray-700">
-                            <h6 className="mb-0 font-medium">Weekly jobs</h6>
-                            <div className="">
-                                <input className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2" type="checkbox" value="" defaultChecked id="noti7"/>
-                                <label className="form-check-label" htmlFor="noti7"></label>
-                            </div>
-                        </div>
-                        <div className="flex justify-between py-4 border-t border-gray-100 dark:border-gray-700">
-                            <h6 className="mb-0 font-medium">Unsubscribe News</h6>
-                            <div className="">
-                                <input className="form-checkbox rounded size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2" type="checkbox" value="" defaultChecked id="noti8"/>
-                                <label className="form-check-label" htmlFor="noti8"></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="p-6 rounded-md shadow-sm dark:shadow-gray-800 bg-white dark:bg-slate-900">
-                        <h5 className="text-lg font-semibold mb-5 text-red-600">Delete Account :</h5>
-
-                        <p className="text-slate-400 mb-4">Do you want to delete the account? Please press below "Delete" button</p>
-
-                        <Link to="#" className="btn bg-red-600 hover:bg-red-700 text-white rounded-md">Delete</Link>
-                    </div>
+                        <button
+                            type="submit"
+                            className="mt-5 px-6 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700"
+                        >
+                            Save Changes
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
-       </>
-    )
+    );
 }

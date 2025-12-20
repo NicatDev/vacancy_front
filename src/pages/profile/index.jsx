@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import shree_logo from "../../assets/images/company/shree-logo.png";
 import circle_logo from "../../assets/images/company/circle-logo.png";
-import { FiSettings, FiMail } from "react-icons/fi";
+import { FiSettings, FiMail, FiFileText } from "react-icons/fi";
 
 import { CandidateList } from "../../data/data";
 import { useUser } from "../../context/UserContext";
@@ -9,38 +9,96 @@ import { useTranslation } from "react-i18next";
 import UserIcon from "../../assets/icons/user.svg";
 import { useEffect, useState } from "react";
 import CandidatesAPI from "../../api/apiList/candidates";
-import CandidateSkillsModal from "../../components/CandidateSkillsModal";
+import { TbBuildings } from "react-icons/tb";
+import dayjs from "dayjs";
 
 export default function CandidateDetail() {
   const { t } = useTranslation();
   const { user } = useUser();
-  const [skills, setSkills] = useState(null);
-  const [skillsModalOpen, setSkillsModalOpen] = useState(false);
+
+  const [skills, setSkills] = useState([]);
+  const [services, setServices] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  const [applications, setApplications] = useState([]);
+
   const params = {
     size: 20,
     page: 1,
   };
 
-  const getSkills = async (id) => {
+  const getSkills = async () => {
     try {
-      if(!id)return;
-      let response = await CandidatesAPI.getCandidateSkill(id, params);
+      if (!user) return;
+      let response = await CandidatesAPI.getSingleCandidateSkills(user?.data?.id);
 
       if (response.status === 200) {
-        setSkills(response.data);
+        setSkills(response.data?.data);
       } else {
-        setSkills(null);
+        setSkills([]);
       }
     } catch (err) {
-      setSkills(null);
+      setSkills([]);
     }
   };
 
-  useEffect(() => {
-    if(!skillsModalOpen)getSkills(user?.data?.id);
-  }, [user?.data?.id,skillsModalOpen]);
+  const getServices = async () => {
+    try {
+      if (!user) return;
+      let response = await CandidatesAPI.getSingleCandidateServices(user?.data?.id);
 
-  const data = CandidateList.find((jobs) => jobs.id === parseInt(1));
+      if (response.status === 200) {
+        setServices(response.data?.data);
+      } else {
+        setServices([]);
+      }
+    } catch (err) {
+      setServices([]);
+    }
+  };
+
+  const getLanguages = async () => {
+    try {
+      if (!user) return;
+      let response = await CandidatesAPI.getSingleCandidateLanguages(user?.data?.id);
+
+      if (response.status === 200) {
+        setLanguages(response.data?.data);
+      } else {
+        setLanguages([]);
+      }
+    } catch (err) {
+      setLanguages([]);
+    }
+  };
+
+
+  const getApplications = async () => {
+    try {
+      if (!user) return;
+      let response = await CandidatesAPI.getCandidateApplications(user?.data?.id);
+
+      if (response.status === 200) {
+        setApplications(response.data?.data);
+      } else {
+        setApplications([]);
+      }
+    } catch (err) {
+      setApplications([]);
+    }
+  };
+
+
+  useEffect(() => {
+    getSkills();
+    getServices();
+    getLanguages();
+    getApplications();
+  }, [user]);
+
+
+  console.log(applications);
+
+
   return (
     <>
       <section className="relative lg:mt-24 mt-[74px]">
@@ -52,7 +110,7 @@ export default function CandidateDetail() {
                   <img
                     src={user?.image ?? UserIcon}
                     className="size-28 rounded-full shadow-sm dark:shadow-gray-800 ring-4 ring-slate-50 dark:ring-slate-800"
-                    alt=""
+                    alt="user"
                   />
                   <div className="ms-4">
                     <h5 className="text-lg font-semibold">
@@ -83,148 +141,92 @@ export default function CandidateDetail() {
               <h5 className="text-xl font-semibold">{user?.data?.name}</h5>
               <p className="text-slate-400 mt-4">{user?.data?.summary}</p>
 
-              <h4 className="mt-6 text-xl font-semibold">
-                Skills :{" "}
-                <button
-                  onClick={() => setSkillsModalOpen(true)}
-                  className="text-emerald-600 font-medium"
-                >
-                  Edit skills
-                </button>
-              </h4>
-              <div className="grid lg:grid-cols-2 grid-cols-1 mt-6 gap-6">
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-slate-400">WordPress</span>
-                    <span className="text-slate-400">84%</span>
-                  </div>
-                  <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                    <div
-                      className="bg-emerald-600 h-[6px] rounded-full"
-                      style={{ width: "84%" }}
-                    ></div>
+              <div className="grid lg:grid-cols-3 grid-cols-1">
+                <div className="flex flex-col">
+                  <h4 className="mt-6 text-xl font-semibold">
+                    Skills:
+                  </h4>
+                  <div className="grid lg:grid-cols-2 grid-cols-1 mt-6 gap-2">
+                    {skills?.length > 0 ? [...skills]?.map(skill => (
+                      <div key={skill?.id}>
+                        <div className="flex justify-between mb-2">
+                          <span className="text-slate-400">{skill?.name}</span>
+                        </div>
+                      </div>
+                    )) : <span>{t('companies.notFound')}</span>}
                   </div>
                 </div>
 
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-slate-400">JavaScript</span>
-                    <span className="text-slate-400">79%</span>
-                  </div>
-                  <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                    <div
-                      className="bg-emerald-600 h-[6px] rounded-full"
-                      style={{ width: "79%" }}
-                    ></div>
+
+                <div className="flex flex-col">
+                  <h4 className="mt-6 text-xl font-semibold">
+                    Services:
+                  </h4>
+                  <div className="grid lg-grid-cols-2 grid-cols-1 mt-6 gap-2">
+                    {services?.length > 0 ? [...services]?.map(service => (
+                      <div key={service?.service?.id}>
+                        <div className="flex justify-between mb-2">
+                          <span className="text-slate-400">{service?.service?.name}</span>
+                        </div>
+                      </div>
+                    )) : <span>{t('companies.notFound')}</span>}
                   </div>
                 </div>
 
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-slate-400">HTML</span>
-                    <span className="text-slate-400">95%</span>
-                  </div>
-                  <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                    <div
-                      className="bg-emerald-600 h-[6px] rounded-full"
-                      style={{ width: "95%" }}
-                    ></div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-slate-400">Figma</span>
-                    <span className="text-slate-400">85%</span>
-                  </div>
-                  <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                    <div
-                      className="bg-emerald-600 h-[6px] rounded-full"
-                      style={{ width: "85%" }}
-                    ></div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-slate-400">Photoshop</span>
-                    <span className="text-slate-400">70%</span>
-                  </div>
-                  <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                    <div
-                      className="bg-emerald-600 h-[6px] rounded-full"
-                      style={{ width: "70%" }}
-                    ></div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-slate-400">Illustration</span>
-                    <span className="text-slate-400">65%</span>
-                  </div>
-                  <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-[6px]">
-                    <div
-                      className="bg-emerald-600 h-[6px] rounded-full"
-                      style={{ width: "65%" }}
-                    ></div>
+                <div className="flex flex-col">
+                  <h4 className="mt-6 text-xl font-semibold">
+                    Languages:
+                  </h4>
+                  <div className="flex w-fit flex-col mt-6 gap-2">
+                    {languages?.length > 0 ? [...languages]?.map(language => (
+                      <div key={language?.language?.id}>
+                        <div className="flex items-center gap-2 justify-between mb-2">
+                          <span className="text-slate-400">{language?.language?.name}</span>
+                          <span className="text-slate-400">-</span>
+                          <span className="text-slate-400">{language?.level?.label}</span>
+                        </div>
+                      </div>
+                    )) : <span>{t('companies.notFound')}</span>}
                   </div>
                 </div>
               </div>
 
               <h4 className="mt-6 text-xl font-semibold">Experience :</h4>
 
-              <div className="flex mt-6">
-                <div className="text-slate-400 font-semibold min-w-[80px] text-center">
-                  <img
-                    src={shree_logo}
-                    className="size-16 mx-auto mb-2 block"
-                    alt=""
-                  />{" "}
-                  2019-22
-                </div>
 
-                <div className="ms-4">
-                  <h5 className="text-lg font-medium mb-0">
-                    Full Stack Developer
-                  </h5>
-                  <span className="text-slate-400 company-university">
-                    Shreethemes - India
-                  </span>
-                  <p className="text-slate-400 mt-2 mb-0">
-                    It seems that only fragments of the original text remain in
-                    the Lorem Ipsum texts used today. One may speculate that
-                    over the course of time certain letters were added or
-                    deleted at various positions within the text.{" "}
-                  </p>
-                </div>
-              </div>
+              {applications.map((application, index) => (
+                <div key={index} className="flex mt-6">
+                  {/* Sol hissə */}
+                  <div className="text-slate-400 font-semibold min-w-[80px] text-center">
 
-              <div className="flex mt-6">
-                <div className="text-slate-400 font-semibold min-w-[80px] text-center">
-                  <img
-                    src={circle_logo}
-                    className="size-16 mx-auto mb-2 block"
-                    alt=""
-                  />{" "}
-                  2017-19
-                </div>
 
-                <div className="ms-4">
-                  <h5 className="text-lg font-medium mb-0">
-                    Back-end Developer
-                  </h5>
-                  <span className="text-slate-400 company-university">
-                    CircleCI - U.S.A.
-                  </span>
-                  <p className="text-slate-400 mt-2 mb-0">
-                    It seems that only fragments of the original text remain in
-                    the Lorem Ipsum texts used today. One may speculate that
-                    over the course of time certain letters were added or
-                    deleted at various positions within the text.{" "}
-                  </p>
+                    {application.job.company.logo ? <img
+                      src={application.job.company.logo}
+                      className="size-16 mx-auto mb-2 block"
+                      alt={application.job.company.name}
+                    /> : <TbBuildings fontSize={64} />}
+
+                    {dayjs(application?.job?.applied_at).format('YYYY-MM-DD')}
+                  </div>
+
+                  <div className="ms-4">
+                    <h5 className="text-lg font-medium mb-0">
+                      {application.job.title}
+                    </h5>
+
+                    <span className="text-slate-400 company-university">
+                      {application.job.company.name} - {application.job.location}
+                    </span>
+
+                    <p className="text-slate-400 mt-2 mb-0">
+                      {application.job.employment_type.name}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              ))}
+
+
+
             </div>
 
             <div className="lg:col-span-4 md:col-span-5">
@@ -237,6 +239,14 @@ export default function CandidateDetail() {
                     </span>
 
                     <span>{user?.data?.name}</span>
+                  </li>
+
+                  <li className="flex justify-between mt-3 items-center font-medium">
+                    <span>
+                      <span className="text-slate-400 me-3">Salary Expectation:</span>
+                    </span>
+
+                    <span>{user?.data?.salary_expectation}$</span>
                   </li>
                   <li className="flex justify-between mt-3 items-center font-medium">
                     <span>
@@ -346,32 +356,33 @@ export default function CandidateDetail() {
                     </ul>
                   </li> */}
 
-                  {/* <li className="mt-3 w-full bg-white dark:bg-slate-900 p-3 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700">
-                    <div className="flex items-center mb-3">
-                      <FiFileText className="size-8 text-slate-400"></FiFileText>
-                      <span className="font-medium ms-2">
-                        calvin-carlo-resume.pdf
-                      </span>
-                    </div>
+                  {user?.data?.cv && (
+                    <li className="mt-3 w-full bg-white dark:bg-slate-900 p-3 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700">
+                      <div className="flex items-center mb-3">
+                        <FiFileText className="size-8 text-slate-400" />
 
-                    <Link
-                      to="assets/images/calvin-carlo-resume.pdf"
-                      className="py-1 px-5 inline-flex font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 dark:border-emerald-600 text-white rounded-md w-full flex items-center justify-center"
-                      download
-                    >
-                      <FiFileText className="me-2" /> Download CV
-                    </Link>
-                  </li> */}
+                        <span className="font-medium ms-2">
+                          {user.data.cv.split("/").pop()}
+                        </span>
+                      </div>
+
+                      <a
+                        href={user.data.cv}
+                        className="py-1 px-5 inline-flex font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 dark:border-emerald-600 text-white rounded-md w-full flex items-center justify-center"
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FiFileText className="me-2" /> Download CV
+                      </a>
+                    </li>
+                  )}
+
                 </ul>
               </div>
             </div>
           </div>
         </div>
-        <CandidateSkillsModal
-          open={skillsModalOpen}
-          onClose={() => setSkillsModalOpen(false)}
-          candidateId={user?.data?.id}
-        />
       </section>
     </>
   );

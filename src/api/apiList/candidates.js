@@ -24,18 +24,26 @@ const CandidatesAPI = {
   jobApply: (params = {}, id) => {
     return axiosClient.post(`/candidates/${id}/applications`, params);
   },
-
-  getCandidateLang: (candidateId,params = {}) => {
+  getCandidateApplications: (id) => {
+    return axiosClient.get(`/candidates/${id}/applications`);
+  },
+  getCandidateLang: (candidateId, params = {}) => {
     return axiosClient.get(`/candidates/${candidateId}/languages`, { params });
   },
-  getCandidateLangLevels: (candidateId,params = {}) => {
+  getCandidateLangLevels: (candidateId, params = {}) => {
     return axiosClient.get(`/candidates/${candidateId}/languages`, { params });
   },
-  removeCandidateLang: (candidateId,languageId) => {
-    return axiosClient.delete(`/candidates/${candidateId}/languages/${languageId}`);
+  removeCandidateLang: (candidateId, languageId) => {
+    return axiosClient.delete(
+      `/candidates/${candidateId}/languages/${languageId}`
+    );
   },
-  addCandidateLang: (candidateId,data) => {
+  addCandidateLang: (candidateId, data) => {
     return axiosClient.post(`/candidates/${candidateId}/languages`, data);
+  },
+
+  updateProfile: (candidateId, params) => {
+    return axiosClient.put(`/candidates/${candidateId}`, params);
   },
 };
 

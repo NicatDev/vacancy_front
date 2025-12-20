@@ -144,7 +144,7 @@ export default function EmployerList() {
                         >
                             <div className="size-14 flex items-center justify-center bg-white dark:bg-slate-900 shadow-md rounded-md -mt-12">
                                 {item?.logo ? <img
-                                    src={CompanyIcon}
+                                    src={item?.logo}
                                     className="size-8"
                                     alt="Company Logo"
                                 /> : <TbBuildings fontSize={35} />}
