@@ -137,7 +137,6 @@ export default function ResetPasswordPage() {
                             placeholder="name@example.com"
                         />
                         <button
-                            disabled={formik.isSubmitting}
                             onClick={handleSendMail}
                             className="py-2 px-5 w-full cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-md transition duration-300"
                         >
