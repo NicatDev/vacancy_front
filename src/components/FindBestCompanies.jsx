@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Pagination } from "antd";
 import { useTranslation } from "react-i18next";
-import CompanyIcon from "../assets/icons/company.svg";
-import CompaniesAPI from "../api/apiList/companies"; 
+import CompaniesAPI from "../api/apiList/companies";
+import { TbBuildings } from "react-icons/tb";
 import { LuMapPin, MdOutlineArrowForward } from "../assets/icons/vander";
 
 export default function FindBestCompanies() {
@@ -20,13 +20,13 @@ export default function FindBestCompanies() {
   const fetchCompanies = async () => {
     try {
       setLoading(true);
-            const params = {
-                page,
-                size: pageSize,
-                include: "user",
-                order: "desc",
-                order_by: "id",
-            };
+      const params = {
+        page,
+        size: pageSize,
+        include: "user",
+        order: "desc",
+        order_by: "id",
+      };
       const res = await CompaniesAPI.getCompanies(params);
 
       const data = res.data.data || res.data;
@@ -73,7 +73,8 @@ export default function FindBestCompanies() {
                 key={item.id}
               >
                 <div className="size-14 flex items-center justify-center bg-white dark:bg-slate-900 shadow-md shadow-gray-200 dark:shadow-gray-700 rounded-md relative -mt-12">
-                  <img src={item.logo||CompanyIcon} className="size-8" alt="" />
+
+                  {item?.logo ? <img src={item.logo} className="size-8" alt="" /> : <TbBuildings fontSize={25} />}
                 </div>
 
                 <div className="mt-4">

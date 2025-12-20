@@ -10,8 +10,9 @@ import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../context/UserContext";
 import LoginIcon from "../assets/icons/login.svg";
+
 const Navbar = (props) => {
-  const { refreshUser } = useUser();
+  const { refreshUser, user } = useUser();
   const { pathname } = useLocation();
   const { t } = useTranslation();
   const { languages, changeLanguage } = Languages;
@@ -316,8 +317,9 @@ const Navbar = (props) => {
                 className="dropdown-toggle items-center"
                 type="button"
               >
+              
                 <span className="size-9 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide border align-middle transition duration-500 ease-in-out rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white">
-                  <img src={userImg} className="rounded-full" alt="" />
+                  <img src={user?.data?.avatar_url ?? userImg} className="rounded-full" alt="" />
                 </span>
               </button>
 

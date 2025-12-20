@@ -13,7 +13,8 @@
     "worktype": "İş növü",
     "button": "Axtar",
     "popular": "Populyar axtarışlar :",
-    "items": "Dizayner, Developer, Web, IOS, PHP Senior Engineer"
+    "items": "Dizayner, Developer, Web, IOS, PHP Senior Engineer",
+    "searchjJobs": "Vakansiyaları axtar..."
   },
   "categories": {
     "title": "Populyar Kateqoriyalar",
@@ -21,7 +22,8 @@
     "loading": "Yüklənir...",
     "noData": "Kateqoriya tapılmadı.",
     "jobs": "Vakansiya",
-    "seeMore": "Daha çox kateqoriya"
+    "seeMore": "Daha çox kateqoriya",
+    "categories": "Kategoriyalar"
   },
   "millions": {
     "title": "Milyonlarla iş elanları. Özünə uyğun olanı tap.",
@@ -62,7 +64,21 @@
     "contactFor": "Müraciət üçün",
     "resetPassword": "Şifrənizi sıfırlayın",
     "resetPasswordInfoText": "Zəhmət olmasa e-poçt ünvanınızı daxil edin. Yeni şifrə yaratmaq üçün link e-poçt vasitəsilə sizə göndəriləcək.",
-     "rememberPassword": "Şifrənizi xatırladınız?"
+    "rememberPassword": "Şifrənizi xatırladınız?",
+    "forgotPassword": "Şifrəmi unutdum",
+    "error": "Xəta",
+    "verifying": "Yoxlanılır...",
+    "plsWait": "E-poçt ünvanınız yoxlanılır. Zəhmət olmasa gözləyin.",
+    "verifyCompleted": "Təsdiqləmə linki natamamdır.",
+    "unexpectedVerify": "Təsdiqləmə zamanı gözlənilməz xəta baş verdi.",
+    "successfully": "Uğurlu",
+    "goLogin": "Daxil ol",
+    "goHome": "Ana səhifəyə keç",
+    "newPassword": "Yeni parol",
+    "passwordConfirmation": "Parolu təsdiqlə",
+    "passwordMin": "Parol ən azı 6 simvol olmalıdır",
+    "passwordRequired": "Parol tələb olunur",
+    "passwordsMustMatch": "Parollar uyğun olmalıdır"
   },
   "companies": {
     "employerList.loading": "Şirkətlər yüklənir...",
@@ -76,6 +92,7 @@
     "notFound": "Yoxdur",
     "website": "Veb sayt",
     "jobPostCount": "Vakansiya sayı",
+    "employeeCount": "İşçi sayı",
     "social": "Sosial",
     "companyStory": "Şirkət hekayəsi"
   },
@@ -272,5 +289,11 @@
     "submit": "Göndər",
     "day": "gün",
     "wait": "Gözləyin..."
+  },
+  "footer": {
+    "aboutUs": "Haqqımızda",
+    "contactUs": "Əlaqə",
+    "terms": "Şərtlər",
+    "privacyPolicy": "Məxfilik siyasəti"
   }
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { LuMapPin, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/icons/vander";
-import CompanyIcon from "../assets/icons/company.svg"
+import { TbBuildings } from "react-icons/tb";
 
 export default function JobGridsTwoComp({ jobs, pagination, onPageChange }) {
-  if (!jobs || jobs.length === 0) return <div style={{display:'flex',alignItems:'center',width:'100%',justifyContent:'center'}}><p style={{fontSize:'25px', color:'gray'}}>No jobs found.</p></div>;
+  if (!jobs || jobs.length === 0) return <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }}><p style={{ fontSize: '25px', color: 'gray' }}>No jobs found.</p></div>;
 
   const pages = [];
   for (let i = 1; i <= pagination.last_page; i++) pages.push(i);
@@ -20,7 +20,7 @@ export default function JobGridsTwoComp({ jobs, pagination, onPageChange }) {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <div className="size-14 flex items-center justify-center bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
-                  <img src={job.company.logo??CompanyIcon} className="size-8" alt={job.company.name} />
+                  {job.company?.logo ? <img src={job.company.logo} className="size-8" alt={job.company.name} /> : <TbBuildings fontSize={25} />}
                 </div>
                 <div className="ms-3">
                   <Link
@@ -75,11 +75,10 @@ export default function JobGridsTwoComp({ jobs, pagination, onPageChange }) {
                   <li key={page}>
                     <button
                       onClick={() => onPageChange(page)}
-                      className={`size-[40px] inline-flex justify-center items-center border ${
-                        page === pagination.current_page
-                          ? "bg-emerald-600 text-white border-emerald-600"
-                          : "bg-white dark:bg-slate-900 text-slate-400 border-gray-100 dark:border-gray-800 hover:bg-emerald-600 hover:text-white"
-                      }`}
+                      className={`size-[40px] inline-flex justify-center items-center border ${page === pagination.current_page
+                        ? "bg-emerald-600 text-white border-emerald-600"
+                        : "bg-white dark:bg-slate-900 text-slate-400 border-gray-100 dark:border-gray-800 hover:bg-emerald-600 hover:text-white"
+                        }`}
                     >
                       {page}
                     </button>

@@ -12,8 +12,11 @@ import {
   FaInstagram,
   IoLogoTwitter,
 } from "../assets/icons/vander";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+
+  const { t } = useTranslation()
   return (
     <footer className="relative bg-slate-900 dark:bg-slate-800">
       <div className="container">
@@ -26,7 +29,7 @@ export default function Footer() {
                     to="/"
                     className="flex justify-center md:justify-start focus:outline-none"
                   >
-                    <img src={logo} className="" alt="" style={{height: 120}} />
+                    <img src={logo} className="" alt="" style={{ height: 120 }} />
                   </Link>
                 </div>
 
@@ -37,7 +40,7 @@ export default function Footer() {
                         to="/aboutus"
                         className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium me-4"
                       >
-                        About us
+                        {t('footer.aboutUs')}
                       </Link>
                     </li>
                     <li className="inline-block mt-[10px] md:mt-0">
@@ -45,7 +48,7 @@ export default function Footer() {
                         to="/contact"
                         className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium"
                       >
-                        Contact us
+                        {t('footer.contactUs')}
                       </Link>
                     </li>
 
@@ -54,7 +57,8 @@ export default function Footer() {
                         to="/terms"
                         className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium me-4"
                       >
-                        Terms
+
+                        {t('footer.terms')}
                       </Link>
                     </li>
                     <li className="inline-block mt-[10px] md:mt-0">
@@ -62,7 +66,7 @@ export default function Footer() {
                         to="/privacy"
                         className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium me-4"
                       >
-                        Privacy Policy
+                        {t('footer.privacyPolicy')}
                       </Link>
                     </li>
                   </ul>
@@ -78,12 +82,12 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 items-center gap-6">
             <div className="ltr:md:text-left rtl:md:text-right text-center">
               <p className="mb-0 text-gray-300 font-medium">
-                ©{new Date().getFullYear()} Jobstack
+                ©{new Date().getFullYear()} Octobus
               </p>
             </div>
 
             <ul className="list-none ltr:md:text-right rtl:md:text-left text-center space-x-0.5">
-              
+
               <li className="inline">
                 <Link
                   to="http://linkedin.com/company/"

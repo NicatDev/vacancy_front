@@ -131,7 +131,7 @@ export default function Login() {
                                     required className="form-input mt-2 w-full rounded-md"
                                 />
                             </div>
-  
+
                             <button
                                 type="submit"
                                 disabled={loading}
@@ -148,12 +148,12 @@ export default function Login() {
 
 
                         <div className="text-center mt-4">
-                            <Link to="/reset-password" style={{textDecoration:"underline"}} className="text-slate-400">Şifrəmi unutdum</Link>
+                            <Link to="/reset-password" style={{ textDecoration: "underline" }} className="text-slate-400">{t('common.forgotPassword')}</Link>
                         </div>
                     </div>
 
                     <div className="px-6 py-2 bg-slate-50 dark:bg-slate-800 text-center">
-                        <p className="mb-0 text-gray-400 font-medium">© {new Date().getFullYear()} Jobstack</p>
+                        <p className="mb-0 text-gray-400 font-medium">© {new Date().getFullYear()} Octobus</p>
                     </div>
                 </div>
             </div>

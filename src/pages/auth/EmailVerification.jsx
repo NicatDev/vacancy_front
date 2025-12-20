@@ -1,80 +1,87 @@
-// src/pages/auth/EmailVerification.jsx (Yeni Bileşen)
-
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import AuthAPI from "../../api/AuthAPI"; 
-import logo_dark from '../../assets/images/logo-dark.png';
-import logo_light from '../../assets/images/logo-light.png';
+import { useEffect, useState } from "react";
+import { useParams, useSearchParams, Link } from "react-router-dom";
+import EmailsAPI from "../../api/apiList/email";
+import logo from "../../assets/images/logo.png";
+import { useTranslation } from "react-i18next";
 
 export default function EmailVerification() {
-    // URL'den ID ve hash parametrelerini alıyoruz
-    const { id, hash } = useParams(); 
-    
-    const [status, setStatus] = useState('Verifying...');
-    const [message, setMessage] = useState('Your email address is being verified. Please wait.');
+    const { t } = useTranslation();
+    const { id, hash } = useParams();
+    const [searchParams] = useSearchParams();
+
+    const expires = searchParams.get("expires");
+    const signature = searchParams.get("signature");
+
+    const [status, setStatus] = useState(t('common.verifying'));
+    const [message, setMessage] = useState(t('common.plsWait'));
     const [isSuccess, setIsSuccess] = useState(false);
-    
-    // API çağrısı, bileşen yüklendiğinde bir kere çalışır
+
     useEffect(() => {
-        const verify = async () => {
-            if (!id || !hash) {
-                setStatus('Error');
-                setMessage('Verification link is incomplete.');
+        const verifyEmail = async () => {
+            if (!id || !hash || !expires || !signature) {
+                setStatus(t('common.error'));
+                setMessage(t('common.verifyCompleted'));
                 return;
             }
 
             try {
-                // API'ye doğrulama isteği gönder
-                const response = await AuthAPI.verifyEmail(id, hash); 
-                
-                setStatus('Success');
-                setMessage(response.data.message || "Email verified successfully!");
-                setIsSuccess(true);
-                
-            } catch (err) {
-                // Hata Yönetimi
-                console.error("Email verification failed:", err.response ? err.response.data : err.message);
-                
-                setStatus('Error');
-                
-                if (err.response && err.response.status === 403) {
-                    setMessage(err.response.data.message || "Invalid or expired verification link.");
-                } else if (err.response && err.response.status === 401) {
-                    // API yetkilendirme istiyorsa ve token yoksa.
-                    setMessage("You need to be logged in to verify your email. Please login first.");
-                } else {
-                    setMessage("An unexpected error occurred during verification.");
-                }
+                const response = await EmailsAPI.getEmailVerify(id, hash, {
+                    expires,
+                    signature
+                });
 
+                setStatus(t('common.successfully'));
+                setMessage(
+                    response?.data?.message || t('common.emailVerified')
+                );
+                setIsSuccess(true);
+            } catch (error) {
+                setStatus(t('common.error'));
+
+                if (error?.response?.status === 403) {
+                    setMessage(
+                        error.response.data?.message ||
+                        t('common.invalidOrExpired')
+                    );
+                    return;
+                } else {
+                    setMessage(t('common.unexpectedVerify'));
+                }
             }
         };
 
-        verify();
-    }, [id, hash]); // id ve hash değiştiğinde tekrar çalışır
+        verifyEmail();
+    }, [id, hash, expires, signature]);
 
     return (
-        <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[url('../../assets/images/hero/bg3.jpg')] bg-no-repeat bg-center bg-cover">
+        <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[url('../../assets/images/hero/bg3.jpg')] bg-cover bg-center">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
+
             <div className="container">
                 <div className="flex justify-center">
-                    <div className="relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md p-8 text-center max-w-lg w-full">
+                    <div className="relative bg-white dark:bg-slate-900 shadow-md rounded-md p-6 text-center max-w-lg w-full">
                         <Link to="/">
-                            <img src={logo_dark} className="mx-auto h-[24px] block dark:hidden" alt="Logo Dark" />
-                            <img src={logo_light} className="mx-auto h-[24px] dark:block hidden" alt="Logo Light" />
+                            <img
+                                src={logo}
+                                className="mx-auto !h-[80px] block"
+                                alt="Logo"
+                            />
                         </Link>
-                        
-                        <h5 className={`my-6 text-2xl font-semibold ${isSuccess ? 'text-emerald-600' : 'text-red-600'}`}>
+
+                        <h5
+                            className={`my-6 text-2xl font-semibold ${isSuccess ? "text-emerald-600" : "text-red-600"}`}
+                        >
                             {status}
                         </h5>
-                        
+
                         <p className="text-slate-500 dark:text-slate-300">{message}</p>
 
                         <div className="mt-6">
-                            <Link 
-                                to={isSuccess ? "/login" : "/"} 
-                                className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md"
+                            <Link
+                                to={isSuccess ? "/login" : "/"}
+                                className="py-2 px-5 inline-block font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-md transition"
                             >
-                                {isSuccess ? 'Go to Login' : 'Go Home'}
+                                {isSuccess ? t('common.goLogin') : t('common.goHome')}
                             </Link>
                         </div>
                     </div>

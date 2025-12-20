@@ -157,9 +157,9 @@ axiosClient.interceptors.response.use(
 
         processQueue(refreshError, null);
 
-        if (!originalRequest.url?.includes("/me")) {
-          redirectToLogin();
-        }
+        // if (!originalRequest.url?.includes("/me")) {
+        //   redirectToLogin();
+        // }
 
         return Promise.reject(refreshError);
       } finally {

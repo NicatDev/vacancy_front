@@ -22,7 +22,7 @@ export default function Error() {
                             </div>
                         </div>
                         <div className="text-center">
-                            <p className="mb-0 text-slate-400 font-medium">© {(new Date().getFullYear())}{" "} Jobstack</p>
+                            <p className="mb-0 text-slate-400 font-medium">© {(new Date().getFullYear())}{" "} Octobus</p>
                         </div>
                     </div>
                 </div>

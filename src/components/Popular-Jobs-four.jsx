@@ -8,7 +8,8 @@ import {
 import { jobData } from "../data/data";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import CompanyIcon from "../assets/icons/company.svg";
+import { TbBuildings } from "react-icons/tb";
+
 export default function PopularJobsfour() {
   const { t } = useTranslation();
   const [jobs, setJobs] = useState([]);
@@ -52,7 +53,7 @@ export default function PopularJobsfour() {
               <div className="p-6">
                 <div className="flex items-center">
                   <div className="size-14 min-w-[56px] flex items-center justify-center bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
-                    <img src={item?.company?.logo||CompanyIcon} className="size-8" alt="" />
+                    {item?.company?.logo ? <img src={item?.company?.logo} className="size-8" alt="" /> : <TbBuildings fontSize={25} />}
                   </div>
 
                   <div className="ms-3 flex flex-col">
@@ -74,7 +75,7 @@ export default function PopularJobsfour() {
                   <span className="bg-slate-100 dark:bg-slate-800 inline-block text-slate-900 dark:text-slate-300 text-xs px-2.5 py-0.5 font-semibold rounded-full me-1">
                     {item?.employment_type?.name}
                   </span>
-                 
+
                 </div>
               </div>
 

@@ -13,7 +13,8 @@
     "worktype": "Work type",
     "button": "Search",
     "popular": "Popular Searches :",
-    "items": "Designer, Developer, Web, IOS, PHP Senior Engineer"
+    "items": "Designer, Developer, Web, IOS, PHP Senior Engineer",
+    "searchjJobs": "Search jobs..."
   },
   "categories": {
     "title": "Popular Categories",
@@ -21,7 +22,8 @@
     "loading": "Loading...",
     "noData": "No categories found.",
     "jobs": "Jobs",
-    "seeMore": "See more categories"
+    "seeMore": "See more categories",
+    "categories": "Categories"
   },
   "millions": {
     "title": "Millions of jobs. Find the one that's right for you.",
@@ -62,7 +64,21 @@
     "contactFor": "Contact For",
     "resetPassword": "Reset Your Password",
     "resetPasswordInfoText": "Please enter your email address. You will receive a link to create a new password via email.",
-    "rememberPassword": "Remember your password ?"
+    "rememberPassword": "Remember your password ?",
+    "forgotPassword": "Forgot password",
+    "error": "Error",
+    "verifying": "Verifying...",
+    "plsWait": "Your email address is being verified. Please wait.",
+    "verifyCompleted": "Verification link is incomplete.",
+    "unexpectedVerify": "An unexpected error occurred during verification.",
+    "successfully": "Successfully",
+    "goLogin": "Go Login",
+    "goHome": "Go Home",
+    "newPassword": "New password",
+    "passwordConfirmation": "Confirm password",
+    "passwordMin": "Password must be at least 6 characters",
+    "passwordRequired": "Password is required",
+    "passwordsMustMatch": "Passwords must match"
   },
   "companies": {
     "employerList.loading": "Loading companies...",
@@ -76,6 +92,7 @@
     "notFound": "Not found",
     "website": "Website",
     "jobPostCount": "Post count",
+    "employeeCount": "Employee count",
     "social": "Social",
     "companyStory": "Compant Story"
   },
@@ -273,5 +290,11 @@
     "submit": "Submit",
     "day": "day",
     "wait": "Gözləyin..."
+  },
+  "footer": {
+    "aboutUs": "About us",
+    "contactUs": "Contact us",
+    "terms": "Terms",
+    "privacyPolicy": "Privacy policy"
   }
 }

@@ -47,7 +47,7 @@ export default function EmployerDetail(props) {
     const getCompanyExternalLinks = async () => {
       try {
         const response = await CompaniesAPI.getCompanyExternalLinks(id);
-        console.log(response?.data)
+        setExternalLinks(response?.data?.data)
       } catch (error) {
 
       }
@@ -95,7 +95,7 @@ export default function EmployerDetail(props) {
                   </h5>
                   <h6 className="text-base text-slate-400 flex items-center">
                     <PiMapPin className="me-1" />
-                    {/* {data?.Location ? data?.Location : "France,Paris"} */}
+                    {company?.location ? company?.location : t('companies.notFound')}
                   </h6>
                 </div>
               </div>
@@ -108,19 +108,9 @@ export default function EmployerDetail(props) {
             <div className="lg:col-span-8 md:col-span-7">
               <h5 className="text-xl font-semibold">{t('companies.companyStory')}</h5>
               <p className="text-slate-400 mt-4">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-                The point of using Lorem Ipsum is that it has a more-or-less
-                normal distribution of letters, as opposed.
+                {company?.summary ? company?.summary : t('companies.notFound')}
               </p>
-              <p className="text-slate-400 mt-2">
-                Contrary to popular belief, Lorem Ipsum is not simply random
-                text. It has roots in a piece of classical Latin literature from
-                45 BC, making it over 2000 years old. Richard McClintock, a
-                Latin professor at Hampden-Sydney College in Virginia, looked up
-                one of the more obscure Latin words, consectetur, from a Lorem
-                Ipsum passage.
-              </p>
+
 
               {/* <div className="grid grid-cols-12 gap-6 mt-6">
                 <div className="col-span-12">
@@ -226,11 +216,11 @@ export default function EmployerDetail(props) {
                     <span className="text-slate-400 font-medium">{t('companies.jobPostCount')}:</span>
                     <span className="font-medium">{company?.job_post_count ?? 0}</span>
                   </li>
-{/* 
+
                   <li className="flex justify-between mt-2">
-                    <span className="text-slate-400 font-medium">Founder:</span>
-                    <span className="font-medium">Niklas Zennström</span>
-                  </li> */}
+                    <span className="text-slate-400 font-medium">{t('companies.employeeCount')}:</span>
+                    <span className="font-medium">{company?.employees_count}</span>
+                  </li>
 
                   {/* <li className="flex justify-between mt-2">
                     <span className="text-slate-400 font-medium">
@@ -255,59 +245,59 @@ export default function EmployerDetail(props) {
                       textOverflow: "ellipsis",
                       width: '70%',
                       marginLeft: "auto"
-                    }} target="_blank" className="font-medium text-blue-500">{company?.website}</a>}
+                    }} target="_blank" className="font-medium text-blue-500 text-right">{company?.website}</a>}
                   </li>
 
                   <li className="flex justify-between mt-2">
                     <span className="text-slate-400 font-medium">{t('companies.social')}:</span>
 
-                    {externalLinks?.length > 0 ? <ul className="list-none ltr:text-right rtl:text-left">
-                      <li className="inline">
-                        <Link
-                          to="http://linkedin.com/"
-                          target="_blank"
-                          className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"
-                        >
-                          <BiLogoLinkedin />
-                        </Link>
-                      </li>
-                      <li className="inline">
-                        <Link
-                          to="https://www.facebook.com/"
-                          target="_blank"
-                          className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"
-                        >
-                          <FaFacebookF />
-                        </Link>
-                      </li>
-                      <li className="inline">
-                        <Link
-                          to="https://www.instagram.com//"
-                          target="_blank"
-                          className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"
-                        >
-                          <FaInstagram />
-                        </Link>
-                      </li>
-                      <li className="inline">
-                        <Link
-                          to="https://twitter.com/"
-                          target="_blank"
-                          className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"
-                        >
-                          <IoLogoTwitter />
-                        </Link>
-                      </li>
-                      <li className="inline">
-                        <Link
-                          to="mailto:@supportjobstack.in"
-                          className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"
-                        >
-                          <LuMail />
-                        </Link>
-                      </li>
-                    </ul> : t('companies.notFound')}
+                    {externalLinks?.length > 0 ? (
+                      <ul className="list-none ltr:text-right rtl:text-left">
+                        {externalLinks.map((link) => {
+                          let Icon = null;
+                          let href = link.url;
+
+                          switch (link.label.toLowerCase()) {
+                            case "linkedin":
+                              Icon = BiLogoLinkedin;
+                              break;
+                            case "facebook":
+                              Icon = FaFacebookF;
+                              break;
+                            case "instagram":
+                              Icon = FaInstagram;
+                              break;
+                            case "twitter":
+                              Icon = IoLogoTwitter;
+                              break;
+                            case "email":
+                            case "mail":
+                              Icon = LuMail;
+                              href = `mailto:${link.url}`;
+                              break;
+                            default:
+                              return null; // əgər tanınmayan sosialdırsa göstərmə
+                          }
+
+                          return (
+                            <li className="inline" key={link.id}>
+                              <a
+                                href={href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5"
+                              >
+                                <Icon />
+                              </a>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    ) : (
+                      t('companies.notFound')
+                    )}
                   </li>
+
                 </ul>
 
                 {/* <div className="mt-4 pt-2 border-t border-gray-200 dark:border-gray-800">

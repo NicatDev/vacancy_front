@@ -7,20 +7,26 @@ import JobGridsTwoComp from "../../components/job-grids-two-comp";
 import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { useSearchParams } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
+import { useTranslation } from "react-i18next";
+
 export default function JobGridsTwo() {
+  const { t } = useTranslation();
+  const { isDarkMode } = useUser();
   const [industries, setIndustries] = useState([]);
   const [employmentTypes, setEmploymentTypes] = useState([]);
   const [expandedIndustry, setExpandedIndustry] = useState(null);
-const [searchParams,setSearchParams] = useSearchParams();
-const typeFromUrl = searchParams.get("type");     
-const searchFromUrl = searchParams.get("search");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const typeFromUrl = searchParams.get("type");
+  const searchFromUrl = searchParams.get("search");
   const dropdownRef = useRef(null);
 
   const [filters, setFilters] = useState({
-    text: searchFromUrl??"",
+    text: searchFromUrl ?? "",
     industry: null,
     occupation: null,
-    employment_type: typeFromUrl??null,
+    employment_type: typeFromUrl ?? null,
     page: 1,
     size: 15,
   });
@@ -72,7 +78,7 @@ const searchFromUrl = searchParams.get("search");
 
   useEffect(() => {
     fetchJobs(filters.page);
-      setSearchParams({});
+    setSearchParams({});
   }, [filters]);
 
   /* =======================
@@ -153,128 +159,143 @@ const searchFromUrl = searchParams.get("search");
         <div className="container grid md:grid-cols-12 gap-8">
           {/* FILTER SIDEBAR */}
           <div className="md:col-span-4">
-            <div className="bg-white p-6 rounded shadow sticky top-20">
-              {/* SEARCH */}
+            <div className=" p-6 rounded shadow sticky top-20">
               <div className="mb-6">
-                <label className="font-semibold">Search</label>
+                <label className="font-semibold">{t('search.button')}</label>
                 <div className="relative mt-2">
-                  <LuSearch className="absolute top-3 left-3" style={{marginLeft:'10px'}} />
+                  <LuSearch className="absolute top-3 left-3" style={{ marginLeft: '10px' }} />
                   <input
                     type="text"
                     value={filters.text}
                     onChange={handleSearchChange}
                     className="w-full h-10 ps-10 border rounded"
-                    placeholder="Search jobs..."
+                    placeholder={t('search.searchjJobs')}
                   />
                 </div>
               </div>
 
               {/* CATEGORIES */}
               {/* CATEGORIES */}
-              <div className="mb-6">
-                <label className="font-semibold block mb-3 text-slate-800">
-                  Categories
-                </label>
+              <div className="flex flex-col overflow-y-auto h-dvh">
+                <div className="mb-6 px-2.5">
+                  <label className="font-semibold block mb-3 text-slate-800">
+                    {t('categories.categories')}
+                  </label>
 
-                <div ref={dropdownRef} className="flex flex-col gap-3">
-                  {industries.map((industry) => {
-                    const isOpen = expandedIndustry === industry.id;
-                    const isSelected = filters.industry === industry.id;
+                  <div ref={dropdownRef} className="flex flex-col gap-3">
+                    {industries.map((industry) => {
+                      const isOpen = expandedIndustry === industry.id;
+                      const isSelected = filters.industry === industry.id;
 
-                    return (
-                      <div
-                        key={industry.id}
-                        className={`shadow-class rounded-lg transition-all ${isOpen ? "border-emerald-500 shadow-sm" : "border-slate-200"
-                          }`}
-                      >
-                        {/* INDUSTRY HEADER */}
+                      return (
                         <div
-                          className=" rounded-cart flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-slate-50"
-                          onClick={() =>
-                            setExpandedIndustry(isOpen ? null : industry.id)
-                          }
+                          key={industry.id}
+                          className={`${isDarkMode ? 'shadow-class-dark' : 'shadow-class'} rounded-lg transition-all ${isOpen ? "border-emerald-500 shadow-sm" : "border-slate-200"
+                            }`}
                         >
-                          <label className="flex items-center gap-3 cursor-pointer">
+                          {/* INDUSTRY HEADER */}
+                          <div
+                            className=" rounded-cart flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-slate-50"
+                            onClick={() =>
+                              setExpandedIndustry(isOpen ? null : industry.id)
+                            }
+                          >
+                            <label className="flex items-center gap-3 cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={() => handleIndustrySelect(industry.id)}
+                                className="accent-emerald-600 w-4 h-4"
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                              <span className="font-medium text-slate-800">
+                                {industry.name}
+                              </span>
+                            </label>
+
+                            {industry.occupations?.length > 0 && (
+                              <IoIosArrowDown
+                                className={`rounded-cart text-slate-500 transition-transform duration-300 rounded-lg ${isOpen ? "rotate-180" : ""
+                                  }`}
+                              />
+                            )}
+                          </div>
+
+                          {/* OCCUPATIONS DROPDOWN */}
+                          {isOpen && industry.occupations && (
+                            <div className="rounded-cart px-4 pb-3 pt-2 border-top">
+                              {industry.occupations.map((occ) => {
+                                const occSelected = filters.occupation === occ.id;
+
+                                return (
+                                  <label
+                                    key={occ.id}
+                                    className={`flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition ${occSelected
+                                      ? "bg-emerald-100 text-emerald-700"
+                                      : "hover:bg-slate-200/60"
+                                      }`}
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      checked={occSelected}
+                                      onChange={() =>
+                                        handleOccupationSelect(occ.id)
+                                      }
+                                      className="accent-emerald-600 w-4 h-4"
+                                    />
+                                    <span className="text-sm">{occ.name}</span>
+                                  </label>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+
+                <div className="mb-6 px-2.5">
+                  <label className="font-semibold block mb-3 text-slate-800">
+                    {t('vacancyDetail.employeeType')}
+                  </label>
+
+                  <div className="flex flex-col gap-3">
+                    {employmentTypes.map((type) => {
+                      const isSelected = filters.employment_type === type.id;
+
+                      return (
+                        <div
+                          key={type.id}
+                          className={`${isDarkMode ? 'shadow-class-dark' : 'shadow-class'}
+            rounded-lg transition-all
+            ${isSelected ? 'border-emerald-500 shadow-sm' : 'border-slate-200'}
+          `}
+                        >
+                          <label
+                            className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-slate-50 rounded-lg"
+                          >
                             <input
                               type="checkbox"
                               checked={isSelected}
-                              onChange={() => handleIndustrySelect(industry.id)}
+                              onChange={() => handleEmploymentTypeSelect(type.id)}
                               className="accent-emerald-600 w-4 h-4"
-                              onClick={(e) => e.stopPropagation()}
                             />
                             <span className="font-medium text-slate-800">
-                              {industry.name}
+                              {type.name}
                             </span>
                           </label>
-
-                          {industry.occupations?.length > 0 && (
-                            <IoIosArrowDown
-                              className={`rounded-cart text-slate-500 transition-transform duration-300 rounded-lg ${isOpen ? "rotate-180" : ""
-                                }`}
-                            />
-                          )}
                         </div>
-
-                        {/* OCCUPATIONS DROPDOWN */}
-                        {isOpen && industry.occupations && (
-                          <div className="rounded-cart px-4 pb-3 pt-2 border-top">
-                            {industry.occupations.map((occ) => {
-                              const occSelected = filters.occupation === occ.id;
-
-                              return (
-                                <label
-                                  key={occ.id}
-                                  className={`flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition ${occSelected
-                                      ? "bg-emerald-100 text-emerald-700"
-                                      : "hover:bg-slate-200/60 text-slate-700"
-                                    }`}
-                                >
-                                  <input
-                                    type="checkbox"
-                                    checked={occSelected}
-                                    onChange={() =>
-                                      handleOccupationSelect(occ.id)
-                                    }
-                                    className="accent-emerald-600 w-4 h-4"
-                                  />
-                                  <span className="text-sm">{occ.name}</span>
-                                </label>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
 
-
-              {/* EMPLOYMENT TYPE */}
-              <div>
-                <label className="font-semibold block mb-3">
-                  Employment Type
-                </label>
-                {employmentTypes.map((type) => (
-                  <label
-                    key={type.id}
-                    className="flex items-center mb-2 cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={filters.employment_type == type.id}
-                      onChange={() =>
-                        handleEmploymentTypeSelect(type.id)
-                      }
-                    />
-                    <span className="ms-2">{type.name}</span>
-                  </label>
-                ))}
               </div>
             </div>
           </div>
 
-          {/* JOB LIST */}
           <div className="md:col-span-8">
             <JobGridsTwoComp
               jobs={jobs}

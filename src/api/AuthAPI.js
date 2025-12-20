@@ -82,6 +82,9 @@ const AuthAPI = {
   forgotPassword: (params) => {
     return axiosClient.post("/auth/forgot-password", params);
   },
+  resetPassword: (params) => {
+    return axiosClient.post("/auth/reset-password", params);
+  },
 };
 
 export default AuthAPI;

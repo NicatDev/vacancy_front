@@ -4,6 +4,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/icons/vande
 import CandidatesAPI from "../api/apiList/candidates";
 import { useTranslation } from "react-i18next";
 import UserIcon from "../assets/icons/user.svg";
+import { FaUserLarge } from "react-icons/fa6";
 
 const initialCandidateData = {
   data: [],
@@ -71,9 +72,8 @@ export default function CandidateListComp() {
             e.preventDefault();
             if (current_page > 1) handlePageChange(current_page - 1);
           }}
-          className={`size-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 rounded-s-3xl border border-gray-100 dark:border-gray-800 ${
-            current_page === 1 ? "cursor-not-allowed opacity-50" : "hover:text-white hover:border-emerald-600 hover:bg-emerald-600"
-          }`}
+          className={`size-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 rounded-s-3xl border border-gray-100 dark:border-gray-800 ${current_page === 1 ? "cursor-not-allowed opacity-50" : "hover:text-white hover:border-emerald-600 hover:bg-emerald-600"
+            }`}
         >
           <MdKeyboardArrowLeft className="text-[20px]" />
         </Link>
@@ -97,11 +97,10 @@ export default function CandidateListComp() {
               e.preventDefault();
               handlePageChange(i);
             }}
-            className={`size-[40px] inline-flex justify-center items-center border ${
-              i === current_page
+            className={`size-[40px] inline-flex justify-center items-center border ${i === current_page
                 ? "bg-emerald-600 text-white border-emerald-600"
                 : "text-slate-400 bg-white dark:bg-slate-900 border-gray-100 hover:text-white hover:border-emerald-600 hover:bg-emerald-600"
-            }`}
+              }`}
           >
             {i}
           </Link>
@@ -118,9 +117,8 @@ export default function CandidateListComp() {
             e.preventDefault();
             if (current_page < last_page) handlePageChange(current_page + 1);
           }}
-          className={`size-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 rounded-e-3xl border border-gray-100 dark:border-gray-800 ${
-            current_page === last_page ? "cursor-not-allowed opacity-50" : "hover:text-white hover:border-emerald-600 hover:bg-emerald-600"
-          }`}
+          className={`size-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 rounded-e-3xl border border-gray-100 dark:border-gray-800 ${current_page === last_page ? "cursor-not-allowed opacity-50" : "hover:text-white hover:border-emerald-600 hover:bg-emerald-600"
+            }`}
         >
           <MdKeyboardArrowRight className="text-[20px]" />
         </Link>
@@ -148,11 +146,14 @@ export default function CandidateListComp() {
                 className="group bg-white dark:bg-slate-900 relative overflow-hidden rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 text-center p-6"
                 key={item.id}
               >
-                <img
+                <div className="flex justify-center mx-auto w-60px h-60px items-center rounded-full border">
+                  <FaUserLarge fontSize={40} />
+                </div>
+                {/* <img
                   src={UserIcon}
                   className="size-20 rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 mx-auto"
                   alt={item.name}
-                />
+                /> */}
                 <div className="mt-2">
                   <Link to={`/candidate-profile/${item.id}`} className="hover:text-emerald-600 font-semibold text-lg">
                     {item.name}

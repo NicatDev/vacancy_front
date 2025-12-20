@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { LuMapPin, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/icons/vander";
 import CompaniesAPI from '../api/apiList/companies';
 import { useTranslation } from "react-i18next";
-import CompanyIcon from "../assets/icons/company.svg";
+import { TbBuildings } from "react-icons/tb";
 const initialCompanyData = {
     data: [],
     meta: {
@@ -143,11 +143,12 @@ export default function EmployerList() {
                             key={item.id}
                         >
                             <div className="size-14 flex items-center justify-center bg-white dark:bg-slate-900 shadow-md rounded-md -mt-12">
-                                <img
+                                {item?.logo ? <img
                                     src={CompanyIcon}
                                     className="size-8"
                                     alt="Company Logo"
-                                />
+                                /> : <TbBuildings fontSize={35} />}
+
                             </div>
 
                             <div className="mt-4">
@@ -155,7 +156,7 @@ export default function EmployerList() {
                                     to={`/company/${item.id}`}
                                     className="text-lg hover:text-emerald-600 font-semibold"
                                 >
-                                   {item?.name}
+                                    {item?.name}
                                 </Link>
 
                             </div>
@@ -167,7 +168,7 @@ export default function EmployerList() {
                                 </span>
 
                                 <span className="font-semibold text-emerald-600">
-                                  {item?.job_post_count}Jobs
+                                    {item?.job_post_count}Jobs
                                 </span>
                             </div>
                         </div>
