@@ -3,14 +3,15 @@ import { BiCheckCircle } from "react-icons/bi";
 import PricingPlansApi from "../api/apiList/pricing";
 import { toast } from "react-toastify";
 import SubscriptionApi from "../api/apiList/subscriptions";
-
+import { useUser } from "../context/UserContext";
 const BACKGROUND_IMAGE_PATH = '../../assets/images/hero/bg.jpg';
 
 export default function Pricing() {
   const [selected, setSelected] = useState(null);
   const [plans, setPlans] = useState([]);
+  const { user } = useUser();
 
-  const companyId = localStorage.getItem('companyId') ?? null;
+  // const companyId = localStorage.getItem('companyId') ?? null;
 
   const mapPackages = (data) =>
     data.map((item) => ({
@@ -27,7 +28,7 @@ export default function Pricing() {
     if (!plan) return;
 
     if (plan.type === "one-time") {
-      const params = { pricing_plan_id: plan.id, company_id: companyId };
+      const params = { pricing_plan_id: plan.id, company_id: user?.data?.id };
       const response = await SubscriptionApi.createOnetimePurchase(params);
 
       if (response?.data?.status === "PAYER_ACTION_REQUIRED") {
@@ -36,11 +37,10 @@ export default function Pricing() {
           window.open(link, "_blank", "noopener,noreferrer");
         }
       } else {
-        toast.error("Ödeme başlatılamadı.");
       }
     }
     else if (plan.type === "regular") {
-      const params = { pricing_plan_id: plan.id, company_id: companyId };
+      const params = { pricing_plan_id: plan.id, company_id: user?.data?.id };
       const response = await SubscriptionApi.createSubsscription(params);
 
       if (response?.data?.data?.paypal?.status === "APPROVAL_PENDING") {

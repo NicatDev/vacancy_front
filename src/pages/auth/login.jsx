@@ -5,7 +5,6 @@ import logo from "../../assets/images/logo.png";
 import AuthAPI from "../../api/AuthAPI";
 import axiosClient from "../../api/axiosClient";
 import { toast } from "react-toastify";
-import { Helmet } from "react-helmet-async";
 
 export default function Login() {
     const { t } = useTranslation();
@@ -64,20 +63,20 @@ export default function Login() {
                     access_token: { token: accessObj.token, ...accessObj },
                     refresh_token: { token: refreshObj.token, ...refreshObj },
                 };
-                localStorage.removeItem('companyId');
                 localStorage.removeItem('role');
                 localStorage.removeItem('tokens');
-                
-                localStorage.setItem('companyId', responseData?.id)
+                localStorage.removeItem('email_verified_at');
+                localStorage.setItem("email_verified_at", responseData?.user?.email_verified_at ? true : false)
                 localStorage.setItem("role", responseData?.user?.role === "company" ? 'company' : 'candidate')
                 localStorage.setItem("tokens", JSON.stringify(newTokens));
-                document.cookie = `token=${accessToken}; path=/; max-age=90; Secure; SameSite=Lax`;
 
                 axiosClient.defaults.headers.common[
                     "Authorization"
                 ] = `Bearer ${accessToken}`;
 
                 navigate("/");
+                location.reload();
+
             }
         } catch (error) {
             const message = error?.response?.data?.message;

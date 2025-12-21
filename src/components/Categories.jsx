@@ -44,11 +44,6 @@ export default function Categories() {
   }, []);
 
 
-  useEffect(() => {
-    console.log(industries)
-  }, [industries]);
-
-
   return (
     <>
       <div className="container">

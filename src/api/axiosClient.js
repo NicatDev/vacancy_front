@@ -1,5 +1,4 @@
 import axios from "axios";
-// 1. Gerekli importlar əlavə edildi
 import { toast } from "react-toastify";
 import i18n from "i18next"; // i18n obyekti tərcümə üçün əlavə edildi (düzgün i18n obyektinizin olduğundan əmin olun)
 
@@ -28,12 +27,10 @@ const processQueue = (error, token = null) => {
   failedQueue = [];
 };
 
-// 🚨 Yönlendirme İşlemini Gerçekleştiren Yardımcı Fonksiyon
 const redirectToLogin = () => {
-  // Tarayıcı ortamında olduğumuzdan emin olalım
   if (typeof window !== "undefined") {
     localStorage.clear();
-    delete axiosClient.defaults.headers.common["Authorization"]; // Yönlendirmeyi gerçekleştir
+    delete axiosClient.defaults.headers.common["Authorization"]; 
     window.location.href = "/login";
   }
 };
@@ -92,8 +89,7 @@ axiosClient.interceptors.response.use(
       try {
         // 🚨 KRİTİK KONTROL: Refresh token yoksa, temizle ve YÖNLENDİR
         if (!tokens?.refresh_token?.token) {
-          console.error("Refresh token bulunamadı. Login'e yönlendiriliyor.");
-          //   redirectToLogin();
+            redirectToLogin();
           throw new Error("No refresh token available. Logging out.");
         } // Refresh Token ile API çağrısı
 
@@ -147,7 +143,6 @@ axiosClient.interceptors.response.use(
         originalRequest.headers["Authorization"] = `Bearer ${newAccess}`;
         return axiosClient(originalRequest);
       } catch (refreshError) {
-        // 🚨 Refresh isteği hata verirse (400, 401 vb.), YÖNLENDİR
         console.error(
           "Token yenileme başarısız oldu veya refresh token geçersiz:",
           refreshError
@@ -155,9 +150,9 @@ axiosClient.interceptors.response.use(
 
         processQueue(refreshError, null);
 
-        // if (!originalRequest.url?.includes("/me")) {
-        //   redirectToLogin();
-        // }
+        if (!originalRequest.url?.includes("/me")) {
+          redirectToLogin();
+        }
 
         return Promise.reject(refreshError);
       } finally {

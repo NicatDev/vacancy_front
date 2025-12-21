@@ -15,8 +15,8 @@ import VacanciesAPI from "../api/apiList/vacancies.js";
 
 export default function JobPost() {
   const navigate = useNavigate();
-  const company_id = localStorage.getItem('companyId') ?? null;
-  const { isDarkMode } = useUser();
+  // const company_id = localStorage.getItem('companyId') ?? null;
+  const { isDarkMode, user } = useUser();
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const paymentStatus = searchParams.get("payment");
@@ -158,7 +158,7 @@ export default function JobPost() {
       try {
         const response = await VacanciesAPI.createJobPost({
           ...values,
-          company_id,
+          company_id: user?.data?.id,
           salary: `$${values?.minSalary}-$${values?.maxSalary}`,
           category: values?.category?.value,
           education_level_id: values?.education_level_id?.value,

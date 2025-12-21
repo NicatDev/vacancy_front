@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
     const role = localStorage.getItem('role') ?? null;
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [isDarkMode, setIsDarkMode] = useState(false)
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     const getProfile = async () => {
         try {

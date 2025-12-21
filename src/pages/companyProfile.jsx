@@ -35,10 +35,14 @@ import {
 import AuthAPI from "../api/AuthAPI";
 import CompanySVG from "../assets/icons/company.svg";
 import { useTranslation } from "react-i18next";
+import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
 export default function CompanyProfile() {
+  const navigate = useNavigate();
+  const { user } = useUser();
   const [company, setCompany] = useState(null);
   const [links, setLinks] = useState([]);
   const [phones, setPhones] = useState([]);
@@ -113,7 +117,6 @@ export default function CompanyProfile() {
       const res = await AuthAPI.getCompanyVacancies(company.id);
       setVacancies(res?.data?.data || []);
     } catch (e) {
-      console.log(e);
       setVacancies([]);
     } finally {
       setLoadingVacancies(false);
@@ -136,7 +139,6 @@ export default function CompanyProfile() {
       setPhones(phonesRes?.data?.data || []);
       setLinks(linksRes?.data?.data || []);
     } catch (e) {
-      console.log(e);
       setCompany(null);
     } finally {
       setLoading(false);
@@ -238,7 +240,11 @@ export default function CompanyProfile() {
     message.success("Link deleted");
   };
 
-  /* ================= RENDER ================= */
+  useEffect(() => {
+    if (!user || localStorage.getItem('email_verified_at') == "false") {
+      navigate('/login');
+    }
+  }, [user])
 
   if (loading) {
     return (

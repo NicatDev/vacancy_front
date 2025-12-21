@@ -18,6 +18,7 @@ import 'dayjs/locale/az';
 import {
   MdOutlineArrowForward,
   HiOutlineBuildingOffice,
+  TbBuildings,
 } from "../../assets/icons/vander";
 import { PiMapPin } from "../../assets/icons/vander";
 import { jobData } from "../../data/data";
@@ -127,11 +128,11 @@ export default function JobDetailThree() {
             <div className="lg:col-span-4 md:col-span-6 ">
               <div className="flex flex-col sticky top-20">
                 <div className="p-6 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md bg-white dark:bg-slate-900">
-                  {vacancy?.company?.logo && <img
+                  {vacancy?.company?.logo ? <img
                     src={vacancy?.company?.logo}
                     className="rounded-full size-28 p-4 bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700"
                     alt=""
-                  />}
+                  /> : <TbBuildings fontSize={60} />}
 
                   <div className="md:ms-4 mt-4">
                     <h5 className="text-xl font-semibold">
@@ -148,14 +149,14 @@ export default function JobDetailThree() {
                     </div>
                   </div>
                 </div>
-                <div>
+                {(localStorage.getItem('email_verified_at') != "false" && user) && <div>
                   <button
                     onClick={() => setIsOpen(true)}
                     className="py-1 px-5 mt-4 cursor-pointer w-fit inline-block rounded-3xl font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white searchbtn submit-btn"
                   >
                     {t('vacancyDetail.boostVacancy')}
                   </button>
-                </div>
+                </div>}
               </div>
             </div>
 
@@ -277,7 +278,7 @@ export default function JobDetailThree() {
                   ))}
                 </ul>
               )}
-              {role === "candidate" && <div className="mt-5">
+              {(role === "candidate" && localStorage.getItem('email_verified_at') != "false") && <div className="mt-5">
                 <button
                   onClick={handleClickJobApply}
                   className="py-1 cursor-pointer px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white md:ms-2 w-full md:w-auto"

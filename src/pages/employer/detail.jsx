@@ -20,6 +20,7 @@ import {
   AiOutlineClockCircle,
   BiDollarCircle,
   FaInstagram,
+  TbBuildings,
 } from "../../assets/icons/vander";
 import ExploreJob from "../../components/Explore-job";
 import { jobData } from "../../data/data";
@@ -83,11 +84,11 @@ export default function EmployerDetail(props) {
           <div className="grid grid-cols-1">
             <div className="md:flex justify-between items-center shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md p-6 bg-white dark:bg-slate-900">
               <div className="flex items-center">
-                {company?.logo && <img
+                {company?.logo ? <img
                   src={company?.logo}
                   className=" size-20 p-3 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md bg-slate-50 dark:bg-slate-800"
                   alt=""
-                />}
+                /> : <TbBuildings fontSize={60} />}
 
                 <div className="ms-4">
                   <h5 className="text-xl font-bold">

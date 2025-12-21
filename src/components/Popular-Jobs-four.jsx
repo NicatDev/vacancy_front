@@ -47,7 +47,6 @@ export default function PopularJobsfour() {
 
       })
     } catch (error) {
-      toast.success('Ne ise duzgun getmedi!')
     }
   }
 
@@ -78,7 +77,7 @@ export default function PopularJobsfour() {
 
                   <div className="ms-3 flex flex-col">
                     <Link
-                      to={`/vacancy/${item.id}`}
+                      to={`/vacancies/${item.id}`}
                       className="inline-block text-[16px] font-semibold hover:text-emerald-600 transition-all duration-500 me-1"
                     >
                       {item.title}
@@ -106,7 +105,7 @@ export default function PopularJobsfour() {
                     {item?.location}
                   </span>
                 </div>
-                {user?.data?.user?.role != 'company' &&
+                {(user?.data?.user?.role != 'company' && localStorage.getItem('email_verified_at') != "false") &&
                   <div
                     onClick={() => handleClickJobApply(item?.id)}
                     style={{ cursor: 'pointer' }}

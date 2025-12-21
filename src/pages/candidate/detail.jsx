@@ -85,7 +85,6 @@ export default function CandidateDetail() {
     }, [id]);
 
 
-    console.log(candidate)
     return (
         <>
 

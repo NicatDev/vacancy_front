@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiSettings, FiMail, FiFileText } from "react-icons/fi";
 import { TbBuildings } from "react-icons/tb";
 import dayjs from "dayjs";
@@ -8,15 +8,37 @@ import { useTranslation } from "react-i18next";
 import UserIcon from "../../assets/icons/user.svg";
 import CandidatesAPI from "../../api/apiList/candidates";
 import { useUser } from "../../context/UserContext";
+import axiosClient from "../../api/axiosClient";
 
 export default function CandidateDetail() {
   const { t } = useTranslation();
   const { user } = useUser();
-
+  const navigate = useNavigate();
   const [skills, setSkills] = useState([]);
   const [services, setServices] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [applications, setApplications] = useState([]);
+  const [avatarUrl, setAvatarUrl] = useState(UserIcon);
+
+
+  const handleDownloadCV = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axiosClient.get(user.data.cv, {
+        responseType: 'blob',
+      });
+
+      const file = new Blob([response.data], { type: 'application/pdf' });
+      const fileURL = URL.createObjectURL(file);
+
+      window.open(fileURL, '_blank');
+
+      setTimeout(() => URL.revokeObjectURL(fileURL), 10000);
+    } catch (error) {
+      console.error("CV yüklənərkən xəta baş verdi:", error);
+    }
+  };
 
   const getSkills = async () => {
     try {
@@ -65,6 +87,22 @@ export default function CandidateDetail() {
     getApplications();
   }, [user]);
 
+  useEffect(() => {
+    if (user?.data?.avatar) {
+      axiosClient
+        .get(user.data.avatar, { responseType: "blob" })
+        .then((res) => setAvatarUrl(URL.createObjectURL(res.data)))
+        .catch(() => setAvatarUrl(UserIcon));
+    }
+  }, [user?.data?.avatar]);
+
+
+  useEffect(() => {
+    if (!user || localStorage.getItem('email_verified_at') == "false") {
+      navigate('/login');
+    }
+  }, [user])
+
   return (
     <>
       <section className="relative lg:mt-24 mt-[74px]">
@@ -74,7 +112,7 @@ export default function CandidateDetail() {
               <div className="relative flex items-end justify-between">
                 <div className="relative flex items-center">
                   <img
-                    src={user?.image ?? UserIcon}
+                    src={avatarUrl}
                     className="size-28 rounded-full shadow-sm dark:shadow-gray-800 ring-4 ring-slate-50 dark:ring-slate-800"
                     alt="user"
                   />
@@ -197,15 +235,12 @@ export default function CandidateDetail() {
                         <span className="font-medium ms-2">{user.data.cv.split("/").pop()}</span>
                       </div>
 
-                      <a
-                        href={user.data.cv}
-                        className="py-1 px-5 inline-flex font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 dark:border-emerald-600 text-white rounded-md w-full flex items-center justify-center"
-                        download
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <button
+                        className="py-1 cursor-pointer px-5 inline-flex font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 dark:border-emerald-600 text-white rounded-md w-full flex items-center justify-center"
+                        onClick={handleDownloadCV}
                       >
                         <FiFileText className="me-2" /> {t('candidateProfile.downloadCV')}
-                      </a>
+                      </button>
                     </li>
                   )}
                 </ul>

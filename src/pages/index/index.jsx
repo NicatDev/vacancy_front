@@ -14,8 +14,10 @@ import ab02 from "../../assets/images/DSC03777.jpg";
 import ab03 from "../../assets/images/DSC03251.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 
 export default function Index() {
+  const {user} = useUser();
   const { t } = useTranslation();
   const [employmentTypes, setEmploymentTypes] = useState([]);
   const [searchText, setSearchText] = useState("");

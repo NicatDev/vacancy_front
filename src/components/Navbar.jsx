@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useUser } from "../context/UserContext";
 import LoginIcon from "../assets/icons/login.svg";
 import { FaDollarSign } from "react-icons/fa6";
+import axiosClient from "../api/axiosClient";
 
 const Navbar = (props) => {
   const { refreshUser, user } = useUser();
@@ -21,6 +22,8 @@ const Navbar = (props) => {
   const [currentLang, setCurrentLang] = useState(
     localStorage.getItem("language") ?? "en"
   );
+
+  const [avatarUrl, setAvatarUrl] = useState(userImg);
   const [isDropdown, openDropdown] = useState(true);
   const { navClass, topnavClass, isContainerFluid } = props;
   const [isOpen, setMenu] = useState(true);
@@ -57,6 +60,16 @@ const Navbar = (props) => {
   useEffect(() => {
     activateMenu();
   }, []);
+
+
+  useEffect(() => {
+    if (user?.data?.avatar) {
+      axiosClient
+        .get(user.data.avatar, { responseType: "blob" })
+        .then((res) => setAvatarUrl(URL.createObjectURL(res.data)))
+        .catch(() => setAvatarUrl(userImg));
+    }
+  }, [user?.data?.avatar]);
 
   function windowScroll() {
     const navbar = document.getElementById("topnav");
@@ -198,9 +211,10 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
-    if (!pathname?.includes("login") && !pathname?.includes("signup")) {
+    if (!pathname?.includes("login") && !pathname?.includes("signup") && localStorage.getItem('tokens') && localStorage.getItem("email_verified_at") != "false") {
       refreshUser();
     }
+
   }, [pathname]);
 
   return (
@@ -281,7 +295,7 @@ const Navbar = (props) => {
             <li className="hidden lg:inline-block mb-0 me-2">
               <div className="relative top-[3px]">
                 <Link
-                  to="/job-post"
+                  to={(user && localStorage.getItem('email_verified_at') != "false") ? 'job-post' : 'login'}
                   className="rounded-3xl"
                   style={{
                     backgroundColor: "oklch(45% 0.18 260.67)",
@@ -319,8 +333,8 @@ const Navbar = (props) => {
                 type="button"
               >
 
-                <span className="size-9 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide border align-middle transition duration-500 ease-in-out rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white">
-                  <img src={user?.data?.avatar_url ?? userImg} className="rounded-full" alt="" />
+                <span className="size-9 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide border align-middle transition duration-500 ease-in-out rounded-full cursor-pointer border-emerald-600 hover:border-emerald-700 text-white">
+                  <img src={avatarUrl} className="rounded-full" alt="" />
                 </span>
               </button>
 
@@ -346,7 +360,7 @@ const Navbar = (props) => {
                       {t("navbar.profile")}
                     </Link>
                   </li> : <></>}
-                  {user?.data?.user?.role != 'company' ? <li>
+                  {(user?.data?.user?.role != 'company' && localStorage.getItem('email_verified_at') != "false") ? <li>
                     <Link
                       to="/candidate-profile-setting"
                       className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
@@ -356,7 +370,6 @@ const Navbar = (props) => {
                     </Link>
                   </li> : <></>}
 
-                  <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
                   <li>
                     <Link
                       to="/login" // keep the link for semantics
