@@ -40,7 +40,7 @@ export default function EmailVerification() {
 
                 if (error?.response?.status === 403) {
                     setMessage(
-                        error.response.data?.message ||
+                        error.response.data?.message |
                         t('common.invalidOrExpired')
                     );
                     return;

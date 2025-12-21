@@ -101,7 +101,7 @@
   "companiesMain": {
     "title": "Companies",
     "breadcrumb": {
-      "home": "Octobus",
+      "home": "Octopus",
       "jobs": "Companies",
       "employers": ""
     },
@@ -245,7 +245,10 @@
     "draft": "Draft",
     "active": "Active",
     "select": "Select",
-    "insertData": "Enter data"
+    "insertData": "Enter data",
+    "selectLanguage": "Select language",
+    "selectLevel": "Select level",
+    "visit":"Visit"
   },
   "formErrors": {
     "invalidStatus": "Invalid status selection.",
@@ -317,9 +320,12 @@
     "phoneNumbers": "Phone Numbers",
     "externalLinks": "External Links",
     "add": "Add",
+    "cancel": "Cancel",
     "editPhone": "Edit Phone",
     "addPhone": "Add Phone",
     "deletePhoneConfirm": "Delete phone?",
+    "deleteSkillConfirm": "Delete skill?",
+    "deleteServiceConfirm": "Are you sure you want to delete this service?",
     "editLink": "Edit Link",
     "addLink": "Add Link",
     "deleteLinkConfirm": "Delete link?",
@@ -334,6 +340,14 @@
     "website": "Website",
     "logo": "Logo (optional)",
     "noPhone": "No phone numbers",
+    "noSkill": "No skill",
+    "noService": "No services found",
+    "addSkill": "Add skill",
+    "skillName": "Skill Name",
+    "serviceName": "Service Name",
+    "addService": "Add Service",
+    "errorSkillField": "Please input skill name",
+    "errorServiceField": "Please enter the service name",
     "noLink": "No external links",
     "vacancy": "Vacancy",
     "employmentType": "Employment Type",
@@ -342,6 +356,42 @@
     "status": "Status",
     "active": "Active",
     "inactive": "Inactive",
-    "noVacancies": "No vacancies published"
+    "noVacancies": "No vacancies published",
+    "addLanguage": "Add Language",
+    "languageName": "Language Name",
+    "levelName": "Level Name",
+    "deleteLanguageConfirm": "Are you sure you want to delete this language?",
+    "noLanguage": "No languages found"
+  },
+  "candidateProfile": {
+    "skills": "Skills",
+    "services": "Services",
+    "languages": "Languages",
+    "experience": "Experience",
+    "personalDetail": "Personal Detail",
+    "fullName": "Full name",
+    "salaryExpectation": "Salary Expectation",
+    "email": "Email",
+    "downloadCV": "Download CV",
+    "notFound": "Not found"
+  },
+  "profileSettings": {
+    "candidateName": "Candidate Name",
+    "speciality": "Speciality",
+    "salaryExpectation": "Salary Expectation",
+    "uploadResume": "Upload Resume (PDF)",
+    "summary": "Summary",
+    "saveChanges": "Save Changes",
+    "successMessage": "Profile updated successfully"
+  },
+  "toastMessages": {
+    "skillAdded": "Skill added successfully",
+    "skillDeleted": "Skill deleted successfully",
+    "serviceAdded": "Service added successfully",
+    "serviceDeleted": "Service deleted successfully",
+    "errorOccurred": "An error occurred, please try again",
+    "successMessage": "Profile settings updated",
+    "languageAdded": "Language added successfully",
+    "languageDeleted": "Language deleted successfully"
   }
 }

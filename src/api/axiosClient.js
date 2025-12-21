@@ -32,10 +32,8 @@ const processQueue = (error, token = null) => {
 const redirectToLogin = () => {
   // Tarayıcı ortamında olduğumuzdan emin olalım
   if (typeof window !== "undefined") {
-    console.log("Token geçersiz. Kullanıcı /login sayfasına yönlendiriliyor."); // Gerekli temizlik işlemleri
     localStorage.clear();
     delete axiosClient.defaults.headers.common["Authorization"]; // Yönlendirmeyi gerçekleştir
-
     window.location.href = "/login";
   }
 };

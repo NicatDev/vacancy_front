@@ -82,7 +82,7 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 items-center gap-6">
             <div className="ltr:md:text-left rtl:md:text-right text-center">
               <p className="mb-0 text-gray-300 font-medium">
-                ©{new Date().getFullYear()} Octobus
+                ©{new Date().getFullYear()} Octopus
               </p>
             </div>
 

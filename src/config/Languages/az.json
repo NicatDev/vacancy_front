@@ -79,7 +79,7 @@
     "passwordMin": "Parol ən azı 6 simvol olmalıdır",
     "passwordRequired": "Parol tələb olunur",
     "passwordsMustMatch": "Parollar uyğun olmalıdır",
-    "plans":"Planlar"
+    "plans": "Planlar"
   },
   "companies": {
     "employerList.loading": "Şirkətlər yüklənir...",
@@ -100,7 +100,7 @@
   "companiesMain": {
     "title": "Şirkətlər",
     "breadcrumb": {
-      "home": "Octobus",
+      "home": "Octopus",
       "jobs": "Şirkətlər",
       "employers": ""
     },
@@ -244,7 +244,10 @@
     "draft": "Qaralama",
     "active": "Aktiv",
     "select": "Seçim edin",
-    "insertData": "Daxil edin"
+    "insertData": "Daxil edin",
+    "selectLanguage": "Dili seçin",
+    "selectLevel": "Səviyyəni seçin",
+    "visit": "Ziyarət et"
   },
   "formErrors": {
     "invalidStatus": "Yanlış status seçimi.",
@@ -315,9 +318,12 @@
     "phoneNumbers": "Telefon Nömrələri",
     "externalLinks": "Xarici Linklər",
     "add": "Əlavə et",
+    "cancel": "Ləğv et",
     "editPhone": "Telefonu redaktə et",
     "addPhone": "Telefon əlavə et",
     "deletePhoneConfirm": "Telefon silinsin?",
+    "deleteSkillConfirm": "Bacarıq silinsin?",
+    "deleteServiceConfirm": "Bu xidməti silmək istədiyinizə əminsiniz?",
     "editLink": "Linki redaktə et",
     "addLink": "Link əlavə et",
     "deleteLinkConfirm": "Link silinsin?",
@@ -332,6 +338,14 @@
     "website": "Veb sayt",
     "logo": "Loqo (istəyə bağlı)",
     "noPhone": "Telefon nömrəsi yoxdur",
+    "noSkill": "Bacarıq yoxdur",
+    "noService": "Heç bir xidmət tapılmadı",
+    "addSkill": "Bacarıq əlavə et",
+    "addService": "Xidmət əlavə et",
+    "skillName": "Bacarıq Adı",
+    "serviceName": "Xidmət adı",
+    "errorSkillField": "Zəhmət olmasa, bacarıq adını daxil edin",
+    "errorServiceField": "Zəhmət olmasa xidmət adını daxil edin",
     "noLink": "Xarici link yoxdur",
     "vacancy": "Vakansiya",
     "employmentType": "Əmək növü",
@@ -340,6 +354,42 @@
     "status": "Status",
     "active": "Aktiv",
     "inactive": "Passiv",
-    "noVacancies": "Vakansiya yoxdur"
+    "noVacancies": "Vakansiya yoxdur",
+    "addLanguage": "Dil əlavə et",
+    "languageName": "Dil seçin",
+    "levelName": "Səviyyə seçin",
+    "deleteLanguageConfirm": "Bu dili silmək istədiyinizə əminsiniz?",
+    "noLanguage": "Dil əlavə edilməyib"
+  },
+  "candidateProfile": {
+    "skills": "Bacarıqlar",
+    "services": "Xidmətlər",
+    "languages": "Dillər",
+    "experience": "Təcrübə",
+    "personalDetail": "Şəxsi Məlumatlar",
+    "fullName": "Tam Ad",
+    "salaryExpectation": "Maaş Gözləntisi",
+    "email": "E-poçt",
+    "downloadCV": "CV-ni Yüklə",
+    "notFound": "Tapılmadı"
+  },
+  "profileSettings": {
+    "candidateName": "Namizədin Adı",
+    "speciality": "İxtisas",
+    "salaryExpectation": "Maaş Gözləntisi",
+    "uploadResume": "CV Yüklə (PDF)",
+    "summary": "Xülasə",
+    "saveChanges": "Dəyişiklikləri Yadda Saxla",
+    "successMessage": "Profil uğurla yeniləndi"
+  },
+  "toastMessages": {
+    "skillAdded": "Bacarıq uğurla əlavə edildi",
+    "skillDeleted": "Bacarıq uğurla silindi",
+    "serviceAdded": "Xidmət uğurla əlavə edildi",
+    "serviceDeleted": "Xidmət uğurla silindi",
+    "errorOccurred": "Xəta baş verdi, yenidən cəhd edin",
+    "successMessage": "Profil məlumatları yeniləndi",
+    "languageAdded": "Dil uğurla əlavə edildi",
+    "languageDeleted": "Dil uğurla silindi"
   }
 }

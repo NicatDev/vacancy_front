@@ -1,0 +1,83 @@
+/* VisitWidget.css */
+
+.visit-container {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 9999;
+}
+
+.visit-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px; /* w-24 */
+  height: 96px; /* h-24 */
+  text-decoration: none;
+}
+
+/* Fırlanan kənar xətt */
+.visit-border-rotate {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed #013995; /* emerald-600 */
+  border-radius: 9999px;
+  animation: spin-slow 5s linear infinite;
+}
+
+/* İçindəki sabit dairə */
+.visit-circle-inner {
+  background-color: #013995; /* emerald-600 */
+  color: white;
+  width: 80px; /* w-20 */
+  height: 80px; /* h-20 */
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  z-index: 10;
+  text-align: center;
+  padding: 5px;
+}
+
+/* Üstünə gələndə böyümə effekti */
+.visit-link:hover .visit-circle-inner {
+  transform: scale(1.1);
+}
+
+/* Silmə düyməsi */
+.visit-close-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: white;
+  border-radius: 9999px;
+  color: #ef4444; /* red-500 */
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Konteynerin üstünə gələndə düymə görünsün */
+.visit-container:hover .visit-close-btn {
+  opacity: 1;
+}
+
+/* Animasiya */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

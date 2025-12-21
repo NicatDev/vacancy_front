@@ -1,16 +1,13 @@
-import { Link, useParams } from "react-router-dom";
-import shree_logo from "../../assets/images/company/shree-logo.png";
-import circle_logo from "../../assets/images/company/circle-logo.png";
+import { Link } from "react-router-dom";
 import { FiSettings, FiMail, FiFileText } from "react-icons/fi";
-
-import { CandidateList } from "../../data/data";
-import { useUser } from "../../context/UserContext";
-import { useTranslation } from "react-i18next";
-import UserIcon from "../../assets/icons/user.svg";
-import { useEffect, useState } from "react";
-import CandidatesAPI from "../../api/apiList/candidates";
 import { TbBuildings } from "react-icons/tb";
 import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import UserIcon from "../../assets/icons/user.svg";
+import CandidatesAPI from "../../api/apiList/candidates";
+import { useUser } from "../../context/UserContext";
 
 export default function CandidateDetail() {
   const { t } = useTranslation();
@@ -21,22 +18,12 @@ export default function CandidateDetail() {
   const [languages, setLanguages] = useState([]);
   const [applications, setApplications] = useState([]);
 
-  const params = {
-    size: 20,
-    page: 1,
-  };
-
   const getSkills = async () => {
     try {
       if (!user) return;
       let response = await CandidatesAPI.getSingleCandidateSkills(user?.data?.id);
-
-      if (response.status === 200) {
-        setSkills(response.data?.data);
-      } else {
-        setSkills([]);
-      }
-    } catch (err) {
+      setSkills(response.status === 200 ? response.data?.data : []);
+    } catch {
       setSkills([]);
     }
   };
@@ -45,13 +32,8 @@ export default function CandidateDetail() {
     try {
       if (!user) return;
       let response = await CandidatesAPI.getSingleCandidateServices(user?.data?.id);
-
-      if (response.status === 200) {
-        setServices(response.data?.data);
-      } else {
-        setServices([]);
-      }
-    } catch (err) {
+      setServices(response.status === 200 ? response.data?.data : []);
+    } catch {
       setServices([]);
     }
   };
@@ -60,33 +42,21 @@ export default function CandidateDetail() {
     try {
       if (!user) return;
       let response = await CandidatesAPI.getSingleCandidateLanguages(user?.data?.id);
-
-      if (response.status === 200) {
-        setLanguages(response.data?.data);
-      } else {
-        setLanguages([]);
-      }
-    } catch (err) {
+      setLanguages(response.status === 200 ? response.data?.data : []);
+    } catch {
       setLanguages([]);
     }
   };
-
 
   const getApplications = async () => {
     try {
       if (!user) return;
       let response = await CandidatesAPI.getCandidateApplications(user?.data?.id);
-
-      if (response.status === 200) {
-        setApplications(response.data?.data);
-      } else {
-        setApplications([]);
-      }
-    } catch (err) {
+      setApplications(response.status === 200 ? response.data?.data : []);
+    } catch {
       setApplications([]);
     }
   };
-
 
   useEffect(() => {
     getSkills();
@@ -94,10 +64,6 @@ export default function CandidateDetail() {
     getLanguages();
     getApplications();
   }, [user]);
-
-
-  console.log(applications);
-
 
   return (
     <>
@@ -113,9 +79,7 @@ export default function CandidateDetail() {
                     alt="user"
                   />
                   <div className="ms-4">
-                    <h5 className="text-lg font-semibold">
-                      {user?.data?.name}
-                    </h5>
+                    <h5 className="text-lg font-semibold">{user?.data?.name}</h5>
                     <p className="text-slate-400">{user?.data?.speciality}</p>
                   </div>
                 </div>
@@ -135,7 +99,7 @@ export default function CandidateDetail() {
       </section>
 
       <section className="relative mt-12">
-        <div className="container md:pb-24 pb-16 ">
+        <div className="container md:pb-24 pb-16">
           <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
             <div className="lg:col-span-8 md:col-span-7">
               <h5 className="text-xl font-semibold">{user?.data?.name}</h5>
@@ -143,227 +107,94 @@ export default function CandidateDetail() {
 
               <div className="grid lg:grid-cols-3 grid-cols-1">
                 <div className="flex flex-col">
-                  <h4 className="mt-6 text-xl font-semibold">
-                    Skills:
-                  </h4>
+                  <h4 className="mt-6 text-xl font-semibold">{t('candidateProfile.skills')}:</h4>
                   <div className="grid lg:grid-cols-2 grid-cols-1 mt-6 gap-2">
-                    {skills?.length > 0 ? [...skills]?.map(skill => (
-                      <div key={skill?.id}>
-                        <div className="flex justify-between mb-2">
-                          <span className="text-slate-400">{skill?.name}</span>
-                        </div>
+                    {skills?.length > 0 ? skills.map(skill => (
+                      <div key={skill?.id} className="flex justify-between mb-2">
+                        <span className="text-slate-400">{skill?.name}</span>
                       </div>
-                    )) : <span>{t('companies.notFound')}</span>}
+                    )) : <span>{t('candidateProfile.notFound')}</span>}
                   </div>
                 </div>
 
-
                 <div className="flex flex-col">
-                  <h4 className="mt-6 text-xl font-semibold">
-                    Services:
-                  </h4>
+                  <h4 className="mt-6 text-xl font-semibold">{t('candidateProfile.services')}:</h4>
                   <div className="grid lg-grid-cols-2 grid-cols-1 mt-6 gap-2">
-                    {services?.length > 0 ? [...services]?.map(service => (
-                      <div key={service?.service?.id}>
-                        <div className="flex justify-between mb-2">
-                          <span className="text-slate-400">{service?.service?.name}</span>
-                        </div>
+                    {services?.length > 0 ? services.map(service => (
+                      <div key={service?.service?.id} className="flex justify-between mb-2">
+                        <span className="text-slate-400">{service?.service?.name}</span>
                       </div>
-                    )) : <span>{t('companies.notFound')}</span>}
+                    )) : <span>{t('candidateProfile.notFound')}</span>}
                   </div>
                 </div>
 
                 <div className="flex flex-col">
-                  <h4 className="mt-6 text-xl font-semibold">
-                    Languages:
-                  </h4>
+                  <h4 className="mt-6 text-xl font-semibold">{t('candidateProfile.languages')}:</h4>
                   <div className="flex w-fit flex-col mt-6 gap-2">
-                    {languages?.length > 0 ? [...languages]?.map(language => (
-                      <div key={language?.language?.id}>
-                        <div className="flex items-center gap-2 justify-between mb-2">
-                          <span className="text-slate-400">{language?.language?.name}</span>
-                          <span className="text-slate-400">-</span>
-                          <span className="text-slate-400">{language?.level?.label}</span>
-                        </div>
+                    {languages?.length > 0 ? languages.map(language => (
+                      <div key={language?.language?.id} className="flex items-center gap-2 justify-between mb-2">
+                        <span className="text-slate-400">{language?.language?.name}</span>
+                        <span className="text-slate-400">-</span>
+                        <span className="text-slate-400">{language?.level?.label}</span>
                       </div>
-                    )) : <span>{t('companies.notFound')}</span>}
+                    )) : <span>{t('candidateProfile.notFound')}</span>}
                   </div>
                 </div>
               </div>
 
-              <h4 className="mt-6 text-xl font-semibold">Experience :</h4>
-
+              <h4 className="mt-6 text-xl font-semibold">{t('candidateProfile.experience')}:</h4>
 
               {applications.map((application, index) => (
                 <div key={index} className="flex mt-6">
-                  {/* Sol hissə */}
                   <div className="text-slate-400 font-semibold min-w-[80px] text-center">
-
-
-                    {application.job.company.logo ? <img
-                      src={application.job.company.logo}
-                      className="size-16 mx-auto mb-2 block"
-                      alt={application.job.company.name}
-                    /> : <TbBuildings fontSize={64} />}
-
+                    {application.job.company.logo ? (
+                      <img
+                        src={application.job.company.logo}
+                        className="size-16 mx-auto mb-2 block"
+                        alt={application.job.company.name}
+                      />
+                    ) : <TbBuildings fontSize={64} />}
                     {dayjs(application?.job?.applied_at).format('YYYY-MM-DD')}
                   </div>
 
                   <div className="ms-4">
-                    <h5 className="text-lg font-medium mb-0">
-                      {application.job.title}
-                    </h5>
-
+                    <h5 className="text-lg font-medium mb-0">{application.job.title}</h5>
                     <span className="text-slate-400 company-university">
                       {application.job.company.name} - {application.job.location}
                     </span>
-
-                    <p className="text-slate-400 mt-2 mb-0">
-                      {application.job.employment_type.name}
-                    </p>
+                    <p className="text-slate-400 mt-2 mb-0">{application.job.employment_type.name}</p>
                   </div>
                 </div>
               ))}
-
-
-
             </div>
 
             <div className="lg:col-span-4 md:col-span-5">
               <div className="bg-slate-50 dark:bg-slate-800 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 sticky top-20">
-                <h5 className="text-lg font-semibold">Personal Detail:</h5>
+                <h5 className="text-lg font-semibold">{t('candidateProfile.personalDetail')}</h5>
                 <ul className="list-none mt-4">
                   <li className="flex justify-between mt-3 items-center font-medium">
-                    <span>
-                      <span className="text-slate-400 me-3">Full name :</span>
-                    </span>
-
+                    <span className="text-slate-400 me-3">{t('candidateProfile.fullName')} :</span>
                     <span>{user?.data?.name}</span>
                   </li>
 
                   <li className="flex justify-between mt-3 items-center font-medium">
-                    <span>
-                      <span className="text-slate-400 me-3">Salary Expectation:</span>
-                    </span>
-
+                    <span className="text-slate-400 me-3">{t('candidateProfile.salaryExpectation')} :</span>
                     <span>{user?.data?.salary_expectation}$</span>
                   </li>
-                  <li className="flex justify-between mt-3 items-center font-medium">
-                    <span>
-                      <FiMail className="size-4 text-slate-400 me-3 inline"></FiMail>
-                      <span className="text-slate-400 me-3">Email :</span>
-                    </span>
 
+                  <li className="flex justify-between mt-3 items-center font-medium">
+                    <div className="flex items-center gap-2">
+                      <FiMail className="size-4 text-slate-400 inline" />
+                      <span className="text-slate-400 me-3">{t('candidateProfile.email')} :</span>
+                    </div>
                     <span>{user?.data?.user?.email}</span>
                   </li>
-                  {/* <li className="flex justify-between mt-3 items-center font-medium">
-                    <span>
-                      <FiGift className="size-4 text-slate-400 me-3 inline"></FiGift>
-                      <span className="text-slate-400 me-3">D.O.B. :</span>
-                    </span>
-
-                    <span>31st Dec, 1996</span>
-                  </li> */}
-                  {/* <li className="flex justify-between mt-3 items-center font-medium">
-                    <span>
-                      <FiHome className="size-4 text-slate-400 me-3 inline"></FiHome>
-                      <span className="text-slate-400 me-3">Address :</span>
-                    </span>
-
-                    <span>15 Razy street</span>
-                  </li> */}
-                  {/* <li className="flex justify-between mt-3 items-center font-medium">
-                    <span>
-                      <FiMapPin className="size-4 text-slate-400 me-3 inline"></FiMapPin>
-                      <span className="text-slate-400 me-3">City :</span>
-                    </span>
-
-                    <span>London</span>
-                  </li> */}
-                  {/* <li className="flex justify-between mt-3 items-center font-medium">
-                    <span>
-                      <FiGlobe className="size-4 text-slate-400 me-3 inline"></FiGlobe>
-                      <span className="text-slate-400 me-3">Country :</span>
-                    </span>
-
-                    <span>UK</span>
-                  </li> */}
-                  {/* <li className="flex justify-between mt-3 items-center font-medium">
-                    <span>
-                      <FiServer className="size-4 text-slate-400 me-3 inline"></FiServer>
-                      <span className="text-slate-400 me-3">Postal Code :</span>
-                    </span>
-
-                    <span>521452</span>
-                  </li> */}
-                  {/* <li className="flex justify-between mt-3 items-center font-medium">
-                    <span>
-                      <FiPhone className="size-4 text-slate-400 me-3 inline"></FiPhone>
-                      <span className="text-slate-400 me-3">Mobile :</span>
-                    </span>
-
-                    <span>(+125) 1542-8452</span>
-                  </li> */}
-
-                  {/* <li className="flex justify-between mt-3">
-                    <span className="text-slate-400 font-medium">Social:</span>
-
-                    <ul className="list-none ltr:text-right rtl:text-left space-x-0.5">
-                      <li className="inline">
-                        <Link
-                          to="http://linkedin.com/company/"
-                          target="_blank"
-                          className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5 mt-1"
-                        >
-                          <BiLogoLinkedin />
-                        </Link>
-                      </li>
-                      <li className="inline">
-                        <Link
-                          to="https://www.facebook.com/"
-                          target="_blank"
-                          className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5 mt-1"
-                        >
-                          <FaFacebookF />
-                        </Link>
-                      </li>
-                      <li className="inline">
-                        <Link
-                          to="https://www.instagram.com/"
-                          target="_blank"
-                          className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5 mt-1"
-                        >
-                          <FaInstagram />
-                        </Link>
-                      </li>
-                      <li className="inline">
-                        <Link
-                          to="https://twitter.com/"
-                          target="_blank"
-                          className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5 mt-1"
-                        >
-                          <IoLogoTwitter />
-                        </Link>
-                      </li>
-                      <li className="inline">
-                        <Link
-                          to="mailto:support@jobstack.in"
-                          className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-200 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white dark:text-white text-slate-400 mx-0.5 mt-1"
-                        >
-                          <LuMail />
-                        </Link>
-                      </li>
-                    </ul>
-                  </li> */}
 
                   {user?.data?.cv && (
                     <li className="mt-3 w-full bg-white dark:bg-slate-900 p-3 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700">
                       <div className="flex items-center mb-3">
                         <FiFileText className="size-8 text-slate-400" />
-
-                        <span className="font-medium ms-2">
-                          {user.data.cv.split("/").pop()}
-                        </span>
+                        <span className="font-medium ms-2">{user.data.cv.split("/").pop()}</span>
                       </div>
 
                       <a
@@ -373,11 +204,10 @@ export default function CandidateDetail() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <FiFileText className="me-2" /> Download CV
+                        <FiFileText className="me-2" /> {t('candidateProfile.downloadCV')}
                       </a>
                     </li>
                   )}
-
                 </ul>
               </div>
             </div>
