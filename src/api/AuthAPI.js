@@ -37,6 +37,7 @@ const AuthAPI = {
     password_confirmation,
     website,
     name,
+    voen
   }) => {
     const payload = {
       email,
@@ -44,6 +45,7 @@ const AuthAPI = {
       passwordConfirm: password_confirmation, // API tələb edir
       website,
       name,
+      voen
     };
 
     return axiosClient.post("/companies/register", payload);

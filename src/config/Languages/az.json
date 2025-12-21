@@ -185,7 +185,8 @@
     "accept_tnc": "Mən Şərtləri qəbul edirəm",
     "register": "Qeydiyyat",
     "already_account": "Artıq hesabınız var?",
-    "sign_in": "Daxil ol"
+    "sign_in": "Daxil ol",
+    "voen":"VÖEN"
   },
   "jobcategory": {
     "title": "İş Kateqoriyaları",

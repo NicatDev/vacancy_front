@@ -186,7 +186,8 @@
     "accept_tnc": "I accept the Terms and Conditions",
     "register": "Register",
     "already_account": "Already have an account?",
-    "sign_in": "Sign in"
+    "sign_in": "Sign in",
+    "voen": "VOEN"
   },
   "jobcategory": {
     "title": "Job Categories",
@@ -248,7 +249,7 @@
     "insertData": "Enter data",
     "selectLanguage": "Select language",
     "selectLevel": "Select level",
-    "visit":"Visit"
+    "visit": "Visit"
   },
   "formErrors": {
     "invalidStatus": "Invalid status selection.",
