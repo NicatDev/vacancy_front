@@ -5,13 +5,14 @@ import logo from "../assets/images/logo.png";
 import userImg from "../assets/images/user.png";
 import { LuSearch, FiUser, FiSettings, FiLogOut } from "../assets/icons/vander";
 import Languages from "../config/Languages";
-import Select from "react-select";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../context/UserContext";
 import LoginIcon from "../assets/icons/login.svg";
 import { FaDollarSign } from "react-icons/fa6";
 import axiosClient from "../api/axiosClient";
+import { Dropdown, Button } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 
 const Navbar = (props) => {
   const { refreshUser, user } = useUser();
@@ -45,14 +46,14 @@ const Navbar = (props) => {
     }
   };
 
-  const options = languages.map((lang) => ({
-    value: lang.code,
+  const languageItems = languages.map((lang) => ({
+    key: lang.code,
     label: lang.code.toUpperCase(),
   }));
 
-  const handleChange = (selectedOption) => {
-    changeLanguage(selectedOption.value);
-    setCurrentLang(selectedOption);
+  const handleLanguageChange = ({ key }) => {
+    changeLanguage(key);
+    setCurrentLang(key);
   };
 
   window.addEventListener("scroll", windowScroll);
@@ -178,37 +179,91 @@ const Navbar = (props) => {
     }
   };
 
-  const customSelectStyles = {
-    control: (styles) => ({
-      ...styles,
-      borderRadius: "9999px",
-      borderColor: "#3b82f6",
-      minHeight: "36px",
-      cursor: "pointer",
-      boxShadow: "none",
-      backgroundColor: "white",
-      width: 75,
-      minWidth: 75,
-      "&:hover": { borderColor: "#2563eb" },
-    }),
-    singleValue: (styles) => ({
-      ...styles,
-      color: "#2563eb",
-      fontWeight: "500",
-      whiteSpace: "nowrap",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      fontSize: 12,
-    }),
-    dropdownIndicator: (styles) => ({ ...styles, color: "#2563eb" }),
-    indicatorSeparator: () => ({ display: "none" }),
-    menu: (styles) => ({
-      ...styles,
-      borderRadius: "0.5rem",
-      overflow: "hidden",
-      zIndex: 9999,
-    }),
-  };
+  const userMenuItems = [
+    ...(user?.data?.user?.role === "company"
+      ? [
+        {
+          key: "company-profile",
+          label: (
+            <Link
+              to="/company-profile"
+              className="flex items-center gap-2"
+            >
+              <FiUser />
+              {t("navbar.profile")}
+            </Link>
+          ),
+        },
+      ]
+      : user?.data?.user?.role === "candidate"
+        ? [
+          {
+            key: "profile",
+            label: (
+              <Link
+                to="/profile"
+                className="flex items-center gap-2"
+              >
+                <FiUser />
+                {t("navbar.profile")}
+              </Link>
+            ),
+          },
+        ]
+        : []),
+
+    ...(user?.data?.user?.role !== "company" &&
+      localStorage.getItem("email_verified_at") !== "false"
+      ? [
+        {
+          key: "settings",
+          label: (
+            <Link
+              to="/candidate-profile-setting"
+              className="flex items-center gap-2"
+            >
+              <FiSettings />
+              {t("navbar.settings")}
+            </Link>
+          ),
+        },
+      ]
+      : []),
+
+    {
+      key: "logout",
+      label: (
+        <span
+          onClick={() => {
+            localStorage.clear();
+            navigate("/");
+          }}
+          className="flex items-center gap-2 cursor-pointer"
+        >
+          <FiLogOut />
+          {t("navbar.logout")}
+        </span>
+      ),
+    },
+
+    ...(user?.data?.user?.role === "company"
+      ? [
+        {
+          key: "pricing",
+          label: (
+            <Link
+              to="/pricing"
+              className="flex items-center gap-2"
+            >
+              <FaDollarSign />
+              {t("common.plans")}
+            </Link>
+          ),
+        },
+      ]
+      : []),
+  ];
+
 
   useEffect(() => {
     if (!pathname?.includes("login") && !pathname?.includes("signup") && localStorage.getItem('tokens') && localStorage.getItem("email_verified_at") != "false") {
@@ -290,7 +345,7 @@ const Navbar = (props) => {
           </div>
         </div>
 
-        <ul className="buy-button list-none mb-0">
+        <ul className="buy-button flex items-center h-74px list-none mb-0">
           {(role === "company" || !role) && (
             <li className="hidden lg:inline-block mb-0 me-2">
               <div className="relative top-[3px]">
@@ -326,78 +381,18 @@ const Navbar = (props) => {
 
           {role && (
             <li className="dropdown inline-block relative ps-1">
-              <button
-                onClick={() => openDropdown(!isDropdown)}
-                data-dropdown-toggle="dropdown"
-                className="dropdown-toggle items-center"
-                type="button"
+              <Dropdown
+                menu={{ items: userMenuItems }}
+                trigger={["click"]}
+                placement="bottomRight"
               >
-
-                <span className="size-9 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide border align-middle transition duration-500 ease-in-out rounded-full cursor-pointer border-emerald-600 hover:border-emerald-700 text-white">
-                  <img src={avatarUrl} className="rounded-full" alt="" />
+                <span className="size-9 inline-flex items-center justify-center rounded-full cursor-pointer border border-emerald-600 hover:border-emerald-700">
+                  <img src={avatarUrl} className="rounded-full w-full h-full" alt="" />
                 </span>
-              </button>
-
-              <div
-                className={`dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 ${isDropdown ? "hidden" : "block"
-                  }`}
-              >
-                <ul className="py-2 text-start">
-                  {user?.data?.user?.role == 'company' ? <li>
-                    <Link
-                      to="/company-profile"
-                      className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
-                    >
-                      <FiUser className="size-4 me-2" />
-                      {t("navbar.profile")}
-                    </Link>
-                  </li> : user?.data?.user?.role == 'candidate' ? <li>
-                    <Link
-                      to="/profile"
-                      className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
-                    >
-                      <FiUser className="size-4 me-2" />
-                      {t("navbar.profile")}
-                    </Link>
-                  </li> : <></>}
-                  {(user?.data?.user?.role != 'company' && localStorage.getItem('email_verified_at') != "false") ? <li>
-                    <Link
-                      to="/candidate-profile-setting"
-                      className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
-                    >
-                      <FiSettings className="size-4 me-2" />
-                      {t("navbar.settings")}
-                    </Link>
-                  </li> : <></>}
-
-                  <li>
-                    <Link
-                      to="/login" // keep the link for semantics
-                      onClick={(e) => {
-                        e.preventDefault(); // prevent navigation
-                        localStorage.clear(); // clear localStorage
-                        navigate('/')
-                        // optionally, you can do other logout actions here
-                      }}
-                      className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
-                    >
-                      <FiLogOut className="size-4 me-2" />
-                      {t("navbar.logout")}
-                    </Link>
-                  </li>
-                  {user?.data?.user?.role == 'company' ? <li>
-                    <Link
-                      to="/pricing"
-                      className="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-emerald-600 dark:hover:text-white"
-                    >
-                      <FaDollarSign className="size-4 me-2" />
-                      {t("common.plans")}
-                    </Link>
-                  </li> : <></>}
-                </ul>
-              </div>
+              </Dropdown>
             </li>
           )}
+
           {!role && (
             <li className="inline-block mb-0 me-2 ml-2">
               <div className="relative top-[3px]">
@@ -422,14 +417,28 @@ const Navbar = (props) => {
           )}
 
           <li className="dropdown inline-block relative ps-1">
-            <Select
-              value={options.find((opt) => opt.value === currentLang)}
-              onChange={handleChange}
-              options={options}
-              isSearchable={false}
-              styles={customSelectStyles}
-            />
+            <Dropdown
+              menu={{
+                items: languageItems,
+                onClick: handleLanguageChange,
+              }}
+              trigger={["click"]}
+              placement="bottomRight"
+            >
+              <Button
+                size="small"
+                className="rounded-full border-blue-500 text-blue-600 font-medium px-3 flex items-center gap-1"
+                style={{
+                  padding:"15px 5px",
+                  borderRadius: 20
+                }}
+              >
+                {currentLang.toUpperCase()}
+                <DownOutlined />
+              </Button>
+            </Dropdown>
           </li>
+
         </ul>
 
         <div
@@ -459,7 +468,7 @@ const Navbar = (props) => {
 
             <li className="block lg:hidden pb-4 px-4 custom_new_vacancy_btn">
               <Link
-                to="/job-post"
+                to={user ? '/job-post' : '/login'}
                 className="rounded-3xl w-fit"
                 style={{
                   backgroundColor: "oklch(45% 0.18 260.67)",

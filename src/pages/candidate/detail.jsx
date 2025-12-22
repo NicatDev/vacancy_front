@@ -8,7 +8,7 @@ import { CandidateList } from '../../data/data';
 import CandidatesAPI from '../../api/apiList/candidates';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import UserIcon from "../../assets/icons/user.svg";
+import userImg from "../../assets/images/user.png";
 import { TfiEmail } from "react-icons/tfi";
 import { MdOutlinePhone } from "react-icons/md";
 
@@ -94,7 +94,8 @@ export default function CandidateDetail() {
                         <div className="md:w-full">
                             <div className="relative flex items-end justify-between">
                                 <div className="relative flex items-center">
-                                    <img src={UserIcon} className="size-28 rounded-full shadow-sm dark:shadow-gray-800 ring-4 ring-slate-50 dark:ring-slate-800" alt="" />
+
+                                    <img src={userImg} className="size-28 rounded-full shadow-sm dark:shadow-gray-800 ring-4 ring-slate-50 dark:ring-slate-800" alt="" />
                                     <div className="ms-4">
                                         {/* <h5 className="text-lg font-semibold">{data?.name ? data?.name : "Steven Townsend"}</h5> */}
                                         <h5 className="text-lg font-semibold">{candidate?.speciality ?? ''}</h5>

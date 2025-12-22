@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-// CSS faylını import edirik
 import "./VisitWidget.css";
 
 const MainLayout = () => {
@@ -13,37 +12,33 @@ const MainLayout = () => {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(true);
 
-  const renderVisitCircle = () => {
+  const renderVisitButton = () => {
     if (!isVisible) return null;
 
     return (
-      <div className="visit-container">
-        {/* Silmək düyməsi */}
-        <button
-          onClick={() => setIsVisible(false)}
-          className="visit-close-btn"
-        >
-          <IoCloseCircleOutline />
-        </button>
-
-        {/* Link və Dairə */}
+      <div className="visit-button-container">
         <a
           href="https://psychology.octopus.com.az/"
           target="_blank"
           rel="noopener noreferrer"
-          className="visit-link"
+          className="visit-button-link"
         >
-          {/* Fırlanan border */}
-          <div className="visit-border-rotate"></div>
-
-          {/* Sabit daxili dairə */}
-          <div className="visit-circle-inner">
-            {t("commonContent.visit")}
-          </div>
+          <span className="visit-button-text">Test Your Personality</span>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setIsVisible(false);
+            }}
+            className="visit-close-btn"
+          >
+            <IoCloseCircleOutline />
+          </button>
         </a>
       </div>
     );
   };
+
+
 
   return (
     <>
@@ -56,8 +51,7 @@ const MainLayout = () => {
         }
       />
 
-      {renderVisitCircle()}
-
+      {renderVisitButton()}
       <Outlet />
       <Footer />
     </>

@@ -7,7 +7,7 @@ import SkillsAPI from "../../api/apiList/skills";
 import ServicesAPI from "../../api/apiList/services";
 import LanguagesAPI from "../../api/apiList/languages";
 import { FiEdit, FiFileText } from "react-icons/fi";
-import UserIcon from "../../assets/icons/user.svg";
+import userImg from "../../assets/images/user.png";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ export default function CandidateProfileSetting() {
     const { user, refreshUser, isDarkMode } = useUser();
     const { t } = useTranslation();
 
-    const [avatarUrl, setAvatarUrl] = useState(UserIcon);
+    const [avatarUrl, setAvatarUrl] = useState(userImg);
     const [skills, setSkills] = useState([]);
     const [services, setServices] = useState([]);
     const [languages, setLanguages] = useState([]);
@@ -148,7 +148,7 @@ export default function CandidateProfileSetting() {
             axiosClient
                 .get(user.data.avatar, { responseType: "blob" })
                 .then((res) => setAvatarUrl(URL.createObjectURL(res.data)))
-                .catch(() => setAvatarUrl(UserIcon));
+                .catch(() => setAvatarUrl(userImg));
         }
 
         if (user?.data?.cv) {
@@ -266,10 +266,29 @@ export default function CandidateProfileSetting() {
                             />
                             <label
                                 htmlFor="avatar-upload"
-                                className="absolute top-1/2 left-1/2 bg-white p-2 rounded-full cursor-pointer shadow-md flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity translate-x-[-50%] translate-y-[-50%] z-10"
+                                style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    backgroundColor: "white",
+                                    padding: "0.5rem", // Tailwind p-2
+                                    borderRadius: "9999px", // Tailwind rounded-full
+                                    cursor: "pointer",
+                                    boxShadow: "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)", // Tailwind shadow-md
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    opacity: 0,
+                                    transition: "opacity 0.3s",
+                                    zIndex: 10,
+                                    transform: "translate(-50%, -50%)" // top-1/2 left-1/2 + translate
+                                }}
+                                onMouseEnter={e => e.currentTarget.style.opacity = 1}
+                                onMouseLeave={e => e.currentTarget.style.opacity = 0}
                             >
                                 <FiEdit style={{ width: "16px", height: "16px", color: "#374151" }} />
                             </label>
+
                         </div>
                         <div className="ms-4">
                             <h5 className="text-lg font-semibold">{formik.values.name}</h5>

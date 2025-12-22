@@ -249,7 +249,10 @@
     "insertData": "Enter data",
     "selectLanguage": "Select language",
     "selectLevel": "Select level",
-    "visit": "Visit"
+    "visit": "Visit",
+    "400": "Unsuccessful operation",
+    "500": "Server error",
+    "404": "Operation not found"
   },
   "formErrors": {
     "invalidStatus": "Invalid status selection.",
@@ -394,5 +397,12 @@
     "successMessage": "Profile settings updated",
     "languageAdded": "Language added successfully",
     "languageDeleted": "Language deleted successfully"
+  },
+  "errorPage": {
+    "title": "Page Not Found?",
+    "descriptionLine1": "Whoops, this is embarrassing.",
+    "descriptionLine2": "Looks like the page you were looking for wasn't found.",
+    "backToHome": "Back to Home",
+    "copyright": "Octopus"
   }
 }

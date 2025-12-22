@@ -186,7 +186,7 @@
     "register": "Qeydiyyat",
     "already_account": "Artıq hesabınız var?",
     "sign_in": "Daxil ol",
-    "voen":"VÖEN"
+    "voen": "VÖEN"
   },
   "jobcategory": {
     "title": "İş Kateqoriyaları",
@@ -248,7 +248,10 @@
     "insertData": "Daxil edin",
     "selectLanguage": "Dili seçin",
     "selectLevel": "Səviyyəni seçin",
-    "visit": "Ziyarət et"
+    "visit": "Ziyarət et",
+    "400": "Uğursuz əməliyyat",
+    "500": "Server xətası",
+    "404": "Əməliyyat tapılmadı"
   },
   "formErrors": {
     "invalidStatus": "Yanlış status seçimi.",
@@ -392,5 +395,12 @@
     "successMessage": "Profil məlumatları yeniləndi",
     "languageAdded": "Dil uğurla əlavə edildi",
     "languageDeleted": "Dil uğurla silindi"
+  },
+  "errorPage": {
+    "title": "Səhifə tapılmadı",
+    "descriptionLine1": "Ops, bu bir az utancvericidir.",
+    "descriptionLine2": "Axtardığınız səhifə tapılmadı.",
+    "backToHome": "Ana səhifəyə qayıt",
+    "copyright": "Octopus"
   }
 }

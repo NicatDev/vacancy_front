@@ -4,8 +4,7 @@ import { TbBuildings } from "react-icons/tb";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import UserIcon from "../../assets/icons/user.svg";
+import userImg from "../../assets/images/user.png";
 import CandidatesAPI from "../../api/apiList/candidates";
 import { useUser } from "../../context/UserContext";
 import axiosClient from "../../api/axiosClient";
@@ -18,7 +17,7 @@ export default function CandidateDetail() {
   const [services, setServices] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [applications, setApplications] = useState([]);
-  const [avatarUrl, setAvatarUrl] = useState(UserIcon);
+  const [avatarUrl, setAvatarUrl] = useState(userImg);
 
 
   const handleDownloadCV = async (e) => {
@@ -92,7 +91,7 @@ export default function CandidateDetail() {
       axiosClient
         .get(user.data.avatar, { responseType: "blob" })
         .then((res) => setAvatarUrl(URL.createObjectURL(res.data)))
-        .catch(() => setAvatarUrl(UserIcon));
+        .catch(() => setAvatarUrl(userImg));
     }
   }, [user?.data?.avatar]);
 

@@ -30,7 +30,7 @@ const processQueue = (error, token = null) => {
 const redirectToLogin = () => {
   if (typeof window !== "undefined") {
     localStorage.clear();
-    delete axiosClient.defaults.headers.common["Authorization"]; 
+    delete axiosClient.defaults.headers.common["Authorization"];
     window.location.href = "/login";
   }
 };
@@ -89,7 +89,7 @@ axiosClient.interceptors.response.use(
       try {
         // 🚨 KRİTİK KONTROL: Refresh token yoksa, temizle ve YÖNLENDİR
         if (!tokens?.refresh_token?.token) {
-            redirectToLogin();
+          redirectToLogin();
           throw new Error("No refresh token available. Logging out.");
         } // Refresh Token ile API çağrısı
 
@@ -177,37 +177,31 @@ axiosClient.interceptors.response.use(
           responseData.errors.forEach(function (err) {
             const message =
               (err.field_name ? err.field_name + ": " : "") +
-              (err.message || translate("CommonContent.400"));
+              (err.message || translate("commonContent.400"));
             toast.error(message);
           });
         } else {
           // Massiv yoxdursa, ümumi mesajı bildiririk
           const message =
-            responseData?.message || translate("CommonContent.400");
+            responseData?.message || translate("commonContent.400");
           toast.error(message);
         }
       } else if (status === 404) {
         // 404 Not Found
-        const message = responseData?.message || translate("CommonContent.404");
+        const message = responseData?.message || translate("commonContent.404");
         toast.error(message);
       } else if (status === 500) {
         // 500 Internal Server Error
-        const message = responseData?.message || translate("CommonContent.500");
+        const message = responseData?.message || translate("commonContent.500");
         toast.error(message);
       } else if (status !== 401 && status !== 403) {
-        // Yuxarıda idarə olunmayan digər bütün cavab xətaları (422, 409, etc.)
         const message =
-          responseData?.message || translate("CommonContent.genericError");
+          responseData?.message || translate("commonContent.genericError");
         toast.error(message);
       }
     } else {
-      // Şəbəkə xətası (no response)
       console.error("Şəbəkə xətası:", error.message);
-      toast.error(i18n.t("CommonContent.networkError"));
     }
-
-    // --- ⭐️ GLOBAL XƏTA BİLDİRİM MƏNTİQİ BURADA BİTİR ---
-
     return Promise.reject(error);
   }
 );

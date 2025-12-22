@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/icons/vander";
 import CandidatesAPI from "../api/apiList/candidates";
 import { useTranslation } from "react-i18next";
-import UserIcon from "../assets/icons/user.svg";
-import { FaUserLarge } from "react-icons/fa6";
+import userImg from "../assets/images/user.png";
+import { FaRegUser, FaUserLarge } from "react-icons/fa6";
 
 const initialCandidateData = {
   data: [],
@@ -147,7 +147,7 @@ export default function CandidateListComp() {
                 key={item.id}
               >
                 <div className="flex justify-center mx-auto w-60px h-60px items-center rounded-full border">
-                  <FaUserLarge fontSize={40} />
+                  <FaRegUser fontSize={40} />
                 </div>
                 {/* <img
                   src={UserIcon}
