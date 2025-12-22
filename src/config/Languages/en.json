@@ -107,7 +107,7 @@
     },
     "faq1Title": "How does it work?",
     "faq1Content": "There are many variations of passages of Lorem Ipsum available, but most have been altered in some way.",
-    "faq2Title": "Do I need a designer to use Jobstack?",
+    "faq2Title": "Do I need a designer to use Octopus?",
     "faq2Content": "There are many variations of passages of Lorem Ipsum available, but most have been altered in some way.",
     "faq3Title": "What do I need to do to start selling?",
     "faq3Content": "There are many variations of passages of Lorem Ipsum available, but most have been altered in some way."
@@ -195,7 +195,7 @@
   },
   "jobPost": {
     "pageTitle": "Job Post",
-    "breadcrumbHome": "Jobstack",
+    "breadcrumbHome": "Octopus",
     "breadcrumbCurrent": "Job Post",
     "paymentSuccessToast": "Payment successful!",
     "paymentErrorToast": "Payment failed!",
@@ -404,5 +404,57 @@
     "descriptionLine2": "Looks like the page you were looking for wasn't found.",
     "backToHome": "Back to Home",
     "copyright": "Octopus"
+  },
+
+  "terms": {
+    "title": "Terms & Services",
+    "breadcrumbHome": "Octopus",
+    "introTitle": "Introduction",
+    "introText": "Octopus is an online job posting platform that connects employers with job seekers. By using this website, you agree to comply with and be bound by the following terms and conditions.",
+
+    "agreementTitle": "User Agreements",
+    "agreementText1": "By accessing and using Octopus, you confirm that you are legally eligible to enter into this agreement.",
+    "agreementText2": "Employers are responsible for the accuracy, legality, and authenticity of job postings.",
+    "agreementText3": "Job seekers are responsible for the accuracy of the personal and professional information they provide.",
+
+    "restrictionTitle": "Restrictions",
+    "restrictionIntro": "You are specifically restricted from the following actions:",
+    "restriction1": "Posting false, misleading, or fraudulent job advertisements",
+    "restriction2": "Using the platform for illegal or unauthorized purposes",
+    "restriction3": "Collecting user data without permission",
+    "restriction4": "Uploading harmful or malicious content",
+
+    "faqTitle": "Users Question & Answer",
+    "faq": {
+      "q1": "How does Octopus work?",
+      "a1": "Employers post job vacancies, and job seekers can apply directly through the platform.",
+      "q2": "Is Octopus free to use?",
+      "a2": "Job seekers can use Octopus for free. Some premium features may be available for employers.",
+      "q3": "Do I need an account to apply for jobs?",
+      "a3": "Yes, creating an account allows you to apply for jobs and track your applications.",
+      "q4": "How are job postings reviewed?",
+      "a4": "All job postings are monitored to ensure compliance with our terms and community standards."
+    }
+  },
+
+  "privacy": {
+    "title": "Privacy Policy",
+    "breadcrumbHome": "Octopus",
+
+    "overviewTitle": "Overview",
+    "overviewText1": "Octopus is committed to protecting your personal data and respecting your privacy.",
+    "overviewText2": "This Privacy Policy explains how we collect, use, store, and protect your information when you use our job platform.",
+    "overviewText3": "By using Octopus, you agree to the practices described in this policy.",
+
+    "usageTitle": "We use your information to",
+    "usage1": "Provide and improve job matching services",
+    "usage2": "Allow employers and job seekers to communicate",
+    "usage3": "Manage user accounts and applications",
+    "usage4": "Improve platform security and prevent fraud",
+    "usage5": "Send important service-related notifications",
+    "usage6": "Comply with legal obligations",
+
+    "voluntaryTitle": "Information Provided Voluntarily",
+    "voluntaryText": "Any information you provide voluntarily, including profile details and job applications, is used solely for the purpose of delivering our services."
   }
 }

@@ -126,7 +126,7 @@ export default function Footer() {
               </li>
               <li className="inline">
                 <Link
-                  to="mailto:support@jobstack.in"
+                  to="mailto:support@Octopus.in"
                   className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
                 >
                   <LuMail />

@@ -147,7 +147,7 @@ export default function JobGridsTwo() {
         <div className="absolute bottom-5 start-0 end-0 text-center z-10">
           <ul className="breadcrumb breadcrumb-light inline-block">
             <li className="inline text-white/50">
-              <Link to="/index">Jobstack</Link>
+              <Link to="/index">Octopus</Link>
             </li>
             <li className="inline text-white ms-2">Vacancies</li>
           </ul>

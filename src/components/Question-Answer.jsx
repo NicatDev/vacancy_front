@@ -5,7 +5,7 @@ import { FiHelpCircle } from 'react-icons/fi'
 export default function QuesAnswer() {
     const QuesAnswerData = [
         {
-            question: 'How our Jobstack work ?',
+            question: 'How our Octopus work ?',
             answer: 'Due to its widespread use as filler text for layouts, non-readability is of great importance: human perception is tuned to recognize certain patterns and repetitions in texts.',
         },
         {
@@ -17,7 +17,7 @@ export default function QuesAnswer() {
             answer: 'Furthermore, it is advantageous when the dummy text is relatively realistic so that the layout impression of the final publication is not compromised.',
         },
         {
-            question: 'Is Jobstack safer to use with my account ?',
+            question: 'Is Octopus safer to use with my account ?',
             answer: "The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. Lorem Ipsum is composed in a pseudo-Latin language which more or less corresponds to 'proper' Latin.",
         }
     ]

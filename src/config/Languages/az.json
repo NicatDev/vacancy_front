@@ -106,7 +106,7 @@
     },
     "faq1Title": "Necə işləyir?",
     "faq1Content": "Lorem Ipsum mətni üçün bir çox variasiyalar mövcuddur, lakin əksəriyyəti müəyyən qədər dəyişdirilmişdir.",
-    "faq2Title": "Jobstack istifadə etmək üçün dizayner lazımdır?",
+    "faq2Title": "Octopus istifadə etmək üçün dizayner lazımdır?",
     "faq2Content": "Lorem Ipsum mətni üçün bir çox variasiyalar mövcuddur, lakin əksəriyyəti müəyyən qədər dəyişdirilmişdir.",
     "faq3Title": "Satışa başlamaq üçün nə etməliyəm?",
     "faq3Content": "Lorem Ipsum mətni üçün bir çox variasiyalar mövcuddur, lakin əksəriyyəti müəyyən qədər dəyişdirilmişdir."
@@ -194,7 +194,7 @@
   },
   "jobPost": {
     "pageTitle": "İş Elanı",
-    "breadcrumbHome": "Jobstack",
+    "breadcrumbHome": "Octopus",
     "breadcrumbCurrent": "İş Elanı",
     "paymentSuccessToast": "Ödəniş uğurlu oldu!",
     "paymentErrorToast": "Ödəniş uğursuz oldu!",
@@ -402,5 +402,57 @@
     "descriptionLine2": "Axtardığınız səhifə tapılmadı.",
     "backToHome": "Ana səhifəyə qayıt",
     "copyright": "Octopus"
+  },
+
+  "terms": {
+    "title": "Şərtlər və Xidmətlər",
+    "breadcrumbHome": "Octopus",
+    "introTitle": "Giriş",
+    "introText": "Octopus işəgötürənləri iş axtaranlarla birləşdirən onlayn iş elanı platformasıdır. Saytdan istifadə etməklə bu şərtlərlə razılaşmış olursunuz.",
+
+    "agreementTitle": "İstifadəçi Razılaşması",
+    "agreementText1": "Octopus platformasından istifadə etməklə bu razılaşmanı bağlamaq üçün hüquqi səlahiyyətə malik olduğunuzu təsdiqləyirsiniz.",
+    "agreementText2": "İşəgötürənlər yerləşdirilən iş elanlarının düzgünlüyünə və qanuniliyinə görə məsuliyyət daşıyır.",
+    "agreementText3": "İş axtaranlar təqdim etdikləri şəxsi və peşəkar məlumatların düzgünlüyünə görə məsuliyyət daşıyır.",
+
+    "restrictionTitle": "Məhdudiyyətlər",
+    "restrictionIntro": "Aşağıdakı hallarda platformadan istifadə qadağandır:",
+    "restriction1": "Yanlış və ya aldadıcı iş elanları paylaşmaq",
+    "restriction2": "Platformadan qanunsuz məqsədlərlə istifadə etmək",
+    "restriction3": "İstifadəçi məlumatlarını icazəsiz toplamaq",
+    "restriction4": "Zərərli və ya təhlükəli məzmun yükləmək",
+
+    "faqTitle": "İstifadəçilər üçün Suallar və Cavablar",
+    "faq": {
+      "q1": "Octopus necə işləyir?",
+      "a1": "İşəgötürənlər vakansiya elanları paylaşır, iş axtaranlar isə birbaşa platforma üzərindən müraciət edirlər.",
+      "q2": "Octopus-dan istifadə ödənişlidirmi?",
+      "a2": "İş axtaranlar üçün platforma tamamilə pulsuzdur. İşəgötürənlər üçün əlavə ödənişli funksiyalar mövcud ola bilər.",
+      "q3": "İşlərə müraciət etmək üçün hesab lazımdırmı?",
+      "a3": "Bəli, hesab yaratmaq işlərə müraciət etməyə və müraciətlərinizi izləməyə imkan verir.",
+      "q4": "İş elanları necə yoxlanılır?",
+      "a4": "Bütün iş elanları şərtlərə və icma qaydalarına uyğunluq üçün nəzarətdən keçirilir."
+    }
+  },
+
+  "privacy": {
+    "title": "Məxfilik Siyasəti",
+    "breadcrumbHome": "Octopus",
+
+    "overviewTitle": "Ümumi Baxış",
+    "overviewText1": "Octopus şəxsi məlumatlarınızın qorunmasına və məxfiliyinizə hörmət etməyə sadiqdir.",
+    "overviewText2": "Bu Məxfilik Siyasəti iş platformamızdan istifadə etdiyiniz zaman məlumatların necə toplandığını və istifadə edildiyini izah edir.",
+    "overviewText3": "Octopus-dan istifadə etməklə bu siyasətdə göstərilən şərtlərlə razılaşırsınız.",
+
+    "usageTitle": "Məlumatlarınız aşağıdakı məqsədlər üçün istifadə olunur",
+    "usage1": "İş uyğunlaşdırma xidmətlərini təqdim etmək və təkmilləşdirmək",
+    "usage2": "İşəgötürənlərlə iş axtaranlar arasında əlaqə yaratmaq",
+    "usage3": "İstifadəçi hesablarını və müraciətləri idarə etmək",
+    "usage4": "Platformanın təhlükəsizliyini təmin etmək və fırıldağın qarşısını almaq",
+    "usage5": "Vacib sistem bildirişlərini göndərmək",
+    "usage6": "Qanuni öhdəliklərə əməl etmək",
+
+    "voluntaryTitle": "Könüllü Təqdim Edilən Məlumatlar",
+    "voluntaryText": "Könüllü olaraq təqdim etdiyiniz bütün məlumatlar yalnız platforma xidmətlərinin göstərilməsi məqsədi ilə istifadə olunur."
   }
 }

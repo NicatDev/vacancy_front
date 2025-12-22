@@ -1,8 +1,8 @@
 {
-  "name": "jobstack",
+  "name": "Octopus",
   "private": true,
   "version": "1.6.0",
-  "description": "Jobstack - React Tailwind CSS Job Portal & Job Board Template",
+  "description": "Octopus - React Tailwind CSS Job Portal & Job Board Template",
   "type": "module",
   "scripts": {
     "dev": "vite",
