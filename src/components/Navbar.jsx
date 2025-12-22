@@ -54,6 +54,7 @@ const Navbar = (props) => {
   const handleLanguageChange = ({ key }) => {
     changeLanguage(key);
     setCurrentLang(key);
+    location.reload();
   };
 
   window.addEventListener("scroll", windowScroll);
@@ -429,7 +430,7 @@ const Navbar = (props) => {
                 size="small"
                 className="rounded-full border-blue-500 text-blue-600 font-medium px-3 flex items-center gap-1"
                 style={{
-                  padding:"15px 5px",
+                  padding: "15px 5px",
                   borderRadius: 20
                 }}
               >
