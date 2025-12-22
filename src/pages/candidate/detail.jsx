@@ -168,10 +168,11 @@ export default function CandidateDetail() {
                             </div>
 
 
-                            <div className="mt-4 flex items-center gap-4">
+                            <div className="mt-4 flex flex-col gap-4">
+
                                 <h4 className="text-lg font-semibold">{t('common.contactFor')}:</h4>
 
-                                <div className="flex gap-4 ">
+                                <div className="grid grid-cols-1 w-fit sm:grid-cols-2 gap-4">
                                     <a href='mailto:octopustalentscareers@gmail.com' className="flex items-center gap-3 px-4 py-3 rounded-cart border border-slate-100">
                                         <span className="text-slate-900 dark:text-white">
                                             <TfiEmail />

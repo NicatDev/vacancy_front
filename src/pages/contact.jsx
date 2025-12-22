@@ -137,9 +137,8 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className={`py-1 px-5 inline-block font-semibold tracking-wide border text-base rounded-md text-white ${
-                      loading ? "bg-gray-400" : "bg-emerald-600 hover:bg-emerald-700"
-                    }`}
+                    className={`py-1 px-5 inline-block font-semibold tracking-wide border text-base rounded-md text-white ${loading ? "bg-gray-400" : "bg-emerald-600 hover:bg-emerald-700"
+                      }`}
                   >
                     {loading ? t("contact.sending") : t("contact.sendMessage")}
                   </button>
@@ -177,8 +176,8 @@ export default function Contact() {
                 <h5 className="text-lg font-semibold">{t("contact.email")}</h5>
                 <p className="text-slate-400 mt-3">{t("contact.emailDescription")}</p>
                 <div className="mt-5">
-                  <Link to="mailto:contact@example.com" className="btn btn-link">
-                    contact@example.com
+                  <Link to="mailto:octopustalentscareers@gmail.com" className="btn btn-link">
+                    octopustalentscareers@gmail.com
                   </Link>
                 </div>
               </div>
