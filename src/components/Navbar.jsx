@@ -63,13 +63,14 @@ const Navbar = (props) => {
     activateMenu();
   }, []);
 
-
   useEffect(() => {
     if (user?.data?.avatar) {
       axiosClient
-        .get(user.data.avatar, { responseType: "blob" })
+        .get(user.data.avatar, { responseType: "blob", skipErrorToast: true })
         .then((res) => setAvatarUrl(URL.createObjectURL(res.data)))
-        .catch(() => setAvatarUrl(userImg));
+        .catch(() => {
+          setAvatarUrl(userImg);
+        });
     }
   }, [user?.data?.avatar]);
 
@@ -133,10 +134,10 @@ const Navbar = (props) => {
         Element.prototype.webkitMatchesSelector ||
         function (s) {
           var matches = (this.document || this.ownerDocument).querySelectorAll(
-            s
-          ),
+              s
+            ),
             i = matches.length;
-          while (--i >= 0 && matches.item(i) !== this) { }
+          while (--i >= 0 && matches.item(i) !== this) {}
           return i > -1;
         };
     }
@@ -183,52 +184,46 @@ const Navbar = (props) => {
   const userMenuItems = [
     ...(user?.data?.user?.role === "company"
       ? [
-        {
-          key: "company-profile",
-          label: (
-            <Link
-              to="/company-profile"
-              className="flex items-center gap-2"
-            >
-              <FiUser />
-              {t("navbar.profile")}
-            </Link>
-          ),
-        },
-      ]
-      : user?.data?.user?.role === "candidate"
-        ? [
           {
-            key: "profile",
+            key: "company-profile",
             label: (
-              <Link
-                to="/profile"
-                className="flex items-center gap-2"
-              >
+              <Link to="/company-profile" className="flex items-center gap-2">
                 <FiUser />
                 {t("navbar.profile")}
               </Link>
             ),
           },
         ]
-        : []),
+      : user?.data?.user?.role === "candidate"
+      ? [
+          {
+            key: "profile",
+            label: (
+              <Link to="/profile" className="flex items-center gap-2">
+                <FiUser />
+                {t("navbar.profile")}
+              </Link>
+            ),
+          },
+        ]
+      : []),
 
     ...(user?.data?.user?.role !== "company" &&
-      localStorage.getItem("email_verified_at") !== "false"
+    localStorage.getItem("email_verified_at") !== "false"
       ? [
-        {
-          key: "settings",
-          label: (
-            <Link
-              to="/candidate-profile-setting"
-              className="flex items-center gap-2"
-            >
-              <FiSettings />
-              {t("navbar.settings")}
-            </Link>
-          ),
-        },
-      ]
+          {
+            key: "settings",
+            label: (
+              <Link
+                to="/candidate-profile-setting"
+                className="flex items-center gap-2"
+              >
+                <FiSettings />
+                {t("navbar.settings")}
+              </Link>
+            ),
+          },
+        ]
       : []),
 
     {
@@ -249,38 +244,38 @@ const Navbar = (props) => {
 
     ...(user?.data?.user?.role === "company"
       ? [
-        {
-          key: "pricing",
-          label: (
-            <Link
-              to="/pricing"
-              className="flex items-center gap-2"
-            >
-              <FaDollarSign />
-              {t("common.plans")}
-            </Link>
-          ),
-        },
-      ]
+          {
+            key: "pricing",
+            label: (
+              <Link to="/pricing" className="flex items-center gap-2">
+                <FaDollarSign />
+                {t("common.plans")}
+              </Link>
+            ),
+          },
+        ]
       : []),
   ];
 
-
   useEffect(() => {
-    if (!pathname?.includes("login") && !pathname?.includes("signup") && localStorage.getItem('tokens') && localStorage.getItem("email_verified_at") != "false") {
+    if (
+      !pathname?.includes("login") &&
+      !pathname?.includes("signup") &&
+      localStorage.getItem("tokens") &&
+      localStorage.getItem("email_verified_at") != "false"
+    ) {
       refreshUser();
     }
-
   }, [pathname]);
 
   return (
     <nav id="topnav" className={`defaultscroll is-sticky ${topnavClass}`}>
-
       <div
-        className={`${isContainerFluid === true
-          ? "container-fluid md:px-8 px-3"
-          : "container"
-          }`}
+        className={`${
+          isContainerFluid === true
+            ? "container-fluid md:px-8 px-3"
+            : "container"
+        }`}
       >
         <Link className="logo" to="/">
           <div className="block sm:hidden">
@@ -348,11 +343,15 @@ const Navbar = (props) => {
 
         <ul className="buy-button flex items-center h-74px list-none mb-0">
           {(role === "company" || !role) && (
-            <li className="hidden lg:inline-block mb-0 me-2">
+            <li className="hidden lg:flex items-center mb-0 justify-center h-full me-2">
               <div className="relative top-[3px]">
                 <Link
-                  to={(user && localStorage.getItem('email_verified_at') != "false") ? 'job-post' : 'login'}
-                  className="rounded-3xl"
+                  to={
+                    user && localStorage.getItem("email_verified_at") != "false"
+                      ? "job-post"
+                      : "login"
+                  }
+                  className="rounded-3xl h-36px shrink-0 flex"
                   style={{
                     backgroundColor: "oklch(45% 0.18 260.67)",
                     color: "white",
@@ -366,7 +365,7 @@ const Navbar = (props) => {
             </li>
           )}
 
-          <li className="inline-block mb-0">
+          <li className="flex items-center mb-0 justify-center h-full">
             <div className="relative top-[3px]">
               <LuSearch className="text-lg absolute top-[8px] end-3" />
               <input
@@ -381,25 +380,29 @@ const Navbar = (props) => {
           </li>
 
           {role && (
-            <li className="dropdown inline-block relative ps-1">
+            <li className="dropdown flex h-full items-center relative ps-1">
               <Dropdown
                 menu={{ items: userMenuItems }}
                 trigger={["click"]}
                 placement="bottomRight"
               >
-                <span className="size-9 inline-flex items-center justify-center rounded-full cursor-pointer border border-emerald-600 hover:border-emerald-700">
-                  <img src={avatarUrl} className="rounded-full w-full h-full" alt="" />
+                <span className="size-9 mt-5px inline-flex items-center justify-center rounded-full cursor-pointer border border-emerald-600 hover:border-emerald-700">
+                  <img
+                    src={avatarUrl}
+                    className="rounded-full w-full h-full"
+                    alt="avatar"
+                  />
                 </span>
               </Dropdown>
             </li>
           )}
 
           {!role && (
-            <li className="inline-block mb-0 me-2 ml-2">
+            <li className="flex items-center mb-0 justify-center h-full ml-2">
               <div className="relative top-[3px]">
                 <Link
                   to="/login"
-                  className="rounded-3xl"
+                  className="rounded-3xl h-36px shrink-0 flex w-36px"
                   style={{
                     backgroundColor: "white",
                     color: "white",
@@ -409,7 +412,7 @@ const Navbar = (props) => {
                   }}
                 >
                   <img
-                    style={{ height: "17px", color: "white" }}
+                    style={{ height: "18px", color: "white" }}
                     src={LoginIcon}
                   />
                 </Link>
@@ -417,7 +420,7 @@ const Navbar = (props) => {
             </li>
           )}
 
-          <li className="dropdown inline-block relative ps-1">
+          <li className="dropdown flex h-full items-center relative ps-1">
             <Dropdown
               menu={{
                 items: languageItems,
@@ -428,10 +431,12 @@ const Navbar = (props) => {
             >
               <Button
                 size="small"
-                className="rounded-full border-blue-500 text-blue-600 font-medium px-3 flex items-center gap-1"
+                className="border-blue-500 text-blue-600 h-36px shrink-0 font-medium px-3 flex items-center gap-1 rounded-3xl"
                 style={{
-                  padding: "15px 5px",
-                  borderRadius: 20
+                  padding: "5px",
+                  borderRadius: "1.5rem",
+                  marginTop: 5,
+                  boxSizing: "border-box",
                 }}
               >
                 {currentLang.toUpperCase()}
@@ -439,7 +444,6 @@ const Navbar = (props) => {
               </Button>
             </Dropdown>
           </li>
-
         </ul>
 
         <div
@@ -469,7 +473,7 @@ const Navbar = (props) => {
 
             <li className="block lg:hidden pb-4 px-4 custom_new_vacancy_btn">
               <Link
-                to={user ? '/job-post' : '/login'}
+                to={user ? "/job-post" : "/login"}
                 className="rounded-3xl w-fit"
                 style={{
                   backgroundColor: "oklch(45% 0.18 260.67)",

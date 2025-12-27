@@ -38,7 +38,7 @@ const redirectToLogin = () => {
 axiosClient.interceptors.request.use(
   (config) => {
     const tokens = JSON.parse(localStorage.getItem("tokens") || "{}");
-    const language = localStorage.getItem("language") || "az"; // Refresh Token Yapısından Okuma: tokens.access_token.token
+    const language = localStorage.getItem("language") || "az";
 
     if (tokens?.access_token?.token) {
       config.headers.Authorization = `Bearer ${tokens.access_token.token}`;
@@ -63,12 +63,14 @@ axiosClient.interceptors.response.use(
       return Promise.reject(error);
     }
 
+    if (originalRequest?.skipErrorToast) {
+      return Promise.reject(error);
+    }
+
     if (
       (error.response?.status === 401 || error.response?.status === 403) &&
       !originalRequest._retry
     ) {
-      // ... (Mövcud Token Yeniləmə Məntiqi) ...
-
       if (isRefreshing) {
         // Yenileme zaten sürüyorsa sıraya ekle
         return new Promise((resolve, reject) => {
@@ -87,11 +89,12 @@ axiosClient.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // 🚨 KRİTİK KONTROL: Refresh token yoksa, temizle ve YÖNLENDİR
         if (!tokens?.refresh_token?.token) {
-          redirectToLogin();
+          // redirectToLogin();
+          localStorage.clear();
+          delete axiosClient.defaults.headers.common["Authorization"];
           throw new Error("No refresh token available. Logging out.");
-        } // Refresh Token ile API çağrısı
+        }
 
         const refreshResponse = await axios.post(
           `${axiosClient.defaults.baseURL}/auth/refresh`,
@@ -151,7 +154,10 @@ axiosClient.interceptors.response.use(
         processQueue(refreshError, null);
 
         if (!originalRequest.url?.includes("/me")) {
-          redirectToLogin();
+          // redirectToLogin();
+
+          localStorage.clear();
+          delete axiosClient.defaults.headers.common["Authorization"];
         }
 
         return Promise.reject(refreshError);

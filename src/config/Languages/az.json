@@ -79,7 +79,10 @@
     "passwordMin": "Parol ən azı 6 simvol olmalıdır",
     "passwordRequired": "Parol tələb olunur",
     "passwordsMustMatch": "Parollar uyğun olmalıdır",
-    "plans": "Planlar"
+    "plans": "Planlar",
+    "fileNotFound": "Fayl tapılmadı",
+    "emailVerified": "Email təsdiqləndi",
+    "invalidOrExpired": "Yanlış və ya vaxtı keçmiş"
   },
   "companies": {
     "employerList.loading": "Şirkətlər yüklənir...",
@@ -375,7 +378,7 @@
     "salaryExpectation": "Maaş Gözləntisi",
     "email": "E-poçt",
     "downloadCV": "CV-ni Yüklə",
-    "notFound": "Tapılmadı"
+    "notFound": "Yoxdur"
   },
   "profileSettings": {
     "candidateName": "Namizədin Adı",
@@ -384,7 +387,8 @@
     "uploadResume": "CV Yüklə (PDF)",
     "summary": "Xülasə",
     "saveChanges": "Dəyişiklikləri Yadda Saxla",
-    "successMessage": "Profil uğurla yeniləndi"
+    "successMessage": "Profil uğurla yeniləndi",
+    "saving": "Yadda saxlanır..."
   },
   "toastMessages": {
     "skillAdded": "Bacarıq uğurla əlavə edildi",
@@ -454,5 +458,14 @@
 
     "voluntaryTitle": "Könüllü Təqdim Edilən Məlumatlar",
     "voluntaryText": "Könüllü olaraq təqdim etdiyiniz bütün məlumatlar yalnız platforma xidmətlərinin göstərilməsi məqsədi ilə istifadə olunur."
+  },
+  "emailSent": {
+    "title": "E-poçtunuzu yoxlayın! 📧",
+    "description": "Qeydiyyatı tamamlamaq üçün e-poçt ünvanınıza təsdiq linki göndərdik. Zəhmət olmasa inbox və spam qovluğunu yoxlayın.",
+    "note": "Daxil olmadan əvvəl e-poçtunuzu təsdiqləməlisiniz.",
+    "loginButton": "Giriş səhifəsinə keç",
+
+    "company_title": "Qeydiyyat tamamlandı ⏳",
+    "company_description": "Hesabınız admin tərəfindən təsdiqləndikdən sonra giriş edə biləcəksiniz."
   }
 }

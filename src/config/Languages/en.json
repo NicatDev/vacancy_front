@@ -80,7 +80,10 @@
     "passwordMin": "Password must be at least 6 characters",
     "passwordRequired": "Password is required",
     "passwordsMustMatch": "Passwords must match",
-    "plans": "Plans"
+    "plans": "Plans",
+    "fileNotFound": "File not found",
+    "emailVerified": "Email has been verified" ,
+    "invalidOrExpired": "Invalid or expired" 
   },
   "companies": {
     "employerList.loading": "Loading companies...",
@@ -386,7 +389,8 @@
     "uploadResume": "Upload Resume (PDF)",
     "summary": "Summary",
     "saveChanges": "Save Changes",
-    "successMessage": "Profile updated successfully"
+    "successMessage": "Profile updated successfully",
+    "saving": "Saving..."
   },
   "toastMessages": {
     "skillAdded": "Skill added successfully",
@@ -456,5 +460,14 @@
 
     "voluntaryTitle": "Information Provided Voluntarily",
     "voluntaryText": "Any information you provide voluntarily, including profile details and job applications, is used solely for the purpose of delivering our services."
+  },
+  "emailSent": {
+    "title": "Check Your Email! 📧",
+    "description": "We have sent a verification link to your email address. Please check your inbox and spam folder.",
+    "note": "You must verify your email before logging in.",
+    "loginButton": "Go to Login Page",
+
+    "company_title": "Registration Completed ⏳",
+    "company_description": "You will be able to log in after your account is approved by the admin."
   }
 }

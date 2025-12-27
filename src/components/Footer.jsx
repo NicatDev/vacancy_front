@@ -38,7 +38,7 @@ export default function Footer() {
                     <li className="inline-block mt-[10px] md:mt-0">
                       <Link
                         to="/aboutus"
-                        className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium me-4"
+                        className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium"
                       >
                         {t('footer.aboutUs')}
                       </Link>
@@ -55,7 +55,7 @@ export default function Footer() {
                     <li className="inline-block">
                       <Link
                         to="/terms"
-                        className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium me-4"
+                        className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium"
                       >
 
                         {t('footer.terms')}
@@ -64,7 +64,7 @@ export default function Footer() {
                     <li className="inline-block mt-[10px] md:mt-0">
                       <Link
                         to="/privacy"
-                        className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium me-4"
+                        className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium"
                       >
                         {t('footer.privacyPolicy')}
                       </Link>
