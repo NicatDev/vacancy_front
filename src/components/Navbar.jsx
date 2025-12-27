@@ -64,15 +64,30 @@ const Navbar = (props) => {
   }, []);
 
   useEffect(() => {
+    if (user?.data?.logo) {
+      setAvatarUrl(user.data.logo);
+      return;
+    }
+
     if (user?.data?.avatar) {
       axiosClient
-        .get(user.data.avatar, { responseType: "blob", skipErrorToast: true })
-        .then((res) => setAvatarUrl(URL.createObjectURL(res.data)))
+        .get(user.data.avatar, {
+          responseType: "blob",
+          skipErrorToast: true,
+        })
+        .then((res) => {
+          const objectUrl = URL.createObjectURL(res.data);
+          setAvatarUrl(objectUrl);
+        })
         .catch(() => {
           setAvatarUrl(userImg);
         });
+
+      return;
     }
-  }, [user?.data?.avatar]);
+
+    setAvatarUrl(userImg);
+  }, [user?.data?.logo, user?.data?.avatar]);
 
   function windowScroll() {
     const navbar = document.getElementById("topnav");

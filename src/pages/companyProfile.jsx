@@ -241,8 +241,9 @@ export default function CompanyProfile() {
   };
 
   useEffect(() => {
-    if (!user || localStorage.getItem('email_verified_at') == "false") {
-      navigate('/login');
+    const tokens = localStorage.getItem('tokens')
+    if (!user && tokens && localStorage.getItem('email_verified_at') == "false") {
+      navigate('/');
     }
   }, [user])
 
