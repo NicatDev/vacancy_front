@@ -60,7 +60,7 @@ export default function Aboutus() {
                 {t("about.heading")}
               </h3>
 
-              <p className="text-slate-400 max-w-xl">
+              <p className="text-slate-400 about_us_description max-w-xl">
                 {t("about.description")}
               </p>
             </div>

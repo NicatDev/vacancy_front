@@ -1977,13 +1977,13 @@
     color: var(--color-green-600);
   }
   .email-text {
-  display: -webkit-box;        /* Flexbox-un WebKit variantı */
-  -webkit-line-clamp: 1;       /* 1 sətr göstər */
-  -webkit-box-orient: vertical;/* Yuxarıdan aşağıya istiqamət */
-  overflow: hidden;             /* Qalan hissəni gizlət */
-  text-overflow: ellipsis;      /* ... göstər */
-  white-space: normal;          /* Sətir qırılmasını təmin edir */
-}
+    display: -webkit-box; /* Flexbox-un WebKit variantı */
+    -webkit-line-clamp: 1; /* 1 sətr göstər */
+    -webkit-box-orient: vertical; /* Yuxarıdan aşağıya istiqamət */
+    overflow: hidden; /* Qalan hissəni gizlət */
+    text-overflow: ellipsis; /* ... göstər */
+    white-space: normal; /* Sətir qırılmasını təmin edir */
+  }
   .text-orange-500 {
     color: var(--color-orange-500);
   }
@@ -2063,6 +2063,13 @@
   }
   .opacity-50 {
     opacity: 0.5;
+  }
+
+  .text-20px {
+    font-size: 20px;
+  }
+  .text-16px {
+    font-size: 16px;
   }
   .h-dvh {
     height: 100dvh;
@@ -6740,4 +6747,14 @@ html[dir="rtl"] {
   border-top: 1px solid rgba(100, 100, 100, 0.191);
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+}
+
+.about_us_description {
+  font-size: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .about_us_description {
+    font-size: 16px;
+  }
 }
