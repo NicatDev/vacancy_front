@@ -248,6 +248,7 @@ const Navbar = (props) => {
           onClick={() => {
             localStorage.clear();
             navigate("/");
+            location.reload();
           }}
           className="flex items-center gap-2 cursor-pointer"
         >
