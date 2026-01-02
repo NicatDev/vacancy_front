@@ -1,10 +1,11 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { LuMapPin, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/icons/vander";
 import { TbBuildings } from "react-icons/tb";
+import { useTranslation } from "react-i18next";
 
 export default function JobGridsTwoComp({ jobs, pagination, onPageChange }) {
-  if (!jobs || jobs.length === 0) return <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }}><p style={{ fontSize: '25px', color: 'gray' }}>No jobs found.</p></div>;
+  const { t } = useTranslation();
+  if (!jobs || jobs.length === 0) return <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }}><p style={{ fontSize: '25px', color: 'gray' }}>{t('common.noJobFound')}</p></div>;
 
   const pages = [];
   for (let i = 1; i <= pagination.last_page; i++) pages.push(i);
@@ -30,7 +31,7 @@ export default function JobGridsTwoComp({ jobs, pagination, onPageChange }) {
                     {job.title}
                   </Link>
                   <span className="block text-sm text-slate-400">
-                    {job.published_at.as_days} days ago
+                    {job.published_at.as_days} {t('popularJobs.daysago')}
                   </span>
                 </div>
               </div>

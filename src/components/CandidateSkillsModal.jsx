@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Modal, Input, Select, Button } from "antd";
 import { FiTrash2, FiPlus } from "react-icons/fi";
 import CandidatesAPI from "../api/apiList/candidates";
+import { useTranslation } from "react-i18next";
 
 const LEVELS = [
   { value: 1, label: "20%" },
@@ -16,6 +17,7 @@ export default function CandidateSkillsModal({
   onClose,
   candidateId,
 }) {
+  const { t } = useTranslation();
   const [skills, setSkills] = useState([]);
   const [languageName, setLanguageName] = useState("");
   const [levelId, setLevelId] = useState(null);
@@ -24,9 +26,8 @@ export default function CandidateSkillsModal({
     size: 20,
     page: 1,
   };
-  // ---------------- GET SKILLS ----------------
   const fetchSkills = async (id) => {
-    if(!id)alert('11')
+    if (!id) alert('11')
     try {
       const res = await CandidatesAPI.getCandidateSkill(id, params);
       setSkills(res.data?.data || []);
@@ -41,7 +42,6 @@ export default function CandidateSkillsModal({
     }
   }, [open, candidateId]);
 
-  // ---------------- ADD SKILL ----------------
   const handleAdd = async () => {
     if (!languageName || !levelId) return;
 
@@ -60,7 +60,6 @@ export default function CandidateSkillsModal({
     }
   };
 
-  // ---------------- REMOVE SKILL ----------------
   const handleRemove = async (skillId) => {
     await CandidatesAPI.removeCandidateSkill(candidateId, skillId);
     fetchSkills(candidateId);
@@ -74,13 +73,12 @@ export default function CandidateSkillsModal({
       footer={null}
       destroyOnClose
     >
-      {/* ADD SECTION */}
       <div className="flex gap-2 mb-4">
         <Input
           placeholder="Language"
           value={languageName}
           onChange={(e) => setLanguageName(e.target.value)}
-            style={{width:'55%'}}
+          style={{ width: '55%' }}
         />
 
         <Select
@@ -88,7 +86,7 @@ export default function CandidateSkillsModal({
           options={LEVELS}
           value={levelId}
           onChange={setLevelId}
-                 style={{width:'35%'}}
+          style={{ width: '35%' }}
         />
 
         <Button
@@ -97,11 +95,10 @@ export default function CandidateSkillsModal({
           icon={<FiPlus />}
           loading={loading}
           onClick={handleAdd}
-                 style={{width:'10%'}}
+          style={{ width: '10%' }}
         />
       </div>
 
-      {/* SKILLS LIST */}
       <div className="space-y-2 max-h-[300px] overflow-auto">
         {skills.map((item) => (
           <div
@@ -126,7 +123,7 @@ export default function CandidateSkillsModal({
 
         {skills.length === 0 && (
           <p className="text-gray-400 text-sm text-center">
-            No skills added
+            {t('categories.noSkillsAdded')}
           </p>
         )}
       </div>

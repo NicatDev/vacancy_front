@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import IndustryAPI from "../api/apiList/industries";
 import { Pagination, Spin } from "antd";
+import { useTranslation } from "react-i18next";
 
 import {
   AiOutlineGitlab,
@@ -20,10 +21,11 @@ const icons = [
 ];
 
 export default function JobCategoriesComp() {
+  const { t } = useTranslation();
   const [industries, setIndustries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [size] = useState(8); // ✅ səhifədə 5 data
+  const [size] = useState(8);
   const [total, setTotal] = useState(0);
 
   const fetchIndustries = async (pageNumber = 1) => {
@@ -33,7 +35,6 @@ export default function JobCategoriesComp() {
       const data = res.data.data || res.data;
       setIndustries(data);
 
-      // ✅ total backend meta-dan götürülür
       setTotal(res.data.meta.total || data.length);
     } catch (err) {
       console.error("API ERROR:", err);
@@ -53,7 +54,7 @@ export default function JobCategoriesComp() {
           <Spin size="large" />
         </div>
       ) : industries.length === 0 ? (
-        <p className="text-center py-10">No categories found.</p>
+        <p className="text-center py-10">{t('categories.noData')}</p>
       ) : (
         <>
           <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-[30px]">

@@ -24,7 +24,8 @@
     "noData": "No categories found.",
     "jobs": "Jobs",
     "seeMore": "See more categories",
-    "categories": "Categories"
+    "categories": "Categories",
+    "noSkillsAdded":"No skills added"
   },
   "millions": {
     "title": "Millions of jobs. Find the one that's right for you.",
@@ -83,7 +84,8 @@
     "plans": "Plans",
     "fileNotFound": "File not found",
     "emailVerified": "Email has been verified" ,
-    "invalidOrExpired": "Invalid or expired" 
+    "invalidOrExpired": "Invalid or expired" ,
+    "noJobFound":"No jobs found"
   },
   "companies": {
     "employerList.loading": "Loading companies...",

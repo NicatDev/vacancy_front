@@ -11,7 +11,6 @@ import ResetPassword from "./pages/auth/reset-password";
 import JobGridsTwo from "./pages/job-grids/job-grids-two";
 import JobDetailThree from "./pages/job-detail/job-detail-three";
 import Aboutus from "./pages/aboutus";
-import Services from "./pages/services";
 import Pricing from "./pages/pricing";
 import Employerlist from "./pages/employer/list";
 import EmployerDetail from "./pages/employer/detail";
@@ -56,7 +55,6 @@ function App() {
             <Route path="/vacancies" element={<JobGridsTwo />} />
             <Route path="/vacancies/:id" element={<JobDetailThree />} />
             <Route path="/aboutus" element={<Aboutus />} />
-            <Route path="/services" element={<Services />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/companies" element={<Employerlist />} />
             <Route path="/company/:id" element={<EmployerDetail />} />
