@@ -37,6 +37,10 @@ const VacanciesAPI = {
   boostJob: (id) => {
     return axiosClient.post(`/job-posts/${id}/boost`);
   },
+
+  updateJobPost: (id, data) => {
+    return axiosClient.put(`/job-posts/${id}`, data);
+  },
 };
 
 export default VacanciesAPI;

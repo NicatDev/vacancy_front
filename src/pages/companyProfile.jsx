@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import VacanciesAPI from "../api/apiList/vacancies";
 import {
   Card,
   Row,
@@ -31,6 +32,7 @@ import {
   CalendarOutlined,
   ClockCircleOutlined,
   InfoCircleOutlined,
+  CheckCircleOutlined,
 } from "@ant-design/icons";
 import AuthAPI from "../api/AuthAPI";
 import CompanySVG from "../assets/icons/company.svg";
@@ -120,6 +122,17 @@ export default function CompanyProfile() {
       setVacancies([]);
     } finally {
       setLoadingVacancies(false);
+    }
+  };
+
+  const activateJob = async (jobId) => {
+    try {
+      await VacanciesAPI.updateJobPost(jobId, { status: "active" });
+      message.success(t("companyProfile.jobActivated") || "Job activated successfully");
+      fetchVacancies();
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || t("toastMessages.errorOccurred");
+      message.error(errorMessage);
     }
   };
 
@@ -490,6 +503,17 @@ export default function CompanyProfile() {
                                   ? t("companyProfile.active")
                                   : t("companyProfile.inactive")}
                               </Tag>
+                              {!isActive && (
+                                <Button
+                                  type="primary"
+                                  size="small"
+                                  icon={<CheckCircleOutlined />}
+                                  onClick={() => activateJob(item.id)}
+                                  style={{ marginLeft: 8 }}
+                                >
+                                  {t("companyProfile.activateJob") || "Activate"}
+                                </Button>
+                              )}
                             </Col>
                           </Row>
 

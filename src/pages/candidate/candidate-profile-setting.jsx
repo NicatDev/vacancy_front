@@ -471,14 +471,16 @@ export default function CandidateProfileSetting() {
 
               <div className="mt-4">
                 <label className="font-medium">
-                  {t("profileSettings.summary")}
+                  {t("profileSettings.summary")} 
                 </label>
                 <textarea
                   name="summary"
                   className="form-input border mt-2 textarea w-full h-28"
                   value={formik.values.summary}
                   onChange={formik.handleChange}
+                  maxLength={5000}
                 />
+                <span className="text-xs text-slate-400">{formik.values.summary.length}/5000</span>
               </div>
 
               <button

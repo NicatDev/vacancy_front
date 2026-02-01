@@ -229,10 +229,10 @@ export default function CandidateDetail() {
                   </div>
                 </div>
               </div>
-
-              <h4 className="mt-6 text-xl font-semibold">
-                {t("candidateProfile.experience")}:
-              </h4>
+                  {(applications?.length > 0) ?   <h4 className="mt-6 text-xl font-semibold">
+                {t("candidateProfile.applications")}:
+              </h4> : <></> }
+              
 
               {applications.map((application, index) => (
                 <div key={index} className="flex mt-6">

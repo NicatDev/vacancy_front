@@ -436,8 +436,8 @@ export default function JobPost() {
 
                     {/* Min Salary */}
                     <div className="md:col-span-3 col-span-12 ltr:text-left rtl:text-right">
-                      <label className="font-semibold md:invisible md:block hidden">
-                        {t('jobPost.salaryMinLabel')}
+                      <label className="font-semibold md:invisible">
+                        {t('jobPost.salaryMinLabel')}22
                       </label>
                       <div className="relative mt-1">
                         <span className="size-10 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 absolute top-0 start-0 overflow-hidden rounded">
@@ -446,7 +446,7 @@ export default function JobPost() {
                         <input
                           type="number"
                           className={`form-input border ${formik.touched.minSalary && formik.errors.minSalary ? 'border-red-500' : 'border-slate-100 dark:border-slate-800'} ps-12 pl-12`}
-                          placeholder={t('commonContent.insertData')}
+                          placeholder={t('jobPost.salaryMinLabel')}
                           name="minSalary"
                           value={formik.values.minSalary}
                           onChange={formik.handleChange}
@@ -470,7 +470,7 @@ export default function JobPost() {
                         <input
                           type="number"
                           className={`form-input border ${formik.touched.maxSalary && formik.errors.maxSalary ? 'border-red-500' : 'border-slate-100 dark:border-slate-800'} ps-12 pl-12`}
-                          placeholder={t('commonContent.insertData')}
+                          placeholder={t('jobPost.salaryMaxLabel')}
                           name="maxSalary"
                           value={formik.values.maxSalary}
                           onChange={formik.handleChange}
@@ -512,7 +512,7 @@ export default function JobPost() {
 
                     <div className="col-span-12 ltr:text-left rtl:text-right">
                       <label className="font-semibold" htmlFor="responsibilities">
-                        {t('jobPost.skillsLabel')}
+                        {t('jobPost.responsibilitiesLabel')}
                       </label>
                       <textarea
                         id="responsibilities"

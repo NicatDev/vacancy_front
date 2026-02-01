@@ -154,11 +154,7 @@ export default function CandidateListComp() {
                   className="size-20 rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 mx-auto"
                   alt={item.name}
                 /> */}
-                <div className="mt-2">
-                  <Link to={`/candidate-profile/${item.id}`} className="hover:text-emerald-600 font-semibold text-lg">
-                    {item.name}
-                  </Link>
-                </div>
+                
 
                 <ul className="mt-2 list-none space-x-0.5">
                   {item.languages?.map((lang, idx) => (
