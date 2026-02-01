@@ -23,9 +23,16 @@ export default function Signup() {
     speciality: "",
     summary: "",
     salary_expectation: "",
+    salary_expectation_currency: "AZN",
     website: "",
     voen: "",
   });
+
+  const currencyOptions = [
+    { value: "AZN", label: "AZN" },
+    { value: "USD", label: "USD" },
+    { value: "EUR", label: "EUR" },
+  ];
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -67,6 +74,7 @@ export default function Signup() {
           speciality: formData.speciality,
           summary: formData.summary,
           salary_expectation: formData.salary_expectation,
+          salary_expectation_currency: formData.salary_expectation_currency,
         };
         res = await AuthAPI.registerAsCandidate(candidateData);
       } else {
@@ -127,22 +135,20 @@ export default function Signup() {
             <div className="flex justify-center mt-4 mb-6 border-b border-gray-200 dark:border-gray-700">
               <button
                 type="button"
-                className={`px-4 py-2 border-b-2 transition cursor-pointer ${
-                  userType === "candidate"
+                className={`px-4 py-2 border-b-2 transition cursor-pointer ${userType === "candidate"
                     ? "border-emerald-600 text-emerald-600"
                     : "border-transparent text-gray-500 hover:text-emerald-600"
-                }`}
+                  }`}
                 onClick={() => handleTypeChange("candidate")}
               >
                 {t("register.candidate")}
               </button>
               <button
                 type="button"
-                className={`px-4 py-2 border-b-2 transition cursor-pointer ${
-                  userType === "company"
+                className={`px-4 py-2 border-b-2 transition cursor-pointer ${userType === "company"
                     ? "border-emerald-600 text-emerald-600"
                     : "border-transparent text-gray-500 hover:text-emerald-600"
-                }`}
+                  }`}
                 onClick={() => handleTypeChange("company")}
               >
                 {t("register.company")}
@@ -201,14 +207,28 @@ export default function Signup() {
                     <label className="block font-semibold">
                       {t("register.salary_expectation")}
                     </label>
-                    <input
-                      id="salary_expectation"
-                      type="number"
-                      value={formData.salary_expectation}
-                      onChange={handleChange}
-                      required
-                      className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
-                    />
+                    <div className="flex gap-2 mt-2">
+                      <input
+                        id="salary_expectation"
+                        type="number"
+                        value={formData.salary_expectation}
+                        onChange={handleChange}
+                        required
+                        className="form-input flex-1 rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
+                      />
+                      <select
+                        id="salary_expectation_currency"
+                        value={formData.salary_expectation_currency}
+                        onChange={handleChange}
+                        className="form-select w-24 rounded-md border border-gray-300 dark:border-gray-600 px-2 py-2 bg-transparent outline-none focus:border-emerald-600"
+                      >
+                        {currencyOptions.map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                   <div>
                     <label className="block font-semibold">

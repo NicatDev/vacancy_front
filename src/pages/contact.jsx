@@ -153,51 +153,56 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-[30px]">
             {/* Phone */}
             <div className="text-center px-6">
-              <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
-                <BsTelephone />
-              </div>
-              <div className="content mt-7">
-                <h5 className="text-lg font-semibold">{t("contact.phone")}</h5>
-                <p className="text-slate-400 mt-3">{t("contact.phoneDescription")}</p>
-                <div className="mt-5">
-                  <Link to="tel:+152534-468-854" className="btn btn-link">
-                    +152 534-468-854
-                  </Link>
+              <a href="tel:+15253468854" className="block hover:opacity-80 transition-opacity">
+                <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
+                  <BsTelephone />
                 </div>
-              </div>
+                <div className="content mt-7">
+                  <h5 className="text-lg font-semibold">{t("contact.phone")}</h5>
+                  <p className="text-slate-400 mt-3">{t("contact.phoneDescription")}</p>
+                  <div className="mt-5">
+                    <span className="btn btn-link text-emerald-600">
+                      +152 534-68-854
+                    </span>
+                  </div>
+                </div>
+              </a>
             </div>
 
             {/* Email */}
             <div className="text-center px-6">
-              <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
-                <LuMail />
-              </div>
-              <div className="content mt-7">
-                <h5 className="text-lg font-semibold">{t("contact.email")}</h5>
-                <p className="text-slate-400 mt-3">{t("contact.emailDescription")}</p>
-                <div className="mt-5">
-                  <Link to="mailto:octopustalentscareers@gmail.com" className="btn btn-link">
-                    octopustalentscareers@gmail.com
-                  </Link>
+              <a href="mailto:octopustalentscareers@gmail.com" className="block hover:opacity-80 transition-opacity">
+                <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
+                  <LuMail />
                 </div>
-              </div>
+                <div className="content mt-7">
+                  <h5 className="text-lg font-semibold">{t("contact.email")}</h5>
+                  <p className="text-slate-400 mt-3">{t("contact.emailDescription")}</p>
+                  <div className="mt-5">
+                    <span className="btn btn-link text-emerald-600">
+                      octopustalentscareers@gmail.com
+                    </span>
+                  </div>
+                </div>
+              </a>
             </div>
 
             {/* Location */}
             <div className="text-center px-6">
-              <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
-                <PiMapPin />
-              </div>
-              <div className="content mt-7">
-                <h5 className="text-lg font-semibold">{t("contact.location")}</h5>
-                <p className="text-slate-400 mt-3">{t("contact.locationAddress")}</p>
-
-                <div className="mt-5">
-                  <Link to="https://www.google.com/maps" className="btn btn-link">
-                    {t("contact.viewOnMap")}
-                  </Link>
+              <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity">
+                <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
+                  <PiMapPin />
                 </div>
-              </div>
+                <div className="content mt-7">
+                  <h5 className="text-lg font-semibold">{t("contact.location")}</h5>
+                  <p className="text-slate-400 mt-3">{t("contact.locationAddress")}</p>
+                  <div className="mt-5">
+                    <span className="btn btn-link text-emerald-600">
+                      {t("contact.viewOnMap")}
+                    </span>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>

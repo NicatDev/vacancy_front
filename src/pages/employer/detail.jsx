@@ -258,7 +258,7 @@ export default function EmployerDetail(props) {
                           let Icon = null;
                           let href = link.url;
 
-                          switch (link.label.toLowerCase()) {
+                          switch (link.label?.toLowerCase()) {
                             case "linkedin":
                               Icon = BiLogoLinkedin;
                               break;

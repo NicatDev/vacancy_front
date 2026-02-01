@@ -16,6 +16,7 @@ const AuthAPI = {
     speciality,
     summary,
     salary_expectation,
+    salary_expectation_currency,
   }) => {
     const payload = {
       name,
@@ -25,6 +26,7 @@ const AuthAPI = {
       speciality,
       summary,
       salary_expectation: parseInt(salary_expectation, 10),
+      salary_expectation_currency,
     };
 
     return axiosClient.post("/candidates/register", payload);
@@ -88,8 +90,8 @@ const AuthAPI = {
   getCompanyProfile: () => {
     return axiosClient.get("/auth/companies/me");
   },
-  updateProfileCompany: (id,data) => {
-    return axiosClient.put('/companies/'+id,data)
+  updateProfileCompany: (id, data) => {
+    return axiosClient.put('/companies/' + id, data)
   },
   createExternalForCompany: (id, data) => {
     return axiosClient.post(`/companies/${id}/external-links`, data);
@@ -97,10 +99,10 @@ const AuthAPI = {
   getExternalForCompany: (c_id) => {
     return axiosClient.get(`/companies/${c_id}/external-links/`);
   },
-  updateExternalForCompany: (c_id,ext_id,data) => {
+  updateExternalForCompany: (c_id, ext_id, data) => {
     return axiosClient.put(`/companies/${c_id}/external-links/${ext_id}`, data);
   },
-  deleteExternalForCompany: (c_id,ext_id) => {
+  deleteExternalForCompany: (c_id, ext_id) => {
     return axiosClient.delete(`/companies/${c_id}/external-links/${ext_id}`);
   },
   getPhoneNumbersForCompany: (companyId, params = {}) => {
@@ -139,12 +141,12 @@ const AuthAPI = {
       `/companies/${companyId}/phone-numbers/${phoneId}`
     );
   },
-   getCompanyVacancies: (companyId) => {
+  getCompanyVacancies: (companyId) => {
     return axiosClient.get(
       `/companies/${companyId}/job-posts`
     );
   },
-  
+
 };
 
 export default AuthAPI;

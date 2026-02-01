@@ -31,6 +31,15 @@ export default function JobPost() {
     { value: 'active', label: t('commonContent.active') },
   ];
 
+  const getCurrencySymbol = (currency) => {
+    switch (currency) {
+      case 'USD': return '$';
+      case 'EUR': return '€';
+      case 'AZN': return '₼';
+      default: return '₼';
+    }
+  };
+
 
   const getAllEmploymentTypes = async () => {
     try {
@@ -121,8 +130,8 @@ export default function JobPost() {
         }
         return schema;
       }),
-    responsibilities: Yup.string().required(t('formErrors.skillsRequired')),
-    requirements: Yup.string().required(t('formErrors.requiremntsRequired')),
+    responsibilities: Yup.string().required(t('formErrors.responsibilitiesRequired')),
+    requirements: Yup.string().required(t('formErrors.requirementsRequired')),
 
     education_level_id: Yup.object().nullable().required(t('formErrors.educationRequired')),
     experience: Yup.string().required(t('formErrors.experienceRequired')),
@@ -141,6 +150,7 @@ export default function JobPost() {
       category: null,
       employment_type_id: null,
       salaryType: "M",
+      salaryCurrency: "AZN",
       minSalary: "",
       maxSalary: "",
       responsibilities: "",
@@ -159,7 +169,8 @@ export default function JobPost() {
         const response = await VacanciesAPI.createJobPost({
           ...values,
           company_id: user?.data?.id,
-          salary: `$${values?.minSalary}-$${values?.maxSalary}`,
+          salary: `${values?.minSalary}-${values?.maxSalary}`,
+          salary_expectation_currency: values?.salaryCurrency,
           category: values?.category?.value,
           education_level_id: values?.education_level_id?.value,
           employment_type_id: values?.employment_type_id?.value,
@@ -173,6 +184,8 @@ export default function JobPost() {
         }
       } catch (error) {
         setSubmitting(false);
+        const errorMessage = error.response?.data?.message || t('toastMessages.errorOccurred');
+        toast.error(errorMessage);
       }
 
     },
@@ -417,18 +430,28 @@ export default function JobPost() {
 
                     <div className="md:col-span-6 col-span-12 ltr:text-left rtl:text-right">
                       <label className="font-semibold">{t('jobPost.salaryLabel')}</label>
-                      <select
-                        className={`form-select form-input border ${formik.touched.salaryType && formik.errors.salaryType ? 'border-red-500' : 'border-slate-100 dark:border-slate-800'} block w-full mt-1`}
-                        name="salaryType"
-                        value={formik.values.salaryType}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        placeholder={t('commonContent.select')}
-
-                      >
-                        <option value="M">{t('jobPost.salaryMonthly')}</option>
-                        {/* Əlavə tiplər bura gələ bilər */}
-                      </select>
+                      <div className="flex gap-2 mt-1">
+                        {/* <select
+                          className={`form-select form-input border ${formik.touched.salaryType && formik.errors.salaryType ? 'border-red-500' : 'border-slate-100 dark:border-slate-800'} flex-1`}
+                          name="salaryType"
+                          value={formik.values.salaryType}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                        >
+                          <option value="M">{t('jobPost.salaryMonthly')}</option>
+                        </select> */}
+                        <select
+                          className="form-select form-input border border-slate-100 dark:border-slate-800 w-24"
+                          name="salaryCurrency"
+                          value={formik.values.salaryCurrency}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                        >
+                          <option value="AZN">AZN</option>
+                          <option value="USD">USD</option>
+                          <option value="EUR">EUR</option>
+                        </select>
+                      </div>
                       {formik.touched.salaryType && formik.errors.salaryType ? (
                         <p className="text-red-600 text-sm mt-1">{formik.errors.salaryType}</p>
                       ) : null}
@@ -437,11 +460,11 @@ export default function JobPost() {
                     {/* Min Salary */}
                     <div className="md:col-span-3 col-span-12 ltr:text-left rtl:text-right">
                       <label className="font-semibold md:invisible">
-                        {t('jobPost.salaryMinLabel')}22
+                        {t('jobPost.salaryMinLabel')}
                       </label>
                       <div className="relative mt-1">
-                        <span className="size-10 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 absolute top-0 start-0 overflow-hidden rounded">
-                          <FiDollarSign className="size-4 absolute top-3 start-3"></FiDollarSign>
+                        <span className="size-10 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 absolute top-0 start-0 overflow-hidden rounded flex items-center justify-center">
+                          <span className="text-sm font-semibold">{getCurrencySymbol(formik.values.salaryCurrency)}</span>
                         </span>
                         <input
                           type="number"
@@ -464,8 +487,8 @@ export default function JobPost() {
                         {t('jobPost.salaryMaxLabel')}
                       </label>
                       <div className="relative mt-1">
-                        <span className="size-10 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 absolute top-0 start-0 overflow-hidden rounded">
-                          <FiDollarSign className="size-4 absolute top-3 start-3"></FiDollarSign>
+                        <span className="size-10 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 absolute top-0 start-0 overflow-hidden rounded flex items-center justify-center">
+                          <span className="text-sm font-semibold">{getCurrencySymbol(formik.values.salaryCurrency)}</span>
                         </span>
                         <input
                           type="number"
@@ -554,7 +577,7 @@ export default function JobPost() {
                         id="experience"
                         type="text"
                         className={`form-input border ${formik.touched.experience && formik.errors.experience ? 'border-red-500' : 'border-slate-100 dark:border-slate-800'} mt-1`}
-                        placeholder={t('commonContent.insertData')}
+                        placeholder={t('jobPost.experiencePlaceholder')}
                         name="experience"
                         value={formik.values.experience}
                         onChange={formik.handleChange}

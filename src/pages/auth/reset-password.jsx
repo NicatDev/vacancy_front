@@ -49,6 +49,8 @@ export default function ResetPasswordPage() {
             navigate("/login");
           }
         } catch (error) {
+          const errorMessage = error.response?.data?.message || t('toastMessages.errorOccurred');
+          toast.error(errorMessage);
         } finally {
           setSubmitting(false);
         }
