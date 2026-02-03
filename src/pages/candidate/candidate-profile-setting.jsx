@@ -198,16 +198,30 @@ export default function CandidateProfileSetting() {
         });
     }
 
-    if (user?.data?.cv) {
-      setFileList([
-        {
-          uid: "-1",
-          name: user.data.cv.split("/").pop() || "resume.pdf",
-          status: "done",
-          url: user.data.cv,
-        },
-      ]);
+    if (!user?.data?.cv) {
+      setFileList([]);
+      return;
     }
+
+    axiosClient
+      .get(user.data.cv, { responseType: "blob", skipErrorToast: true })
+      .then((res) => {
+        if (res.status === 200) {
+          setFileList([
+            {
+              uid: "-1",
+              name: user.data.cv.split("/").pop() || "resume.pdf",
+              status: "done",
+              url: user.data.cv,
+            },
+          ]);
+        } else {
+          setFileList([]);
+        }
+      })
+      .catch(() => {
+        setFileList([]);
+      });
   }, [user?.data?.avatar, user?.data?.cv]);
 
   useEffect(() => {
