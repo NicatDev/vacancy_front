@@ -119,6 +119,7 @@ export default function Pricing() {
                       {plan.price}
                     </span>
 
+
                     <span className="text-xl font-semibold self-end mb-1">
                       /mo
                     </span>
