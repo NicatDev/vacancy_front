@@ -3,9 +3,13 @@ import { initReactI18next } from "react-i18next";
 import en from "./en.json";
 import az from "./az.json";
 
-const DEFAULT_LANGUAGE = 'en';
+const DEFAULT_LANGUAGE = 'az';
 
-const language = localStorage.getItem('language') || 'en';
+let language = localStorage.getItem('language');
+if (!language) {
+    language = DEFAULT_LANGUAGE;
+    localStorage.setItem('language', language);
+}
 
 export const languages = [
     { code: 'az', name: 'Azərbaycan' },

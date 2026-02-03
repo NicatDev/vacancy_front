@@ -7,12 +7,10 @@ import JobGridsTwoComp from "../../components/job-grids-two-comp";
 import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { useSearchParams } from "react-router-dom";
-import { useUser } from "../../context/UserContext";
 import { useTranslation } from "react-i18next";
 
 export default function JobGridsTwo() {
   const { t } = useTranslation();
-  const { isDarkMode } = useUser();
   const [industries, setIndustries] = useState([]);
   const [employmentTypes, setEmploymentTypes] = useState([]);
   const [expandedIndustry, setExpandedIndustry] = useState(null);
@@ -159,16 +157,16 @@ export default function JobGridsTwo() {
         <div className="container grid md:grid-cols-12 gap-8">
           {/* FILTER SIDEBAR */}
           <div className="md:col-span-4">
-            <div className=" p-6 rounded shadow sticky top-20">
+            <div className="p-6 sticky top-20 filter-panel">
               <div className="mb-6">
-                <label className="font-semibold">{t('search.button')}</label>
-                <div className="relative mt-2">
-                  <LuSearch className="absolute top-3 left-3" style={{ marginLeft: '10px' }} />
+                <label className="filter-section-title">{t('search.button')}</label>
+                <div className="filter-input-wrap mt-2">
+                  <LuSearch className="filter-icon" />
                   <input
                     type="text"
                     value={filters.text}
                     onChange={handleSearchChange}
-                    className="w-full h-10 ps-10 border rounded"
+                    className="filter-input"
                     placeholder={t('search.searchjJobs')}
                   />
                 </div>
@@ -176,9 +174,9 @@ export default function JobGridsTwo() {
 
               {/* CATEGORIES */}
               {/* CATEGORIES */}
-              <div className="flex flex-col overflow-y-auto h-dvh">
+              <div className="flex flex-col overflow-y-auto h-dvh filter-scroll">
                 <div className="mb-6 px-2.5">
-                  <label className="font-semibold block mb-3 text-slate-800">
+                  <label className="filter-section-title block mb-3">
                     {t('categories.categories')}
                   </label>
 
@@ -190,12 +188,11 @@ export default function JobGridsTwo() {
                       return (
                         <div
                           key={industry.id}
-                          className={`${isDarkMode ? 'shadow-class-dark' : 'shadow-class'} rounded-lg transition-all ${isOpen ? "border-emerald-500 shadow-sm" : "border-slate-200"
-                            }`}
+                          className={`filter-card ${isOpen || isSelected ? "filter-card-active" : ""}`}
                         >
                           {/* INDUSTRY HEADER */}
                           <div
-                            className=" rounded-cart flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-slate-50"
+                            className={`filter-card-header cursor-pointer ${isOpen || isSelected ? "filter-card-header-active" : ""}`}
                             onClick={() =>
                               setExpandedIndustry(isOpen ? null : industry.id)
                             }
@@ -205,17 +202,17 @@ export default function JobGridsTwo() {
                                 type="checkbox"
                                 checked={isSelected}
                                 onChange={() => handleIndustrySelect(industry.id)}
-                                className="accent-emerald-600 w-4 h-4"
+                                className="filter-check"
                                 onClick={(e) => e.stopPropagation()}
                               />
-                              <span className="font-medium text-slate-800">
+                              <span className="font-medium">
                                 {industry.name}
                               </span>
                             </label>
 
                             {industry.occupations?.length > 0 && (
                               <IoIosArrowDown
-                                className={`rounded-cart text-slate-500 transition-transform duration-300 rounded-lg ${isOpen ? "rotate-180" : ""
+                                className={`text-slate-500 transition-transform duration-300 rounded-lg ${isOpen ? "rotate-180" : ""
                                   }`}
                               />
                             )}
@@ -223,17 +220,14 @@ export default function JobGridsTwo() {
 
                           {/* OCCUPATIONS DROPDOWN */}
                           {isOpen && industry.occupations && (
-                            <div className="rounded-cart px-4 pb-3 pt-2 border-top">
+                            <div className="filter-card-body">
                               {industry.occupations.map((occ) => {
                                 const occSelected = filters.occupation === occ.id;
 
                                 return (
                                   <label
                                     key={occ.id}
-                                    className={`flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition ${occSelected
-                                      ? "bg-emerald-100 text-emerald-700"
-                                      : "hover:bg-slate-200/60"
-                                      }`}
+                                    className={`flex items-center gap-3 px-3 py-2 cursor-pointer transition filter-pill ${occSelected ? "filter-pill-active" : ""}`}
                                   >
                                     <input
                                       type="checkbox"
@@ -241,7 +235,7 @@ export default function JobGridsTwo() {
                                       onChange={() =>
                                         handleOccupationSelect(occ.id)
                                       }
-                                      className="accent-emerald-600 w-4 h-4"
+                                      className="filter-check"
                                     />
                                     <span className="text-sm">{occ.name}</span>
                                   </label>
@@ -257,7 +251,7 @@ export default function JobGridsTwo() {
 
 
                 <div className="mb-6 px-2.5">
-                  <label className="font-semibold block mb-3 text-slate-800">
+                  <label className="filter-section-title block mb-3">
                     {t('vacancyDetail.employeeType')}
                   </label>
 
@@ -268,21 +262,18 @@ export default function JobGridsTwo() {
                       return (
                         <div
                           key={type.id}
-                          className={`${isDarkMode ? 'shadow-class-dark' : 'shadow-class'}
-            rounded-lg transition-all
-            ${isSelected ? 'border-emerald-500 shadow-sm' : 'border-slate-200'}
-          `}
+                          className={`filter-card ${isSelected ? "filter-card-active" : ""}`}
                         >
                           <label
-                            className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-slate-50 rounded-lg"
+                            className={`filter-card-header cursor-pointer ${isSelected ? "filter-card-header-active" : ""}`}
                           >
                             <input
                               type="checkbox"
                               checked={isSelected}
                               onChange={() => handleEmploymentTypeSelect(type.id)}
-                              className="accent-emerald-600 w-4 h-4"
+                              className="filter-check"
                             />
-                            <span className="font-medium text-slate-800">
+                            <span className="font-medium">
                               {type.name}
                             </span>
                           </label>

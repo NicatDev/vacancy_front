@@ -50,7 +50,7 @@ export default function JobPost() {
             value: d?.id,
             label: d?.name
           }
-        })
+        }).sort((a, b) => a.label.localeCompare(b.label, 'az', { sensitivity: 'base' }));
         setEmploymentTypes(prevState => [...modified_data])
       }
     } catch (error) {
@@ -67,7 +67,7 @@ export default function JobPost() {
             value: d?.id,
             label: d?.name
           }
-        })
+        }).sort((a, b) => a.label.localeCompare(b.label, 'az', { sensitivity: 'base' }));
         setEducations(prevState => [...modified_data])
       }
     } catch (error) {
@@ -84,13 +84,13 @@ export default function JobPost() {
             value: d?.id,
             label: d?.name
           }
-        });
+        }).sort((a, b) => a.label.localeCompare(b.label, 'az', { sensitivity: 'base' }));
         const modfied_occupations = [...response?.data?.data]?.map(d => d?.occupations)?.flat(Infinity)?.map(d => {
           return {
             value: d?.id,
             label: d?.name
           }
-        })
+        }).sort((a, b) => a.label.localeCompare(b.label, 'az', { sensitivity: 'base' }));
 
 
         setCategories(prevState => [...modified_data]);

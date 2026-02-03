@@ -6749,6 +6749,23 @@ html[dir="rtl"] {
   border-top-right-radius: 0px;
 }
 
+.switch-tabs {
+  background-color: #013995;
+}
+
+.switch-pill {
+  background-color: #fff;
+}
+
+.switch-active-text {
+  background-color: #ffff;
+  color: #013995;
+}
+
+.switch-inactive-text {
+  color: #fff;
+}
+
 .about_us_description {
   font-size: 20px;
 }
@@ -6757,4 +6774,216 @@ html[dir="rtl"] {
   .about_us_description {
     font-size: 16px;
   }
+}
+
+.filter-panel {
+  background-color: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(2, 6, 23, 0.08);
+}
+
+.dark .filter-panel {
+  background-color: #0f172b;
+  border-color: rgba(148, 163, 184, 0.2);
+  box-shadow: 0 12px 24px rgba(2, 6, 23, 0.4);
+}
+
+.filter-section-title {
+  color: #0f172a;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.dark .filter-section-title {
+  color: #e2e8f0;
+}
+
+.filter-input-wrap {
+  position: relative;
+}
+
+.filter-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+}
+
+.filter-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px 0 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background-color: #f8fafc;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.dark .filter-input {
+  background-color: #0b1222;
+  border-color: rgba(148, 163, 184, 0.2);
+  color: #e2e8f0;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+
+.filter-card {
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background-color: #ffffff;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  overflow: hidden;
+}
+
+.dark .filter-card {
+  background-color: #0f172b;
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.filter-card:hover {
+  border-color: #0a4cb7;
+}
+
+.filter-card-active {
+  border-color: rgba(14, 165, 233, 0.5);
+}
+
+.dark .filter-card-active {
+  border-color: rgba(14, 165, 233, 0.5);
+}
+
+.filter-card-header {
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-card-header:hover {
+  background-color: rgba(15, 23, 42, 0.03);
+}
+
+.dark .filter-card-header:hover {
+  background-color: rgba(148, 163, 184, 0.08);
+}
+
+.filter-card-header-active {
+  background-color: rgba(10, 76, 183, 0.1);
+}
+
+.dark .filter-card-header-active {
+  background-color: rgba(10, 76, 183, 0.18);
+}
+
+.filter-card-body {
+  padding: 10px 14px 12px;
+  border-top: 1px dashed rgba(15, 23, 42, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dark .filter-card-body {
+  border-top-color: rgba(148, 163, 184, 0.2);
+}
+
+.filter-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  appearance: none;
+  border: 2px solid rgba(2, 6, 23, 0.35);
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  position: relative;
+}
+
+.filter-check:checked {
+  border-color: #0a4cb7;
+  background-color: transparent;
+}
+
+.dark .filter-check {
+  border-color: rgba(148, 163, 184, 0.6);
+}
+
+.filter-check::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: #0a4cb7;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.filter-check:checked::after {
+  opacity: 1;
+}
+
+.filter-pill {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background-color: rgba(15, 23, 42, 0.04);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dark .filter-pill {
+  background-color: rgba(148, 163, 184, 0.12);
+}
+
+.filter-pill-active {
+  background-color: rgba(10, 76, 183, 0.12);
+  color: #0a4cb7;
+}
+
+.dark .filter-pill-active {
+  background-color: rgba(10, 76, 183, 0.22);
+  color: #8cb3ff;
+}
+
+.filter-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.7) transparent;
+}
+
+.dark .filter-scroll {
+  scrollbar-color: rgba(10, 76, 183, 0.55) transparent;
+}
+
+.filter-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filter-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filter-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.7);
+  border-radius: 9999px;
+}
+
+.filter-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 116, 139, 0.8);
+}
+
+.dark .filter-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(10, 76, 183, 0.55);
+}
+
+.dark .filter-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(10, 76, 183, 0.75);
 }

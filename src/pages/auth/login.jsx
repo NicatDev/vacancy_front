@@ -119,27 +119,36 @@ export default function Login() {
               />
             </Link>
 
-            <div className="flex justify-center mt-4 mb-6 border-b border-gray-200 dark:border-gray-700">
-              <button
-                className={`px-4 py-2 font-medium ${
-                  userType === "candidate"
-                    ? "border-b-2 border-emerald-600 text-emerald-600"
-                    : "text-gray-500"
-                }`}
-                onClick={() => setUserType("candidate")}
-              >
-                {t("login.candidate")}
-              </button>
-              <button
-                className={`px-4 py-2 font-medium ${
-                  userType === "company"
-                    ? "border-b-2 border-emerald-600 text-emerald-600"
-                    : "text-gray-500"
-                }`}
-                onClick={() => setUserType("company")}
-              >
-                {t("login.company")}
-              </button>
+            <div className="mt-4 mb-6">
+              <div className="switch-tabs relative mx-auto flex w-full max-w-[320px] rounded-full p-1">
+                <span
+                  className={`switch-pill absolute inset-y-1 w-1/2 rounded-full shadow transition-transform duration-200 ease-out ${
+                    userType === "candidate" ? "translate-x-0" : "translate-x-full"
+                  }`}
+                />
+                <button
+                  type="button"
+                  className={`relative z-10 flex-1 px-4 py-2 rounded-3xl text-sm font-semibold transition ${
+                    userType === "candidate"
+                      ? "switch-active-text"
+                      : "switch-inactive-text"
+                  }`}
+                  onClick={() => setUserType("candidate")}
+                >
+                  {t("login.candidate")}
+                </button>
+                <button
+                  type="button"
+                  className={`relative z-10 flex-1 px-4 py-2 rounded-3xl text-sm font-semibold transition ${
+                    userType === "company"
+                      ? "switch-active-text"
+                      : "switch-inactive-text"
+                  }`}
+                  onClick={() => setUserType("company")}
+                >
+                  {t("login.company")}
+                </button>
+              </div>
             </div>
 
             <h5 className="text-xl font-semibold mb-4 text-center">
