@@ -394,6 +394,7 @@
     "salaryExpectation": "Salary Expectation",
     "uploadResume": "Upload Resume (PDF)",
     "summary": "Summary",
+    "summaryTooltip": "Education, your brief professional story and etc.",
     "saveChanges": "Save Changes",
     "successMessage": "Profile updated successfully",
     "saving": "Saving..."

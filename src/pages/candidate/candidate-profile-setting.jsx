@@ -24,8 +24,13 @@ import {
   theme,
   Select,
   Upload,
+  Tooltip,
 } from "antd";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  DeleteOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
 import axiosClient from "../../api/axiosClient";
 
 const { Text } = Typography;
@@ -484,8 +489,16 @@ export default function CandidateProfileSetting() {
               </div>
 
               <div className="mt-4">
-                <label className="font-medium">
-                  {t("profileSettings.summary")} 
+                <label className="font-medium inline-flex items-center gap-2">
+                  {t("profileSettings.summary")}
+                  <Tooltip
+                    title={t("profileSettings.summaryTooltip")}
+                  >
+                    <InfoCircleOutlined
+                      className="text-slate-400 cursor-pointer hover:text-slate-500 cursor-help"
+                      aria-label="summary-info"
+                    />
+                  </Tooltip>
                 </label>
                 <textarea
                   name="summary"
