@@ -16,7 +16,7 @@ import VacanciesAPI from "../api/apiList/vacancies.js";
 export default function JobPost() {
   const navigate = useNavigate();
   // const company_id = localStorage.getItem('companyId') ?? null;
-  const { isDarkMode, user } = useUser();
+  const { isDarkMode, user, refreshUser } = useUser();
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const paymentStatus = searchParams.get("payment");
@@ -265,6 +265,7 @@ export default function JobPost() {
   useEffect(() => {
     if (paymentStatus === "success") {
       toast.success(t('jobPost.paymentSuccessToast'));
+      refreshUser?.();
       // Parametri URL-dən silmək
       searchParams.delete("payment");
       navigate({ search: searchParams.toString() }, { replace: true });
@@ -274,7 +275,7 @@ export default function JobPost() {
       searchParams.delete("payment");
       navigate({ search: searchParams.toString() }, { replace: true });
     }
-  }, [paymentStatus, navigate, searchParams]);
+  }, [paymentStatus, navigate, searchParams, refreshUser]);
 
 
   useEffect(() => {
