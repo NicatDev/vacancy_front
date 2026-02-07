@@ -258,19 +258,6 @@ const Navbar = (props) => {
       ),
     },
 
-    ...(user?.data?.user?.role === "company"
-      ? [
-          {
-            key: "pricing",
-            label: (
-              <Link to="/pricing" className="flex items-center gap-2">
-                <FaDollarSign />
-                {t("common.plans")}
-              </Link>
-            ),
-          },
-        ]
-      : []),
   ];
 
   useEffect(() => {
@@ -376,6 +363,26 @@ const Navbar = (props) => {
                   }}
                 >
                   {t("navbar.newVacancy")}
+                </Link>
+              </div>
+            </li>
+          )}
+
+          {role === "company" && (
+            <li className="hidden lg:flex items-center mb-0 justify-center h-full me-2">
+              <div className="relative top-[3px]">
+                <Link
+                  to="/pricing"
+                  className="rounded-3xl h-36px shrink-0 flex items-center gap-2"
+                  style={{
+                    backgroundColor: "oklch(45% 0.18 260.67)",
+                    color: "white",
+                    padding: "8px 16px",
+                    textDecoration: "none",
+                  }}
+                >
+                  <FaDollarSign />
+                  {t("common.plans")}
                 </Link>
               </div>
             </li>
@@ -488,18 +495,36 @@ const Navbar = (props) => {
             </li>
 
             <li className="block lg:hidden pb-4 px-4 custom_new_vacancy_btn">
-              <Link
-                to={user ? "/job-post" : "/login"}
-                className="rounded-3xl w-fit"
-                style={{
-                  backgroundColor: "oklch(45% 0.18 260.67)",
-                  color: "white",
-                  padding: "8px 16px",
-                  textDecoration: "none",
-                }}
-              >
-                {t("navbar.newVacancy")}
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link
+                  to={user ? "/job-post" : "/login"}
+                  className="rounded-3xl w-fit"
+                  style={{
+                    backgroundColor: "oklch(45% 0.18 260.67)",
+                    color: "white",
+                    padding: "8px 16px",
+                    textDecoration: "none",
+                  }}
+                >
+                  {t("navbar.newVacancy")}
+                </Link>
+
+                {role === "company" && (
+                  <Link
+                    to="/pricing"
+                    className="rounded-3xl w-fit flex items-center gap-2"
+                    style={{
+                      backgroundColor: "oklch(45% 0.18 260.67)",
+                      color: "white",
+                      padding: "8px 16px",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <FaDollarSign />
+                    {t("common.plans")}
+                  </Link>
+                )}
+              </div>
             </li>
           </ul>
         </div>
