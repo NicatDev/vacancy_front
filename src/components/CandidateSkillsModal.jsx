@@ -12,6 +12,7 @@ const LEVELS = [
   { value: 5, label: "100%" },
 ];
 
+
 export default function CandidateSkillsModal({
   open,
   onClose,
