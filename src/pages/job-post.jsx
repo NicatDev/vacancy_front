@@ -1,5 +1,5 @@
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
-import { FiDollarSign } from "react-icons/fi";
+import { FiDollarSign, FiX } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,15 +9,18 @@ import EmploymentTypeApi from "../api/apiList/employmentTypes";
 import IndustryAPI from "../api/apiList/industries.js";
 import EducationsApi from "../api/apiList/educations.js";
 import Select from 'react-select';
+import { Button, Modal } from "antd";
 import { useUser } from "../context/UserContext.jsx";
 import VacanciesAPI from "../api/apiList/vacancies.js";
+import jobPostGuideAz from "../assets/pdfs/job-post-guideing-az.pdf";
+import jobPostGuideEn from "../assets/pdfs/job-post-guideing-en.pdf";
 
 
 export default function JobPost() {
   const navigate = useNavigate();
   // const company_id = localStorage.getItem('companyId') ?? null;
   const { isDarkMode, user, refreshUser } = useUser();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
   const paymentStatus = searchParams.get("payment");
 
@@ -25,6 +28,7 @@ export default function JobPost() {
   const [categories, setCategories] = useState([]);
   const [occupations, setOccupations] = useState([]);
   const [educations, setEducations] = useState([]);
+  const [isGuideOpen, setIsGuideOpen] = useState(true);
 
   const jobStatuses = [
     { value: 'draft', label: t('commonContent.draft') },
@@ -284,8 +288,34 @@ export default function JobPost() {
     getAllEducations();
   }, []);
 
+  const guidePdf = i18n.language?.toLowerCase().startsWith("az")
+    ? jobPostGuideAz
+    : jobPostGuideEn;
+
   return (
     <>
+      <Modal
+        title={t('jobPost.guideTitle')}
+        open={isGuideOpen}
+        onCancel={() => setIsGuideOpen(false)}
+        closeIcon={<FiX />}
+        width={900}
+        footer={[
+          <Button key="understood" type="primary" onClick={() => setIsGuideOpen(false)}>
+            {t('jobPost.guideUnderstood')}
+          </Button>,
+          <Button key="close" onClick={() => setIsGuideOpen(false)}>
+            {t('jobPost.guideClose')}
+          </Button>,
+        ]}
+      >
+        <iframe
+          title={t('jobPost.guideTitle')}
+          src={guidePdf}
+          className="w-full"
+          style={{ height: "70vh", border: "none" }}
+        />
+      </Modal>
       <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
         <div className="absolute inset-0 bg-emerald-900/90"></div>
         <div className="container">
@@ -328,6 +358,14 @@ export default function JobPost() {
 
       <section className="relative bg-slate-50 dark:bg-slate-800 lg:py-24 py-16">
         <div className="container">
+          <div className="flex justify-center mb-4">
+            <Button
+              type="default"
+              onClick={() => setIsGuideOpen(true)}
+            >
+              {t('jobPost.readGuideButton')}
+            </Button>
+          </div>
           <div className="lg:flex justify-center">
             <div className="lg:w-1/3">
               <div className="p-6 bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">

@@ -245,7 +245,11 @@
     "education": "Education",
     "formSubmittedSuccess": "Job post submitted successfully!",
     "submittingButton": "Submitting...",
-    "responsibilitiesLabel": "Responsibilities"
+    "responsibilitiesLabel": "Responsibilities",
+    "readGuideButton": "Read the guide",
+    "guideTitle": "Job Post Guide",
+    "guideUnderstood": "I understand",
+    "guideClose": "Close"
   },
   "commonContent": {
     "draft": "Draft",
@@ -469,3 +473,4 @@
     "company_description": "You will be able to log in after your account is approved by the admin."
   }
 }
+

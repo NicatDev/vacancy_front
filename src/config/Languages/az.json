@@ -245,7 +245,11 @@
     "education": "Təhsil",
     "formSubmittedSuccess": "İş elanı uğurla göndərildi!",
     "submittingButton": "Göndərilir...",
-    "responsibilitiesLabel": "Öhdəliklər"
+    "responsibilitiesLabel": "Öhdəliklər",
+    "readGuideButton": "Təlimatı oxu",
+    "guideTitle": "Vakansiya yaratma təlimatı",
+    "guideUnderstood": "Anladım",
+    "guideClose": "Bağla"
   },
   "commonContent": {
     "draft": "Qaralama",
@@ -468,3 +472,4 @@
     "company_description": "Hesabınız admin tərəfindən təsdiqləndikdən sonra giriş edə biləcəksiniz."
   }
 }
+
