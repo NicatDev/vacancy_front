@@ -165,7 +165,7 @@ export default function EmployerList() {
                             <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between">
                                 <span className="text-slate-400 flex items-center">
                                     <LuMapPin className="me-1" />
-                                    {t("companies.employerList.noLocation")}
+                                   {item?.location ?? t("companies.employerList.noLocation")}
                                 </span>
 
                                 <span className="font-semibold text-emerald-600">

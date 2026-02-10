@@ -47,7 +47,7 @@ const MainLayout = () => {
           [
             "vacancies", "aboutus", "terms", "privacy", "categories",
             "companies", "company", "candidates", "job-apply", "job-post", "pricing"
-          ].some(path => pathname?.includes(path)) ? "nav-light" : null
+          ].some(path => pathname?.includes(path) && !pathname?.includes("company-profile")) ? "nav-light" : null
         }
       />
 

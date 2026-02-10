@@ -100,7 +100,7 @@
     "jobPostCount": "Vakansiya sayı",
     "employeeCount": "İşçi sayı",
     "social": "Sosial",
-    "companyStory": "Şirkət hekayəsi"
+    "companyStory": "Şirkət haqqında"
   },
   "companiesMain": {
     "title": "Şirkətlər",
@@ -191,7 +191,7 @@
     "register": "Qeydiyyat",
     "already_account": "Artıq hesabınız var?",
     "sign_in": "Daxil ol",
-    "voen": "VÖEN"
+    "voen": "Tax ID"
   },
   "jobcategory": {
     "title": "İş Kateqoriyaları",
@@ -325,7 +325,7 @@
     "linkDeleted": "Link silindi",
     "notFound": "Şirkət profili tapılmadı",
     "summary": "Xülasə",
-    "voen": "VÖEN",
+    "voen": "Tax ID",
     "location": "Ünvan",
     "employees": "İşçilər",
     "email": "Email",
@@ -368,7 +368,7 @@
     "expiresAt": "Bitmə tarixi",
     "status": "Status",
     "active": "Aktiv",
-    "inactive": "Passiv",
+    "inactive": "Qaralama",
     "noVacancies": "Vakansiya yoxdur",
     "addLanguage": "Dil əlavə et",
     "languageName": "Dil seçin",
@@ -472,4 +472,3 @@
     "company_description": "Hesabınız admin tərəfindən təsdiqləndikdən sonra giriş edə biləcəksiniz."
   }
 }
-

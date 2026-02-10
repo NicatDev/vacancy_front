@@ -98,8 +98,8 @@ export default function CandidateListComp() {
               handlePageChange(i);
             }}
             className={`size-[40px] inline-flex justify-center items-center border ${i === current_page
-                ? "bg-emerald-600 text-white border-emerald-600"
-                : "text-slate-400 bg-white dark:bg-slate-900 border-gray-100 hover:text-white hover:border-emerald-600 hover:bg-emerald-600"
+              ? "bg-emerald-600 text-white border-emerald-600"
+              : "text-slate-400 bg-white dark:bg-slate-900 border-gray-100 hover:text-white hover:border-emerald-600 hover:bg-emerald-600"
               }`}
           >
             {i}
@@ -154,7 +154,7 @@ export default function CandidateListComp() {
                   className="size-20 rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 mx-auto"
                   alt={item.name}
                 /> */}
-                
+
 
                 <ul className="mt-2 list-none space-x-0.5">
                   {item.languages?.map((lang, idx) => (
@@ -169,7 +169,7 @@ export default function CandidateListComp() {
                 <div className="flex justify-between mt-2">
                   <div className="block">
                     <span className="text-slate-400">{t("candidates.list.salary")}:</span>
-                    <span className="block text-sm font-semibold">{item.salary_expectation || "-"}</span>
+                    <span className="block text-sm font-semibold">{item.salary_expectation || "-"} {item?.salary_expectation_currency}</span>
                   </div>
                   <div className="block">
                     <span className="text-slate-400">{t("candidates.list.speciality")}:</span>

@@ -157,7 +157,7 @@ export default function JobGridsTwo() {
         <div className="container grid md:grid-cols-12 gap-8">
           {/* FILTER SIDEBAR */}
           <div className="md:col-span-4">
-            <div className="p-6 sticky top-20 filter-panel">
+            <div className="p-6 sticky top-20 filter-panel me-2">
               <div className="mb-6">
                 <label className="filter-section-title">{t('search.button')}</label>
                 <div className="filter-input-wrap mt-2">

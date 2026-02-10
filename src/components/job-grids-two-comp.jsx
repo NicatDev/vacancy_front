@@ -14,7 +14,8 @@ export default function JobGridsTwoComp({ jobs, pagination, onPageChange }) {
     <>
       <div className="grid lg:grid-cols-2 gap-[30px]">
         {jobs.map((job) => (
-          <div
+          <Link
+            to={`/vacancies/${job.id}`}
             key={job.id}
             className="group shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 rounded-md bg-white dark:bg-slate-900"
           >
@@ -24,12 +25,11 @@ export default function JobGridsTwoComp({ jobs, pagination, onPageChange }) {
                   {job.company?.logo ? <img src={job.company.logo} className="size-8" alt={job.company.name} /> : <TbBuildings fontSize={25} />}
                 </div>
                 <div className="ms-3">
-                  <Link
-                    to={`/company/${job.company.id}`}
+                  <h4
                     className="block text-[16px] font-semibold hover:text-emerald-600 transition-all duration-500"
                   >
                     {job.title}
-                  </Link>
+                  </h4>
                   <span className="block text-sm text-slate-400">
                     {job.published_at.as_days} {t('popularJobs.daysago')}
                   </span>
@@ -42,18 +42,17 @@ export default function JobGridsTwoComp({ jobs, pagination, onPageChange }) {
             </div>
 
             <div className="mt-6">
-              <Link
-                to={`/vacancies/${job.id}`}
+              <h6
                 className="text-lg hover:text-emerald-600 font-semibold transition-all duration-500"
               >
                 {job.title}
-              </Link>
+              </h6>
               <h6 className="text-base font-medium flex items-center">
                 <LuMapPin className="me-1" />
                 {job.location}
               </h6>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

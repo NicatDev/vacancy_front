@@ -100,7 +100,7 @@
     "jobPostCount": "Post count",
     "employeeCount": "Employee count",
     "social": "Social",
-    "companyStory": "Compant Story"
+    "companyStory": "Company about"
   },
   "companiesMain": {
     "title": "Companies",
@@ -191,7 +191,7 @@
     "register": "Register",
     "already_account": "Already have an account?",
     "sign_in": "Sign in",
-    "voen": "VOEN"
+    "voen": "Tax ID"
   },
   "jobcategory": {
     "title": "Job Categories",
@@ -326,7 +326,7 @@
     "linkDeleted": "Link deleted",
     "notFound": "Company profile not found",
     "summary": "Summary",
-    "voen": "VOEN",
+    "voen": "Tax ID",
     "location": "Location",
     "employees": "Employees",
     "email": "Email",
@@ -369,7 +369,7 @@
     "expiresAt": "Expires At",
     "status": "Status",
     "active": "Active",
-    "inactive": "Inactive",
+    "inactive": "Draft",
     "noVacancies": "No vacancies published",
     "addLanguage": "Add Language",
     "languageName": "Language Name",
@@ -473,4 +473,3 @@
     "company_description": "You will be able to log in after your account is approved by the admin."
   }
 }
-
