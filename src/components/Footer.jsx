@@ -69,6 +69,16 @@ export default function Footer() {
                         {t('footer.privacyPolicy')}
                       </Link>
                     </li>
+                    <li className="inline-block mt-[10px] md:mt-0">
+                      <a
+                        href="https://coachingbyleyla.com/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-gray-300 hover:text-gray-400 duration-500 ease-in-out font-medium"
+                      >
+                        coachingbyleyla.com
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
