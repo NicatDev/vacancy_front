@@ -148,7 +148,7 @@ export default function JobGridsTwo() {
   return (
     <>
       {/* HERO */}
-      <section className="relative table w-full py-36 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
+      <section className="relative table w-full py-24 bg-[url('../../assets/images/hero/bg.jpg')] bg-top bg-no-repeat bg-cover">
         <div className="absolute inset-0 bg-emerald-900/90"></div>
         <div className="container">
           <div className="grid grid-cols-1 text-center mt-10">
@@ -168,7 +168,7 @@ export default function JobGridsTwo() {
       </section>
 
       {/* CONTENT */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="container grid md:grid-cols-12 gap-8">
           {/* FILTER SIDEBAR */}
           <div className="md:col-span-4 mb-4">
