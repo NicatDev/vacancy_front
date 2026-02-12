@@ -77,7 +77,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="pb-6 text-center">
+      <div className="pb-6 text-center mb-3">
         <a
           href="https://coachingbyleyla.com/"
           target="_blank"

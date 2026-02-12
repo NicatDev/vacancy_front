@@ -41,6 +41,7 @@ import CompanySVG from "../assets/icons/company.svg";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import SubscriptionApi from "../api/apiList/subscriptions";
 
 const { Title, Text } = Typography;
 
@@ -58,6 +59,10 @@ export default function CompanyProfile() {
   const [loadingVacancies, setLoadingVacancies] = useState(true);
   const [editingPhone, setEditingPhone] = useState(null);
   const [editingLink, setEditingLink] = useState(null);
+
+  const [subModalOpen, setSubModalOpen] = useState(false);
+  const [subActionType, setSubActionType] = useState(null); // 'suspend', 'cancel', 'resubscribe'
+  const [subForm] = Form.useForm();
 
   const [phoneForm] = Form.useForm();
   const [linkForm] = Form.useForm();
@@ -255,6 +260,52 @@ export default function CompanyProfile() {
     message.success("Link deleted");
   };
 
+  const handleSuspendSubscription = () => {
+    setSubActionType('suspend');
+    subForm.resetFields();
+    setSubModalOpen(true);
+  };
+
+  const handleCancelSubscription = () => {
+    setSubActionType('cancel');
+    subForm.resetFields();
+    setSubModalOpen(true);
+  };
+
+  const handleResubscribeSubscription = () => {
+    setSubActionType('resubscribe');
+    subForm.resetFields();
+    setSubModalOpen(true);
+  };
+
+  const handleSubscriptionSubmit = async () => {
+    try {
+      const values = await subForm.validateFields();
+      if (!company?.subscription?.id) return;
+
+      const payload = {
+        subscription_id: company.subscription.id,
+        reason: values.reason
+      };
+
+      if (subActionType === 'suspend') {
+        await SubscriptionApi.suspendSubscription(payload);
+        message.success(t("companyProfile.suspended") || "Subscription suspended successfully");
+      } else if (subActionType === 'cancel') {
+        await SubscriptionApi.cancelSubscription(payload);
+        message.success(t("companyProfile.cancelled") || "Subscription cancelled successfully");
+      } else if (subActionType === 'resubscribe') {
+        await SubscriptionApi.resubscribeSubscription(payload);
+        message.success(t("companyProfile.resubscribed") || "Subscription activated successfully");
+      }
+
+      setSubModalOpen(false);
+      fetchAll();
+    } catch (error) {
+      message.error(error.response?.data?.message || t("common.errorOccurred") || "Action failed");
+    }
+  };
+
   const handleShowJob = (id) => {
     navigate(`/vacancies/${id}`);
   };
@@ -383,6 +434,71 @@ export default function CompanyProfile() {
         {/* RIGHT */}
         <Col xs={24} md={16}>
           <Space direction="vertical" size="large" style={{ width: "100%" }}>
+            {/* SUBSCRIPTION */}
+            {company.subscription && (
+              <Card
+                title={
+                  <Space>
+                    <CheckCircleOutlined style={{ color: "green" }} />
+                    {t("companyProfile.activeSubscription") || "Active Subscription"}
+                  </Space>
+                }
+                extra={
+                  <Tag color={company.subscription.status === 'active' ? 'green' : 'orange'}>
+                    {company.subscription.status.toUpperCase()}
+                  </Tag>
+                }
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div>
+                    <Title level={4}>{company.subscription.pricing_plan?.name}</Title>
+                    <Text type="secondary">
+                      {t("companyProfile.price") || "Price"}: {company.subscription.pricing_plan?.price} AZN / {company.subscription.pricing_plan?.duration_months} {t("companyProfile.months") || "months"}
+                    </Text>
+                    <div style={{ marginTop: 12 }}>
+                      <Text strong>{t("companyProfile.features") || "Features"}:</Text>
+                      <ul style={{ paddingLeft: 20, marginTop: 8 }}>
+                        {company.subscription.pricing_plan?.features?.map((feature, index) => (
+                          <li key={index}><Text>{feature}</Text></li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <Space direction="vertical">
+                    {company.subscription.status === 'active' ? (
+                      <Button
+                        type="warning"
+                        ghost
+                        style={{ width: '100%', borderColor: '#faad14', color: '#faad14' }}
+                        onClick={handleSuspendSubscription}
+                      >
+                        {t("companyProfile.suspend") || "Suspend"}
+                      </Button>
+                    ) : company.subscription.status === 'suspended' ? (
+                      <Button
+                        type="primary"
+                        ghost
+                        style={{ width: '100%' }}
+                        onClick={handleResubscribeSubscription}
+                      >
+                        {t("companyProfile.resubscribe") || "Resubscribe"}
+                      </Button>
+                    ) : null}
+
+                    {company.subscription.status !== 'cancelled' && (
+                      <Button
+                        danger
+                        style={{ width: '100%' }}
+                        onClick={handleCancelSubscription}
+                      >
+                        {t("companyProfile.cancel") || "Cancel"}
+                      </Button>
+                    )}
+                  </Space>
+                </div>
+              </Card>
+            )}
+
             {/* PHONES */}
             <Card
               title={
@@ -736,6 +852,26 @@ export default function CompanyProfile() {
               accept="image/png"
               onChange={(e) => handleLogoChange(e.target.files[0])}
             />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* SUBSCRIPTION MODAL */}
+      <Modal
+        open={subModalOpen}
+        title={t("companyProfile.subscriptionAction") || "Subscription Action"}
+        onOk={handleSubscriptionSubmit}
+        onCancel={() => setSubModalOpen(false)}
+        okText={t("companyProfile.confirm") || "Confirm"}
+        cancelText={t("companyProfile.close") || "Close"}
+      >
+        <Form form={subForm} layout="vertical">
+          <Form.Item
+            name="reason"
+            label={t("companyProfile.reasonLabel") || "Reason"}
+            rules={[{ required: true, message: t("companyProfile.reasonRequired") || "Please enter a reason" }]}
+          >
+            <Input.TextArea rows={4} placeholder={t("companyProfile.reasonLabel") || "Reason"} />
           </Form.Item>
         </Form>
       </Modal>
