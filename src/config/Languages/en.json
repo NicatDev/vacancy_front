@@ -249,7 +249,9 @@
     "readGuideButton": "Read the guide",
     "guideTitle": "Job Post Guide",
     "guideUnderstood": "I understand",
-    "guideClose": "Close"
+    "guideClose": "Close",
+    "placementFeeTitle": "Placement Fee Agreement",
+    "placementAccept": "I Accept"
   },
   "commonContent": {
     "draft": "Draft",
@@ -377,7 +379,10 @@
     "deleteLanguageConfirm": "Are you sure you want to delete this language?",
     "noLanguage": "No languages found",
     "activateJob": "Activate",
-    "jobActivated": "Job activated successfully"
+    "jobActivated": "Job activated successfully",
+    "showVacancy": "Show",
+    "editVacancy": "Edit",
+    "vacancyUpdated": "Vacancy updated successfully"
   },
   "candidateProfile": {
     "skills": "Skills",

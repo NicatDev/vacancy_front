@@ -249,7 +249,9 @@
     "readGuideButton": "Təlimatı oxu",
     "guideTitle": "Vakansiya yaratma təlimatı",
     "guideUnderstood": "Anladım",
-    "guideClose": "Bağla"
+    "guideClose": "Bağla",
+    "placementFeeTitle": "Yerləşdirmə Haqqı üzrə Razılaşma",
+    "placementAccept": "Qəbul edirəm"
   },
   "commonContent": {
     "draft": "Qaralama",
@@ -376,7 +378,10 @@
     "deleteLanguageConfirm": "Bu dili silmək istədiyinizə əminsiniz?",
     "noLanguage": "Dil əlavə edilməyib",
     "activateJob": "Aktiv et",
-    "jobActivated": "Vakansiya uğurla aktivləşdirildi"
+    "jobActivated": "Vakansiya uğurla aktivləşdirildi",
+    "showVacancy": "Göstər",
+    "editVacancy": "Düzəliş et",
+    "vacancyUpdated": "Vakansiya uğurla yeniləndi"
   },
   "candidateProfile": {
     "skills": "Bacarıqlar",

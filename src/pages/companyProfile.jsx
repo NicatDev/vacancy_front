@@ -16,6 +16,7 @@ import {
   Input,
   message,
   Popconfirm,
+  Tooltip,
 } from "antd";
 import {
   GlobalOutlined,
@@ -33,6 +34,7 @@ import {
   ClockCircleOutlined,
   InfoCircleOutlined,
   CheckCircleOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
 import AuthAPI from "../api/AuthAPI";
 import CompanySVG from "../assets/icons/company.svg";
@@ -251,6 +253,14 @@ export default function CompanyProfile() {
     });
 
     message.success("Link deleted");
+  };
+
+  const handleShowJob = (id) => {
+    navigate(`/vacancies/${id}`);
+  };
+
+  const handleEditJob = (id) => {
+    navigate(`/job-post?edit=${id}`);
   };
 
   useEffect(() => {
@@ -514,6 +524,22 @@ export default function CompanyProfile() {
                                   {t("companyProfile.activateJob") || "Activate"}
                                 </Button>
                               )}
+                              <Tooltip title={t("companyProfile.showVacancy") || "Show"}>
+                                <Button
+                                  size="small"
+                                  icon={<EyeOutlined />}
+                                  style={{ marginLeft: 8 }}
+                                  onClick={() => handleShowJob(item.id)}
+                                />
+                              </Tooltip>
+                              <Tooltip title={t("companyProfile.editVacancy") || "Edit"}>
+                                <Button
+                                  size="small"
+                                  icon={<EditOutlined />}
+                                  style={{ marginLeft: 8 }}
+                                  onClick={() => handleEditJob(item.id)}
+                                />
+                              </Tooltip>
                             </Col>
                           </Row>
 

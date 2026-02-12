@@ -9,7 +9,7 @@ import EmploymentTypeApi from "../api/apiList/employmentTypes";
 import IndustryAPI from "../api/apiList/industries.js";
 import EducationsApi from "../api/apiList/educations.js";
 import Select from 'react-select';
-import { Button, Modal } from "antd";
+import { Button, Modal, Spin } from "antd";
 import { useUser } from "../context/UserContext.jsx";
 import VacanciesAPI from "../api/apiList/vacancies.js";
 import jobPostGuideAz from "../assets/pdfs/job-post-guideing-az.pdf";
@@ -23,12 +23,18 @@ export default function JobPost() {
   const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
   const paymentStatus = searchParams.get("payment");
+  const editId = searchParams.get("edit");
+  const isEditing = Boolean(editId);
 
   const [employmentTypes, setEmploymentTypes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [occupations, setOccupations] = useState([]);
   const [educations, setEducations] = useState([]);
   const [isGuideOpen, setIsGuideOpen] = useState(true);
+  const [isJobLoading, setIsJobLoading] = useState(false);
+  const [editingJob, setEditingJob] = useState(null);
+  const [placementModalOpen, setPlacementModalOpen] = useState(false);
+  const [placementAccepted, setPlacementAccepted] = useState(false);
 
   const jobStatuses = [
     { value: 'draft', label: t('commonContent.draft') },
@@ -168,30 +174,40 @@ export default function JobPost() {
     },
     validationSchema: validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      setSubmitting(true)
-      try {
-        const response = await VacanciesAPI.createJobPost({
-          ...values,
-          company_id: user?.data?.id,
-          salary: `${values?.minSalary}-${values?.maxSalary}`,
-          salary_expectation_currency: values?.salaryCurrency,
-          category: values?.category?.value,
-          education_level_id: values?.education_level_id?.value,
-          employment_type_id: values?.employment_type_id?.value,
-          occupation_id: values?.occupation_id?.value,
-          location: `${values?.location} ${values?.country} ${values?.state}`
-        });
+      setSubmitting(true);
+      const salaryString =
+        values?.minSalary || values?.maxSalary
+          ? `${values?.minSalary || ""}-${values?.maxSalary || ""}`
+          : "";
+      const payload = {
+        ...values,
+        company_id: user?.data?.id,
+        salary: salaryString,
+        salary_expectation_currency: values?.salaryCurrency,
+        category: values?.category?.value,
+        education_level_id: values?.education_level_id?.value,
+        employment_type_id: values?.employment_type_id?.value,
+        occupation_id: values?.occupation_id?.value,
+        location: `${values?.location} ${values?.country} ${values?.state}`.trim(),
+      };
 
-        if (response.status === 201) {
-          setSubmitting(false);
-          toast.success(t('jobPost.formSubmittedSuccess'));
+      try {
+        if (isEditing) {
+          await VacanciesAPI.updateJobPost(editId, payload);
+          toast.success(t('companyProfile.vacancyUpdated'));
+          navigate("/company-profile");
+        } else {
+          const response = await VacanciesAPI.createJobPost(payload);
+          if (response.status === 201) {
+            toast.success(t('jobPost.formSubmittedSuccess'));
+          }
         }
       } catch (error) {
-        setSubmitting(false);
         const errorMessage = error.response?.data?.message || t('toastMessages.errorOccurred');
         toast.error(errorMessage);
+      } finally {
+        setSubmitting(false);
       }
-
     },
   });
 
@@ -281,19 +297,160 @@ export default function JobPost() {
     }
   }, [paymentStatus, navigate, searchParams, refreshUser]);
 
-
+  useEffect(() => {
+    if (isEditing) {
+      setIsGuideOpen(false);
+    }
+  }, [isEditing]);
+  
   useEffect(() => {
     getAllEmploymentTypes();
     getAllCategoriesAndOccupations();
     getAllEducations();
   }, []);
 
+  useEffect(() => {
+    const fetchJobToEdit = async () => {
+      if (!isEditing) return;
+      try {
+        setIsJobLoading(true);
+        const res = await VacanciesAPI.getSingleJobPost(editId);
+        setEditingJob(res?.data?.data);
+      } catch (error) {
+        toast.error(t('toastMessages.errorOccurred'));
+      } finally {
+        setIsJobLoading(false);
+      }
+    };
+
+    fetchJobToEdit();
+  }, [editId, isEditing, t]);
+
+  useEffect(() => {
+    if (!editingJob) return;
+
+    const employmentOption = employmentTypes.find(
+      (et) =>
+        et.value === editingJob?.employment_type?.id ||
+        et.value === editingJob?.employment_type_id
+    ) || null;
+
+    const occupationOption = occupations.find(
+      (occ) => occ.value === editingJob?.occupation?.id || occ.value === editingJob?.occupation_id
+    ) || null;
+
+    const categoryOption =
+      categories.find(
+        (cat) => cat.value === editingJob?.industry?.id || cat.value === editingJob?.industry_id
+      ) || null;
+
+    const educationOption = educations.find(
+      (edu) => edu.value === editingJob?.education_level?.id || edu.value === editingJob?.education_level_id
+    ) || null;
+
+    // Try to reconstruct address / country / state from single location string when separate fields missing
+    let parsedLocation = editingJob?.location || "";
+    let parsedCountry = editingJob?.country || "";
+    let parsedState = editingJob?.state || "";
+
+    if (parsedLocation && (!parsedCountry || !parsedState)) {
+      const tokens = parsedLocation.trim().split(" ").filter(Boolean);
+      if (tokens.length >= 2) {
+        parsedState = parsedState || tokens.pop();
+        parsedCountry = parsedCountry || tokens.pop();
+        parsedLocation = tokens.join(" ");
+      }
+    }
+
+    const salaryRange =
+      typeof editingJob?.salary === "string" && editingJob.salary.includes("-")
+        ? editingJob.salary.split("-")
+        : [editingJob?.min_salary, editingJob?.max_salary];
+
+    const [minSalaryVal, maxSalaryVal] = salaryRange;
+
+    formik.setValues({
+      status: editingJob?.status || formik.values.status,
+      title: editingJob?.title || "",
+      info: editingJob?.info || editingJob?.description || "",
+      category: categoryOption || null,
+      employment_type_id: employmentOption || null,
+      salaryType: "M",
+      salaryCurrency: editingJob?.salary_expectation_currency || "AZN",
+      minSalary: minSalaryVal || "",
+      maxSalary: maxSalaryVal || "",
+      responsibilities: editingJob?.responsibilities || "",
+      requirements: editingJob?.requirements || "",
+      education_level_id: educationOption || null,
+      experience: editingJob?.experience || "",
+      occupation_id: occupationOption || null,
+      location: parsedLocation,
+      country: parsedCountry,
+      state: parsedState,
+    });
+  }, [editingJob, employmentTypes, categories, occupations, educations]);
+
   const guidePdf = i18n.language?.toLowerCase().startsWith("az")
     ? jobPostGuideAz
     : jobPostGuideEn;
 
+  if (isEditing && isJobLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Spin size="large" />
+      </div>
+    );
+  }
+
   return (
     <>
+      {/* Placement Fee Agreement (create only) */}
+      <Modal
+        title={t('jobPost.placementFeeTitle')}
+        open={placementModalOpen && !isEditing}
+        onCancel={() => setPlacementModalOpen(false)}
+        footer={[
+          <Button key="close" onClick={() => setPlacementModalOpen(false)}>
+            {t('jobPost.guideClose')}
+          </Button>,
+          <Button
+            key="accept"
+            type="primary"
+            onClick={() => {
+              setPlacementAccepted(true);
+              setPlacementModalOpen(false);
+              formik.submitForm();
+            }}
+          >
+            {t('jobPost.placementAccept')}
+          </Button>,
+        ]}
+      >
+        <div className="space-y-3 text-sm leading-6">
+          {i18n.language?.toLowerCase().startsWith("az") ? (
+            <>
+              <p>☐ Yerləşdirmə Haqqı üzrə Razılaşma</p>
+              <p>
+                Bu vakansiyanı yerləşdirməklə Şirkət təsdiq edir ki, Platforma vasitəsilə təqdim edilmiş namizədin (birbaşa və ya dolayı yolla) işə qəbulu baş verdiyi halda, Şirkət namizədin razılaşdırılmış aylıq ümumi (gross) əsas əməkhaqqı həcmində yerləşdirmə haqqı ödəməyi qəbul edir.
+              </p>
+              <p>
+                Yerləşdirmə haqqı namizədin iş təklifini rəsmi şəkildə qəbul etməsi və işə başlaması ilə ödənilməli hesab olunur və ümumi rekrutinq bazar praktikasına uyğundur
+              </p>
+            </>
+          ) : (
+            <>
+              <p>☐ Placement Fee Agreement</p>
+              <p>
+                By posting this vacancy, the Company acknowledges and agrees that in the event a candidate introduced through the Platform is hired (directly or indirectly), the Company will pay a placement fee equal to the candidate’s agreed gross monthly base salary.
+              </p>
+              <p>
+                The placement fee becomes due upon the candidate’s formal acceptance of the employment offer and commencement of employment, in accordance with standard recruitment industry practices.
+              </p>
+            </>
+          )}
+        </div>
+      </Modal>
+
       <Modal
         title={t('jobPost.guideTitle')}
         open={isGuideOpen}
@@ -713,8 +870,19 @@ export default function JobPost() {
                         name="send"
                         className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white"
                         disabled={formik.isSubmitting}
+                        onClick={(e) => {
+                          if (!isEditing && !placementAccepted) {
+                            e.preventDefault();
+                            setPlacementModalOpen(true);
+                            return;
+                          }
+                        }}
                       >
-                        {formik.isSubmitting ? t('jobPost.submittingButton') : t('jobPost.postNowButton')}
+                        {formik.isSubmitting
+                          ? t('jobPost.submittingButton')
+                          : isEditing
+                            ? t('companyProfile.editVacancy')
+                            : t('jobPost.postNowButton')}
                       </button>
                     </div>
                   </div>

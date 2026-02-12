@@ -15,6 +15,8 @@ export default function JobGridsTwo() {
   const [employmentTypes, setEmploymentTypes] = useState([]);
   const [expandedIndustry, setExpandedIndustry] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isCategoriesOpen, setCategoriesOpen] = useState(true);
+  const [isEmploymentOpen, setEmploymentOpen] = useState(true);
 
   const typeFromUrl = searchParams.get("type");
   const searchFromUrl = searchParams.get("search");
@@ -47,6 +49,19 @@ export default function JobGridsTwo() {
     EmploymentTypeApi.getEmploymentTypes(1, 10000).then((res) =>
       setEmploymentTypes(res.data.data)
     );
+  }, []);
+
+  // On mobile/tablet collapse filter blocks by default; keep open on desktop
+  useEffect(() => {
+    const updateFilterStateByViewport = () => {
+      const isMobile = window.innerWidth < 1024;
+      setCategoriesOpen(!isMobile);
+      setEmploymentOpen(!isMobile);
+    };
+
+    updateFilterStateByViewport();
+    window.addEventListener("resize", updateFilterStateByViewport);
+    return () => window.removeEventListener("resize", updateFilterStateByViewport);
   }, []);
 
   /* =======================
@@ -156,7 +171,7 @@ export default function JobGridsTwo() {
       <section className="py-16">
         <div className="container grid md:grid-cols-12 gap-8">
           {/* FILTER SIDEBAR */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-4 mb-4">
             <div className="p-6 sticky top-20 filter-panel me-2">
               <div className="mb-6">
                 <label className="filter-section-title">{t('search.button')}</label>
@@ -174,13 +189,25 @@ export default function JobGridsTwo() {
 
               {/* CATEGORIES */}
               {/* CATEGORIES */}
-              <div className="flex flex-col overflow-y-auto h-dvh filter-scroll">
-                <div className="mb-6 px-2.5">
-                  <label className="filter-section-title block mb-3">
-                    {t('categories.categories')}
-                  </label>
+              <div className="flex flex-col filter-scroll lg:overflow-y-auto lg:max-h-[80vh]">
+                <div className="mb-2 px-2.5">
+                  <button
+                    type="button"
+                    className="filter-section-title filter-card p-3 w-full flex items-center justify-between mb-3"
+                    onClick={() => setCategoriesOpen((prev) => !prev)}
+                  >
+                    <span>{t('categories.categories')}</span>
+                    <IoIosArrowDown
+                      className={`text-lg transition-transform ${isCategoriesOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
 
-                  <div ref={dropdownRef} className="flex flex-col gap-3">
+                  <div
+                    ref={dropdownRef}
+                    className={`flex flex-col gap-3 transition-all duration-200 ${
+                      isCategoriesOpen ? "" : "hidden"
+                    }`}
+                  >
                     {industries.map((industry) => {
                       const isOpen = expandedIndustry === industry.id;
                       const isSelected = filters.industry === industry.id;
@@ -250,12 +277,23 @@ export default function JobGridsTwo() {
                 </div>
 
 
-                <div className="mb-6 px-2.5">
-                  <label className="filter-section-title block mb-3">
-                    {t('vacancyDetail.employeeType')}
-                  </label>
+                <div className="mb-2 px-2.5">
+                  <button
+                    type="button"
+                    className="filter-section-title filter-card p-3 w-full flex items-center justify-between mb-3"
+                    onClick={() => setEmploymentOpen((prev) => !prev)}
+                  >
+                    <span>{t('vacancyDetail.employeeType')}</span>
+                    <IoIosArrowDown
+                      className={`text-lg transition-transform ${isEmploymentOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
 
-                  <div className="flex flex-col gap-3">
+                  <div
+                    className={`flex flex-col gap-3 transition-all duration-200 ${
+                      isEmploymentOpen ? "" : "hidden"
+                    }`}
+                  >
                     {employmentTypes.map((type) => {
                       const isSelected = filters.employment_type === type.id;
 

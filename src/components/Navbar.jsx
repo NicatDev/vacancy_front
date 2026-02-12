@@ -139,6 +139,11 @@ const Navbar = (props) => {
     }
   };
 
+  const closeMenu = () => {
+    // Close the mobile menu (set default hidden state)
+    setMenu(true);
+  };
+
   const getClosest = (elem, selector) => {
     if (!Element.prototype.matches) {
       Element.prototype.matches =
@@ -271,6 +276,11 @@ const Navbar = (props) => {
     }
   }, [pathname]);
 
+  // Close the mobile navigation whenever the route changes
+  useEffect(() => {
+    closeMenu();
+  }, [pathname]);
+
   return (
     <nav id="topnav" className={`defaultscroll is-sticky ${topnavClass}`}>
       <div
@@ -368,7 +378,7 @@ const Navbar = (props) => {
             </li>
           )}
 
-          {role === "company" && (
+          {(role === "company" || !role) && (
             <li className="hidden lg:flex items-center mb-0 justify-center h-full me-2">
               <div className="relative top-[3px]">
                 <Link
@@ -475,29 +485,40 @@ const Navbar = (props) => {
         >
           <ul className={`navigation-menu ${navClass}`}>
             <li>
-              <Link to="/companies">{t("navbar.companies")}</Link>
+              <Link to="/companies" onClick={closeMenu}>
+                {t("navbar.companies")}
+              </Link>
             </li>
 
             <li>
-              <Link to="/vacancies">{t("navbar.vacancies")}</Link>
+              <Link to="/vacancies" onClick={closeMenu}>
+                {t("navbar.vacancies")}
+              </Link>
             </li>
 
             <li>
-              <Link to="/candidates">{t("navbar.candidates")}</Link>
+              <Link to="/candidates" onClick={closeMenu}>
+                {t("navbar.candidates")}
+              </Link>
             </li>
 
             <li>
-              <Link to="/aboutus">{t("navbar.aboutUs")}</Link>
+              <Link to="/aboutus" onClick={closeMenu}>
+                {t("navbar.aboutUs")}
+              </Link>
             </li>
 
             <li>
-              <Link to="/contact">{t("navbar.contactUs")}</Link>
+              <Link to="/contact" onClick={closeMenu}>
+                {t("navbar.contactUs")}
+              </Link>
             </li>
 
             <li className="block lg:hidden pb-4 px-4 custom_new_vacancy_btn">
               <div className="flex items-center gap-2">
                 <Link
                   to={user ? "/job-post" : "/login"}
+                  onClick={closeMenu}
                   className="rounded-3xl w-fit"
                   style={{
                     backgroundColor: "oklch(45% 0.18 260.67)",
@@ -509,9 +530,10 @@ const Navbar = (props) => {
                   {t("navbar.newVacancy")}
                 </Link>
 
-                {role === "company" && (
+                {(role === "company" || !role) && (
                   <Link
                     to="/pricing"
+                    onClick={closeMenu}
                     className="rounded-3xl w-fit flex items-center gap-2"
                     style={{
                       backgroundColor: "oklch(45% 0.18 260.67)",
