@@ -100,7 +100,7 @@
     "jobPostCount": "Post count",
     "employeeCount": "Employee count",
     "social": "Social",
-    "companyStory": "Company about"
+    "companyStory": "About Company"
   },
   "companiesMain": {
     "title": "Companies",
@@ -310,7 +310,9 @@
     "close": "Close",
     "submit": "Submit",
     "day": "day",
-    "wait": "Gözləyin..."
+    "wait": "Please wait...",
+    "boostDetail": "Detail",
+    "boostValue": "Value"
   },
   "footer": {
     "aboutUs": "About us",
@@ -366,8 +368,8 @@
     "noLink": "No external links",
     "vacancy": "Vacancy",
     "employmentType": "Employment Type",
-    "publishedAt": "Published At",
-    "expiresAt": "Expires At",
+    "publishedAt": "Published",
+    "expiresAt": "Expires",
     "status": "Status",
     "active": "Active",
     "inactive": "Draft",
@@ -492,5 +494,10 @@
     "loginButton": "Go to Login Page",
     "company_title": "Registration Completed ⏳",
     "company_description": "You will be able to log in after your account is approved by the admin."
+  },
+  "pricing": {
+    "title": "Pricing Plans",
+    "monthly": "/mo",
+    "createAd": "Create Ad"
   }
 }

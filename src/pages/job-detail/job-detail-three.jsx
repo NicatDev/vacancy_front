@@ -126,7 +126,7 @@ export default function JobDetailThree() {
           <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
             {/* Sol tərəf */}
             <div className="lg:col-span-4 md:col-span-6 ">
-              <div className="flex flex-col sticky top-20">
+              <div className="flex flex-col sticky top-28">
                 <div className="p-6 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md bg-white dark:bg-slate-900">
                   {vacancy?.company?.logo ? <img
                     src={vacancy?.company?.logo}
@@ -222,7 +222,7 @@ export default function JobDetailThree() {
                     <p className="font-medium">{t('vacancyDetail.datePosted')}:</p>
                     <span className="text-emerald-600 font-medium text-sm">
                       {/* 28th Feb, 2025 */}
-                      {vacancy?.published_at && dayjs(vacancy?.published_at?.as_date).format("Do MMM, YYYY")}
+                      {vacancy?.published_at && dayjs(vacancy?.published_at?.as_date).format("D MMM, YYYY")}
                     </span>
                   </div>
                 </li>
@@ -329,8 +329,8 @@ export default function JobDetailThree() {
                   <table className="w-full text-sm text-left text-gray-600 dark:text-gray-300">
                     <thead className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
                       <tr>
-                        <th className="px-6 py-3 font-semibold">{t('vacancyDetail.parametr')}</th>
-                        <th className="px-6 py-3 font-semibold">{t('vacancyDetail.value')}</th>
+                        <th className="px-6 py-3 font-semibold">{t('vacancyDetail.boostDetail')}</th>
+                        <th className="px-6 py-3 font-semibold">{t('vacancyDetail.boostValue')}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">

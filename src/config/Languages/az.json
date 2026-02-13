@@ -309,7 +309,9 @@
     "close": "Bağla",
     "submit": "Göndər",
     "day": "gün",
-    "wait": "Gözləyin..."
+    "wait": "Gözləyin...",
+    "boostDetail": "Ətraflı",
+    "boostValue": "Dəyər"
   },
   "footer": {
     "aboutUs": "Haqqımızda",
@@ -491,5 +493,10 @@
     "loginButton": "Giriş səhifəsinə keç",
     "company_title": "Qeydiyyat tamamlandı ⏳",
     "company_description": "Hesabınız admin tərəfindən təsdiqləndikdən sonra giriş edə biləcəksiniz."
+  },
+  "pricing": {
+    "title": "Qiymət Planları",
+    "monthly": "/ay",
+    "createAd": "Elanı Yarat"
   }
 }

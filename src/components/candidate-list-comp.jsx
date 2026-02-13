@@ -140,52 +140,46 @@ export default function CandidateListComp() {
         </div>
       ) : (
         <>
-          <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[30px]">
             {candidateList.data.map((item) => (
-              <div
-                className="group bg-white dark:bg-slate-900 relative overflow-hidden rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 text-center p-6"
+              <Link
+                to={`/candidate-profile/${item.id}`}
                 key={item.id}
+                className="group shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 rounded-md bg-white dark:bg-slate-900 hover:shadow-md transition-all duration-500"
               >
-                <div className="flex justify-center mx-auto w-60px h-60px items-center rounded-full border">
-                  <FaRegUser fontSize={40} />
+                <div className="flex justify-between">
+                  <div className="flex items-center">
+                    <div className="size-14 flex items-center justify-center bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
+                      <FaRegUser className="text-emerald-600" fontSize={22} />
+                    </div>
+                    <div className="ms-3">
+                      <h4 className="block text-[16px] font-semibold group-hover:text-emerald-600 transition-all duration-500">
+                        {item.speciality || "-"}
+                      </h4>
+                      <span className="block text-sm text-slate-400">
+                        {t("candidates.list.salary")}: {item.salary_expectation || "-"} {item?.salary_expectation_currency}
+                      </span>
+                    </div>
+                  </div>
+
+                  <span className="bg-emerald-600/10 h-fit group-hover:bg-emerald-600 inline-block text-emerald-600 group-hover:text-white text-xs px-2.5 py-0.5 font-semibold rounded-full transition-all duration-500">
+                    #{item.id}
+                  </span>
                 </div>
-                {/* <img
-                  src={UserIcon}
-                  className="size-20 rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 mx-auto"
-                  alt={item.name}
-                /> */}
 
-
-                <ul className="mt-2 list-none space-x-0.5">
-                  {item.languages?.map((lang, idx) => (
-                    <li className="inline" key={idx}>
-                      <span className="bg-emerald-600/10 inline-block text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full">
+                {item.languages?.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {item.languages.map((lang, idx) => (
+                      <span
+                        key={idx}
+                        className="bg-emerald-600/10 inline-block text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full"
+                      >
                         {lang.name}
                       </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="flex justify-between mt-2">
-                  <div className="block">
-                    <span className="text-slate-400">{t("candidates.list.salary")}:</span>
-                    <span className="block text-sm font-semibold">{item.salary_expectation || "-"} {item?.salary_expectation_currency}</span>
+                    ))}
                   </div>
-                  <div className="block">
-                    <span className="text-slate-400">{t("candidates.list.speciality")}:</span>
-                    <span className="block text-sm font-semibold">{item.speciality || "-"}</span>
-                  </div>
-                </div>
-
-                <div className="mt-3">
-                  <Link
-                    to={`/candidate-profile/${item.id}`}
-                    className="py-[5px] px-4 text-sm inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-center bg-emerald-600 hover:bg-emerald-700 border-emerald-600 dark:border-emerald-600 text-white rounded-md"
-                  >
-                    {t("candidates.list.viewProfile")}
-                  </Link>
-                </div>
-              </div>
+                )}
+              </Link>
             ))}
           </div>
 

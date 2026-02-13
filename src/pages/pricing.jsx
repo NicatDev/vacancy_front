@@ -4,12 +4,14 @@ import PricingPlansApi from "../api/apiList/pricing";
 import { toast } from "react-toastify";
 import SubscriptionApi from "../api/apiList/subscriptions";
 import { useUser } from "../context/UserContext";
+import { useTranslation } from "react-i18next";
 const BACKGROUND_IMAGE_PATH = '../../assets/images/hero/bg.jpg';
 
 export default function Pricing() {
   const [selected, setSelected] = useState(null);
   const [plans, setPlans] = useState([]);
   const { user } = useUser();
+  const { t } = useTranslation();
 
   // const companyId = localStorage.getItem('companyId') ?? null;
 
@@ -19,7 +21,7 @@ export default function Pricing() {
       name: item.name,
       price: Number(item.price),
       currency: "AZN",
-      btn: "Elanı Yarat",
+      btn: t('pricing.createAd'),
       features: item.features,
       type: item?.type
     }));
@@ -87,7 +89,7 @@ export default function Pricing() {
         <div className="container">
           <div className="grid grid-cols-1 text-center mt-10">
             <h3 className="md:text-3xl text-2xl md:leading-snug tracking-wide leading-snug font-medium text-white">
-              Pricing Plans
+              {t('pricing.title')}
             </h3>
           </div>
         </div>
@@ -121,7 +123,7 @@ export default function Pricing() {
 
 
                     <span className="text-xl font-semibold self-end mb-1">
-                      /mo
+                      {t('pricing.monthly')}
                     </span>
                   </div>
 

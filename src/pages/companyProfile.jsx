@@ -807,8 +807,9 @@ export default function CompanyProfile() {
         title={t("companyProfile.editCompany")}
         onOk={submitCompany}
         onCancel={() => setCompanyModalOpen(false)}
-        okText="Update"
-        style={{ height: "400px", overflowY: "scroll" }}
+        okText={t("companyProfile.update")}
+        cancelText={t("companyProfile.close")}
+        styles={{ body: { maxHeight: "400px", overflowY: "auto" } }}
       >
         <Form form={companyForm} layout="vertical">
           <Form.Item

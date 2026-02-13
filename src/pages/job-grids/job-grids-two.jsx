@@ -24,9 +24,9 @@ export default function JobGridsTwo() {
 
   const [filters, setFilters] = useState({
     text: searchFromUrl ?? "",
-    industry: null,
-    occupation: null,
-    employment_type: typeFromUrl ?? null,
+    industry: [],
+    occupation: [],
+    employment_type: typeFromUrl ? [typeFromUrl] : [],
     page: 1,
     size: 15,
   });
@@ -71,9 +71,9 @@ export default function JobGridsTwo() {
     try {
       const res = await VacanciesAPI.searchJobPosts({
         text: filters.text,
-        industry: filters.industry,
-        occupation: filters.occupation,
-        employment_type: filters.employment_type,
+        industry: filters.industry.length > 0 ? filters.industry.join(',') : null,
+        occupation: filters.occupation.length > 0 ? filters.occupation.join(',') : null,
+        employment_type: filters.employment_type.length > 0 ? filters.employment_type.join(',') : null,
         page,
         size: filters.size,
       });
@@ -104,28 +104,42 @@ export default function JobGridsTwo() {
   const handleIndustrySelect = (industryId) => {
     setExpandedIndustry((prev) => (prev === industryId ? null : industryId));
 
-    setFilters((prev) => ({
-      ...prev,
-      industry: prev.industry === industryId ? null : industryId,
-      occupation: null,
-      page: 1,
-    }));
+    setFilters((prev) => {
+      const alreadySelected = prev.industry.includes(industryId);
+      return {
+        ...prev,
+        industry: alreadySelected
+          ? prev.industry.filter((id) => id !== industryId)
+          : [...prev.industry, industryId],
+        page: 1,
+      };
+    });
   };
 
   const handleOccupationSelect = (occupationId) => {
-    setFilters((prev) => ({
-      ...prev,
-      occupation: prev.occupation === occupationId ? null : occupationId,
-      page: 1,
-    }));
+    setFilters((prev) => {
+      const alreadySelected = prev.occupation.includes(occupationId);
+      return {
+        ...prev,
+        occupation: alreadySelected
+          ? prev.occupation.filter((id) => id !== occupationId)
+          : [...prev.occupation, occupationId],
+        page: 1,
+      };
+    });
   };
 
   const handleEmploymentTypeSelect = (id) => {
-    setFilters((prev) => ({
-      ...prev,
-      employment_type: prev.employment_type === id ? null : id,
-      page: 1,
-    }));
+    setFilters((prev) => {
+      const alreadySelected = prev.employment_type.includes(id);
+      return {
+        ...prev,
+        employment_type: alreadySelected
+          ? prev.employment_type.filter((t) => t !== id)
+          : [...prev.employment_type, id],
+        page: 1,
+      };
+    });
   };
 
   const handlePageChange = (page) => {
@@ -204,13 +218,12 @@ export default function JobGridsTwo() {
 
                   <div
                     ref={dropdownRef}
-                    className={`flex flex-col gap-3 transition-all duration-200 ${
-                      isCategoriesOpen ? "" : "hidden"
-                    }`}
+                    className={`flex flex-col gap-3 transition-all duration-200 ${isCategoriesOpen ? "" : "hidden"
+                      }`}
                   >
                     {industries.map((industry) => {
                       const isOpen = expandedIndustry === industry.id;
-                      const isSelected = filters.industry === industry.id;
+                      const isSelected = filters.industry.includes(industry.id);
 
                       return (
                         <div
@@ -249,7 +262,7 @@ export default function JobGridsTwo() {
                           {isOpen && industry.occupations && (
                             <div className="filter-card-body">
                               {industry.occupations.map((occ) => {
-                                const occSelected = filters.occupation === occ.id;
+                                const occSelected = filters.occupation.includes(occ.id);
 
                                 return (
                                   <label
@@ -290,12 +303,11 @@ export default function JobGridsTwo() {
                   </button>
 
                   <div
-                    className={`flex flex-col gap-3 transition-all duration-200 ${
-                      isEmploymentOpen ? "" : "hidden"
-                    }`}
+                    className={`flex flex-col gap-3 transition-all duration-200 ${isEmploymentOpen ? "" : "hidden"
+                      }`}
                   >
                     {employmentTypes.map((type) => {
-                      const isSelected = filters.employment_type === type.id;
+                      const isSelected = filters.employment_type.includes(type.id);
 
                       return (
                         <div

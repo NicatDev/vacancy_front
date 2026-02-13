@@ -111,7 +111,7 @@ export default function Signup() {
   };
 
   return (
-    <section className="flex items-center justify-center py-24 relative bg-[url('../../assets/images/hero/bg3.jpg')] bg-cover bg-center">
+    <section className="flex items-center justify-center py-24 min-h-screen relative bg-[url('../../assets/images/hero/bg3.jpg')] bg-cover bg-center bg-fixed">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
       <div className="container flex justify-center">
         <div className="relative bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md w-full max-w-xl">
@@ -132,27 +132,33 @@ export default function Signup() {
             </Link>
 
             {/* Tabs */}
-            <div className="flex justify-center mt-4 mb-6 border-b border-gray-200 dark:border-gray-700">
-              <button
-                type="button"
-                className={`px-4 py-2 border-b-2 transition cursor-pointer ${userType === "candidate"
-                    ? "border-emerald-600 text-emerald-600"
-                    : "border-transparent text-gray-500 hover:text-emerald-600"
-                  }`}
-                onClick={() => handleTypeChange("candidate")}
-              >
-                {t("register.candidate")}
-              </button>
-              <button
-                type="button"
-                className={`px-4 py-2 border-b-2 transition cursor-pointer ${userType === "company"
-                    ? "border-emerald-600 text-emerald-600"
-                    : "border-transparent text-gray-500 hover:text-emerald-600"
-                  }`}
-                onClick={() => handleTypeChange("company")}
-              >
-                {t("register.company")}
-              </button>
+            <div className="mt-4 mb-6">
+              <div className="switch-tabs relative mx-auto flex w-full max-w-[320px] rounded-full p-1">
+                <span
+                  className={`switch-pill absolute inset-y-1 w-1/2 rounded-full shadow transition-transform duration-200 ease-out ${userType === "candidate" ? "translate-x-0" : "translate-x-full"
+                    }`}
+                />
+                <button
+                  type="button"
+                  className={`relative z-10 flex-1 px-4 py-2 rounded-3xl text-sm font-semibold transition ${userType === "candidate"
+                    ? "switch-active-text"
+                    : "switch-inactive-text"
+                    }`}
+                  onClick={() => handleTypeChange("candidate")}
+                >
+                  {t("register.candidate")}
+                </button>
+                <button
+                  type="button"
+                  className={`relative z-10 flex-1 px-4 py-2 rounded-3xl text-sm font-semibold transition ${userType === "company"
+                    ? "switch-active-text"
+                    : "switch-inactive-text"
+                    }`}
+                  onClick={() => handleTypeChange("company")}
+                >
+                  {t("register.company")}
+                </button>
+              </div>
             </div>
 
             <h5 className="text-xl font-semibold mb-6 text-center">
@@ -174,6 +180,7 @@ export default function Signup() {
                       value={formData.name}
                       onChange={handleChange}
                       required
+                      placeholder={t("register.name")}
                       className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                     />
                   </div>
@@ -187,6 +194,7 @@ export default function Signup() {
                       value={formData.email}
                       onChange={handleChange}
                       required
+                      placeholder={t("register.email")}
                       className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                     />
                   </div>
@@ -200,6 +208,7 @@ export default function Signup() {
                       value={formData.speciality}
                       onChange={handleChange}
                       required
+                      placeholder={t("register.speciality")}
                       className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                     />
                   </div>
@@ -214,6 +223,7 @@ export default function Signup() {
                         value={formData.salary_expectation}
                         onChange={handleChange}
                         required
+                        placeholder={t("register.salary_expectation")}
                         className="form-input flex-1 rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                       />
                       <select
@@ -242,6 +252,7 @@ export default function Signup() {
                         value={formData.password}
                         onChange={handleChange}
                         required
+                        placeholder={t("register.password")}
                         className="form-input w-full rounded-md pr-10 border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                       />
 
@@ -272,6 +283,7 @@ export default function Signup() {
                         value={formData.password_confirmation}
                         onChange={handleChange}
                         required
+                        placeholder={t("register.confirm_password")}
                         className="form-input w-full rounded-md pr-10 border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                       />
 
@@ -300,6 +312,7 @@ export default function Signup() {
                       onChange={handleChange}
                       rows={3}
                       required
+                      placeholder={t("register.summary")}
                       className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                     ></textarea>
                   </div>
@@ -318,6 +331,7 @@ export default function Signup() {
                       value={formData.name}
                       onChange={handleChange}
                       required
+                      placeholder={t("register.name")}
                       className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                     />
                   </div>
@@ -331,6 +345,7 @@ export default function Signup() {
                       value={formData.email}
                       onChange={handleChange}
                       required
+                      placeholder={t("register.email")}
                       className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                     />
                   </div>
@@ -344,6 +359,7 @@ export default function Signup() {
                       value={formData.voen}
                       onChange={handleChange}
                       required
+                      placeholder={t("register.voen")}
                       className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                     />
                   </div>
@@ -356,7 +372,7 @@ export default function Signup() {
                       type="url"
                       value={formData.website}
                       onChange={handleChange}
-                      required
+                      placeholder={t("register.website")}
                       className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
                     />
                   </div>
@@ -364,27 +380,57 @@ export default function Signup() {
                     <label className="block font-semibold">
                       {t("register.password")}
                     </label>
-                    <input
-                      id="password"
-                      type="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      required
-                      className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
-                    />
+                    <div className="relative mt-2">
+                      <input
+                        id="password"
+                        type={showPassword ? "text" : "password"}
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                        placeholder={t("register.password")}
+                        className="form-input w-full rounded-md pr-10 border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((p) => !p)}
+                        className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-emerald-600"
+                        aria-label="Toggle password visibility"
+                      >
+                        {showPassword ? (
+                          <FiEyeOff size={18} />
+                        ) : (
+                          <FiEye size={18} />
+                        )}
+                      </button>
+                    </div>
                   </div>
                   <div>
                     <label className="block font-semibold">
                       {t("register.confirm_password")}
                     </label>
-                    <input
-                      id="password_confirmation"
-                      type="password"
-                      value={formData.password_confirmation}
-                      onChange={handleChange}
-                      required
-                      className="form-input mt-2 w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
-                    />
+                    <div className="relative mt-2">
+                      <input
+                        id="password_confirmation"
+                        type={showConfirmPassword ? "text" : "password"}
+                        value={formData.password_confirmation}
+                        onChange={handleChange}
+                        required
+                        placeholder={t("register.confirm_password")}
+                        className="form-input w-full rounded-md pr-10 border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent outline-none focus:border-emerald-600"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowConfirmPassword((p) => !p)}
+                        className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-emerald-600"
+                        aria-label="Toggle confirm password visibility"
+                      >
+                        {showConfirmPassword ? (
+                          <FiEyeOff size={18} />
+                        ) : (
+                          <FiEye size={18} />
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
