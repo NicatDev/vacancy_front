@@ -311,7 +311,8 @@
     "day": "gün",
     "wait": "Gözləyin...",
     "boostDetail": "Ətraflı",
-    "boostValue": "Dəyər"
+    "boostValue": "Dəyər",
+    "boostInfoText": "Bu bölmədə vakansiyanın irəli çəkilməsi ilə bağlı ətraflı məlumatlar qeyd olunub."
   },
   "footer": {
     "aboutUs": "Haqqımızda",

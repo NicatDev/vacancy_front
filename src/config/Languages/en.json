@@ -312,7 +312,8 @@
     "day": "day",
     "wait": "Please wait...",
     "boostDetail": "Detail",
-    "boostValue": "Value"
+    "boostValue": "Value",
+    "boostInfoText": "This section contains detailed information about boosting the vacancy."
   },
   "footer": {
     "aboutUs": "About us",

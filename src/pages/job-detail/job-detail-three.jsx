@@ -9,7 +9,9 @@ import {
   FiMapPin,
   FiMonitor,
   FiUserCheck,
+  FiInfo,
 } from "react-icons/fi";
+import { Tooltip } from "antd";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../context/UserContext"
@@ -329,7 +331,12 @@ export default function JobDetailThree() {
                   <table className="w-full text-sm text-left text-gray-600 dark:text-gray-300">
                     <thead className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
                       <tr>
-                        <th className="px-6 py-3 font-semibold">{t('vacancyDetail.boostDetail')}</th>
+                        <th className="px-6 py-3 font-semibold">
+                          {t('vacancyDetail.boostDetail')}
+                          <Tooltip title={t('vacancyDetail.boostInfoText')}>
+                            <FiInfo className="inline-block text-[18px] ms-1 text-gray-400 cursor-pointer" />
+                          </Tooltip>
+                        </th>
                         <th className="px-6 py-3 font-semibold">{t('vacancyDetail.boostValue')}</th>
                       </tr>
                     </thead>
