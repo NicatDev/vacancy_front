@@ -62,7 +62,9 @@
   },
   "common": {
     "noData": "Məlumat tapılmadı",
-    "contactFor": "Müraciət üçün",
+    "contactFor": "Müraciət",
+    "contactInfo": "Namizədlə əlaqə saxlamaq üçün aşağıdakı vasitələrdən istifadə edə bilərsiniz.",
+    "edit": "Düzəliş et",
     "resetPassword": "Şifrənizi sıfırlayın",
     "resetPasswordInfoText": "Zəhmət olmasa e-poçt ünvanınızı daxil edin. Yeni şifrə yaratmaq üçün link e-poçt vasitəsilə sizə göndəriləcək.",
     "rememberPassword": "Şifrənizi xatırladınız?",
@@ -312,7 +314,8 @@
     "wait": "Gözləyin...",
     "boostDetail": "Ətraflı",
     "boostValue": "Dəyər",
-    "boostInfoText": "Bu bölmədə vakansiyanın irəli çəkilməsi ilə bağlı ətraflı məlumatlar qeyd olunub."
+    "boostInfoText": "Bu bölmədə vakansiyanın irəli çəkilməsi ilə bağlı ətraflı məlumatlar qeyd olunub.",
+    "year": "il"
   },
   "footer": {
     "aboutUs": "Haqqımızda",
@@ -411,7 +414,7 @@
     "fullName": "Tam Ad",
     "salaryExpectation": "Maaş Gözləntisi",
     "email": "E-poçt",
-    "downloadCV": "CV-ni Yüklə",
+    "downloadCV": "CV-ni Göstər",
     "notFound": "Yoxdur",
     "applications": "Müraciətlər"
   },
@@ -498,6 +501,6 @@
   "pricing": {
     "title": "Qiymət Planları",
     "monthly": "/ay",
-    "createAd": "Elanı Yarat"
+    "createAd": "Planı Almaq"
   }
 }

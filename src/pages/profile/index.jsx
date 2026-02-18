@@ -142,9 +142,9 @@ export default function CandidateDetail() {
                 <div className="">
                   <Link
                     to="/candidate-profile-setting"
-                    className="btn btn-icon rounded-full bg-emerald-600/5 hover:bg-emerald-600 border-emerald-600/10 hover:border-emerald-600 text-emerald-600 hover:text-white flex justify-center items-center"
+                    className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white"
                   >
-                    <FiSettings className="size-4" />
+                    {t("common.edit")}
                   </Link>
                 </div>
               </div>
@@ -229,10 +229,10 @@ export default function CandidateDetail() {
                   </div>
                 </div>
               </div>
-                  {(applications?.length > 0) ?   <h4 className="mt-6 text-xl font-semibold">
+              {(applications?.length > 0) ? <h4 className="mt-6 text-xl font-semibold">
                 {t("candidateProfile.applications")}:
-              </h4> : <></> }
-              
+              </h4> : <></>}
+
 
               {applications.map((application, index) => (
                 <div key={index} className="flex mt-6">

@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import image from '../../assets/images/DSC03269.jpg';
 import shree_logo from '../../assets/images/company/shree-logo.png';
 import circle_logo from '../../assets/images/company/circle-logo.png';
-import { FiSettings, FiGift, FiGlobe, FiHome, FiMail, FiMapPin, FiPhone, FiServer } from 'react-icons/fi';
+import { FiSettings, FiGift, FiGlobe, FiHome, FiMail, FiMapPin, FiPhone, FiServer, FiInfo } from 'react-icons/fi';
 import { LuMail, BiLogoDribbble, AiOutlineBehance, BiLogoLinkedin, FaFacebookF, IoLogoTwitter, FaInstagram, FiFileText } from "../../assets/icons/vander"
 import { CandidateList } from '../../data/data';
 import CandidatesAPI from '../../api/apiList/candidates';
@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import userImg from "../../assets/images/user.png";
 import { TfiEmail } from "react-icons/tfi";
 import { MdOutlinePhone } from "react-icons/md";
+import { Modal } from 'antd';
 
 export default function CandidateDetail() {
     const { t } = useTranslation();
@@ -19,6 +20,7 @@ export default function CandidateDetail() {
     const [candidate, setCandidate] = useState(null);
     const [skills, setSkills] = useState([]);
     const [languages, setLanguages] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const getCandidate = async () => {
         try {
@@ -152,10 +154,11 @@ export default function CandidateDetail() {
                                     {languages.map((lang) => (
                                         <div
                                             key={lang.language}
-                                            className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 px-3 py-1.5 rounded-full"
+                                            className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 px-3 py-1.5 rounded-full"
                                         >
                                             <span className="text-sm font-medium text-slate-700 dark:text-slate-200">{lang.language}</span>
-                                            <span className="text-xs text-slate-400">• {lang.level}</span>
+                                            <span className='text-xs text-slate-400'>•</span>
+                                            <span className="text-xs text-slate-400">{lang.level}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -191,6 +194,9 @@ export default function CandidateDetail() {
                             <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                                 <span className="w-1 h-5 bg-emerald-600 rounded-full inline-block"></span>
                                 {t('common.contactFor')}
+                                <button onClick={() => setIsModalOpen(true)} className="ms-2 text-emerald-600 hover:text-emerald-700 transition-all cursor-pointer flex items-center">
+                                    <FiInfo className="size-4" />
+                                </button>
                             </h4>
                             <div className="flex flex-col gap-3">
                                 <a href='mailto:octopustalentscareers@gmail.com' className="flex items-center gap-3 px-4 py-3 rounded-md bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-emerald-600/30 hover:bg-emerald-600/5 transition-all duration-300 group">
@@ -216,6 +222,20 @@ export default function CandidateDetail() {
                     </div>
                 </div>
             </section>
+
+            <Modal
+                title={t('common.contactFor')}
+                open={isModalOpen}
+                onOk={() => setIsModalOpen(false)}
+                onCancel={() => setIsModalOpen(false)}
+                footer={null}
+            >
+                <div className="py-4">
+                    <p className="text-slate-600 dark:text-slate-400">
+                        {t('common.contactInfo')}
+                    </p>
+                </div>
+            </Modal>
         </>
     )
 }

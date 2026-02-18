@@ -62,7 +62,9 @@
   },
   "common": {
     "noData": "No data",
-    "contactFor": "Contact For",
+    "contactFor": "Contact",
+    "contactInfo": "You can use the following methods to contact the candidate.",
+    "edit": "Edit",
     "resetPassword": "Reset Your Password",
     "resetPasswordInfoText": "Please enter your email address. You will receive a link to create a new password via email.",
     "rememberPassword": "Remember your password ?",
@@ -313,7 +315,8 @@
     "wait": "Please wait...",
     "boostDetail": "Detail",
     "boostValue": "Value",
-    "boostInfoText": "This section contains detailed information about boosting the vacancy."
+    "boostInfoText": "This section contains detailed information about boosting the vacancy.",
+    "year": "year"
   },
   "footer": {
     "aboutUs": "About us",
@@ -412,7 +415,7 @@
     "fullName": "Full name",
     "salaryExpectation": "Salary Expectation",
     "email": "Email",
-    "downloadCV": "Download CV",
+    "downloadCV": "Show the CV",
     "notFound": "Not found",
     "applications": "Applications"
   },
@@ -499,6 +502,6 @@
   "pricing": {
     "title": "Pricing Plans",
     "monthly": "/mo",
-    "createAd": "Create Ad"
+    "createAd": "Buy Plan"
   }
 }

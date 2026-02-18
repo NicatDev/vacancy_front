@@ -203,7 +203,7 @@ export default function JobDetailThree() {
                   <div className="ms-4">
                     <p className="font-medium">{t('vacancyDetail.experience')}:</p>
                     <span className="text-emerald-600 font-medium text-sm">
-                      {vacancy?.experience ?? ''}
+                      {vacancy?.experience ?? ''} {t('vacancyDetail.year')}
                     </span>
                   </div>
                 </li>
@@ -225,6 +225,15 @@ export default function JobDetailThree() {
                     <span className="text-emerald-600 font-medium text-sm">
                       {/* 28th Feb, 2025 */}
                       {vacancy?.published_at && dayjs(vacancy?.published_at?.as_date).format("D MMM, YYYY")}
+                    </span>
+                  </div>
+                </li>
+                <li className="inline-flex items-center py-2 px-4 bg-white dark:bg-slate-900 me-2 my-1 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
+                  <FiClock className="size-5"></FiClock>
+                  <div className="ms-4">
+                    <p className="font-medium">{t('vacancyDetail.expiryDate')}:</p>
+                    <span className="text-emerald-600 font-medium text-sm">
+                      {vacancy?.expired_at && dayjs(vacancy?.expired_at?.as_date).format("D MMM, YYYY")}
                     </span>
                   </div>
                 </li>
