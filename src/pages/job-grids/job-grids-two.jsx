@@ -18,17 +18,27 @@ export default function JobGridsTwo() {
   const [isCategoriesOpen, setCategoriesOpen] = useState(true);
   const [isEmploymentOpen, setEmploymentOpen] = useState(true);
 
-  const typeFromUrl = searchParams.get("type");
-  const searchFromUrl = searchParams.get("search");
   const dropdownRef = useRef(null);
 
-  const [filters, setFilters] = useState({
-    text: searchFromUrl ?? "",
-    industry: [],
-    occupation: [],
-    employment_type: typeFromUrl ? [typeFromUrl] : [],
-    page: 1,
-    size: 15,
+  // Read multiple filter values from URL on initial load
+  const [filters, setFilters] = useState(() => {
+    const text = searchParams.get("search") ?? searchParams.get("text") ?? "";
+    const industry = searchParams.getAll("industry[]");
+    const occupation = searchParams.getAll("occupation[]");
+    const employment_type = searchParams.getAll("employment_type[]") || [];
+    // Also support legacy "type" param
+    const legacyType = searchParams.get("type");
+    if (legacyType && !employment_type.includes(legacyType)) {
+      employment_type.push(legacyType);
+    }
+    return {
+      text,
+      industry,
+      occupation,
+      employment_type,
+      page: 1,
+      size: 15,
+    };
   });
 
   const [jobs, setJobs] = useState([]);
@@ -71,9 +81,9 @@ export default function JobGridsTwo() {
     try {
       const res = await VacanciesAPI.searchJobPosts({
         text: filters.text,
-        industry: filters.industry.length > 0 ? filters.industry.join(',') : null,
-        occupation: filters.occupation.length > 0 ? filters.occupation.join(',') : null,
-        employment_type: filters.employment_type.length > 0 ? filters.employment_type.join(',') : null,
+        industry: filters.industry,
+        occupation: filters.occupation,
+        employment_type: filters.employment_type,
         page,
         size: filters.size,
       });
@@ -89,9 +99,17 @@ export default function JobGridsTwo() {
     }
   };
 
+  // Sync URL search params whenever filters change
   useEffect(() => {
     fetchJobs(filters.page);
-    setSearchParams({});
+
+    const params = new URLSearchParams();
+    if (filters.text) params.set("search", filters.text);
+    filters.industry.forEach((id) => params.append("industry[]", id));
+    filters.occupation.forEach((id) => params.append("occupation[]", id));
+    filters.employment_type.forEach((id) => params.append("employment_type[]", id));
+
+    setSearchParams(params, { replace: true });
   }, [filters]);
 
   /* =======================
@@ -104,15 +122,36 @@ export default function JobGridsTwo() {
   const handleIndustrySelect = (industryId) => {
     setExpandedIndustry((prev) => (prev === industryId ? null : industryId));
 
+    // Find child occupation IDs for this industry
+    const industry = industries.find((ind) => ind.id === industryId);
+    const childOccupationIds = industry?.occupations?.map((occ) => occ.id) || [];
+
     setFilters((prev) => {
       const alreadySelected = prev.industry.includes(industryId);
-      return {
-        ...prev,
-        industry: alreadySelected
-          ? prev.industry.filter((id) => id !== industryId)
-          : [...prev.industry, industryId],
-        page: 1,
-      };
+
+      if (alreadySelected) {
+        // Deselecting industry → remove industry + its child occupations
+        return {
+          ...prev,
+          industry: prev.industry.filter((id) => id !== industryId),
+          occupation: prev.occupation.filter(
+            (id) => !childOccupationIds.includes(id)
+          ),
+          page: 1,
+        };
+      } else {
+        // Selecting industry → add industry + auto-select all child occupations
+        const newOccupations = [
+          ...prev.occupation,
+          ...childOccupationIds.filter((id) => !prev.occupation.includes(id)),
+        ];
+        return {
+          ...prev,
+          industry: [...prev.industry, industryId],
+          occupation: newOccupations,
+          page: 1,
+        };
+      }
     });
   };
 

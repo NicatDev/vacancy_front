@@ -5,25 +5,26 @@ const VacanciesAPI = {
     page = 1,
     size = 15,
     text = "",
-    industry = null,
-    occupation = null,
-    employment_type = null,
+    industry = [],
+    occupation = [],
+    employment_type = [],
   } = {}) => {
-    const params = {
-      page: Number(page),
-      size: Number(size),
-    };
+    const params = new URLSearchParams();
+    params.append("page", Number(page));
+    params.append("size", Number(size));
 
-    // yalnız dolu olanlar əlavə olunur (pipeline logic)
-    if (text) params.text = text;
-    if (occupation) {
-      params.occupation = occupation; // occupation industry-ni override edir
-    } else if (industry) {
-      params.industry = industry;
+    if (text) params.append("text", text);
+    if (Array.isArray(industry)) {
+      industry.forEach((id) => params.append("industry[]", id));
     }
-    if (employment_type) params.employment_type = employment_type;
+    if (Array.isArray(occupation)) {
+      occupation.forEach((id) => params.append("occupation[]", id));
+    }
+    if (Array.isArray(employment_type)) {
+      employment_type.forEach((id) => params.append("employment_type[]", id));
+    }
 
-    return axiosClient.get("/job-posts/search", { params });
+    return axiosClient.get(`/job-posts/search?${params.toString()}`);
   },
 
   createJobPost: (params) => {
