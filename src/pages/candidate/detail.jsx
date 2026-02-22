@@ -199,21 +199,21 @@ export default function CandidateDetail() {
                                 </button>
                             </h4>
                             <div className="flex flex-col gap-3">
-                                <a href='mailto:octopustalentscareers@gmail.com' className="flex items-center gap-3 px-4 py-3 rounded-md bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-emerald-600/30 hover:bg-emerald-600/5 transition-all duration-300 group">
+                                <a href='mailto:info@octopus.com.az' className="flex items-center gap-3 px-4 py-3 rounded-md bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-emerald-600/30 hover:bg-emerald-600/5 transition-all duration-300 group">
                                     <span className="size-9 flex items-center justify-center bg-emerald-600/10 rounded-md text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
                                         <TfiEmail />
                                     </span>
                                     <span className="text-slate-700 dark:text-slate-200 text-sm font-medium">
-                                        octopustalentscareers@gmail.com
+                                        info@octopus.com.az
                                     </span>
                                 </a>
 
-                                <a href='tel:+994 50 123 45 67' className="flex items-center gap-3 px-4 py-3 rounded-md bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-emerald-600/30 hover:bg-emerald-600/5 transition-all duration-300 group">
+                                <a href='tel:+15705752535' className="flex items-center gap-3 px-4 py-3 rounded-md bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-emerald-600/30 hover:bg-emerald-600/5 transition-all duration-300 group">
                                     <span className="size-9 flex items-center justify-center bg-emerald-600/10 rounded-md text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
                                         <MdOutlinePhone />
                                     </span>
                                     <span className="text-slate-700 dark:text-slate-200 text-sm font-medium">
-                                        +994 50 123 45 67
+                                        +15705752535
                                     </span>
                                 </a>
                             </div>

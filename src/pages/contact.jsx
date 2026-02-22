@@ -162,7 +162,7 @@ export default function Contact() {
                   <p className="text-slate-400 mt-3">{t("contact.phoneDescription")}</p>
                   <div className="mt-5">
                     <span className="btn btn-link text-emerald-600">
-                      +152 534-68-854
+                      +15705752535
                     </span>
                   </div>
                 </div>
@@ -171,7 +171,7 @@ export default function Contact() {
 
             {/* Email */}
             <div className="text-center px-6">
-              <a href="mailto:octopustalentscareers@gmail.com" className="block hover:opacity-80 transition-opacity">
+              <a href="mailto:info@octopus.com.az" className="block hover:opacity-80 transition-opacity">
                 <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
                   <LuMail />
                 </div>
@@ -180,7 +180,7 @@ export default function Contact() {
                   <p className="text-slate-400 mt-3">{t("contact.emailDescription")}</p>
                   <div className="mt-5">
                     <span className="btn btn-link text-emerald-600">
-                      octopustalentscareers@gmail.com
+                      info@octopus.com.az
                     </span>
                   </div>
                 </div>
