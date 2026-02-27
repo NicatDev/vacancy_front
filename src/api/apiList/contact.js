@@ -6,6 +6,9 @@ const ContactApi = {
   ) => {
     return axiosClient.post("/contact", data);
   },
+  getContactSections: () => {
+    return axiosClient.get("/contact-sections");
+  },
 };
 
 export default ContactApi;

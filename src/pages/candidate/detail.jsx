@@ -6,6 +6,7 @@ import { FiSettings, FiGift, FiGlobe, FiHome, FiMail, FiMapPin, FiPhone, FiServe
 import { LuMail, BiLogoDribbble, AiOutlineBehance, BiLogoLinkedin, FaFacebookF, IoLogoTwitter, FaInstagram, FiFileText } from "../../assets/icons/vander"
 import { CandidateList } from '../../data/data';
 import CandidatesAPI from '../../api/apiList/candidates';
+import ContactApi from '../../api/apiList/contact';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import userImg from "../../assets/images/user.png";
@@ -21,6 +22,7 @@ export default function CandidateDetail() {
     const [skills, setSkills] = useState([]);
     const [languages, setLanguages] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [contactData, setContactData] = useState([]);
 
     const getCandidate = async () => {
         try {
@@ -85,6 +87,26 @@ export default function CandidateDetail() {
         getCandidateLanguages();
         getCandidateServices();
     }, [id]);
+
+    useEffect(() => {
+        const fetchContactSections = async () => {
+            try {
+                const response = await ContactApi.getContactSections();
+                setContactData(response?.data?.data || []);
+            } catch (error) {
+                console.error('Failed to fetch contact sections:', error);
+            }
+        };
+        fetchContactSections();
+    }, []);
+
+    const getContactValue = (type) => {
+        const item = contactData.find((c) => c.type === type);
+        return item?.value || null;
+    };
+
+    const emailValue = getContactValue('email');
+    const phoneValue = getContactValue('phone');
 
 
     return (
@@ -199,21 +221,21 @@ export default function CandidateDetail() {
                                 </button>
                             </h4>
                             <div className="flex flex-col gap-3">
-                                <a href='mailto:info@octopus.com.az' className="flex items-center gap-3 px-4 py-3 rounded-md bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-emerald-600/30 hover:bg-emerald-600/5 transition-all duration-300 group">
+                                <a href={emailValue ? `mailto:${emailValue}` : '#'} className="flex items-center gap-3 px-4 py-3 rounded-md bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-emerald-600/30 hover:bg-emerald-600/5 transition-all duration-300 group">
                                     <span className="size-9 flex items-center justify-center bg-emerald-600/10 rounded-md text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
                                         <TfiEmail />
                                     </span>
                                     <span className="text-slate-700 dark:text-slate-200 text-sm font-medium">
-                                        info@octopus.com.az
+                                        {emailValue}
                                     </span>
                                 </a>
 
-                                <a href='tel:+15705752535' className="flex items-center gap-3 px-4 py-3 rounded-md bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-emerald-600/30 hover:bg-emerald-600/5 transition-all duration-300 group">
+                                <a href={phoneValue ? `tel:${phoneValue}` : '#'} className="flex items-center gap-3 px-4 py-3 rounded-md bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-emerald-600/30 hover:bg-emerald-600/5 transition-all duration-300 group">
                                     <span className="size-9 flex items-center justify-center bg-emerald-600/10 rounded-md text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
                                         <MdOutlinePhone />
                                     </span>
                                     <span className="text-slate-700 dark:text-slate-200 text-sm font-medium">
-                                        +15705752535
+                                        {phoneValue}
                                     </span>
                                 </a>
                             </div>

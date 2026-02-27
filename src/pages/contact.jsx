@@ -1,5 +1,5 @@
-import { useState } from "react";
-import ContactApi from "../api/apiList/contact"; // Sizin axios client wrapper
+import { useState, useEffect } from "react";
+import ContactApi from "../api/apiList/contact";
 import contactImg from '../assets/images/DSC09363.jpg';
 import { Link } from 'react-router-dom';
 import { PiMapPin, BsTelephone, LuMail } from "../assets/icons/vander";
@@ -18,6 +18,29 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [contactData, setContactData] = useState([]);
+
+  useEffect(() => {
+    const fetchContactSections = async () => {
+      try {
+        const response = await ContactApi.getContactSections();
+        setContactData(response?.data?.data || []);
+      } catch (error) {
+        console.error("Failed to fetch contact sections:", error);
+      }
+    };
+    fetchContactSections();
+  }, []);
+
+  // Helper to get value by type
+  const getContactValue = (type) => {
+    const item = contactData.find((c) => c.type === type);
+    return item?.value || null;
+  };
+
+  const phoneValue = getContactValue("phone");
+  const emailValue = getContactValue("email");
+  const addressValue = getContactValue("address");
 
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -153,7 +176,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-[30px]">
             {/* Phone */}
             <div className="text-center px-6">
-              <a href="tel:+15253468854" className="block hover:opacity-80 transition-opacity">
+              <a href={phoneValue ? `tel:${phoneValue}` : "#"} className="block hover:opacity-80 transition-opacity">
                 <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
                   <BsTelephone />
                 </div>
@@ -162,7 +185,7 @@ export default function Contact() {
                   <p className="text-slate-400 mt-3">{t("contact.phoneDescription")}</p>
                   <div className="mt-5">
                     <span className="btn btn-link text-emerald-600">
-                      +15705752535
+                      {phoneValue}
                     </span>
                   </div>
                 </div>
@@ -171,7 +194,7 @@ export default function Contact() {
 
             {/* Email */}
             <div className="text-center px-6">
-              <a href="mailto:info@octopus.com.az" className="block hover:opacity-80 transition-opacity">
+              <a href={emailValue ? `mailto:${emailValue}` : "#"} className="block hover:opacity-80 transition-opacity">
                 <div className="size-14 bg-emerald-600/5 text-emerald-600 rounded-xl flex items-center justify-center mx-auto">
                   <LuMail />
                 </div>
@@ -180,7 +203,7 @@ export default function Contact() {
                   <p className="text-slate-400 mt-3">{t("contact.emailDescription")}</p>
                   <div className="mt-5">
                     <span className="btn btn-link text-emerald-600">
-                      info@octopus.com.az
+                      {emailValue}
                     </span>
                   </div>
                 </div>
@@ -195,7 +218,9 @@ export default function Contact() {
                 </div>
                 <div className="content mt-7">
                   <h5 className="text-lg font-semibold">{t("contact.location")}</h5>
-                  <p className="text-slate-400 mt-3">{t("contact.locationAddress")}</p>
+                  <p className="text-slate-400 mt-3">
+                    {addressValue || t("contact.locationAddress")}
+                  </p>
                   <div className="mt-5">
                     <span className="btn btn-link text-emerald-600">
                       {t("contact.viewOnMap")}

@@ -1,6 +1,6 @@
 import logo_light from "../assets/images/logo-light.png";
 import logo from "../assets/images/logo.png";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   AiOutlineShoppingCart,
@@ -13,10 +13,36 @@ import {
   IoLogoTwitter,
 } from "../assets/icons/vander";
 import { useTranslation } from "react-i18next";
+import ContactApi from "../api/apiList/contact";
 
 export default function Footer() {
+  const { t } = useTranslation();
+  const [contactData, setContactData] = useState([]);
 
-  const { t } = useTranslation()
+  useEffect(() => {
+    const fetchContactSections = async () => {
+      try {
+        const response = await ContactApi.getContactSections();
+        setContactData(response?.data?.data || []);
+      } catch (error) {
+        console.error("Failed to fetch contact sections:", error);
+      }
+    };
+    fetchContactSections();
+  }, []);
+
+  // Helper to get value by type
+  const getContactValue = (type) => {
+    const item = contactData.find((c) => c.type === type);
+    return item?.value || null;
+  };
+
+  const linkedinUrl = getContactValue("linkedin");
+  const facebookUrl = getContactValue("facebook");
+  const instagramUrl = getContactValue("instagram");
+  const xUrl = getContactValue("x");
+  const emailValue = getContactValue("email");
+
   return (
     <footer className="relative bg-slate-900 dark:bg-slate-800">
       <div className="container">
@@ -99,50 +125,60 @@ export default function Footer() {
 
             <ul className="list-none ltr:md:text-right rtl:md:text-left text-center space-x-0.5">
 
-              <li className="inline">
-                <Link
-                  to="http://linkedin.com/company/"
-                  target="_blank"
-                  className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
-                >
-                  <BiLogoLinkedin />
-                </Link>
-              </li>
-              <li className="inline">
-                <Link
-                  to="https://www.facebook.com/"
-                  target="_blank"
-                  className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
-                >
-                  <FaFacebookF />
-                </Link>
-              </li>
-              <li className="inline">
-                <Link
-                  to="https://www.instagram.com//"
-                  target="_blank"
-                  className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
-                >
-                  <FaInstagram />
-                </Link>
-              </li>
-              <li className="inline">
-                <Link
-                  to="https://twitter.com/"
-                  target="_blank"
-                  className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
-                >
-                  <IoLogoTwitter />
-                </Link>
-              </li>
-              <li className="inline">
-                <Link
-                  to="mailto:support@Octopus.in"
-                  className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
-                >
-                  <LuMail />
-                </Link>
-              </li>
+              {linkedinUrl && (
+                <li className="inline">
+                  <Link
+                    to={linkedinUrl}
+                    target="_blank"
+                    className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
+                  >
+                    <BiLogoLinkedin />
+                  </Link>
+                </li>
+              )}
+              {facebookUrl && (
+                <li className="inline">
+                  <Link
+                    to={facebookUrl}
+                    target="_blank"
+                    className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
+                  >
+                    <FaFacebookF />
+                  </Link>
+                </li>
+              )}
+              {instagramUrl && (
+                <li className="inline">
+                  <Link
+                    to={instagramUrl}
+                    target="_blank"
+                    className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
+                  >
+                    <FaInstagram />
+                  </Link>
+                </li>
+              )}
+              {xUrl && (
+                <li className="inline">
+                  <Link
+                    to={xUrl}
+                    target="_blank"
+                    className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
+                  >
+                    <IoLogoTwitter />
+                  </Link>
+                </li>
+              )}
+              {emailValue && (
+                <li className="inline">
+                  <Link
+                    to={`mailto:${emailValue}`}
+                    className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
+                  >
+                    <LuMail />
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
