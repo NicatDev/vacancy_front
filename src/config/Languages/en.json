@@ -253,7 +253,10 @@
     "guideUnderstood": "I understand",
     "guideClose": "Close",
     "placementFeeTitle": "Placement Fee Agreement",
-    "placementAccept": "I Accept"
+    "placementFeeText": "Dear Employer,\n\nPlease be informed that upon the successful hiring of a candidate for this vacancy, a **Placement Fee** must be paid to the Octopus platform. This fee is equivalent to the **gross salary of the candidate's first working month**.\n\nBy clicking \"I Agree\", you acknowledge and accept these terms and conditions.",
+    "placementAccept": "I Agree",
+    "placementCancel": "Cancel",
+    "placementFeeInfoButton": "Placement Fee"
   },
   "commonContent": {
     "draft": "Draft",
@@ -512,18 +515,17 @@
         ]
       },
       {
+        "title": "STARTER PACKAGE (5 VACANCIES)",
+        "features": [
+          "5 vacancy postings",
+          "Save 20%"
+        ]
+      },
+      {
         "title": "6-MONTH SUBSCRIPTION",
         "features": [
           "Unlimited vacancy postings",
           "Priority Listing: Ads appear higher"
-        ]
-      },
-      {
-        "title": "STARTER PACKAGE (5 VACANCIES)",
-        "features": [
-          "5 vacancy postings",
-          "Save 20%",
-          "1 ad = 40 ₼"
         ]
       },
       {

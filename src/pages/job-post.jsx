@@ -14,6 +14,7 @@ import { useUser } from "../context/UserContext.jsx";
 import VacanciesAPI from "../api/apiList/vacancies.js";
 import jobPostGuideAz from "../assets/pdfs/job-post-guideing-az.pdf";
 import jobPostGuideEn from "../assets/pdfs/job-post-guideing-en.pdf";
+import ReactMarkdown from 'react-markdown';
 
 
 export default function JobPost() {
@@ -35,6 +36,7 @@ export default function JobPost() {
   const [editingJob, setEditingJob] = useState(null);
   const [placementModalOpen, setPlacementModalOpen] = useState(false);
   const [placementAccepted, setPlacementAccepted] = useState(false);
+  const [modalTrigger, setModalTrigger] = useState("");
 
   const jobStatuses = [
     { value: 'draft', label: t('commonContent.draft') },
@@ -302,7 +304,7 @@ export default function JobPost() {
       setIsGuideOpen(false);
     }
   }, [isEditing]);
-  
+
   useEffect(() => {
     getAllEmploymentTypes();
     getAllCategoriesAndOccupations();
@@ -419,7 +421,9 @@ export default function JobPost() {
             onClick={() => {
               setPlacementAccepted(true);
               setPlacementModalOpen(false);
-              formik.submitForm();
+              if (modalTrigger === "submit") {
+                formik.submitForm();
+              }
             }}
           >
             {t('jobPost.placementAccept')}
@@ -863,16 +867,17 @@ export default function JobPost() {
                   </div>
 
                   <div className="grid grid-cols-1 gap-4 mt-4">
-                    <div>
+                    <div className="flex flex-wrap items-center gap-4">
                       <button
                         type="submit"
                         id="submit"
                         name="send"
-                        className="py-1 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white"
+                        className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white"
                         disabled={formik.isSubmitting}
                         onClick={(e) => {
                           if (!isEditing && !placementAccepted) {
                             e.preventDefault();
+                            setModalTrigger("submit");
                             setPlacementModalOpen(true);
                             return;
                           }
@@ -884,6 +889,19 @@ export default function JobPost() {
                             ? t('companyProfile.editVacancy')
                             : t('jobPost.postNowButton')}
                       </button>
+
+                      {!isEditing && (
+                        <button
+                          type="button"
+                          className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center rounded-md border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white"
+                          onClick={() => {
+                            setModalTrigger("view");
+                            setPlacementModalOpen(true);
+                          }}
+                        >
+                          {t('jobPost.placementFeeInfoButton')}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </form>

@@ -105,8 +105,10 @@ export default function CandidateDetail() {
         return item?.value || null;
     };
 
-    const emailValue = getContactValue('email');
-    const phoneValue = getContactValue('phone');
+    // const emailValue = getContactValue('email');
+    // const phoneValue = getContactValue('phone');
+    const emailValue = "info@octopus.com.az";
+    const phoneValue = "+1 (570) 575-2535";
 
 
     return (

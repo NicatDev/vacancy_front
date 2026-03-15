@@ -38,8 +38,10 @@ export default function Contact() {
     return item?.value || null;
   };
 
-  const phoneValue = getContactValue("phone");
-  const emailValue = getContactValue("email");
+  // const phoneValue = getContactValue("phone");
+  // const emailValue = getContactValue("email");
+  const phoneValue = "+1 (570) 575-2535";
+  const emailValue = "info@octopus.com.az";
   const addressValue = getContactValue("address");
 
   const handleChange = (e) => {

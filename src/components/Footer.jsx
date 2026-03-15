@@ -41,7 +41,8 @@ export default function Footer() {
   const facebookUrl = getContactValue("facebook");
   const instagramUrl = getContactValue("instagram");
   const xUrl = getContactValue("x");
-  const emailValue = getContactValue("email");
+  // const emailValue = getContactValue("email");
+  const emailValue = "info@octopus.com.az";
 
   return (
     <footer className="relative bg-slate-900 dark:bg-slate-800">

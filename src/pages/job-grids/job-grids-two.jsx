@@ -218,7 +218,7 @@ export default function JobGridsTwo() {
         <div className="container">
           <div className="grid grid-cols-1 text-center mt-10">
             <h3 className="md:text-3xl text-2xl font-medium text-white">
-              Job Vacancies
+              {t('navbar.vacancies')}
             </h3>
           </div>
         </div>
@@ -227,7 +227,7 @@ export default function JobGridsTwo() {
             <li className="inline text-white/50">
               <Link to="/index">Octopus</Link>
             </li>
-            <li className="inline text-white ms-2">Vacancies</li>
+            <li className="inline text-white ms-2">{t('navbar.vacancies')}</li>
           </ul>
         </div>
       </section>

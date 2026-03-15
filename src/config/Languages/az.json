@@ -253,7 +253,10 @@
     "guideUnderstood": "Anladım",
     "guideClose": "Bağla",
     "placementFeeTitle": "Yerləşdirmə Haqqı üzrə Razılaşma",
-    "placementAccept": "Qəbul edirəm"
+    "placementFeeText": "Hörmətli İşəgötürən,\n\nNəzərinizə çatdırırıq ki, vakansiya üzrə seçilmiş namizəd işə qəbul edildiyi təqdirdə, Octopus platformasına **\"Yerləşdirmə Haqqı\" (Placement Fee)** ödənilməsi tələb olunur. Bu məbləğ namizədin **ilk iş ayının gross (vergilər daxil) əməkhaqqısı** həcmində müəyyən edilmişdir.\n\n\"Razıyam\" düyməsini sıxmaqla siz bu şərtləri anladığınızı və qəbul etdiyinizi təsdiqləyirsiniz.",
+    "placementAccept": "Qəbul edirəm",
+    "placementCancel": "İmtina",
+    "placementFeeInfoButton": "Yerləşdirmə haqqı"
   },
   "commonContent": {
     "draft": "Qaralama",
@@ -511,6 +514,13 @@
         ]
       },
       {
+        "title": "BAŞLANĞIC PAKET (5 VAKANSİYA)",
+        "features": [
+          "5 vakansiya",
+          "10% qənaət"
+        ]
+      },
+      {
         "title": "6-AYLIQ ABUNƏLİK",
         "features": [
           "Limitsiz vakansiya",
@@ -518,18 +528,10 @@
         ]
       },
       {
-        "title": "BAŞLANĞIC PAKET (5 VAKANSİYA)",
-        "features": [
-          "5 vakansiya",
-          "20% qənaət",
-          "1 elan = 40 ₼"
-        ]
-      },
-      {
         "title": "12-AYLIQ LİMİTSİZ ABUNƏLİK",
         "features": [
           "Limitsiz vakansiya",
-          "Prioritet",
+          "Prioritet: Yuxarıda görün",
           "Bonus: 1 pulsuz namizəd"
         ]
       }

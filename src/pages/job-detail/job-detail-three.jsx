@@ -5,12 +5,12 @@ import {
   FiBook,
   FiBriefcase,
   FiClock,
-  FiDollarSign,
   FiMapPin,
   FiMonitor,
   FiUserCheck,
   FiInfo,
 } from "react-icons/fi";
+import { BiMoney } from "react-icons/bi";
 import { Tooltip } from "antd";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
@@ -209,11 +209,11 @@ export default function JobDetailThree() {
                 </li>
 
                 <li className="inline-flex items-center py-2 px-4 bg-white dark:bg-slate-900 me-2 my-1 shadow-sm shadow-gray-200 dark:shadow-gray-700 rounded-md">
-                  <FiDollarSign className="size-5"></FiDollarSign>
+                  <BiMoney className="size-5"></BiMoney>
                   <div className="ms-4">
                     <p className="font-medium">{t('vacancyDetail.salary')}:</p>
                     <span className="text-emerald-600 font-medium text-sm">
-                      {vacancy?.salary ? vacancy?.salary : ""}
+                      {vacancy?.salary ? `${vacancy?.salary} ₼` : ""}
                     </span>
                   </div>
                 </li>
