@@ -124,7 +124,10 @@ export default function CompanyProfile() {
     try {
       setLoadingVacancies(true);
       const res = await AuthAPI.getCompanyVacancies(company.id);
-      setVacancies(res?.data?.data || []);
+      const data = res?.data?.data || [];
+      const total = res?.data?.meta?.total ?? data.length;
+      data.total = total; 
+      setVacancies(data);
     } catch (e) {
       setVacancies([]);
     } finally {
@@ -425,7 +428,7 @@ export default function CompanyProfile() {
               {/* Vacancies */}
               <Tag color="blue">
                 <TeamOutlined style={{ marginRight: 4 }} />
-                {t("companyProfile.vacancies")}: {company.job_post_count}
+                {t("companyProfile.vacancies")}: {loadingVacancies ? "..." : (vacancies.total ?? vacancies.length)}
               </Tag>
             </Space>
           </Card>

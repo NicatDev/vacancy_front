@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { LuMapPin, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "../assets/icons/vander";
 import CompaniesAPI from '../api/apiList/companies';
+import AuthAPI from '../api/AuthAPI';
 import { useTranslation } from "react-i18next";
 import { TbBuildings } from "react-icons/tb";
 import CompanyIcon from '../assets/icons/company.svg'
@@ -14,6 +15,44 @@ const initialCompanyData = {
         total: 0,
     }
 };
+
+function CompanyJobCount({ companyId, initialCount }) {
+    const { t } = useTranslation();
+    const [count, setCount] = useState(initialCount);
+    const [loading, setLoading] = useState(initialCount === 0 || initialCount === undefined);
+
+    useEffect(() => {
+        let isMounted = true;
+        if (initialCount === 0 || initialCount === undefined) {
+            const fetchCount = async () => {
+                try {
+                    // Start by checking if we can get the count without full data
+                    const res = await AuthAPI.getCompanyVacancies(companyId, { size: 1 });
+                    if (isMounted) {
+                        const total = res.data?.meta?.total ?? res.data?.data?.length ?? 0;
+                        setCount(total);
+                    }
+                } catch (e) {
+                    // If size=1 fails, try without it
+                    try {
+                        const res = await AuthAPI.getCompanyVacancies(companyId);
+                        if (isMounted) {
+                            const total = res.data?.meta?.total ?? res.data?.data?.length ?? 0;
+                            setCount(total);
+                        }
+                    } catch (err) {}
+                } finally {
+                    if (isMounted) setLoading(false);
+                }
+            };
+            fetchCount();
+        }
+        return () => { isMounted = false; };
+    }, [companyId, initialCount]);
+
+    if (loading) return <span>...</span>;
+    return <span>{t('companies.employerList.activeVacancies', { count })}</span>;
+}
 
 export default function EmployerList() {
     const { t } = useTranslation();
@@ -29,7 +68,6 @@ export default function EmployerList() {
             const params = {
                 page,
                 size: perPage,
-                include: "user",
                 order: "desc",
                 order_by: "id",
             };
@@ -162,14 +200,16 @@ export default function EmployerList() {
 
                             </div>
 
-                            <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between">
-                                <span className="text-slate-400 flex items-center">
-                                    <LuMapPin className="me-1" />
-                                   {item?.location ?? t("companies.employerList.noLocation")}
-                                </span>
+                            <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                                <Link
+                                    to={`/company/${item.id}`}
+                                    className="text-emerald-600 font-semibold hover:text-emerald-700 transition duration-500 ease-in-out"
+                                >
+                                    {t('companies.employerList.visit')}
+                                </Link>
 
                                 <span className="font-semibold text-emerald-600">
-                                    {item?.job_post_count}Jobs
+                                    <CompanyJobCount companyId={item.id} initialCount={item.job_post_count} />
                                 </span>
                             </div>
                         </div>

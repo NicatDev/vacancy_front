@@ -26,7 +26,9 @@ import ExploreJob from "../../components/Explore-job";
 import { jobData } from "../../data/data";
 import { useCallback, useEffect, useState } from "react";
 import CompaniesAPI from "../../api/apiList/companies";
+import AuthAPI from "../../api/AuthAPI";
 import { useTranslation } from "react-i18next";
+import JobGridsTwoComp from "../../components/job-grids-two-comp";
 
 export default function EmployerDetail(props) {
   const { t } = useTranslation()
@@ -34,6 +36,37 @@ export default function EmployerDetail(props) {
   const id = params.id;
   const [company, setCompany] = useState(null);
   const [externalLinks, setExternalLinks] = useState([])
+  const [vacancies, setVacancies] = useState([]);
+  const [loadingVacancies, setLoadingVacancies] = useState(true);
+  const [pagination, setPagination] = useState({
+    current_page: 1,
+    last_page: 1,
+    total: 0,
+  });
+
+  const fetchVacancies = useCallback(async (page = 1) => {
+    try {
+      setLoadingVacancies(true);
+      const response = await AuthAPI.getCompanyVacancies(id, { size: 10, page });
+      const data = response?.data?.data || [];
+      const meta = response?.data?.meta || {};
+
+      setVacancies(data);
+      setPagination({
+        current_page: meta.current_page || 1,
+        last_page: meta.last_page || 1,
+        total: meta.total || data.length,
+      });
+    } catch (error) {
+      console.error("Error loading vacancies:", error);
+    } finally {
+      setLoadingVacancies(false);
+    }
+  }, [id]);
+
+  const onPageChange = (page) => {
+    fetchVacancies(page);
+  }
 
   useEffect(() => {
     const fetchCompany = async () => {
@@ -56,7 +89,8 @@ export default function EmployerDetail(props) {
 
     fetchCompany();
     getCompanyExternalLinks();
-  }, []);
+    fetchVacancies();
+  }, [id, fetchVacancies]);
   const data = jobData.find((jobs) => jobs.id === parseInt(id));
   return (
     <>
@@ -109,7 +143,7 @@ export default function EmployerDetail(props) {
             <div className="lg:col-span-8 md:col-span-7">
               <h5 className="text-xl font-semibold">{t('companies.companyStory')}</h5>
               <p className="text-slate-400 mt-4">
-                {company?.summary ? company?.summary : t('companies.notFound')}
+                {company?.summary ? company?.summary : t('companies.noCompanySummary')}
               </p>
 
 
@@ -137,67 +171,21 @@ export default function EmployerDetail(props) {
                 </div>
               </div> */}
 
-              {/* <h5 className="text-xl font-semibold mt-6">Vacancies:</h5> */}
+              <h5 className="text-xl font-semibold mt-6">{t('companies.latestVacancies')}</h5>
 
-              {/* <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 mt-6">
-                <div className="group relative overflow-hidden rounded-md shadow-sm dark:shadow-gray-800">
-                  <div className="p-6">
-                    <Link
-                      to="#"
-                      className="title h5 text-lg font-semibold hover:text-emerald-600"
-                    >
-                      Software Engineering
-                    </Link>
-                    <p className="text-slate-400 mt-2 flex items-center">
-                      <AiOutlineClockCircle className="text-emerald-600 me-1" />{" "}
-                      Posted 3 Days ago
-                    </p>
-
+              <div className="mt-6">
+                {loadingVacancies ? (
+                  <div className="flex justify-center py-10">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
                   </div>
-
-                  <div className="flex items-center p-6 border-t border-gray-100 dark:border-gray-700">
-                    <img
-                      src={skype}
-                      className="size-12 shadow-md dark:shadow-gray-800 rounded-md p-2 bg-white dark:bg-slate-900"
-                      alt=""
-                    />
-
-                    <div className="ms-3">
-                      <h6 className="mb-0 font-semibold text-base">Skype</h6>
-                      <span className="text-slate-400 text-sm">Australia</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="group relative overflow-hidden rounded-md shadow-sm dark:shadow-gray-800">
-                  <div className="p-6">
-                    <Link
-                      to="#"
-                      className="title h5 text-lg font-semibold hover:text-emerald-600"
-                    >
-                      Web Developer
-                    </Link>
-                    <p className="text-slate-400 mt-2 flex items-center">
-                      <AiOutlineClockCircle className="text-emerald-600" />
-                      Posted 3 Days ago
-                    </p>
-
-                  </div>
-
-                  <div className="flex items-center p-6 border-t border-gray-100 dark:border-gray-700">
-                    <img
-                      src={skype}
-                      className="size-12 shadow-md dark:shadow-gray-800 rounded-md p-2 bg-white dark:bg-slate-900"
-                      alt=""
-                    />
-
-                    <div className="ms-3">
-                      <h6 className="mb-0 font-semibold text-base">Skype</h6>
-                      <span className="text-slate-400 text-sm">America</span>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
+                ) : (
+                  <JobGridsTwoComp
+                    jobs={vacancies}
+                    pagination={pagination}
+                    onPageChange={onPageChange}
+                  />
+                )}
+              </div>
             </div>
 
             <div className="lg:col-span-4 md:col-span-5">
@@ -215,7 +203,7 @@ export default function EmployerDetail(props) {
                 <ul className="list-none mt-4">
                   <li className="flex justify-between mt-2">
                     <span className="text-slate-400 font-medium">{t('companies.jobPostCount')}:</span>
-                    <span className="font-medium">{company?.job_post_count ?? 0}</span>
+                    <span className="font-medium">{loadingVacancies ? "..." : pagination.total}</span>
                   </li>
 
                   <li className="flex justify-between mt-2">

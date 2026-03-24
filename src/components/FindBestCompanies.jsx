@@ -3,11 +3,48 @@ import { Link } from "react-router-dom";
 import { Pagination } from "antd";
 import { useTranslation } from "react-i18next";
 import CompaniesAPI from "../api/apiList/companies";
+import AuthAPI from "../api/AuthAPI";
 import { TbBuildings } from "react-icons/tb";
 import { LuMapPin, MdOutlineArrowForward } from "../assets/icons/vander";
 
 export default function FindBestCompanies() {
   const { t } = useTranslation();
+
+  function CompanyJobCount({ companyId, initialCount }) {
+    const { t } = useTranslation();
+    const [count, setCount] = useState(initialCount);
+    const [loading, setLoading] = useState(initialCount === 0 || initialCount === undefined);
+
+    useEffect(() => {
+      let isMounted = true;
+      if (initialCount === 0 || initialCount === undefined) {
+        const fetchCount = async () => {
+          try {
+            const res = await AuthAPI.getCompanyVacancies(companyId, { size: 1 });
+            if (isMounted) {
+              const total = res.data?.meta?.total ?? res.data?.data?.length ?? 0;
+              setCount(total);
+            }
+          } catch (e) {
+            try {
+              const res = await AuthAPI.getCompanyVacancies(companyId);
+              if (isMounted) {
+                const total = res.data?.meta?.total ?? res.data?.data?.length ?? 0;
+                setCount(total);
+              }
+            } catch (err) { }
+          } finally {
+            if (isMounted) setLoading(false);
+          }
+        };
+        fetchCount();
+      }
+      return () => { isMounted = false; };
+    }, [companyId, initialCount]);
+
+    if (loading) return <span>...</span>;
+    return <span>{t('companies.employerList.activeVacancies', { count })}</span>;
+  }
 
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +60,6 @@ export default function FindBestCompanies() {
       const params = {
         page,
         size: pageSize,
-        include: "user",
         order: "desc",
         order_by: "id",
       };
@@ -80,18 +116,21 @@ export default function FindBestCompanies() {
                 <div className="mt-4">
                   <Link
                     to={`/company/${item.id}`}
-                    className="text-lg hover:text-emerald-600 font-semibold h-[150px]"
+                    className="text-lg hover:text-emerald-600 font-semibold"
                   >
                     {item.name}
                   </Link>
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between">
-                  <span className="text-slate-400 flex items-center">
-                    <LuMapPin className="me-1" /> {item.country}
-                  </span>
+                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                  <Link
+                    to={`/company/${item.id}`}
+                    className="text-emerald-600 font-semibold hover:text-emerald-700 transition duration-500 ease-in-out"
+                  >
+                    {t('companies.employerList.visit')}
+                  </Link>
                   <span className="block font-semibold text-emerald-600">
-                    {item.job_post_count} {t("bestCompanies.jobs")}
+                    <CompanyJobCount companyId={item.id} initialCount={item.job_post_count} />
                   </span>
                 </div>
               </div>
