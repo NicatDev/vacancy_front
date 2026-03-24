@@ -36,14 +36,14 @@
   },
   "popularJobs": {
     "title": "Latest vacancies",
-    "subtitle": "Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30000+ companies worldwide.",
+    "subtitle": "",
     "seeMore": "See More vacancies",
     "applyButton": "Apply",
     "daysago": "days ago"
   },
   "bestCompanies": {
     "title": "Find Best Companies",
-    "subtitle": "Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30,000 companies worldwide.",
+    "subtitle": "",
     "jobs": "Jobs",
     "seeMore": "See More Companies"
   },
@@ -97,12 +97,18 @@
     "employerList.noVacancies": "No Job Vacancies",
     "employerList.pagination.prev": "Previous",
     "employerList.pagination.next": "Next",
+    "employerList.activeVacancies_zero": "No Active Vacancies",
+    "employerList.activeVacancies_one": "{{count}} Active Vacancy",
+    "employerList.activeVacancies_other": "{{count}} Active Vacancies",
+    "employerList.visit": "Visit",
     "notFound": "Not found",
     "website": "Website",
     "jobPostCount": "Post count",
     "employeeCount": "Employee count",
     "social": "Social",
-    "companyStory": "About Company"
+    "companyStory": "About Company",
+    "latestVacancies": "Latest Vacancies",
+    "noCompanySummary": "No additional information has been entered for this company yet."
   },
   "companiesMain": {
     "title": "Companies",

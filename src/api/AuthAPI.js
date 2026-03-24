@@ -141,9 +141,10 @@ const AuthAPI = {
       `/companies/${companyId}/phone-numbers/${phoneId}`
     );
   },
-  getCompanyVacancies: (companyId) => {
+  getCompanyVacancies: (companyId, params = {}) => {
     return axiosClient.get(
-      `/companies/${companyId}/job-posts`
+      `/companies/${companyId}/job-posts`,
+      { params }
     );
   },
 

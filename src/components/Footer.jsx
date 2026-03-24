@@ -37,9 +37,9 @@ export default function Footer() {
     return item?.value || null;
   };
 
-  const linkedinUrl = getContactValue("linkedin");
+  const linkedinUrl = "https://www.linkedin.com/in/leyla-novruz/";
   const facebookUrl = getContactValue("facebook");
-  const instagramUrl = getContactValue("instagram");
+  const instagramUrl = "https://www.instagram.com/transformativecoaching_byleyla?utm_source=qr&igsh=N2Nqa211NXliZXEx";
   const xUrl = getContactValue("x");
   // const emailValue = getContactValue("email");
   const emailValue = "info@octopus.com.az";

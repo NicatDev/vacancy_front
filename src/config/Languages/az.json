@@ -36,7 +36,7 @@
   },
   "bestCompanies": {
     "title": "Ən yaxşı şirkətləri tapın",
-    "subtitle": "Vebdəki bütün açıq mövqeləri axtarın. Şəxsi maaş qiymətləndirmənizi əldə edin. Dünyada 30000+ şirkət haqqında rəyləri oxuyun.",
+    "subtitle": "",
     "jobs": "Vakansiya",
     "seeMore": "Bütün şirkətlərə bax"
   },
@@ -55,7 +55,7 @@
   },
   "popularJobs": {
     "title": "Ən son vakansiyalar",
-    "subtitle": "Vebdəki bütün açıq mövqeləri axtarın. Şəxsi maaş qiymətləndirmənizi əldə edin. Dünyada 30000+ şirkət haqqında rəyləri oxuyun.",
+    "subtitle": "",
     "seeMore": "Bütün vakansiyalara bax",
     "applyButton": "Müraciət et",
     "daysago": "gün əvvəl"
@@ -97,12 +97,18 @@
     "employerList.noVacancies": "Vakansiya yoxdur",
     "employerList.pagination.prev": "Əvvəlki",
     "employerList.pagination.next": "Növbəti",
+    "employerList.activeVacancies_zero": "Aktiv Vakansiya Yoxdur",
+    "employerList.activeVacancies_one": "{{count}} Aktiv Vakansiya",
+    "employerList.activeVacancies_other": "{{count}} Aktiv Vakansiya",
+    "employerList.visit": "Keçid et",
     "notFound": "Yoxdur",
     "website": "Veb sayt",
     "jobPostCount": "Vakansiya sayı",
     "employeeCount": "İşçi sayı",
     "social": "Sosial",
-    "companyStory": "Şirkət haqqında"
+    "companyStory": "Şirkət Haqqında",
+    "latestVacancies": "Son Vakansiyalar",
+    "noCompanySummary": "Bu şirkət haqqında hələlik əlavə məlumat daxil edilməyib."
   },
   "companiesMain": {
     "title": "Şirkətlər",
