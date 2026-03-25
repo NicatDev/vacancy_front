@@ -37,7 +37,7 @@ export default function EmployerDetail(props) {
   const [company, setCompany] = useState(null);
   const [externalLinks, setExternalLinks] = useState([])
   const [vacancies, setVacancies] = useState([]);
-  const [loadingVacancies, setLoadingVacancies] = useState(true);
+  const [loadingVacancies, setLoadingVacancies] = useState(false); // Set to false since we disabled fetching
   const [pagination, setPagination] = useState({
     current_page: 1,
     last_page: 1,
@@ -89,7 +89,7 @@ export default function EmployerDetail(props) {
 
     fetchCompany();
     getCompanyExternalLinks();
-    fetchVacancies();
+    // fetchVacancies(); // Temporarily disabled to avoid 500 error
   }, [id, fetchVacancies]);
   const data = jobData.find((jobs) => jobs.id === parseInt(id));
   return (
@@ -171,6 +171,7 @@ export default function EmployerDetail(props) {
                 </div>
               </div> */}
 
+              {/* Latest Vacancies Section - Temporarily Disabled
               <h5 className="text-xl font-semibold mt-6">{t('companies.latestVacancies')}</h5>
 
               <div className="mt-6">
@@ -186,6 +187,7 @@ export default function EmployerDetail(props) {
                   />
                 )}
               </div>
+              */}
             </div>
 
             <div className="lg:col-span-4 md:col-span-5">
@@ -201,10 +203,10 @@ export default function EmployerDetail(props) {
                 </div> */}
 
                 <ul className="list-none mt-4">
-                  <li className="flex justify-between mt-2">
+                  {/* <li className="flex justify-between mt-2">
                     <span className="text-slate-400 font-medium">{t('companies.jobPostCount')}:</span>
-                    <span className="font-medium">{loadingVacancies ? "..." : pagination.total}</span>
-                  </li>
+                    <span className="font-medium">{company?.job_post_count || 0}</span>
+                  </li> */}
 
                   <li className="flex justify-between mt-2">
                     <span className="text-slate-400 font-medium">{t('companies.employeeCount')}:</span>

@@ -8,10 +8,13 @@ const VacanciesAPI = {
     industry = [],
     occupation = [],
     employment_type = [],
+    company_id = null,
   } = {}) => {
     const params = new URLSearchParams();
     params.append("page", Number(page));
     params.append("size", Number(size));
+
+    if (company_id) params.append("company_id", company_id);
 
     if (text) params.append("text", text);
     if (Array.isArray(industry)) {

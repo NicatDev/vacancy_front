@@ -62,6 +62,16 @@ export default function JobDetailThree() {
     getVacancy();
   }, [id]);
 
+  const renderTextWithNewlines = (text) => {
+    if (!text) return null;
+    return text.split('\n').map((line, index) => (
+      <span key={index}>
+        {line}
+        <br />
+      </span>
+    ));
+  };
+
   useEffect(() => {
     if (paymentStatus === "success") {
       toast.success(t('jobPost.paymentSuccessToast'));
@@ -78,15 +88,6 @@ export default function JobDetailThree() {
 
   const responsibilitiesText = vacancy?.responsibilities;
   const requirementsText = vacancy?.requirements;
-
-
-  const responsibilitiesArray = responsibilitiesText
-    ? responsibilitiesText.split('\n').filter(item => item.trim() !== '')
-    : [];
-
-  const requirementsArray = requirementsText
-    ? requirementsText.split('\n').filter(item => item.trim() !== '')
-    : [];
 
   const handleClickJobApply = async () => {
     try {
@@ -240,9 +241,9 @@ export default function JobDetailThree() {
               </ul>
 
               <h5 className="text-lg font-semibold mt-6">{t('vacancyDetail.jobDescription')}:</h5>
-              <p className="text-slate-400 mt-4">
-                {vacancy?.info ?? ''}
-              </p>
+              <div className="text-slate-400 mt-4">
+                {renderTextWithNewlines(vacancy?.info)}
+              </div>
 
               <h5 className="text-lg font-semibold mt-6">
                 {t('vacancyDetail.responsibilitiesAndDuties')}:
@@ -251,19 +252,10 @@ export default function JobDetailThree() {
                 It sometimes makes sense to select texts containing the various
                 letters and symbols specific to the output language.
               </p> */}
-              {responsibilitiesArray.length > 0 && (
-                <ul className="list-none flex flex-col">
-                  {responsibilitiesArray.map((responsibility, index) => (
-                    <li
-                      key={index}
-                      className="text-slate-400 mt-2 inline-flex items-center"
-                    >
-                      <MdOutlineArrowForward className="text-emerald-600 me-1" />
-
-                      {responsibility.trim()}
-                    </li>
-                  ))}
-                </ul>
+              {responsibilitiesText && (
+                <div className="text-slate-400 mt-4">
+                  {renderTextWithNewlines(responsibilitiesText)}
+                </div>
               )}
 
               <h5 className="text-lg font-semibold mt-6">
@@ -275,19 +267,10 @@ export default function JobDetailThree() {
               </p> */}
 
 
-              {requirementsArray.length > 0 && (
-                <ul className="list-none flex flex-col">
-                  {requirementsArray.map((requirement, index) => (
-                    <li
-                      key={index}
-                      className="text-slate-400 mt-2 inline-flex items-center"
-                    >
-                      <MdOutlineArrowForward className="text-emerald-600 me-1" />
-
-                      {requirement.trim()}
-                    </li>
-                  ))}
-                </ul>
+              {requirementsText && (
+                <div className="text-slate-400 mt-4">
+                  {renderTextWithNewlines(requirementsText)}
+                </div>
               )}
               {(role === "candidate" && localStorage.getItem('email_verified_at') != "false") && <div className="mt-5">
                 <button

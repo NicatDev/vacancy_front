@@ -10,6 +10,7 @@ import {
   BiLogoLinkedin,
   FaFacebookF,
   FaInstagram,
+  FaYoutube,
   IoLogoTwitter,
 } from "../assets/icons/vander";
 import { useTranslation } from "react-i18next";
@@ -104,28 +105,13 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="pb-6 text-center mb-3">
-        <a
-          href="https://coachingbyleyla.com/"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center rounded-full border border-gray-700 px-4 py-2 text-sm text-gray-300 hover:text-white hover:border-emerald-600 transition duration-500 ease-in-out"
-        >
-          Coaching by Leyla
-        </a>
-      </div>
+
 
       <div className="py-[30px] px-0 border-t border-gray-800 dark:border-gray-700">
         <div className="container text-center">
-          <div className="grid md:grid-cols-2 items-center gap-6">
-            <div className="ltr:md:text-left rtl:md:text-right text-center">
-              <p className="mb-0 text-gray-300 font-medium">
-                ©{new Date().getFullYear()} Octopus
-              </p>
-            </div>
+          <div className="grid md:grid-cols-3 items-center gap-6">
 
-            <ul className="list-none ltr:md:text-right rtl:md:text-left text-center space-x-0.5">
-
+            <ul className="list-none text-center ltr:md:text-left rtl:md:text-right space-x-0.5">
               {linkedinUrl && (
                 <li className="inline">
                   <Link
@@ -180,7 +166,33 @@ export default function Footer() {
                   </Link>
                 </li>
               )}
+              <li className="inline">
+                <Link
+                  to="https://www.youtube.com/@transformativecoaching"
+                  target="_blank"
+                  className="size-8 inline-flex items-center text-center justify-center text-base font-semibold tracking-wide align-middle transition duration-500 ease-in-out border-2 border-gray-800 dark:border-gray-700 rounded-md hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white"
+                >
+                  <FaYoutube />
+                </Link>
+              </li>
             </ul>
+
+            <div className="text-center">
+              <a
+                href="https://coachingbyleyla.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center rounded-full border border-gray-700 px-4 py-2 text-sm text-gray-300 hover:text-white hover:border-emerald-600 transition duration-500 ease-in-out"
+              >
+                Coaching by Leyla
+              </a>
+            </div>
+
+            <div className="text-center ltr:md:text-right rtl:md:text-left">
+              <p className="mb-0 text-gray-300 font-medium">
+                ©{new Date().getFullYear()} Octopus. All Right Reserved
+              </p>
+            </div>
           </div>
         </div>
       </div>

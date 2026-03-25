@@ -12,37 +12,9 @@ export default function FindBestCompanies() {
 
   function CompanyJobCount({ companyId, initialCount }) {
     const { t } = useTranslation();
-    const [count, setCount] = useState(initialCount);
-    const [loading, setLoading] = useState(initialCount === 0 || initialCount === undefined);
+    const safeInitialCount = initialCount !== undefined ? initialCount : 0;
+    const count = safeInitialCount;
 
-    useEffect(() => {
-      let isMounted = true;
-      if (initialCount === 0 || initialCount === undefined) {
-        const fetchCount = async () => {
-          try {
-            const res = await AuthAPI.getCompanyVacancies(companyId, { size: 1 });
-            if (isMounted) {
-              const total = res.data?.meta?.total ?? res.data?.data?.length ?? 0;
-              setCount(total);
-            }
-          } catch (e) {
-            try {
-              const res = await AuthAPI.getCompanyVacancies(companyId);
-              if (isMounted) {
-                const total = res.data?.meta?.total ?? res.data?.data?.length ?? 0;
-                setCount(total);
-              }
-            } catch (err) { }
-          } finally {
-            if (isMounted) setLoading(false);
-          }
-        };
-        fetchCount();
-      }
-      return () => { isMounted = false; };
-    }, [companyId, initialCount]);
-
-    if (loading) return <span>...</span>;
     return <span>{t('companies.employerList.activeVacancies', { count })}</span>;
   }
 
@@ -129,9 +101,9 @@ export default function FindBestCompanies() {
                   >
                     {t('companies.employerList.visit')}
                   </Link>
-                  <span className="block font-semibold text-emerald-600">
+                  {/* <span className="block font-semibold text-emerald-600">
                     <CompanyJobCount companyId={item.id} initialCount={item.job_post_count} />
-                  </span>
+                  </span> */}
                 </div>
               </div>
             ))}
