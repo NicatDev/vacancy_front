@@ -16,6 +16,8 @@ import {
 import { useTranslation } from "react-i18next";
 import ContactApi from "../api/apiList/contact";
 
+// test comment for server
+
 export default function Footer() {
   const { t } = useTranslation();
   const [contactData, setContactData] = useState([]);
